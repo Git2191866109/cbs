@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+   					   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+   					   http://www.springframework.org/schema/context 
+   					   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+   					   
+   	<bean id="initializeData" class="com.bs.core.initialize.InitializeData">	
+		<property name="configFileData">
+			<map value-type="java.lang.String">
+				<entry key="isDebug">
+					<value>true</value>
+				</entry>
+				<entry key="websiteDomain">
+					<value>www.xuefeibang.cn</value>
+				</entry>
+				<entry key="user">
+					<!-- <list value-type="java.util.List"> -->
+						<bean class="com.bs.plugins.custom.uc.user.entity.User">
+							<property name="account" value="admin"/>
+							<property name="name" value="admin"/>
+							<property name="type" value="0"/>
+							<property name="password" value="admin"/>
+							<property name="position" value="超级管理员"/>
+							<property name="gender" value="1"/>
+							<property name="status" value="1"/>
+						</bean>
+					<!--</list> -->
+				</entry>
+				<entry key="member">
+					<bean class="com.bs.plugins.custom.cc.member.entity.Member">
+						<property name="account" value="xuefeibang"/>
+						<property name="type" value="2"/>
+						<property name="code" value="100000"/>
+						<property name="password" value="123456"/>
+						<property name="umpayUserNo" value="7050202"/>
+						<property name="umpayAccountNo" value="6227000042010456232"/>
+						<property name="nickname" value="学费帮"/>
+					</bean>
+				</entry>
+				<entry key="spvCorporation">
+					<bean class="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation">
+						<property name="type" value="2"/>
+						<property name="code" value="xuefeibang"/>
+						<property name="status" value="1"/>
+						<property name="signaturePicPath" value=""/>
+						<property name="umpayAccountNo" value="6227000042010456232"/>
+						<property name="availableAmount" value="0"/>
+						<property name="frozenAmount" value="0"/>
+						<property name="umpayMerchantNo" value="7050202"/>
+						<property name="name" value="学费帮"/>
+						<property name="shortName" value="学费帮"/>
+						<property name="bankName" value="建设银行"/>
+						<property name="bankCardNumber" value="6227000042010456232"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="picUploadUrl">
+			<map value-type="java.lang.String">
+				<entry key="ueditorRoot">
+					<!--<value>/data/app/res.xuefeibang.com</value>-->
+					<!--<value>D:/ueditor</value>-->
+					<value>/data/app/</value>
+				</entry>
+				<entry key="picUrl">
+					<!--<value>/data/app/res.xuefeibang.com</value>-->
+					<!--<value>D:/ueditor</value>-->
+					<value>/data/app/</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!--<bean id="uMPayCfg" class="com.bs.plugins.thirdparty.umpay.constants.UMPayCfg">-->
+		<!--<property name="valMapper">-->
+			<!--<map value-type="java.lang.String">-->
+				<!--<entry key="identity_type" >-->
+					<!--<map value-type="java.lang.String">-->
+						<!--<entry key="1" value="IDENTITY_CARD" />-->
+					<!--</map>-->
+				<!--</entry>-->
+			<!--</map>-->
+		<!--</property>-->
+		<!--<property name="retUrlCfg">-->
+			<!--<map value-type="java.lang.String">-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//ret.json" />-->
+			<!--</map>-->
+		<!--</property>-->
+		<!--<property name="notifyUrl">-->
+			<!--<map value-type="java.lang.String">-->
+				<!--<entry key="mer_register_person" value="http://uc.zxuefei.com//notify.json" />-->
+			<!--</map>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+</beans>

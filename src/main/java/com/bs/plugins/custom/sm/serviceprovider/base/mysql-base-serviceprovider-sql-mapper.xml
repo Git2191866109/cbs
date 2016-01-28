@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sm.serviceprovider.dao.IServiceProviderDao">
+
+	<parameterMap id="serviceProviderParam" type="com.bs.plugins.custom.sm.serviceprovider.entity.ServiceProvider" />
+	<resultMap id="serviceProviderResult" type="com.bs.plugins.custom.sm.serviceprovider.entity.ServiceProvider">
+		<id property="id" column="serviceProvider_id" javaType="java.lang.Long" />
+		<result property="name" column="serviceProvider_name" javaType="java.lang.String" />
+		<result property="code" column="serviceProvider_code" javaType="java.lang.String" />
+		<result property="isUse" column="serviceProvider_isUse" javaType="java.lang.Integer" />
+		<result property="description" column="serviceProvider_description" javaType="java.lang.String" />
+		<result property="creationDate" column="serviceProvider_creationDate" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="serviceProviderResult" parameterMap="serviceProviderParam">
+		select 
+			Id serviceProvider_id,
+			Name serviceProvider_name,
+			Code serviceProvider_code,
+			IsUse serviceProvider_isUse,
+			Description serviceProvider_description,
+			CreationDate serviceProvider_creationDate
+		from SM_ServiceProvider
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="isUse != null">and IsUse=${isUse}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null and creationDate != ''">and CreationDate=#{creationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="serviceProviderResult">
+		select 
+			Id serviceProvider_id,
+			Name serviceProvider_name,
+			Code serviceProvider_code,
+			IsUse serviceProvider_isUse,
+			Description serviceProvider_description,
+			CreationDate serviceProvider_creationDate
+		from SM_ServiceProvider
+	</select>
+	
+	<select id="selectOneById"  resultMap="serviceProviderResult" parameterMap="serviceProviderParam">
+		select 
+			Id serviceProvider_id,
+			Name serviceProvider_name,
+			Code serviceProvider_code,
+			IsUse serviceProvider_isUse,
+			Description serviceProvider_description,
+			CreationDate serviceProvider_creationDate
+		from SM_ServiceProvider where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="serviceProviderResult" parameterMap="serviceProviderParam">
+		select 
+			Id serviceProvider_id,
+			Name serviceProvider_name,
+			Code serviceProvider_code,
+			IsUse serviceProvider_isUse,
+			Description serviceProvider_description,
+			CreationDate serviceProvider_creationDate
+		from SM_ServiceProvider
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="serviceProviderParam">
+		select count(*) from SM_ServiceProvider
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="isUse != null">and IsUse=${isUse}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null and creationDate != ''">and CreationDate=#{creationDate}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="serviceProviderParam">
+		update SM_ServiceProvider
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="isUse != null">,IsUse=${isUse}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+               		 <if test="creationDate != null  and creationDate != ''">,CreationDate=#{creationDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="serviceProviderParam">
+		update SM_ServiceProvider
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+                    	<if test="isUse != null">,IsUse=${isUse}</if>
+                        <if test="isUse == null">,IsUse= 0</if>
+						,Description=#{description}
+                        <if test="creationDate != null  and creationDate != ''">,CreationDate=#{creationDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="serviceProviderParam">
+		insert into SM_ServiceProvider
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="isUse != null">,IsUse</if>
+			<if test="description != null and description != ''">,Description</if>
+                <if test="creationDate != null and creationDate != ''">,CreationDate</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="isUse != null">,${isUse}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+            	<if test="creationDate != null and creationDate != ''">,#{creationDate}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="serviceProviderParam">
+		delete from SM_ServiceProvider where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="serviceProviderParam">
+		delete from SM_ServiceProvider
+	</delete>
+	
+	<delete id="delete" parameterMap="serviceProviderParam">
+		delete from SM_ServiceProvider
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="isUse != null">and IsUse=${isUse}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null and creationDate != ''">and CreationDate=#{creationDate}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.modeitemrelation.dao.IModeItemRelationDao">
+	
+	
+	
+	<select id="getModeItemRelation"  resultType="Integer" parameterMap="modeItemRelationParam">
+			select count(1)	from EB_ModeItemRelation
+	<where>
+			<if test="eduModeId != null">EduModeId=${eduModeId}</if>
+			<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+			<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+			
+			<if test="growStagesId != null"> and  GrowStagesId=${growStagesId}</if>
+	</where>
+	</select>
+	<select id="findTreeData" resultMap="modeItemRelationResult" parameterMap="modeItemRelationParam">
+			select
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.EduModeId modeItemRelation_eduModeId,
+			
+			educationMode.Id educationMode_id
+			from EB_ModeItemRelation modeItemRelation
+			inner join EB_EducationMode educationMode on educationMode.Id=modeItemRelation.EduModeId
+		<where>
+		<trim prefixOverrides="and">
+			<if test="growStagesId != null">and modeItemRelation.GrowStagesId=${growStagesId}</if>
+		</trim>
+		GROUP BY educationMode.Id
+		</where>
+	</select>
+	<select id="getTreeBudgetCategory" resultMap="modeItemRelationResult" parameterMap="modeItemRelationParam">
+		select 
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.BudgetCategoryId,
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name
+		from EB_ModeItemRelation modeItemRelation
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=modeItemRelation.BudgetCategoryId		
+		<where>
+				<if test="growStagesId != null"> GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+		</where>
+		GROUP BY budgetCategory.Id
+	</select>
+	<select id="getTreeBudgetItem" resultMap="modeItemRelationResult" parameterMap="modeItemRelationParam">
+		select 
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.BudgetCategoryId,
+			budgetItem.Id budgetItem_id,
+			budgetItem.Name budgetItem_name,
+			budgetItem.ParentId budgetItem_parentId
+		from EB_ModeItemRelation modeItemRelation
+		inner join EB_BudgetItem budgetItem on budgetItem.Id=modeItemRelation.BudgetItemId		
+		<where>
+				<if test="growStagesId != null"> GrowStagesId=${growStagesId}  and budgetItem.BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="budgetCategoryId"> and modeItemRelation.BudgetCategoryId=${budgetCategoryId} </if>
+				
+		</where>
+			GROUP BY budgetItem.Id
+	
+	</select>
+	
+	<select id="selectAssociationsByLeft" resultMap="modeItemRelationResult" parameterMap="modeItemRelationParam">
+		select
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.EduModeId modeItemRelation_eduModeId,
+			modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+			modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+			modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+			modeItemRelation.IsSetData modeItemRelation_isSetData,	
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId,
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel,
+			budgetItemData.Id budgetItemData_id,
+			budgetItemData.AreaCode budgetItemData_areaCode,
+			budgetItemData.EduGoalId budgetItemData_eduGoalId,
+			budgetItemData.GrowStagesId budgetItemData_growStagesId,
+			budgetItemData.EduModeId budgetItemData_eduModeId,
+			budgetItemData.CategoryId budgetItemData_categoryId,
+			budgetItemData.ItemId budgetItemData_itemId,
+			budgetItemData.IsInland budgetItemData_isInland,
+			budgetItemData.LowAmountTotal budgetItemData_lowAmountTotal,
+			budgetItemData.HighAmountTotal budgetItemData_highAmountTotal,
+			budgetItemData.LowAmount budgetItemData_lowAmount,
+			budgetItemData.HighAmount budgetItemData_highAmount,
+			budgetItemData.YearCount budgetItemData_yearCount,
+			budgetItemData.Years budgetItemData_years,
+			budgetItemData.PaymentGrade budgetItemData_paymentGrade,
+			budgetItemData.IsGrading budgetItemData_isGrading,
+			budgetItemData.GradingType budgetItemData_gradingType,
+			budgetItemData.PaymentMethod budgetItemData_paymentMethod,
+			budgetItemData.PaymentMonth budgetItemData_paymentMonth,
+			budgetItemData.IsInflation budgetItemData_isInflation,
+			budgetItemData.IsAreaTranslation budgetItemData_isAreaTranslation,
+			budgetItemData.Comment budgetItemData_comment,
+			budgetItemData.DataSources budgetItemData_dataSources
+		from EB_ModeItemRelation modeItemRelation
+		left join EB_GrowStages growStages on growStages.Id=modeItemRelation.GrowStagesId
+		left join EB_EducationMode educationMode on educationMode.Id=modeItemRelation.EduModeId
+		left join EB_BudgetCategory budgetCategory on budgetCategory.Id=modeItemRelation.BudgetCategoryId
+		left join EB_BudgetItem budgetItem on budgetItem.Id=modeItemRelation.budgetItemId
+		left join EB_BudgetItemData budgetItemData on budgetItemData.Id=modeItemRelation.BudgetItemDataId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemDataId != null">and BudgetItemDataId=${budgetItemDataId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="isSetData != null">and IsSetData=${isSetData}</if>
+			</trim>
+		</where>
+	</select>
+	<delete id="deleteALLByBudgetCategoryId" parameterMap="modeItemRelationParam">
+		delete from EB_ModeItemRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

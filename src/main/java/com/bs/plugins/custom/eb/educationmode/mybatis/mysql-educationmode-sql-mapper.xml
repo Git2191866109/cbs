@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.educationmode.dao.IEducationModeDao">
+	
+	
+	<select id="selectPaginatedByGrowStageIdList"  resultMap="educationModeResult" parameterMap="educationModeParam">
+		select 
+			Id educationMode_id,
+			GrowStagesId educationMode_growStagesId,
+			Name educationMode_name,
+			CreateDate educationMode_createDate,
+			ModifyDate educationMode_modifyDate,
+			CreatorId educationMode_creatorId
+		from EB_EducationMode
+		<where>
+			<if test="growStagesId != null">growStagesId = ${growStagesId} </if>
+		</where>
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	<select id="getEducationMode"  resultMap="educationModeResult" parameterMap="educationModeParam">
+		SELECT 
+			Id educationMode_id,
+			Name educationMode_name
+		from EB_EducationMode 
+		<where>
+		GrowStagesId=${growStagesId}
+		<if test="id!=null"> and  id=${id}</if>
+		</where>
+	</select>
+</mapper>

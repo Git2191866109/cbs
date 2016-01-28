@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.product.dao.IProductDao">
+
+    <parameterMap id="productParam1" type="com.bs.plugins.custom.pc.product.entity.Product" />
+    <resultMap id="productResult1" type="com.bs.plugins.custom.pc.product.entity.Product">
+        <id property="id" column="product_id" javaType="java.lang.Long" />
+        <result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+        <result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+        <result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+        <result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+        <result property="name" column="product_name" javaType="java.lang.String" />
+        <result property="code" column="product_code" javaType="java.lang.String" />
+        <result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+        <result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+        <result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+        <result property="interestRateData" column="product_interestRateData" javaType="java.lang.String" />
+        <result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+        <result property="description" column="product_description" javaType="java.lang.String" />
+        <result property="status" column="product_status" javaType="java.lang.Integer" />
+        <result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+		<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+        <result property="createTime" column="product_createTime" javaType="java.lang.String" />
+        <result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+        <result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+        <result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+        <association property="basicProduct" javaType="com.bs.plugins.custom.pc.basicproduct.entity.BasicProduct">
+            <id property="id" column="basicProduct_id" javaType="java.lang.Long" />
+            <result property="spvId" column="basicProduct_spvId" javaType="java.lang.Long" />
+            <result property="name" column="basicProduct_name" javaType="java.lang.String" />
+            <result property="code" column="basicProduct_code" javaType="java.lang.String" />
+            <result property="totalAmount" column="basicProduct_totalAmount" javaType="java.lang.Integer" />
+            <result property="interestRateDate" column="basicProduct_interestRateDate" javaType="java.lang.String" />
+            <result property="profitExpirationDate" column="basicProduct_profitExpirationDate" javaType="java.lang.String" />
+            <result property="actualExpirationDate" column="basicProduct_actualExpirationDate" javaType="java.lang.String" />
+            <result property="paymentDate" column="basicProduct_paymentDate" javaType="java.lang.String" />
+            <result property="actualPaymentDate" column="basicProduct_actualPaymentDate" javaType="java.lang.String" />
+            <result property="expectedProfitRatio" column="basicProduct_expectedProfitRatio" javaType="java.math.BigDecimal" />
+            <result property="actualExpectedProfitRatio" column="basicProduct_actualExpectedProfitRatio" javaType="java.math.BigDecimal" />
+            <result property="expectedProfit" column="basicProduct_expectedProfit" javaType="java.math.BigDecimal" />
+            <result property="actualProfit" column="basicProduct_actualProfit" javaType="java.math.BigDecimal" />
+            <result property="description" column="basicProduct_description" javaType="java.lang.String" />
+            <result property="createTime" column="basicProduct_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="basicProduct_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="basicProduct_modifyTime" javaType="java.lang.String" />
+            <result property="isDelete" column="basicProduct_isDelete" javaType="java.lang.Integer" />
+            <result property="creatorId" column="basicProduct_creatorId" javaType="java.lang.Long" />
+        </association>
+        <association property="assetCategory" javaType="com.bs.plugins.custom.aa.assetcategory.entity.AssetCategory">
+            <id property="id" column="assetCategory_id" javaType="java.lang.Long" />
+            <result property="code" column="assetCategory_code" javaType="java.lang.Integer" />
+            <result property="name" column="assetCategory_name" javaType="java.lang.String" />
+            <result property="type" column="assetCategory_type" javaType="java.lang.Integer" />
+            <result property="rateOfReturn" column="assetCategory_rateOfReturn" javaType="java.lang.Double" />
+            <result property="variance" column="assetCategory_variance" javaType="java.lang.Double" />
+            <result property="rate" column="assetCategory_rate" javaType="java.lang.Double" />
+            <result property="createTime" column="assetCategory_createTime" javaType="java.lang.String" />
+            <result property="modifyTime" column="assetCategory_modifyTime" javaType="java.lang.String" />
+        </association>
+        <collection property="productAttributeConfigs" ofType="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+            <id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+            <result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+            <result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+            <result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+            <result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+            <result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+            <result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+        </collection>
+        <collection property="productAmountLocks" ofType="com.bs.plugins.custom.tc.productamountlock.entity.ProductAmountLock">
+            <id property="id" column="productAmountLock_id" javaType="java.lang.Long" />
+            <result property="productId" column="productAmountLock_productId" javaType="java.lang.Long" />
+            <result property="transactionNumber" column="productAmountLock_transactionNumber" javaType="java.lang.String" />
+            <result property="spvId" column="productAmountLock_spvId" javaType="java.lang.Long" />
+            <result property="memberId" column="productAmountLock_memberId" javaType="java.lang.Long" />
+            <result property="lockAmount" column="productAmountLock_lockAmount" javaType="java.lang.Integer" />
+            <result property="shares" column="productAmountLock_shares" javaType="java.lang.Integer" />
+            <result property="iDCardType" column="productAmountLock_iDCardType" javaType="java.lang.Integer" />
+            <result property="iDCard" column="productAmountLock_iDCard" javaType="java.lang.String" />
+            <result property="bankName" column="productAmountLock_bankName" javaType="java.lang.String" />
+            <result property="bankCode" column="productAmountLock_bankCode" javaType="java.lang.String" />
+            <result property="bankCodeNumber" column="productAmountLock_bankCodeNumber" javaType="java.lang.String" />
+            <result property="lockStatus" column="productAmountLock_lockStatus" javaType="java.lang.Integer" />
+            <result property="payStatus" column="productAmountLock_payStatus" javaType="java.lang.Integer" />
+            <result property="handleStatus" column="productAmountLock_handleStatus" javaType="java.lang.Integer" />
+            <result property="subsTime" column="productAmountLock_subsTime" javaType="java.lang.String" />
+            <result property="expiredTime" column="productAmountLock_expiredTime" javaType="java.lang.String" />
+            <result property="callbackPayTime" column="productAmountLock_callbackPayTime" javaType="java.lang.String" />
+            <result property="unlockTime" column="productAmountLock_unlockTime" javaType="java.lang.String" />
+            <result property="remark" column="productAmountLock_remark" javaType="java.lang.String" />
+        </collection>
+		<collection property="spvAccountingDetails" ofType="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail">
+			<id property="id" column="spvAccountingDetail_id" javaType="java.lang.Long" />
+			<result property="spvId" column="spvAccountingDetail_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="spvAccountingDetail_productId" javaType="java.lang.Long" />
+			<result property="serialNumber" column="spvAccountingDetail_serialNumber" javaType="java.lang.String" />
+			<result property="flowTo" column="spvAccountingDetail_flowTo" javaType="java.lang.Integer" />
+			<result property="amount" column="spvAccountingDetail_amount" javaType="java.math.BigDecimal" />
+			<result property="businessType" column="spvAccountingDetail_businessType" javaType="java.lang.Integer" />
+			<result property="businessId" column="spvAccountingDetail_businessId" javaType="java.lang.Long" />
+			<result property="accountType" column="spvAccountingDetail_accountType" javaType="java.lang.Integer" />
+			<result property="operatorId" column="spvAccountingDetail_operatorId" javaType="java.lang.Long" />
+			<result property="operator" column="spvAccountingDetail_operator" javaType="java.lang.String" />
+			<result property="description" column="spvAccountingDetail_description" javaType="java.lang.String" />
+			<result property="createTime" column="spvAccountingDetail_createTime" javaType="java.lang.String" />
+		</collection>
+        <collection property="accountingDetails" ofType="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail">
+            <id property="id" column="accountingDetail_id" javaType="java.lang.Long" />
+            <result property="memberId" column="accountingDetail_memberId" javaType="java.lang.Long" />
+            <result property="productId" column="accountingDetail_productId" javaType="java.lang.Long" />
+            <result property="flowTo" column="accountingDetail_flowTo" javaType="java.lang.Integer" />
+            <result property="amount" column="accountingDetail_amount" javaType="java.math.BigDecimal" />
+            <result property="counterpartyType" column="accountingDetail_counterpartyType" javaType="java.lang.Integer" />
+            <result property="counterpartyId" column="accountingDetail_counterpartyId" javaType="java.lang.Long" />
+            <result property="businessType" column="accountingDetail_businessType" javaType="java.lang.Integer" />
+            <result property="businessId" column="accountingDetail_businessId" javaType="java.lang.Long" />
+            <result property="accountType" column="accountingDetail_accountType" javaType="java.lang.Integer" />
+            <result property="transactionNumber" column="accountingDetail_transactionNumber" javaType="java.lang.String" />
+            <result property="operatorId" column="accountingDetail_operatorId" javaType="java.lang.Long" />
+            <result property="operator" column="accountingDetail_operator" javaType="java.lang.String" />
+            <result property="description" column="accountingDetail_description" javaType="java.lang.String" />
+            <result property="createTime" column="accountingDetail_createTime" javaType="java.lang.String" />
+        </collection>
+        <collection property="productContracts" ofType="com.bs.plugins.custom.pc.productcontract.entity.ProductContract">
+            <id property="id" column="productContract_id" javaType="java.lang.Long" />
+            <result property="productId" column="productContract_productId" javaType="java.lang.Long" />
+            <result property="templateId" column="productContract_templateId" javaType="java.lang.Long" />
+            <result property="name" column="productContract_name" javaType="java.lang.String" />
+            <result property="code" column="productContract_code" javaType="java.lang.String" />
+            <result property="filePath" column="productContract_filePath" javaType="java.lang.String" />
+            <result property="content" column="productContract_content" javaType="java.lang.String" />
+            <result property="description" column="productContract_description" javaType="java.lang.String" />
+            <result property="creatorId" column="productContract_creatorId" javaType="java.lang.Long" />
+            <result property="createTime" column="productContract_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="productContract_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="productContract_modifyTime" javaType="java.lang.String" />
+            <result property="delFlag" column="productContract_delFlag" javaType="java.lang.Integer" />
+        </collection>
+        <collection property="productReturnMoneys" ofType="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney">
+            <id property="id" column="productReturnMoney_id" javaType="java.lang.Long" />
+            <result property="memberId" column="productReturnMoney_memberId" javaType="java.lang.Long" />
+            <result property="spvId" column="productReturnMoney_spvId" javaType="java.lang.Long" />
+            <result property="productId" column="productReturnMoney_productId" javaType="java.lang.Long" />
+            <result property="subscriptionId" column="productReturnMoney_subscriptionId" javaType="java.lang.Long" />
+            <result property="transactionNumber" column="productReturnMoney_transactionNumber" javaType="java.lang.String" />
+            <result property="payPlantformNumber" column="productReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+            <result property="productName" column="productReturnMoney_productName" javaType="java.lang.String" />
+            <result property="productCode" column="productReturnMoney_productCode" javaType="java.lang.String" />
+            <result property="distributePrincipal" column="productReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+            <result property="distributeInterest" column="productReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+            <result property="distributeAmount" column="productReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+            <result property="distributeTime" column="productReturnMoney_distributeTime" javaType="java.lang.String" />
+            <result property="interestRateDate" column="productReturnMoney_interestRateDate" javaType="java.lang.String" />
+            <result property="paymentDate" column="productReturnMoney_paymentDate" javaType="java.lang.String" />
+            <result property="actualExpirationDate" column="productReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+            <result property="expectedProfitRatio" column="productReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+            <result property="expectedProfit" column="productReturnMoney_expectedProfit" javaType="java.math.BigDecimal" />
+            <result property="actualProfitRatio" column="productReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+            <result property="actualProfit" column="productReturnMoney_actualProfit" javaType="java.math.BigDecimal" />
+            <result property="serviceFee" column="productReturnMoney_serviceFee" javaType="java.math.BigDecimal" />
+            <result property="businessCheckStatus" column="productReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+            <result property="transferTime" column="productReturnMoney_transferTime" javaType="java.lang.String" />
+            <result property="transferStatus" column="productReturnMoney_transferStatus" javaType="java.lang.Integer" />
+            <result property="status" column="productReturnMoney_status" javaType="java.lang.Integer" />
+            <result property="checkingTime" column="productReturnMoney_checkingTime" javaType="java.lang.String" />
+            <result property="checkingStatus" column="productReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+            <result property="remark" column="productReturnMoney_remark" javaType="java.lang.String" />
+        </collection>
+    </resultMap>
+
+	<select id="selectBasicProductByProductId" resultMap="productResult1" parameterMap="productParam1">
+		select product.Id product_id,
+			basic.InterestRateDate product_interestRateData,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.isDelete product_isDelete from PC_Product product left join PC_BasicProduct basic on basic.Id = product.BasicProductId
+			where product.Id = ${id}
+	</select>
+	
+    <select id="selectNewPaginatedList"  resultMap="productResult1" parameterMap="productParam1">
+        select
+        Id product_id,
+        BasicProductId product_basicProductId,
+        SpvId product_spvId,
+        CategoryId product_categoryId,
+        AssetCategoryCode product_assetCategoryCode,
+        Name product_name,
+        Code product_code,
+        TotalAmount product_totalAmount,
+        SurplusAmount product_surplusAmount,
+        FirstPublishTime product_firstPublishTime,
+        UmpayAccountNo product_umpayAccountNo,
+        Description product_description,
+        Status product_status,
+        DistributeStatus product_distributeStatus,
+		CreatorId product_creatorId,
+        CreateTime product_createTime,
+        ModifierId product_modifierId,
+        ModifyTime product_modifyTime,
+        isDelete product_isDelete
+        from PC_Product
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+                <if test="categoryId != null">and CategoryId=${categoryId}</if>
+                <if test="spvId != null">and SpvId=${spvId}</if>
+                <if test="name != null and name != ''">and Name like CONCAT('%',#{name},'%')</if>
+                <if test="code != null and code != ''">and Code like CONCAT('%',#{code},'%')</if>
+                <if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+                <if test="firstPublishTimeStartTime != null and firstPublishTimeStartTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(FirstPublishTime) >= TO_DAYS(#{firstPublishTimeStartTime})
+					]]>
+
+                </if>
+                <if test="firstPublishTimeEndTime != null and firstPublishTimeEndTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(FirstPublishTime) <= TO_DAYS(#{firstPublishTimeEndTime})
+					]]>
+                </if>
+
+                <if test="description != null and description != ''">and Description=#{description}</if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="creatorId != null">and CreatorId=${creatorId}</if>
+                <if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+                <if test="modifierId != null">and ModifierId=${modifierId}</if>
+                <if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+                <if test="isDelete != null">and isDelete=${isDelete}</if>
+            </trim>
+        </where>
+        order by Id asc
+        limit ${start},${offset}
+    </select>
+
+    <select id="getNewPaginatedCount"  resultType="long" parameterMap="productParam1">
+        select count(*) from PC_Product
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+                <if test="categoryId != null">and CategoryId=${categoryId}</if>
+                <if test="spvId != null">and SpvId=${spvId}</if>
+                <if test="name != null and name != ''">and Name=#{name}</if>
+                <if test="code != null and code != ''">and Code=#{code}</if>
+                <if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+                <if test="description != null and description != ''">and Description=#{description}</if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="creatorId != null">and CreatorId=${creatorId}</if>
+                <if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+                <if test="modifierId != null">and ModifierId=${modifierId}</if>
+                <if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+                <if test="isDelete != null">and isDelete=${isDelete}</if>
+            </trim>
+        </where>
+    </select>
+    
+    <select id="getNewOrSallingProductList" resultMap="productResult1" parameterMap="productParam1">
+    	select  product.Id product_id,
+		        product.CategoryId product_categoryId,
+                SpvId product_spvId,
+		        product.Name product_name,
+		        product.Code product_code,
+		        product.Status product_status,
+		        product.DistributeStatus product_distributeStatus,
+				product.isDelete product_isDelete
+        from PC_Product product
+        left join PC_ProductAttributeConfig config on config.ProductId = product.Id
+        <where> 
+        	(product.isDelete is Null OR product.isDelete = 0) and
+	        <if test="status != null">
+	        	 product.status = ${status} or
+	        </if>
+	      	(config.AttributeId = (SELECT ID from PC_Attribute where Code = #{attributeCode}) 
+	      	and config.AttributeValue = ${attributeValue} and (product.isDelete is Null OR product.isDelete = 0))
+	      	group by product.Id
+      	</where>
+    </select>
+	
+	<select id="selectProductByCategory" resultMap="productResult1" parameterMap="productParam1">
+		select  product.Id product_id,
+		        product.CategoryId product_categoryId,
+		        product.Name product_name,
+		        product.Code product_code,
+		        product.Status product_status,
+		        product.DistributeStatus product_distributeStatus,
+				product.isDelete product_isDelete
+        from PC_Product product
+		LEFT JOIN PC_Category category on product.CategoryId = category.Id
+		where product.status = ${status} or category.Code = 1
+	</select>
+	
+    <select id="getProductList" resultMap="productResult1" parameterMap="productParam1">
+        select  product.Id product_id,
+        product.CategoryId product_categoryId,
+        SpvId product_spvId,
+        product.Name product_name,
+        product.Code product_code,
+        product.Status product_status,
+        product.DistributeStatus product_distributeStatus,
+        product.isDelete product_isDelete
+        from PC_Product product
+        <where>
+            (product.isDelete is Null OR product.isDelete = 0)
+            <if test="status != null">
+                and product.status != ${status}
+            </if>
+        </where>
+    </select>
+    
+    <select id="validNewProduct" resultType="long" parameterMap="productParam1">
+    	select count(1) from PC_ProductAttributeConfig config where config.ProductId = ${id}
+    	and config.AttributeValue = ${attributeValue} and config.AttributeId = (SELECT ID from PC_Attribute where Code = #{attributeCode})
+    </select>
+    
+</mapper>

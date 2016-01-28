@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.aa.riskpreferencedefinition.dao.IRiskPreferenceDefinitionDao">
+
+	<parameterMap id="riskPreferenceDefinitionParam" type="com.bs.plugins.custom.aa.riskpreferencedefinition.entity.RiskPreferenceDefinition" />
+	<resultMap id="riskPreferenceDefinitionResult" type="com.bs.plugins.custom.aa.riskpreferencedefinition.entity.RiskPreferenceDefinition">
+		<id property="id" column="riskPreferenceDefinition_id" javaType="java.lang.Long" />
+		<result property="name" column="riskPreferenceDefinition_name" javaType="java.lang.String" />
+		<result property="minVal" column="riskPreferenceDefinition_minVal" javaType="java.lang.Integer" />
+		<result property="maxVal" column="riskPreferenceDefinition_maxVal" javaType="java.lang.Integer" />
+		<result property="description" column="riskPreferenceDefinition_description" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="riskPreferenceDefinitionResult" parameterMap="riskPreferenceDefinitionParam">
+		select 
+			Id riskPreferenceDefinition_id,
+			Name riskPreferenceDefinition_name,
+			MinVal riskPreferenceDefinition_minVal,
+			MaxVal riskPreferenceDefinition_maxVal,
+			Description riskPreferenceDefinition_description
+		from AA_RiskPreferenceDefinition
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="minVal != null">and MinVal=${minVal}</if>
+				<if test="maxVal != null">and MaxVal=${maxVal}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="riskPreferenceDefinitionResult">
+		select 
+			Id riskPreferenceDefinition_id,
+			Name riskPreferenceDefinition_name,
+			MinVal riskPreferenceDefinition_minVal,
+			MaxVal riskPreferenceDefinition_maxVal,
+			Description riskPreferenceDefinition_description
+		from AA_RiskPreferenceDefinition
+	</select>
+	
+	<select id="selectOneById"  resultMap="riskPreferenceDefinitionResult" parameterMap="riskPreferenceDefinitionParam">
+		select 
+			Id riskPreferenceDefinition_id,
+			Name riskPreferenceDefinition_name,
+			MinVal riskPreferenceDefinition_minVal,
+			MaxVal riskPreferenceDefinition_maxVal,
+			Description riskPreferenceDefinition_description
+		from AA_RiskPreferenceDefinition where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="riskPreferenceDefinitionResult" parameterMap="riskPreferenceDefinitionParam">
+		select 
+			Id riskPreferenceDefinition_id,
+			Name riskPreferenceDefinition_name,
+			MinVal riskPreferenceDefinition_minVal,
+			MaxVal riskPreferenceDefinition_maxVal,
+			Description riskPreferenceDefinition_description
+		from AA_RiskPreferenceDefinition
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="riskPreferenceDefinitionParam">
+		select count(*) from AA_RiskPreferenceDefinition
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="minVal != null">and MinVal=${minVal}</if>
+				<if test="maxVal != null">and MaxVal=${maxVal}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="riskPreferenceDefinitionParam">
+		update AA_RiskPreferenceDefinition
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="minVal != null">,MinVal=${minVal}</if>
+				<if test="maxVal != null">,MaxVal=${maxVal}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="riskPreferenceDefinitionParam">
+		update AA_RiskPreferenceDefinition
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+                    	<if test="minVal != null">,MinVal=${minVal}</if>
+                        <if test="minVal == null">,MinVal= 0</if>
+                    	<if test="maxVal != null">,MaxVal=${maxVal}</if>
+                        <if test="maxVal == null">,MaxVal= 0</if>
+						,Description=#{description}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="riskPreferenceDefinitionParam">
+		insert into AA_RiskPreferenceDefinition
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="minVal != null">,MinVal</if>
+			<if test="maxVal != null">,MaxVal</if>
+			<if test="description != null and description != ''">,Description</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="minVal != null">,${minVal}</if>
+			<if test="maxVal != null">,${maxVal}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="riskPreferenceDefinitionParam">
+		delete from AA_RiskPreferenceDefinition where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="riskPreferenceDefinitionParam">
+		delete from AA_RiskPreferenceDefinition
+	</delete>
+	
+	<delete id="delete" parameterMap="riskPreferenceDefinitionParam">
+		delete from AA_RiskPreferenceDefinition
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="minVal != null">and MinVal=${minVal}</if>
+				<if test="maxVal != null">and MaxVal=${maxVal}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

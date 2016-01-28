@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<pc name="产品中心" code="7">
+  <basecfg name="基础配置" code="701">
+    <attrmanage name="产品属性" code="70101" model-name="PC_Attribute" view-type="tree_list">
+      <create name="创建" code="7010101" menu-type="top" model-name="PC_Attribute" view-type="create"/>
+      <modify name="修改" code="7010102" menu-type="shortcut" model-name="PC_Attribute" view-type="modify"/>
+      <delete name="删除" code="7010103" menu-type="shortcut" model-name="PC_Attribute" view-type="delete"/>
+      <detail name="明细" code="7010104" menu-type="shortcut" model-name="PC_Attribute" view-type="detail"/>
+    </attrmanage>
+    <category name="产品类型" code="70102" model-name="PC_Category" view-type="tree_list">
+      <create name="创建" code="7010201" menu-type="top" model-name="PC_Category" view-type="create"/>
+      <modify name="修改" code="7010202" menu-type="shortcut" model-name="PC_Category" view-type="modify"/>
+      <delete name="删除" code="7010203" menu-type="shortcut" model-name="PC_Category" view-type="delete"/>
+      <detail name="明细" code="7010204" menu-type="shortcut" model-name="PC_Category" view-type="detail"/>
+    </category>
+    <contracttemplate name="合同模板" code="70103" model-name="PC_ContractTemplate" view-type="tree_list">
+      <create name="创建" code="7010301" menu-type="top" model-name="PC_ContractTemplate" view-type="create"/>
+      <modify name="修改" code="7010302" menu-type="shortcut" model-name="PC_ContractTemplate" view-type="modify"/>
+      <delete name="删除" code="7010303" menu-type="shortcut" model-name="PC_ContractTemplate" view-type="delete"/>
+      <detail name="明细" code="7010304" menu-type="shortcut" model-name="PC_ContractTemplate" view-type="detail"/>
+      <preview name="预览" code="7010305" menu-type="shortcut" model-name="PC_ContractTemplate" view-type="detail"/>
+    </contracttemplate>
+    <categorycfg name="产品结构配置" code="70104" model-name="PC_StructureConfig" view-type="tree_list">
+      <newplayerproduct name="新手产品" code="7010401" model-name="PC_Product" view-type="tree_list">
+        <create name="创建" code="701040101" menu-type="top" model-name="PC_StructureConfig" view-type="create"/>
+        <modify name="修改" code="701040102" menu-type="shortcut" model-name="PC_StructureConfig" view-type="modify"/>
+        <delete name="删除" code="701040103" menu-type="shortcut" model-name="PC_StructureConfig" view-type="delete"/>
+        <detail name="明细" code="701040104" menu-type="shortcut" model-name="PC_StructureConfig" view-type="detail"/>
+      </newplayerproduct>
+      <!--<trustproduct name="收益权转让产品" code="7010402" model-name="PC_Product" view-type="tree_list">-->
+        <!--<create name="创建" code="701040201" menu-type="top" model-name="PC_StructureConfig" view-type="create"/>-->
+        <!--<modify name="修改" code="701040202" menu-type="shortcut" model-name="PC_StructureConfig" view-type="modify"/>-->
+        <!--<delete name="删除" code="701040203" menu-type="shortcut" model-name="PC_StructureConfig" view-type="delete"/>-->
+        <!--<detail name="明细" code="701040204" menu-type="shortcut" model-name="PC_StructureConfig" view-type="detail"/>-->
+      <!--</trustproduct>-->
+    </categorycfg>
+  </basecfg>
+  <productmanager name="产品配置" code="702">
+    <basicproduct name="基础产品" code="70201" model-name="PC_BasicProduct" view-type="tree_list">
+      <create name="创建" code="7020101" menu-type="top" model-name="PC_BasicProduct" view-type="create"/>
+      <modify name="修改" code="7020102" menu-type="shortcut" model-name="PC_BasicProduct" view-type="modify"/>
+      <delete name="删除" code="7020103" menu-type="shortcut" model-name="PC_BasicProduct" view-type="delete"/>
+      <detail name="明细" code="7020104" menu-type="shortcut" model-name="PC_BasicProduct" view-type="detail"/>
+    </basicproduct>
+    <product name="产品管理" code="70202" model-name="PC_Product" view-type="tree_list">
+      <newplayerproduct name="新手产品" code="7020201" model-name="PC_Product" view-type="tree_list">
+        <create name="创建" code="702020101" menu-type="top" model-name="PC_Product" view-type="create"/>
+        <modify name="修改" code="702020102" menu-type="shortcut" model-name="PC_Product" view-type="modify"/>
+        <delete name="删除" code="702020103" menu-type="shortcut" model-name="PC_Product" view-type="delete"/>
+        <detail name="查看" code="702020104" menu-type="shortcut" model-name="PC_Product" view-type="detail"/>
+        <preview name="预览" code="702020105" menu-type="shortcut" model-name="PC_Product" view-type="detail"/>
+        <publish name="发布" code="702020106" menu-type="shortcut" model-name="PC_Product" view-type="detail"/>
+        <cancel name="下架" code="702020107" menu-type="shortcut" model-name="PC_Product" view-type="delete"/>
+        <cash name="兑付" code="702020108" menu-type="shortcut" model-name="PC_Product" view-type="modify"/>
+        <cancel name="取消" code="702020109" menu-type="shortcut" model-name="PC_Product" view-type="modify"/>
+        <contract name="合同" code="702020110" menu-type="shortcut" model-name="PC_ProductContract" view-type="tree_list">
+          <create name="创建" code="70202011001" menu-type="top" model-name="PC_ProductContract" view-type="create"/>
+          <modify name="修改" code="70202011002" menu-type="shortcut" model-name="PC_ProductContract" view-type="modify"/>
+          <delete name="删除" code="70202011003" menu-type="shortcut" model-name="PC_ProductContract" view-type="delete"/>
+          <detail name="查看" code="70202011004" menu-type="shortcut" model-name="PC_ProductContract" view-type="detail"/>
+        </contract>
+        <tag name="归档" code="702020111" menu-type="shortcut" model-name="PC_Product" view-type="modify"/>
+
+      </newplayerproduct>
+    </product>
+  </productmanager>
+  <productreport name="产品统计" code="703" />
+    <!--<newplayerproduct name="服务费统计" code="70301" model-name="PC_Product" view-type="tree_list">-->
+    <!--</newplayerproduct>-->
+  <!--</productreport>-->
+</pc>

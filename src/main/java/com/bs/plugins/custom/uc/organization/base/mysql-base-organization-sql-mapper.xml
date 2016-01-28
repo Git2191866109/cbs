@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.organization.dao.IOrganizationDao">
+
+	<parameterMap id="organizationParam" type="com.bs.plugins.custom.uc.organization.entity.Organization" />
+	<resultMap id="organizationResult" type="com.bs.plugins.custom.uc.organization.entity.Organization">
+		<id property="id" column="organization_id" javaType="java.lang.Long" />
+		<result property="parentId" column="organization_parentId" javaType="java.lang.Long" />
+		<result property="parentName" column="organization_parentName" javaType="java.lang.String" />
+		<result property="type" column="organization_type" javaType="java.lang.Integer" />
+		<result property="code" column="organization_code" javaType="java.lang.String" />
+		<result property="name" column="organization_name" javaType="java.lang.String" />
+		<result property="shortName" column="organization_shortName" javaType="java.lang.String" />
+		<result property="phone" column="organization_phone" javaType="java.lang.String" />
+		<result property="fax" column="organization_fax" javaType="java.lang.String" />
+		<result property="postCode" column="organization_postCode" javaType="java.lang.String" />
+		<result property="address" column="organization_address" javaType="java.lang.String" />
+		<result property="description" column="organization_description" javaType="java.lang.String" />
+		<result property="status" column="organization_status" javaType="java.lang.Integer" />
+		<result property="treeLevel" column="organization_treeLevel" javaType="java.lang.Integer" />
+		<result property="treePath" column="organization_treePath" javaType="java.lang.String" />
+		<result property="isChildNode" column="organization_isChildNode" javaType="java.lang.Integer" />
+		<result property="createTime" column="organization_createTime" javaType="java.lang.String" />
+		<result property="modifyTime" column="organization_modifyTime" javaType="java.lang.String" />
+		<result property="roleIds" column="organization_roleIds" javaType="java.lang.String" />
+		<collection property="users" ofType="com.bs.plugins.custom.uc.user.entity.User">
+			<id property="id" column="user_id" javaType="java.lang.Long" />
+			<result property="orgCode" column="user_orgCode" javaType="java.lang.String" />
+			<result property="account" column="user_account" javaType="java.lang.String" />
+			<result property="name" column="user_name" javaType="java.lang.String" />
+			<result property="type" column="user_type" javaType="java.lang.Integer" />
+			<result property="position" column="user_position" javaType="java.lang.String" />
+			<result property="password" column="user_password" javaType="java.lang.String" />
+			<result property="gender" column="user_gender" javaType="java.lang.Integer" />
+			<result property="birthday" column="user_birthday" javaType="java.lang.String" />
+			<result property="head" column="user_head" javaType="java.lang.String" />
+			<result property="individualitySignature" column="user_individualitySignature" javaType="java.lang.String" />
+			<result property="mobilePhone" column="user_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="user_officePhone" javaType="java.lang.String" />
+			<result property="email" column="user_email" javaType="java.lang.String" />
+			<result property="description" column="user_description" javaType="java.lang.String" />
+			<result property="status" column="user_status" javaType="java.lang.Integer" />
+			<result property="style" column="user_style" javaType="java.lang.String" />
+			<result property="createTime" column="user_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="user_modifyTime" javaType="java.lang.String" />
+			<result property="roleIds" column="user_roleIds" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="organizationResult" parameterMap="organizationParam">
+		select
+			organization.Id organization_id,
+			organization.ParentId organization_parentId,
+			organization.ParentName organization_parentName,
+			organization.Type organization_type,
+			organization.Code organization_code,
+			organization.Name organization_name,
+			organization.ShortName organization_shortName,
+			organization.Phone organization_phone,
+			organization.Fax organization_fax,
+			organization.PostCode organization_postCode,
+			organization.Address organization_address,
+			organization.Description organization_description,
+			organization.Status organization_status,
+			organization.TreeLevel organization_treeLevel,
+			organization.TreePath organization_treePath,
+			organization.IsChildNode organization_isChildNode,
+			organization.CreateTime organization_createTime,
+			organization.ModifyTime organization_modifyTime,
+			organization.RoleIds organization_roleIds,	
+			user.Id user_id,
+			user.OrgCode user_orgCode,
+			user.Account user_account,
+			user.Name user_name,
+			user.Type user_type,
+			user.Position user_position,
+			user.Password user_password,
+			user.Gender user_gender,
+			user.Birthday user_birthday,
+			user.Head user_head,
+			user.IndividualitySignature user_individualitySignature,
+			user.MobilePhone user_mobilePhone,
+			user.OfficePhone user_officePhone,
+			user.Email user_email,
+			user.Description user_description,
+			user.Status user_status,
+			user.Style user_style,
+			user.CreateTime user_createTime,
+			user.ModifyTime user_modifyTime,
+			user.RoleIds user_roleIds
+		from UC_Organization organization
+		inner join UC_User user on user.OrgCode=organization.Code
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">and TreePath=#{treePath}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">and RoleIds=#{roleIds}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectOrganizationUser" resultMap="organizationResult" parameterMap="organizationParam">
+		select
+			organization.Id organization_id,
+			organization.ParentId organization_parentId,
+			organization.ParentName organization_parentName,
+			organization.Type organization_type,
+			organization.Code organization_code,
+			organization.Name organization_name,
+			organization.ShortName organization_shortName,
+			organization.Phone organization_phone,
+			organization.Fax organization_fax,
+			organization.PostCode organization_postCode,
+			organization.Address organization_address,
+			organization.Description organization_description,
+			organization.Status organization_status,
+			organization.TreeLevel organization_treeLevel,
+			organization.TreePath organization_treePath,
+			organization.IsChildNode organization_isChildNode,
+			organization.CreateTime organization_createTime,
+			organization.ModifyTime organization_modifyTime,
+			organization.RoleIds organization_roleIds,
+				user.Id user_id,
+	
+				user.OrgCode user_orgCode,
+	
+				user.Account user_account,
+	
+				user.Name user_name,
+	
+				user.Type user_type,
+	
+				user.Position user_position,
+	
+				user.Password user_password,
+	
+				user.Gender user_gender,
+	
+				user.Birthday user_birthday,
+	
+				user.Head user_head,
+	
+				user.IndividualitySignature user_individualitySignature,
+	
+				user.MobilePhone user_mobilePhone,
+	
+				user.OfficePhone user_officePhone,
+	
+				user.Email user_email,
+	
+				user.Description user_description,
+	
+				user.Status user_status,
+	
+				user.Style user_style,
+	
+				user.CreateTime user_createTime,
+	
+				user.ModifyTime user_modifyTime,
+	
+				user.RoleIds user_roleIds
+	
+		from UC_Organization organization
+		inner join UC_User user on user.OrgCode=organization.Code
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">and TreePath=#{treePath}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">and RoleIds=#{roleIds}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="organizationResult" parameterMap="organizationParam">
+		select 
+			Id organization_id,
+			ParentId organization_parentId,
+			ParentName organization_parentName,
+			Type organization_type,
+			Code organization_code,
+			Name organization_name,
+			ShortName organization_shortName,
+			Phone organization_phone,
+			Fax organization_fax,
+			PostCode organization_postCode,
+			Address organization_address,
+			Description organization_description,
+			Status organization_status,
+			TreeLevel organization_treeLevel,
+			TreePath organization_treePath,
+			IsChildNode organization_isChildNode,
+			CreateTime organization_createTime,
+			ModifyTime organization_modifyTime,
+			RoleIds organization_roleIds
+		from UC_Organization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">and TreePath=#{treePath}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">and RoleIds=#{roleIds}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="organizationResult">
+		select 
+			Id organization_id,
+			ParentId organization_parentId,
+			ParentName organization_parentName,
+			Type organization_type,
+			Code organization_code,
+			Name organization_name,
+			ShortName organization_shortName,
+			Phone organization_phone,
+			Fax organization_fax,
+			PostCode organization_postCode,
+			Address organization_address,
+			Description organization_description,
+			Status organization_status,
+			TreeLevel organization_treeLevel,
+			TreePath organization_treePath,
+			IsChildNode organization_isChildNode,
+			CreateTime organization_createTime,
+			ModifyTime organization_modifyTime,
+			RoleIds organization_roleIds
+		from UC_Organization
+	</select>
+	
+	<select id="selectOneById"  resultMap="organizationResult" parameterMap="organizationParam">
+		select 
+			Id organization_id,
+			ParentId organization_parentId,
+			ParentName organization_parentName,
+			Type organization_type,
+			Code organization_code,
+			Name organization_name,
+			ShortName organization_shortName,
+			Phone organization_phone,
+			Fax organization_fax,
+			PostCode organization_postCode,
+			Address organization_address,
+			Description organization_description,
+			Status organization_status,
+			TreeLevel organization_treeLevel,
+			TreePath organization_treePath,
+			IsChildNode organization_isChildNode,
+			CreateTime organization_createTime,
+			ModifyTime organization_modifyTime,
+			RoleIds organization_roleIds
+		from UC_Organization where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="organizationResult" parameterMap="organizationParam">
+		select 
+			Id organization_id,
+			ParentId organization_parentId,
+			ParentName organization_parentName,
+			Type organization_type,
+			Code organization_code,
+			Name organization_name,
+			ShortName organization_shortName,
+			Phone organization_phone,
+			Fax organization_fax,
+			PostCode organization_postCode,
+			Address organization_address,
+			Description organization_description,
+			Status organization_status,
+			TreeLevel organization_treeLevel,
+			TreePath organization_treePath,
+			IsChildNode organization_isChildNode,
+			CreateTime organization_createTime,
+			ModifyTime organization_modifyTime,
+			RoleIds organization_roleIds
+		from UC_Organization
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="organizationParam">
+		select count(*) from UC_Organization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">and TreePath=#{treePath}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">and RoleIds=#{roleIds}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="organizationParam">
+		update UC_Organization
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="parentId != null">,ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">,ParentName=#{parentName}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">,ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">,Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">,Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">,PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">,Address=#{address}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">,TreePath=#{treePath}</if>
+				<if test="isChildNode != null">,IsChildNode=${isChildNode}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+				<if test="roleIds != null and roleIds != ''">,RoleIds=#{roleIds}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="organizationParam">
+		update UC_Organization
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ParentId=${parentId}
+						,ParentName=#{parentName}
+                    	<if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+						,Code=#{code}
+						,Name=#{name}
+						,ShortName=#{shortName}
+						,Phone=#{phone}
+						,Fax=#{fax}
+						,PostCode=#{postCode}
+						,Address=#{address}
+						,Description=#{description}
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                        <if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+                        <if test="treeLevel == null">,TreeLevel= 0</if>
+						,TreePath=#{treePath}
+                    	<if test="isChildNode != null">,IsChildNode=${isChildNode}</if>
+                        <if test="isChildNode == null">,IsChildNode= 0</if>
+                            ,ModifyTime=now()
+						,RoleIds=#{roleIds}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="organizationParam">
+		insert into UC_Organization
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="parentId != null">,ParentId</if>
+			<if test="parentName != null and parentName != ''">,ParentName</if>
+			<if test="type != null">,Type</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="shortName != null and shortName != ''">,ShortName</if>
+			<if test="phone != null and phone != ''">,Phone</if>
+			<if test="fax != null and fax != ''">,Fax</if>
+			<if test="postCode != null and postCode != ''">,PostCode</if>
+			<if test="address != null and address != ''">,Address</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="status != null">,Status</if>
+			<if test="treeLevel != null">,TreeLevel</if>
+			<if test="treePath != null and treePath != ''">,TreePath</if>
+			<if test="isChildNode != null">,IsChildNode</if>
+                ,CreateTime
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="roleIds != null and roleIds != ''">,RoleIds</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="parentId != null">,${parentId}</if>
+			<if test="parentName != null and parentName != ''">,#{parentName}</if>
+			<if test="type != null">,${type}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="shortName != null and shortName != ''">,#{shortName}</if>
+			<if test="phone != null and phone != ''">,#{phone}</if>
+			<if test="fax != null and fax != ''">,#{fax}</if>
+			<if test="postCode != null and postCode != ''">,#{postCode}</if>
+			<if test="address != null and address != ''">,#{address}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="status != null">,${status}</if>
+			<if test="treeLevel != null">,${treeLevel}</if>
+			<if test="treePath != null and treePath != ''">,#{treePath}</if>
+			<if test="isChildNode != null">,${isChildNode}</if>
+                ,now()
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="roleIds != null and roleIds != ''">,#{roleIds}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="organizationParam">
+		delete from UC_Organization where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="organizationParam">
+		delete from UC_Organization
+	</delete>
+	
+	<delete id="delete" parameterMap="organizationParam">
+		delete from UC_Organization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">and TreePath=#{treePath}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">and RoleIds=#{roleIds}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

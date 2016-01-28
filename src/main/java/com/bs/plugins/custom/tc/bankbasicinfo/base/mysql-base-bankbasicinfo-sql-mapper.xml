@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.bankbasicinfo.dao.IBankBasicInfoDao">
+
+	<parameterMap id="bankBasicInfoParam" type="com.bs.plugins.custom.tc.bankbasicinfo.entity.BankBasicInfo" />
+	<resultMap id="bankBasicInfoResult" type="com.bs.plugins.custom.tc.bankbasicinfo.entity.BankBasicInfo">
+		<id property="id" column="bankBasicInfo_id" javaType="java.lang.Long" />
+		<result property="code" column="bankBasicInfo_code" javaType="java.lang.String" />
+		<result property="name" column="bankBasicInfo_name" javaType="java.lang.String" />
+		<result property="singleLimit" column="bankBasicInfo_singleLimit" javaType="java.math.BigDecimal" />
+		<result property="singleDayLimit" column="bankBasicInfo_singleDayLimit" javaType="java.math.BigDecimal" />
+		<result property="status" column="bankBasicInfo_status" javaType="java.lang.Integer" />
+		<result property="createDate" column="bankBasicInfo_createDate" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="bankBasicInfoResult" parameterMap="bankBasicInfoParam">
+		select 
+			Id bankBasicInfo_id,
+			Code bankBasicInfo_code,
+			Name bankBasicInfo_name,
+			SingleLimit bankBasicInfo_singleLimit,
+			SingleDayLimit bankBasicInfo_singleDayLimit,
+			Status bankBasicInfo_status,
+			CreateDate bankBasicInfo_createDate
+		from TC_BankBasicInfo
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="singleLimit != null">and SingleLimit=${singleLimit}</if>
+				<if test="singleDayLimit != null">and SingleDayLimit=${singleDayLimit}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="bankBasicInfoResult">
+		select 
+			Id bankBasicInfo_id,
+			Code bankBasicInfo_code,
+			Name bankBasicInfo_name,
+			SingleLimit bankBasicInfo_singleLimit,
+			SingleDayLimit bankBasicInfo_singleDayLimit,
+			Status bankBasicInfo_status,
+			CreateDate bankBasicInfo_createDate
+		from TC_BankBasicInfo
+	</select>
+	
+	<select id="selectOneById"  resultMap="bankBasicInfoResult" parameterMap="bankBasicInfoParam">
+		select 
+			Id bankBasicInfo_id,
+			Code bankBasicInfo_code,
+			Name bankBasicInfo_name,
+			SingleLimit bankBasicInfo_singleLimit,
+			SingleDayLimit bankBasicInfo_singleDayLimit,
+			Status bankBasicInfo_status,
+			CreateDate bankBasicInfo_createDate
+		from TC_BankBasicInfo where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="bankBasicInfoResult" parameterMap="bankBasicInfoParam">
+		select 
+			Id bankBasicInfo_id,
+			Code bankBasicInfo_code,
+			Name bankBasicInfo_name,
+			SingleLimit bankBasicInfo_singleLimit,
+			SingleDayLimit bankBasicInfo_singleDayLimit,
+			Status bankBasicInfo_status,
+			CreateDate bankBasicInfo_createDate
+		from TC_BankBasicInfo
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="bankBasicInfoParam">
+		select count(*) from TC_BankBasicInfo
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="singleLimit != null">and SingleLimit=${singleLimit}</if>
+				<if test="singleDayLimit != null">and SingleDayLimit=${singleDayLimit}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="bankBasicInfoParam">
+		update TC_BankBasicInfo
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="singleLimit != null">,SingleLimit=${singleLimit}</if>
+				<if test="singleDayLimit != null">,SingleDayLimit=${singleDayLimit}</if>
+				<if test="status != null">,Status=${status}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="bankBasicInfoParam">
+		update TC_BankBasicInfo
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Code=#{code}
+						,Name=#{name}
+						,SingleLimit=${singleLimit}
+						,SingleDayLimit=${singleDayLimit}
+                        <if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="bankBasicInfoParam">
+		insert into TC_BankBasicInfo
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="singleLimit != null">,SingleLimit</if>
+			<if test="singleDayLimit != null">,SingleDayLimit</if>
+			<if test="status != null">,Status</if>
+                ,CreateDate
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="singleLimit != null">,${singleLimit}</if>
+			<if test="singleDayLimit != null">,${singleDayLimit}</if>
+			<if test="status != null">,${status}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="bankBasicInfoParam">
+		delete from TC_BankBasicInfo where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="bankBasicInfoParam">
+		delete from TC_BankBasicInfo
+	</delete>
+	
+	<delete id="delete" parameterMap="bankBasicInfoParam">
+		delete from TC_BankBasicInfo
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="singleLimit != null">and SingleLimit=${singleLimit}</if>
+				<if test="singleDayLimit != null">and SingleDayLimit=${singleDayLimit}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

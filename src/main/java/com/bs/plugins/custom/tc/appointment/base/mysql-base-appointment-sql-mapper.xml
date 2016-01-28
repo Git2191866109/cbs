@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.appointment.dao.IAppointmentDao">
+
+	<parameterMap id="appointmentParam" type="com.bs.plugins.custom.tc.appointment.entity.Appointment" />
+	<resultMap id="appointmentResult" type="com.bs.plugins.custom.tc.appointment.entity.Appointment">
+		<id property="id" column="appointment_id" javaType="java.lang.Long" />
+		<result property="memberId" column="appointment_memberId" javaType="java.lang.Long" />
+		<result property="spvId" column="appointment_spvId" javaType="java.lang.Long" />
+		<result property="productId" column="appointment_productId" javaType="java.lang.Long" />
+		<result property="contact" column="appointment_contact" javaType="java.lang.String" />
+		<result property="mobilePhone" column="appointment_mobilePhone" javaType="java.lang.String" />
+		<result property="productName" column="appointment_productName" javaType="java.lang.String" />
+		<result property="productCode" column="appointment_productCode" javaType="java.lang.String" />
+		<result property="appointAmount" column="appointment_appointAmount" javaType="java.math.BigDecimal" />
+		<result property="shares" column="appointment_shares" javaType="java.lang.Integer" />
+		<result property="appointTime" column="appointment_appointTime" javaType="java.lang.String" />
+		<result property="status" column="appointment_status" javaType="java.lang.Integer" />
+		<result property="remark" column="appointment_remark" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="appointmentResult" parameterMap="appointmentParam">
+		select
+			appointment.Id appointment_id,
+			appointment.MemberId appointment_memberId,
+			appointment.SpvId appointment_spvId,
+			appointment.ProductId appointment_productId,
+			appointment.Contact appointment_contact,
+			appointment.MobilePhone appointment_mobilePhone,
+			appointment.ProductName appointment_productName,
+			appointment.ProductCode appointment_productCode,
+			appointment.AppointAmount appointment_appointAmount,
+			appointment.Shares appointment_shares,
+			appointment.AppointTime appointment_appointTime,
+			appointment.Status appointment_status,
+			appointment.Remark appointment_remark,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_Appointment appointment
+		inner join CC_Member member on member.Id=appointment.MemberId
+		inner join PC_Product product on product.Id=appointment.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAppointmentMember" resultMap="appointmentResult" parameterMap="appointmentParam">
+		select
+			appointment.Id appointment_id,
+			appointment.MemberId appointment_memberId,
+			appointment.SpvId appointment_spvId,
+			appointment.ProductId appointment_productId,
+			appointment.Contact appointment_contact,
+			appointment.MobilePhone appointment_mobilePhone,
+			appointment.ProductName appointment_productName,
+			appointment.ProductCode appointment_productCode,
+			appointment.AppointAmount appointment_appointAmount,
+			appointment.Shares appointment_shares,
+			appointment.AppointTime appointment_appointTime,
+			appointment.Status appointment_status,
+			member.Id product_id,
+			member.SpvId product_spvId,
+			member.EmailRegisterValidId product_emailRegisterValidId,
+			member.Type product_type,
+			member.Code product_code,
+			member.Account product_account,
+			member.PhoneAccount product_phoneAccount,
+			member.EmailAccount product_emailAccount,
+			member.Password product_password,
+			member.UmpayUserNo product_umpayUserNo,
+			member.UmpayAccountNo product_umpayAccountNo,
+			member.PayPassword product_payPassword,
+			member.Nickname product_nickname,
+			member.Avatar product_avatar,
+			member.ValidEmail product_validEmail,
+			member.MobilePhone product_mobilePhone,
+			member.OfficePhone product_officePhone,
+			member.CertificateType product_certificateType,
+			member.CertificateNo product_certificateNo,
+			member.Name product_name,
+			member.Male product_male,
+			member.Birthday product_birthday,
+			member.FamilyRole product_familyRole,
+			member.Rrac product_rrac,
+			member.RiskScore product_riskScore,
+			member.ProvinceSpell product_provinceSpell,
+			member.ProvinceCode product_provinceCode,
+			member.CityCode product_cityCode,
+			member.CountryCode product_countryCode,
+			member.ProvinceName product_provinceName,
+			member.CityName product_cityName,
+			member.CountryName product_countryName,
+			member.Address product_address,
+			member.Income product_income,
+			member.Job product_job,
+			member.Education product_education,
+			member.ChildrenCount product_childrenCount,
+			member.IsFreePassword product_isFreePassword,
+			member.IsEmailValid product_isEmailValid,
+			member.IsRealname product_isRealname,
+			member.IsActivate product_isActivate,
+			member.IsOpenAccount product_isOpenAccount,
+			member.IsBindingCard product_isBindingCard,
+			member.IsSignature product_isSignature,
+			member.SignatureTime product_signatureTime,
+			member.OpenAccountTime product_openAccountTime,
+			member.RegisterTime product_registerTime,
+			member.ModifyTime product_modifyTime,
+			member.SerialNo product_serialNo,
+			member.ResetTime product_resetTime,
+			member.ReferralCode product_referralCode,
+			member.RecommendIdcode product_recommendIdcode
+		from TC_Appointment appointment
+		inner join CC_Member member on member.Id=appointment.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAppointmentProduct" resultMap="appointmentResult" parameterMap="appointmentParam">
+		select
+			appointment.Id appointment_id,
+			appointment.MemberId appointment_memberId,
+			appointment.SpvId appointment_spvId,
+			appointment.ProductId appointment_productId,
+			appointment.Contact appointment_contact,
+			appointment.MobilePhone appointment_mobilePhone,
+			appointment.ProductName appointment_productName,
+			appointment.ProductCode appointment_productCode,
+			appointment.AppointAmount appointment_appointAmount,
+			appointment.Shares appointment_shares,
+			appointment.AppointTime appointment_appointTime,
+			appointment.Status appointment_status,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_Appointment appointment
+		inner join PC_Product product on product.Id=appointment.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="appointmentResult" parameterMap="appointmentParam">
+		select 
+			Id appointment_id,
+			MemberId appointment_memberId,
+			SpvId appointment_spvId,
+			ProductId appointment_productId,
+			Contact appointment_contact,
+			MobilePhone appointment_mobilePhone,
+			ProductName appointment_productName,
+			ProductCode appointment_productCode,
+			AppointAmount appointment_appointAmount,
+			Shares appointment_shares,
+			AppointTime appointment_appointTime,
+			Status appointment_status,
+			Remark appointment_remark
+		from TC_Appointment
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="appointmentResult">
+		select 
+			Id appointment_id,
+			MemberId appointment_memberId,
+			SpvId appointment_spvId,
+			ProductId appointment_productId,
+			Contact appointment_contact,
+			MobilePhone appointment_mobilePhone,
+			ProductName appointment_productName,
+			ProductCode appointment_productCode,
+			AppointAmount appointment_appointAmount,
+			Shares appointment_shares,
+			AppointTime appointment_appointTime,
+			Status appointment_status,
+			Remark appointment_remark
+		from TC_Appointment
+	</select>
+	
+	<select id="selectOneById"  resultMap="appointmentResult" parameterMap="appointmentParam">
+		select 
+			Id appointment_id,
+			MemberId appointment_memberId,
+			SpvId appointment_spvId,
+			ProductId appointment_productId,
+			Contact appointment_contact,
+			MobilePhone appointment_mobilePhone,
+			ProductName appointment_productName,
+			ProductCode appointment_productCode,
+			AppointAmount appointment_appointAmount,
+			Shares appointment_shares,
+			AppointTime appointment_appointTime,
+			Status appointment_status,
+			Remark appointment_remark
+		from TC_Appointment where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="appointmentResult" parameterMap="appointmentParam">
+		select 
+			Id appointment_id,
+			MemberId appointment_memberId,
+			SpvId appointment_spvId,
+			ProductId appointment_productId,
+			Contact appointment_contact,
+			MobilePhone appointment_mobilePhone,
+			ProductName appointment_productName,
+			ProductCode appointment_productCode,
+			AppointAmount appointment_appointAmount,
+			Shares appointment_shares,
+			AppointTime appointment_appointTime,
+			Status appointment_status,
+			Remark appointment_remark
+		from TC_Appointment
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="appointmentParam">
+		select count(*) from TC_Appointment
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="appointmentParam">
+		update TC_Appointment
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="spvId != null">,SpvId=${spvId}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">,Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">,ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">,ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">,AppointAmount=${appointAmount}</if>
+				<if test="shares != null">,Shares=${shares}</if>
+               		 <if test="appointTime != null  and appointTime != ''">,AppointTime=#{appointTime}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="remark != null and remark != ''">,Remark=#{remark}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="appointmentParam">
+		update TC_Appointment
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+                            ,SpvId=${spvId}
+                            ,ProductId=${productId}
+						,Contact=#{contact}
+						,MobilePhone=#{mobilePhone}
+						,ProductName=#{productName}
+						,ProductCode=#{productCode}
+						,AppointAmount=${appointAmount}
+                        <if test="shares != null">,Shares=${shares}</if>
+                        <if test="shares == null">,Shares= 0</if>
+                        <if test="appointTime != null  and appointTime != ''">,AppointTime=#{appointTime}</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+						,Remark=#{remark}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="appointmentParam">
+		insert into TC_Appointment
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="spvId != null">,SpvId</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="contact != null and contact != ''">,Contact</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone</if>
+			<if test="productName != null and productName != ''">,ProductName</if>
+			<if test="productCode != null and productCode != ''">,ProductCode</if>
+			<if test="appointAmount != null">,AppointAmount</if>
+			<if test="shares != null">,Shares</if>
+                <if test="appointTime != null and appointTime != ''">,AppointTime</if>
+			<if test="status != null">,Status</if>
+			<if test="remark != null and remark != ''">,Remark</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="spvId != null">,${spvId}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="contact != null and contact != ''">,#{contact}</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone}</if>
+			<if test="productName != null and productName != ''">,#{productName}</if>
+			<if test="productCode != null and productCode != ''">,#{productCode}</if>
+			<if test="appointAmount != null">,${appointAmount}</if>
+			<if test="shares != null">,${shares}</if>
+            	<if test="appointTime != null and appointTime != ''">,#{appointTime}</if>
+			<if test="status != null">,${status}</if>
+			<if test="remark != null and remark != ''">,#{remark}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="appointmentParam">
+		delete from TC_Appointment where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="appointmentParam">
+		delete from TC_Appointment
+	</delete>
+	
+	<delete id="delete" parameterMap="appointmentParam">
+		delete from TC_Appointment
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contact != null and contact != ''">and Contact=#{contact}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="appointAmount != null">and AppointAmount=${appointAmount}</if>
+				<if test="shares != null">and Shares=${shares}</if>
+				<if test="appointTime != null and appointTime != ''">and AppointTime=#{appointTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

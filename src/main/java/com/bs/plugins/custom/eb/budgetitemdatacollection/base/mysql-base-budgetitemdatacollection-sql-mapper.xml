@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetitemdatacollection.dao.IBudgetItemDataCollectionDao">
+
+	<parameterMap id="budgetItemDataCollectionParam" type="com.bs.plugins.custom.eb.budgetitemdatacollection.entity.BudgetItemDataCollection" />
+	<resultMap id="budgetItemDataCollectionResult" type="com.bs.plugins.custom.eb.budgetitemdatacollection.entity.BudgetItemDataCollection">
+		<id property="id" column="budgetItemDataCollection_id" javaType="java.lang.Long" />
+		<result property="itemDataId" column="budgetItemDataCollection_itemDataId" javaType="java.lang.Long" />
+		<result property="areaId" column="budgetItemDataCollection_areaId" javaType="java.lang.Long" />
+		<result property="eduGoalId" column="budgetItemDataCollection_eduGoalId" javaType="java.lang.Long" />
+		<result property="growStagesId" column="budgetItemDataCollection_growStagesId" javaType="java.lang.Long" />
+		<result property="budgetCategoryId" column="budgetItemDataCollection_budgetCategoryId" javaType="java.lang.Long" />
+		<result property="budgetItemId" column="budgetItemDataCollection_budgetItemId" javaType="java.lang.Long" />
+		<result property="itemLowAmount" column="budgetItemDataCollection_itemLowAmount" javaType="java.math.BigDecimal" />
+		<result property="itemHighAmount" column="budgetItemDataCollection_itemHighAmount" javaType="java.math.BigDecimal" />
+		<result property="lowAmount" column="budgetItemDataCollection_lowAmount" javaType="java.math.BigDecimal" />
+		<result property="highAmount" column="budgetItemDataCollection_highAmount" javaType="java.math.BigDecimal" />
+		<result property="amount" column="budgetItemDataCollection_amount" javaType="java.math.BigDecimal" />
+		<result property="maxAmount" column="budgetItemDataCollection_maxAmount" javaType="java.math.BigDecimal" />
+		<result property="yearCount" column="budgetItemDataCollection_yearCount" javaType="java.lang.Integer" />
+		<result property="years" column="budgetItemDataCollection_years" javaType="java.lang.Integer" />
+		<result property="maxYearCount" column="budgetItemDataCollection_maxYearCount" javaType="java.lang.Integer" />
+		<result property="paymentAge" column="budgetItemDataCollection_paymentAge" javaType="java.lang.Integer" />
+		<result property="isGrading" column="budgetItemDataCollection_isGrading" javaType="java.lang.Integer" />
+		<result property="gradingType" column="budgetItemDataCollection_gradingType" javaType="java.lang.Integer" />
+		<result property="paymentMethod" column="budgetItemDataCollection_paymentMethod" javaType="java.lang.Integer" />
+		<result property="paymentMonth" column="budgetItemDataCollection_paymentMonth" javaType="java.lang.Integer" />
+		<result property="isInflation" column="budgetItemDataCollection_isInflation" javaType="java.lang.Integer" />
+		<result property="isAreaTranslation" column="budgetItemDataCollection_isAreaTranslation" javaType="java.lang.Integer" />
+		<result property="comment" column="budgetItemDataCollection_comment" javaType="java.lang.String" />
+		<result property="dataSources" column="budgetItemDataCollection_dataSources" javaType="java.lang.String" />
+		<result property="trainingAgencyName" column="budgetItemDataCollection_trainingAgencyName" javaType="java.lang.String" />
+		<association property="budgetItemData" javaType="com.bs.plugins.custom.eb.budgetitemdata.entity.BudgetItemData">
+			<id property="id" column="budgetItemData_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="budgetItemData_areaCode" javaType="java.lang.String" />
+			<result property="eduGoalId" column="budgetItemData_eduGoalId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="budgetItemData_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="budgetItemData_eduModeId" javaType="java.lang.Long" />
+			<result property="categoryId" column="budgetItemData_categoryId" javaType="java.lang.Long" />
+			<result property="itemId" column="budgetItemData_itemId" javaType="java.lang.Long" />
+			<result property="isInland" column="budgetItemData_isInland" javaType="java.lang.Integer" />
+			<result property="lowAmountTotal" column="budgetItemData_lowAmountTotal" javaType="java.math.BigDecimal" />
+			<result property="highAmountTotal" column="budgetItemData_highAmountTotal" javaType="java.math.BigDecimal" />
+			<result property="lowAmount" column="budgetItemData_lowAmount" javaType="java.math.BigDecimal" />
+			<result property="highAmount" column="budgetItemData_highAmount" javaType="java.math.BigDecimal" />
+			<result property="maxAmount" column="budgetItemData_maxAmount" javaType="java.math.BigDecimal" />
+			<result property="systemYearCount" column="budgetItemData_systemYearCount" javaType="java.lang.Integer" />
+			<result property="yearCount" column="budgetItemData_yearCount" javaType="java.lang.Double" />
+			<result property="maxYearCount" column="budgetItemData_maxYearCount" javaType="java.lang.Integer" />
+			<result property="years" column="budgetItemData_years" javaType="java.lang.Integer" />
+			<result property="endYears" column="budgetItemData_endYears" javaType="java.lang.Integer" />
+			<result property="paymentGrade" column="budgetItemData_paymentGrade" javaType="java.lang.Integer" />
+			<result property="isGrading" column="budgetItemData_isGrading" javaType="java.lang.Integer" />
+			<result property="gradingType" column="budgetItemData_gradingType" javaType="java.lang.Integer" />
+			<result property="paymentMethod" column="budgetItemData_paymentMethod" javaType="java.lang.Integer" />
+			<result property="paymentMonth" column="budgetItemData_paymentMonth" javaType="java.lang.Integer" />
+			<result property="isInflation" column="budgetItemData_isInflation" javaType="java.lang.Integer" />
+			<result property="isAreaTranslation" column="budgetItemData_isAreaTranslation" javaType="java.lang.Integer" />
+			<result property="comment" column="budgetItemData_comment" javaType="java.lang.String" />
+			<result property="dataSources" column="budgetItemData_dataSources" javaType="java.lang.String" />
+			<result property="trainingAgencyName" column="budgetItemData_trainingAgencyName" javaType="java.lang.String" />
+			<result property="createDate" column="budgetItemData_createDate" javaType="java.lang.String" />
+			<result property="updateDate" column="budgetItemData_updateDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItemData_creatorId" javaType="java.lang.Long" />
+		</association>
+		<collection property="itemFieldValues" ofType="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+			<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+			<result property="itemFieldId" column="itemFieldValue_itemFieldId" javaType="java.lang.Long" />
+			<result property="dataCollectionId" column="itemFieldValue_dataCollectionId" javaType="java.lang.Long" />
+			<result property="fieldName" column="itemFieldValue_fieldName" javaType="java.lang.String" />
+			<result property="fieldValue" column="itemFieldValue_fieldValue" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemDataCollection.TrainingAgencyName budgetItemDataCollection_trainingAgencyName,	
+			budgetItemData.Id budgetItemData_id,
+			budgetItemData.AreaCode budgetItemData_areaCode,
+			budgetItemData.EduGoalId budgetItemData_eduGoalId,
+			budgetItemData.GrowStagesId budgetItemData_growStagesId,
+			budgetItemData.EduModeId budgetItemData_eduModeId,
+			budgetItemData.CategoryId budgetItemData_categoryId,
+			budgetItemData.ItemId budgetItemData_itemId,
+			budgetItemData.IsInland budgetItemData_isInland,
+			budgetItemData.LowAmountTotal budgetItemData_lowAmountTotal,
+			budgetItemData.HighAmountTotal budgetItemData_highAmountTotal,
+			budgetItemData.LowAmount budgetItemData_lowAmount,
+			budgetItemData.HighAmount budgetItemData_highAmount,
+			budgetItemData.MaxAmount budgetItemData_maxAmount,
+			budgetItemData.SystemYearCount budgetItemData_systemYearCount,
+			budgetItemData.YearCount budgetItemData_yearCount,
+			budgetItemData.MaxYearCount budgetItemData_maxYearCount,
+			budgetItemData.Years budgetItemData_years,
+			budgetItemData.EndYears budgetItemData_endYears,
+			budgetItemData.PaymentGrade budgetItemData_paymentGrade,
+			budgetItemData.IsGrading budgetItemData_isGrading,
+			budgetItemData.GradingType budgetItemData_gradingType,
+			budgetItemData.PaymentMethod budgetItemData_paymentMethod,
+			budgetItemData.PaymentMonth budgetItemData_paymentMonth,
+			budgetItemData.IsInflation budgetItemData_isInflation,
+			budgetItemData.IsAreaTranslation budgetItemData_isAreaTranslation,
+			budgetItemData.Comment budgetItemData_comment,
+			budgetItemData.DataSources budgetItemData_dataSources,
+			budgetItemData.TrainingAgencyName budgetItemData_trainingAgencyName,
+			budgetItemData.CreateDate budgetItemData_createDate,
+			budgetItemData.UpdateDate budgetItemData_updateDate,
+			budgetItemData.CreatorId budgetItemData_creatorId
+		from EB_BudgetItemDataCollection budgetItemDataCollection
+		inner join EB_BudgetItemData budgetItemData on budgetItemData.Id=budgetItemDataCollection.ItemDataId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetItemDataCollectionBudgetItemData" resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemData.Id budgetItemData_id,
+			budgetItemData.AreaCode budgetItemData_areaCode,
+			budgetItemData.EduGoalId budgetItemData_eduGoalId,
+			budgetItemData.GrowStagesId budgetItemData_growStagesId,
+			budgetItemData.EduModeId budgetItemData_eduModeId,
+			budgetItemData.CategoryId budgetItemData_categoryId,
+			budgetItemData.ItemId budgetItemData_itemId,
+			budgetItemData.IsInland budgetItemData_isInland,
+			budgetItemData.LowAmountTotal budgetItemData_lowAmountTotal,
+			budgetItemData.HighAmountTotal budgetItemData_highAmountTotal,
+			budgetItemData.LowAmount budgetItemData_lowAmount,
+			budgetItemData.HighAmount budgetItemData_highAmount,
+			budgetItemData.MaxAmount budgetItemData_maxAmount,
+			budgetItemData.SystemYearCount budgetItemData_systemYearCount,
+			budgetItemData.YearCount budgetItemData_yearCount,
+			budgetItemData.MaxYearCount budgetItemData_maxYearCount,
+			budgetItemData.Years budgetItemData_years,
+			budgetItemData.EndYears budgetItemData_endYears,
+			budgetItemData.PaymentGrade budgetItemData_paymentGrade,
+			budgetItemData.IsGrading budgetItemData_isGrading,
+			budgetItemData.GradingType budgetItemData_gradingType,
+			budgetItemData.PaymentMethod budgetItemData_paymentMethod,
+			budgetItemData.PaymentMonth budgetItemData_paymentMonth,
+			budgetItemData.IsInflation budgetItemData_isInflation,
+			budgetItemData.IsAreaTranslation budgetItemData_isAreaTranslation,
+			budgetItemData.Comment budgetItemData_comment,
+			budgetItemData.DataSources budgetItemData_dataSources,
+			budgetItemData.TrainingAgencyName budgetItemData_trainingAgencyName,
+			budgetItemData.CreateDate budgetItemData_createDate,
+			budgetItemData.UpdateDate budgetItemData_updateDate,
+			budgetItemData.CreatorId budgetItemData_creatorId
+		from EB_BudgetItemDataCollection budgetItemDataCollection
+		inner join EB_BudgetItemData budgetItemData on budgetItemData.Id=budgetItemDataCollection.ItemDataId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemDataCollection.TrainingAgencyName budgetItemDataCollection_trainingAgencyName,	
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			itemFieldValue.FieldValue itemFieldValue_fieldValue
+		from EB_BudgetItemDataCollection budgetItemDataCollection
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.DataCollectionId=budgetItemDataCollection.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetItemDataCollectionItemFieldValue" resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemDataCollection.TrainingAgencyName budgetItemDataCollection_trainingAgencyName,
+				itemFieldValue.Id itemFieldValue_id,
+	
+				itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+	
+				itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+	
+				itemFieldValue.FieldName itemFieldValue_fieldName,
+	
+				itemFieldValue.FieldValue itemFieldValue_fieldValue
+	
+		from EB_BudgetItemDataCollection budgetItemDataCollection
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.DataCollectionId=budgetItemDataCollection.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select 
+			Id budgetItemDataCollection_id,
+			ItemDataId budgetItemDataCollection_itemDataId,
+			AreaId budgetItemDataCollection_areaId,
+			EduGoalId budgetItemDataCollection_eduGoalId,
+			GrowStagesId budgetItemDataCollection_growStagesId,
+			BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			BudgetItemId budgetItemDataCollection_budgetItemId,
+			ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			LowAmount budgetItemDataCollection_lowAmount,
+			HighAmount budgetItemDataCollection_highAmount,
+			Amount budgetItemDataCollection_amount,
+			MaxAmount budgetItemDataCollection_maxAmount,
+			YearCount budgetItemDataCollection_yearCount,
+			Years budgetItemDataCollection_years,
+			MaxYearCount budgetItemDataCollection_maxYearCount,
+			PaymentAge budgetItemDataCollection_paymentAge,
+			IsGrading budgetItemDataCollection_isGrading,
+			GradingType budgetItemDataCollection_gradingType,
+			PaymentMethod budgetItemDataCollection_paymentMethod,
+			PaymentMonth budgetItemDataCollection_paymentMonth,
+			IsInflation budgetItemDataCollection_isInflation,
+			IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			Comment budgetItemDataCollection_comment,
+			DataSources budgetItemDataCollection_dataSources,
+			TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_BudgetItemDataCollection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetItemDataCollectionResult">
+		select 
+			Id budgetItemDataCollection_id,
+			ItemDataId budgetItemDataCollection_itemDataId,
+			AreaId budgetItemDataCollection_areaId,
+			EduGoalId budgetItemDataCollection_eduGoalId,
+			GrowStagesId budgetItemDataCollection_growStagesId,
+			BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			BudgetItemId budgetItemDataCollection_budgetItemId,
+			ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			LowAmount budgetItemDataCollection_lowAmount,
+			HighAmount budgetItemDataCollection_highAmount,
+			Amount budgetItemDataCollection_amount,
+			MaxAmount budgetItemDataCollection_maxAmount,
+			YearCount budgetItemDataCollection_yearCount,
+			Years budgetItemDataCollection_years,
+			MaxYearCount budgetItemDataCollection_maxYearCount,
+			PaymentAge budgetItemDataCollection_paymentAge,
+			IsGrading budgetItemDataCollection_isGrading,
+			GradingType budgetItemDataCollection_gradingType,
+			PaymentMethod budgetItemDataCollection_paymentMethod,
+			PaymentMonth budgetItemDataCollection_paymentMonth,
+			IsInflation budgetItemDataCollection_isInflation,
+			IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			Comment budgetItemDataCollection_comment,
+			DataSources budgetItemDataCollection_dataSources,
+			TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_BudgetItemDataCollection
+	</select>
+	
+	<select id="selectOneById"  resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select 
+			Id budgetItemDataCollection_id,
+			ItemDataId budgetItemDataCollection_itemDataId,
+			AreaId budgetItemDataCollection_areaId,
+			EduGoalId budgetItemDataCollection_eduGoalId,
+			GrowStagesId budgetItemDataCollection_growStagesId,
+			BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			BudgetItemId budgetItemDataCollection_budgetItemId,
+			ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			LowAmount budgetItemDataCollection_lowAmount,
+			HighAmount budgetItemDataCollection_highAmount,
+			Amount budgetItemDataCollection_amount,
+			MaxAmount budgetItemDataCollection_maxAmount,
+			YearCount budgetItemDataCollection_yearCount,
+			Years budgetItemDataCollection_years,
+			MaxYearCount budgetItemDataCollection_maxYearCount,
+			PaymentAge budgetItemDataCollection_paymentAge,
+			IsGrading budgetItemDataCollection_isGrading,
+			GradingType budgetItemDataCollection_gradingType,
+			PaymentMethod budgetItemDataCollection_paymentMethod,
+			PaymentMonth budgetItemDataCollection_paymentMonth,
+			IsInflation budgetItemDataCollection_isInflation,
+			IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			Comment budgetItemDataCollection_comment,
+			DataSources budgetItemDataCollection_dataSources,
+			TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_BudgetItemDataCollection where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="budgetItemDataCollectionResult" parameterMap="budgetItemDataCollectionParam">
+		select 
+			Id budgetItemDataCollection_id,
+			ItemDataId budgetItemDataCollection_itemDataId,
+			AreaId budgetItemDataCollection_areaId,
+			EduGoalId budgetItemDataCollection_eduGoalId,
+			GrowStagesId budgetItemDataCollection_growStagesId,
+			BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			BudgetItemId budgetItemDataCollection_budgetItemId,
+			ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			LowAmount budgetItemDataCollection_lowAmount,
+			HighAmount budgetItemDataCollection_highAmount,
+			Amount budgetItemDataCollection_amount,
+			MaxAmount budgetItemDataCollection_maxAmount,
+			YearCount budgetItemDataCollection_yearCount,
+			Years budgetItemDataCollection_years,
+			MaxYearCount budgetItemDataCollection_maxYearCount,
+			PaymentAge budgetItemDataCollection_paymentAge,
+			IsGrading budgetItemDataCollection_isGrading,
+			GradingType budgetItemDataCollection_gradingType,
+			PaymentMethod budgetItemDataCollection_paymentMethod,
+			PaymentMonth budgetItemDataCollection_paymentMonth,
+			IsInflation budgetItemDataCollection_isInflation,
+			IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			Comment budgetItemDataCollection_comment,
+			DataSources budgetItemDataCollection_dataSources,
+			TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_BudgetItemDataCollection
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetItemDataCollectionParam">
+		select count(*) from EB_BudgetItemDataCollection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="budgetItemDataCollectionParam">
+		update EB_BudgetItemDataCollection
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="itemDataId != null">,ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">,AreaId=${areaId}</if>
+				<if test="eduGoalId != null">,EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">,BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">,BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">,ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">,ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">,LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">,HighAmount=${highAmount}</if>
+				<if test="amount != null">,Amount=${amount}</if>
+				<if test="maxAmount != null">,MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">,YearCount=${yearCount}</if>
+				<if test="years != null">,Years=${years}</if>
+				<if test="maxYearCount != null">,MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">,PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">,IsGrading=${isGrading}</if>
+				<if test="gradingType != null">,GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">,PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">,PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">,IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">,IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">,Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">,DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">,TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="budgetItemDataCollectionParam">
+		update EB_BudgetItemDataCollection
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ItemDataId=${itemDataId}
+                            ,AreaId=${areaId}
+                            ,EduGoalId=${eduGoalId}
+                            ,GrowStagesId=${growStagesId}
+                            ,BudgetCategoryId=${budgetCategoryId}
+                            ,BudgetItemId=${budgetItemId}
+						,ItemLowAmount=${itemLowAmount}
+						,ItemHighAmount=${itemHighAmount}
+						,LowAmount=${lowAmount}
+						,HighAmount=${highAmount}
+						,Amount=${amount}
+						,MaxAmount=${maxAmount}
+                        <if test="yearCount != null">,YearCount=${yearCount}</if>
+                        <if test="yearCount == null">,YearCount= 0</if>
+                        <if test="years != null">,Years=${years}</if>
+                        <if test="years == null">,Years= 0</if>
+                        <if test="maxYearCount != null">,MaxYearCount=${maxYearCount}</if>
+                        <if test="maxYearCount == null">,MaxYearCount= 0</if>
+                        <if test="paymentAge != null">,PaymentAge=${paymentAge}</if>
+                        <if test="paymentAge == null">,PaymentAge= 0</if>
+                    	<if test="isGrading != null">,IsGrading=${isGrading}</if>
+                        <if test="isGrading == null">,IsGrading= 0</if>
+                    	<if test="gradingType != null">,GradingType=${gradingType}</if>
+                        <if test="gradingType == null">,GradingType= 0</if>
+                    	<if test="paymentMethod != null">,PaymentMethod=${paymentMethod}</if>
+                        <if test="paymentMethod == null">,PaymentMethod= 0</if>
+                        <if test="paymentMonth != null">,PaymentMonth=${paymentMonth}</if>
+                        <if test="paymentMonth == null">,PaymentMonth= 0</if>
+                    	<if test="isInflation != null">,IsInflation=${isInflation}</if>
+                        <if test="isInflation == null">,IsInflation= 0</if>
+                    	<if test="isAreaTranslation != null">,IsAreaTranslation=${isAreaTranslation}</if>
+                        <if test="isAreaTranslation == null">,IsAreaTranslation= 0</if>
+						,Comment=#{comment}
+						,DataSources=#{dataSources}
+						,TrainingAgencyName=#{trainingAgencyName}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="budgetItemDataCollectionParam">
+		insert into EB_BudgetItemDataCollection
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="itemDataId != null">,ItemDataId</if>
+			<if test="areaId != null">,AreaId</if>
+			<if test="eduGoalId != null">,EduGoalId</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="budgetCategoryId != null">,BudgetCategoryId</if>
+			<if test="budgetItemId != null">,BudgetItemId</if>
+			<if test="itemLowAmount != null">,ItemLowAmount</if>
+			<if test="itemHighAmount != null">,ItemHighAmount</if>
+			<if test="lowAmount != null">,LowAmount</if>
+			<if test="highAmount != null">,HighAmount</if>
+			<if test="amount != null">,Amount</if>
+			<if test="maxAmount != null">,MaxAmount</if>
+			<if test="yearCount != null">,YearCount</if>
+			<if test="years != null">,Years</if>
+			<if test="maxYearCount != null">,MaxYearCount</if>
+			<if test="paymentAge != null">,PaymentAge</if>
+			<if test="isGrading != null">,IsGrading</if>
+			<if test="gradingType != null">,GradingType</if>
+			<if test="paymentMethod != null">,PaymentMethod</if>
+			<if test="paymentMonth != null">,PaymentMonth</if>
+			<if test="isInflation != null">,IsInflation</if>
+			<if test="isAreaTranslation != null">,IsAreaTranslation</if>
+			<if test="comment != null and comment != ''">,Comment</if>
+			<if test="dataSources != null and dataSources != ''">,DataSources</if>
+			<if test="trainingAgencyName != null and trainingAgencyName != ''">,TrainingAgencyName</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="itemDataId != null">,${itemDataId}</if>
+			<if test="areaId != null">,${areaId}</if>
+			<if test="eduGoalId != null">,${eduGoalId}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="budgetCategoryId != null">,${budgetCategoryId}</if>
+			<if test="budgetItemId != null">,${budgetItemId}</if>
+			<if test="itemLowAmount != null">,${itemLowAmount}</if>
+			<if test="itemHighAmount != null">,${itemHighAmount}</if>
+			<if test="lowAmount != null">,${lowAmount}</if>
+			<if test="highAmount != null">,${highAmount}</if>
+			<if test="amount != null">,${amount}</if>
+			<if test="maxAmount != null">,${maxAmount}</if>
+			<if test="yearCount != null">,${yearCount}</if>
+			<if test="years != null">,${years}</if>
+			<if test="maxYearCount != null">,${maxYearCount}</if>
+			<if test="paymentAge != null">,${paymentAge}</if>
+			<if test="isGrading != null">,${isGrading}</if>
+			<if test="gradingType != null">,${gradingType}</if>
+			<if test="paymentMethod != null">,${paymentMethod}</if>
+			<if test="paymentMonth != null">,${paymentMonth}</if>
+			<if test="isInflation != null">,${isInflation}</if>
+			<if test="isAreaTranslation != null">,${isAreaTranslation}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+			<if test="dataSources != null and dataSources != ''">,#{dataSources}</if>
+			<if test="trainingAgencyName != null and trainingAgencyName != ''">,#{trainingAgencyName}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="budgetItemDataCollectionParam">
+		delete from EB_BudgetItemDataCollection where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="budgetItemDataCollectionParam">
+		delete from EB_BudgetItemDataCollection
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetItemDataCollectionParam">
+		delete from EB_BudgetItemDataCollection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="areaId != null">and AreaId=${areaId}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="budgetItemId != null">and BudgetItemId=${budgetItemId}</if>
+				<if test="itemLowAmount != null">and ItemLowAmount=${itemLowAmount}</if>
+				<if test="itemHighAmount != null">and ItemHighAmount=${itemHighAmount}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+				<if test="paymentAge != null">and PaymentAge=${paymentAge}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

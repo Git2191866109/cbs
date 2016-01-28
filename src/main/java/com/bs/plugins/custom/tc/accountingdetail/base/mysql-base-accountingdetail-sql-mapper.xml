@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.accountingdetail.dao.IAccountingDetailDao">
+
+	<parameterMap id="accountingDetailParam" type="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail" />
+	<resultMap id="accountingDetailResult" type="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail">
+		<id property="id" column="accountingDetail_id" javaType="java.lang.Long" />
+		<result property="memberId" column="accountingDetail_memberId" javaType="java.lang.Long" />
+		<result property="productId" column="accountingDetail_productId" javaType="java.lang.Long" />
+		<result property="flowTo" column="accountingDetail_flowTo" javaType="java.lang.Integer" />
+		<result property="amount" column="accountingDetail_amount" javaType="java.math.BigDecimal" />
+		<result property="accountBalance" column="accountingDetail_accountBalance" javaType="java.math.BigDecimal" />
+		<result property="umpayAccountBalance" column="accountingDetail_umpayAccountBalance" javaType="java.math.BigDecimal" />
+		<result property="counterpartyType" column="accountingDetail_counterpartyType" javaType="java.lang.Integer" />
+		<result property="counterpartyId" column="accountingDetail_counterpartyId" javaType="java.lang.Long" />
+		<result property="businessType" column="accountingDetail_businessType" javaType="java.lang.Integer" />
+		<result property="businessId" column="accountingDetail_businessId" javaType="java.lang.Long" />
+		<result property="accountType" column="accountingDetail_accountType" javaType="java.lang.Integer" />
+		<result property="transactionNumber" column="accountingDetail_transactionNumber" javaType="java.lang.String" />
+		<result property="operatorId" column="accountingDetail_operatorId" javaType="java.lang.Long" />
+		<result property="operator" column="accountingDetail_operator" javaType="java.lang.String" />
+		<result property="description" column="accountingDetail_description" javaType="java.lang.String" />
+		<result property="createTime" column="accountingDetail_createTime" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select
+			accountingDetail.Id accountingDetail_id,
+			accountingDetail.MemberId accountingDetail_memberId,
+			accountingDetail.ProductId accountingDetail_productId,
+			accountingDetail.FlowTo accountingDetail_flowTo,
+			accountingDetail.Amount accountingDetail_amount,
+			accountingDetail.AccountBalance accountingDetail_accountBalance,
+			accountingDetail.UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+			accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+			accountingDetail.BusinessType accountingDetail_businessType,
+			accountingDetail.BusinessId accountingDetail_businessId,
+			accountingDetail.AccountType accountingDetail_accountType,
+			accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+			accountingDetail.OperatorId accountingDetail_operatorId,
+			accountingDetail.Operator accountingDetail_operator,
+			accountingDetail.Description accountingDetail_description,
+			accountingDetail.CreateTime accountingDetail_createTime,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_AccountingDetail accountingDetail
+		inner join CC_Member member on member.Id=accountingDetail.MemberId
+		inner join PC_Product product on product.Id=accountingDetail.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAccountingDetailMember" resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select
+			accountingDetail.Id accountingDetail_id,
+			accountingDetail.MemberId accountingDetail_memberId,
+			accountingDetail.ProductId accountingDetail_productId,
+			accountingDetail.FlowTo accountingDetail_flowTo,
+			accountingDetail.Amount accountingDetail_amount,
+			accountingDetail.AccountBalance accountingDetail_accountBalance,
+			accountingDetail.UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+			accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+			accountingDetail.BusinessType accountingDetail_businessType,
+			accountingDetail.BusinessId accountingDetail_businessId,
+			accountingDetail.AccountType accountingDetail_accountType,
+			accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+			accountingDetail.OperatorId accountingDetail_operatorId,
+			accountingDetail.Operator accountingDetail_operator,
+			accountingDetail.Description accountingDetail_description,
+			member.Id product_id,
+			member.SpvId product_spvId,
+			member.EmailRegisterValidId product_emailRegisterValidId,
+			member.Type product_type,
+			member.Code product_code,
+			member.Account product_account,
+			member.PhoneAccount product_phoneAccount,
+			member.EmailAccount product_emailAccount,
+			member.Password product_password,
+			member.UmpayUserNo product_umpayUserNo,
+			member.UmpayAccountNo product_umpayAccountNo,
+			member.PayPassword product_payPassword,
+			member.Nickname product_nickname,
+			member.Avatar product_avatar,
+			member.ValidEmail product_validEmail,
+			member.MobilePhone product_mobilePhone,
+			member.OfficePhone product_officePhone,
+			member.CertificateType product_certificateType,
+			member.CertificateNo product_certificateNo,
+			member.Name product_name,
+			member.Male product_male,
+			member.Birthday product_birthday,
+			member.FamilyRole product_familyRole,
+			member.Rrac product_rrac,
+			member.RiskScore product_riskScore,
+			member.ProvinceSpell product_provinceSpell,
+			member.ProvinceCode product_provinceCode,
+			member.CityCode product_cityCode,
+			member.CountryCode product_countryCode,
+			member.ProvinceName product_provinceName,
+			member.CityName product_cityName,
+			member.CountryName product_countryName,
+			member.Address product_address,
+			member.Income product_income,
+			member.Job product_job,
+			member.Education product_education,
+			member.ChildrenCount product_childrenCount,
+			member.IsFreePassword product_isFreePassword,
+			member.IsEmailValid product_isEmailValid,
+			member.IsRealname product_isRealname,
+			member.IsActivate product_isActivate,
+			member.IsOpenAccount product_isOpenAccount,
+			member.IsBindingCard product_isBindingCard,
+			member.IsSignature product_isSignature,
+			member.SignatureTime product_signatureTime,
+			member.OpenAccountTime product_openAccountTime,
+			member.RegisterTime product_registerTime,
+			member.ModifyTime product_modifyTime,
+			member.SerialNo product_serialNo,
+			member.ResetTime product_resetTime,
+			member.ReferralCode product_referralCode,
+			member.RecommendIdcode product_recommendIdcode
+		from TC_AccountingDetail accountingDetail
+		inner join CC_Member member on member.Id=accountingDetail.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAccountingDetailProduct" resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select
+			accountingDetail.Id accountingDetail_id,
+			accountingDetail.MemberId accountingDetail_memberId,
+			accountingDetail.ProductId accountingDetail_productId,
+			accountingDetail.FlowTo accountingDetail_flowTo,
+			accountingDetail.Amount accountingDetail_amount,
+			accountingDetail.AccountBalance accountingDetail_accountBalance,
+			accountingDetail.UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+			accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+			accountingDetail.BusinessType accountingDetail_businessType,
+			accountingDetail.BusinessId accountingDetail_businessId,
+			accountingDetail.AccountType accountingDetail_accountType,
+			accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+			accountingDetail.OperatorId accountingDetail_operatorId,
+			accountingDetail.Operator accountingDetail_operator,
+			accountingDetail.Description accountingDetail_description,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_AccountingDetail accountingDetail
+		inner join PC_Product product on product.Id=accountingDetail.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select 
+			Id accountingDetail_id,
+			MemberId accountingDetail_memberId,
+			ProductId accountingDetail_productId,
+			FlowTo accountingDetail_flowTo,
+			Amount accountingDetail_amount,
+			AccountBalance accountingDetail_accountBalance,
+			UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			CounterpartyType accountingDetail_counterpartyType,
+			CounterpartyId accountingDetail_counterpartyId,
+			BusinessType accountingDetail_businessType,
+			BusinessId accountingDetail_businessId,
+			AccountType accountingDetail_accountType,
+			TransactionNumber accountingDetail_transactionNumber,
+			OperatorId accountingDetail_operatorId,
+			Operator accountingDetail_operator,
+			Description accountingDetail_description,
+			CreateTime accountingDetail_createTime
+		from TC_AccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="accountingDetailResult">
+		select 
+			Id accountingDetail_id,
+			MemberId accountingDetail_memberId,
+			ProductId accountingDetail_productId,
+			FlowTo accountingDetail_flowTo,
+			Amount accountingDetail_amount,
+			AccountBalance accountingDetail_accountBalance,
+			UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			CounterpartyType accountingDetail_counterpartyType,
+			CounterpartyId accountingDetail_counterpartyId,
+			BusinessType accountingDetail_businessType,
+			BusinessId accountingDetail_businessId,
+			AccountType accountingDetail_accountType,
+			TransactionNumber accountingDetail_transactionNumber,
+			OperatorId accountingDetail_operatorId,
+			Operator accountingDetail_operator,
+			Description accountingDetail_description,
+			CreateTime accountingDetail_createTime
+		from TC_AccountingDetail
+	</select>
+	
+	<select id="selectOneById"  resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select 
+			Id accountingDetail_id,
+			MemberId accountingDetail_memberId,
+			ProductId accountingDetail_productId,
+			FlowTo accountingDetail_flowTo,
+			Amount accountingDetail_amount,
+			AccountBalance accountingDetail_accountBalance,
+			UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			CounterpartyType accountingDetail_counterpartyType,
+			CounterpartyId accountingDetail_counterpartyId,
+			BusinessType accountingDetail_businessType,
+			BusinessId accountingDetail_businessId,
+			AccountType accountingDetail_accountType,
+			TransactionNumber accountingDetail_transactionNumber,
+			OperatorId accountingDetail_operatorId,
+			Operator accountingDetail_operator,
+			Description accountingDetail_description,
+			CreateTime accountingDetail_createTime
+		from TC_AccountingDetail where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="accountingDetailResult" parameterMap="accountingDetailParam">
+		select 
+			Id accountingDetail_id,
+			MemberId accountingDetail_memberId,
+			ProductId accountingDetail_productId,
+			FlowTo accountingDetail_flowTo,
+			Amount accountingDetail_amount,
+			AccountBalance accountingDetail_accountBalance,
+			UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			CounterpartyType accountingDetail_counterpartyType,
+			CounterpartyId accountingDetail_counterpartyId,
+			BusinessType accountingDetail_businessType,
+			BusinessId accountingDetail_businessId,
+			AccountType accountingDetail_accountType,
+			TransactionNumber accountingDetail_transactionNumber,
+			OperatorId accountingDetail_operatorId,
+			Operator accountingDetail_operator,
+			Description accountingDetail_description,
+			CreateTime accountingDetail_createTime
+		from TC_AccountingDetail
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="accountingDetailParam">
+		select count(*) from TC_AccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="accountingDetailParam">
+		update TC_AccountingDetail
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="flowTo != null">,FlowTo=${flowTo}</if>
+				<if test="amount != null">,Amount=${amount}</if>
+				<if test="accountBalance != null">,AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">,UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">,CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">,CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">,BusinessType=${businessType}</if>
+				<if test="businessId != null">,BusinessId=${businessId}</if>
+				<if test="accountType != null">,AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">,OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">,Operator=#{operator}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="accountingDetailParam">
+		update TC_AccountingDetail
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+                            ,ProductId=${productId}
+                    	<if test="flowTo != null">,FlowTo=${flowTo}</if>
+                        <if test="flowTo == null">,FlowTo= 0</if>
+						,Amount=${amount}
+						,AccountBalance=${accountBalance}
+						,UmpayAccountBalance=${umpayAccountBalance}
+                    	<if test="counterpartyType != null">,CounterpartyType=${counterpartyType}</if>
+                        <if test="counterpartyType == null">,CounterpartyType= 0</if>
+                            ,CounterpartyId=${counterpartyId}
+                    	<if test="businessType != null">,BusinessType=${businessType}</if>
+                        <if test="businessType == null">,BusinessType= 0</if>
+                            ,BusinessId=${businessId}
+                    	<if test="accountType != null">,AccountType=${accountType}</if>
+                        <if test="accountType == null">,AccountType= 0</if>
+						,TransactionNumber=#{transactionNumber}
+                            ,OperatorId=${operatorId}
+						,Operator=#{operator}
+						,Description=#{description}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="accountingDetailParam">
+		insert into TC_AccountingDetail
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="flowTo != null">,FlowTo</if>
+			<if test="amount != null">,Amount</if>
+			<if test="accountBalance != null">,AccountBalance</if>
+			<if test="umpayAccountBalance != null">,UmpayAccountBalance</if>
+			<if test="counterpartyType != null">,CounterpartyType</if>
+			<if test="counterpartyId != null">,CounterpartyId</if>
+			<if test="businessType != null">,BusinessType</if>
+			<if test="businessId != null">,BusinessId</if>
+			<if test="accountType != null">,AccountType</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="operatorId != null">,OperatorId</if>
+			<if test="operator != null and operator != ''">,Operator</if>
+			<if test="description != null and description != ''">,Description</if>
+                ,CreateTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="flowTo != null">,${flowTo}</if>
+			<if test="amount != null">,${amount}</if>
+			<if test="accountBalance != null">,${accountBalance}</if>
+			<if test="umpayAccountBalance != null">,${umpayAccountBalance}</if>
+			<if test="counterpartyType != null">,${counterpartyType}</if>
+			<if test="counterpartyId != null">,${counterpartyId}</if>
+			<if test="businessType != null">,${businessType}</if>
+			<if test="businessId != null">,${businessId}</if>
+			<if test="accountType != null">,${accountType}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="operatorId != null">,${operatorId}</if>
+			<if test="operator != null and operator != ''">,#{operator}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="accountingDetailParam">
+		delete from TC_AccountingDetail where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="accountingDetailParam">
+		delete from TC_AccountingDetail
+	</delete>
+	
+	<delete id="delete" parameterMap="accountingDetailParam">
+		delete from TC_AccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="counterpartyId != null">and CounterpartyId=${counterpartyId}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

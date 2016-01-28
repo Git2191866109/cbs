@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<sc name="系统配置" code="2" icon="images/menu/menu_sys.png">
+  <parameter name="系统参数" code="201"> 
+    <dictionarycategory name="字典分类" code="20101" model-name="SC_DictionaryCategory" view-type="list">
+      <create name="创建" code="2010101" menu-type="top" model-name="SC_DictionaryCategory" view-type="create"/>
+      <modify name="修改" code="2010102" menu-type="shortcut" model-name="SC_DictionaryCategory" view-type="modify"/>
+      <delete name="删除" code="2010103" menu-type="shortcut" model-name="SC_DictionaryCategory" view-type="delete"/>
+    </dictionarycategory>
+    <dictionary name="字典配置" code="20102" model-name="SC_Dictionary" view-type="list">
+        <create name="创建" code="2010201" menu-type="top" model-name="SC_Dictionary" view-type="create"/>
+        <modify name="修改" code="2010202" menu-type="shortcut" model-name="SC_Dictionary" view-type="modify"/>
+        <delete name="删除" code="2010203" menu-type="shortcut" model-name="SC_Dictionary" view-type="delete"/>
+    </dictionary>
+    <parametercategory name="全局参数分类" code="20103" model-name="SC_ParameterCategory" view-type="list">
+      <create name="创建" code="2010301" menu-type="top" model-name="SC_ParameterCategory" view-type="create"/>
+      <modify name="修改" code="2010302" menu-type="shortcut" model-name="SC_ParameterCategory" view-type="modify"/>
+      <delete name="删除" code="2010303" menu-type="shortcut" model-name="SC_ParameterCategory" view-type="delete"/>
+    </parametercategory>
+    <globalparameter name="全局参数配置" code="20104" model-name="SC_Parameter" view-type="list">
+        <create name="创建" code="2010401" menu-type="top" model-name="SC_Parameter" view-type="create"/>
+        <modify name="修改" code="2010402" menu-type="shortcut" model-name="SC_Parameter" view-type="modify"/>
+        <delete name="删除" code="2010403" menu-type="shortcut" model-name="SC_Parameter" view-type="delete"/>
+    </globalparameter>
+  </parameter>  
+  <region name="地域管理" code="202"> 
+    <area name="地区配置" code="20201" model-name="SC_Area" view-type="form"> 
+      <create name="创建" code="2020101" menu-type="top" model-name="SC_Area" view-type="create"/>  
+      <modify name="修改" code="2020102" menu-type="shortcut" model-name="SC_Area" view-type="modify"/>  
+      <delete name="删除" code="2020103" menu-type="shortcut" model-name="SC_Area" view-type="delete"/>
+      <view name="查看" code="2020104" menu-type="shortcut" model-name="SC_Area" view-type="view"/>  
+    </area> 
+  </region>  
+  <education name="教育信息配置" code="203"> 
+    <school name="学校管理" code="20301" model-name="SC_School" view-type="list"> 
+      <create name="创建" code="2030101" menu-type="top" model-name="SC_School" view-type="create"/>  
+      <modify name="修改" code="2030102" menu-type="shortcut" model-name="SC_School" view-type="modify"/>  
+      <delete name="删除" code="2030103" menu-type="shortcut" model-name="SC_School" view-type="delete"/> 
+    </school>  
+    <degree name="学历配置" code="20302" model-name="SC_Degree" view-type="list" > 
+      <create name="创建" code="2030201" menu-type="top" model-name="SC_Degree" view-type="create" />  
+      <modify name="修改" code="2030202" menu-type="shortcut" model-name="SC_Degree" view-type="modify" />  
+      <delete name="删除" code="2030203" menu-type="shortcut" model-name="SC_Degree" view-type="delete" /> 
+    </degree>  
+  </education>  
+  <budget name="预算信息配置" code="204"> 
+    <income name="收入水平" code="20402" model-name="SC_ResidentIncomes" view-type="list" > 
+      <create name="创建" code="2040201" menu-type="top" model-name="SC_ResidentIncomes" view-type="create" />  
+      <modify name="修改" code="2040202" menu-type="shortcut" model-name="SC_ResidentIncomes" view-type="modify" />  
+      <delete name="删除" code="2040203" menu-type="shortcut" model-name="SC_ResidentIncomes" view-type="delete" /> 
+    </income>  
+  </budget>
+</sc>

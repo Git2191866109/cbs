@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.role.dao.IRoleDao">
+	<parameterMap id="subRoleParam" type="com.bs.plugins.custom.uc.role.entity.Role" />
+	<resultMap id="subRoleResult" type="com.bs.plugins.custom.uc.role.entity.Role">
+	
+	</resultMap>
+	<select id="selectRoleByUser" resultMap="roleResult" parameterMap="roleParam">
+			select
+				role.Id role_id,
+				role.Name role_name,
+				role.Description role_description,
+				role.Type role_type,
+				role.Status role_status,
+				role.CreateTime role_createTime,
+				role.ModifyTime role_modifyTime,
+				role.CreatorId role_creatorId
+			from UC_Role role
+			inner join UC_UserRoleRelation userRoleRelation on userRoleRelation.RoleId=role.Id
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null">and userRoleRelation.UserId  =${id}</if>
+				</trim>
+			</where>
+	</select>
+	<update id="update" parameterMap="roleParam">
+		update UC_Role
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="status != null">,Status=${status}</if>
+				,ModifyTime=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+</mapper>

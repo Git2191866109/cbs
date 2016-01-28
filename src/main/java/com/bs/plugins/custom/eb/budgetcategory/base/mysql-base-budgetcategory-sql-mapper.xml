@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetcategory.dao.IBudgetCategoryDao">
+
+	<parameterMap id="budgetCategoryParam" type="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory" />
+	<resultMap id="budgetCategoryResult" type="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory">
+		<id property="id" column="budgetCategory_id" javaType="java.lang.Long" />
+		<result property="name" column="budgetCategory_name" javaType="java.lang.String" />
+		<result property="code" column="budgetCategory_code" javaType="java.lang.String" />
+		<result property="createDate" column="budgetCategory_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="budgetCategory_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="budgetCategory_creatorId" javaType="java.lang.Long" />
+		<collection property="budgetItems" ofType="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+			<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+			<result property="itemLevel" column="budgetItem_itemLevel" javaType="java.lang.Integer" />
+			<result property="isChildNode" column="budgetItem_isChildNode" javaType="java.lang.Integer" />
+			<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+			<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+			<result property="grade" column="budgetItem_grade" javaType="java.lang.String" />
+			<result property="age" column="budgetItem_age" javaType="java.lang.Integer" />
+			<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+			<result property="isInflation" column="budgetItem_isInflation" javaType="java.lang.Integer" />
+			<result property="isTranslation" column="budgetItem_isTranslation" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+			<result property="inputLevel" column="budgetItem_inputLevel" javaType="java.lang.Integer" />
+			<result property="isDifferInputLevel" column="budgetItem_isDifferInputLevel" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="itemFields" ofType="com.bs.plugins.custom.eb.itemfield.entity.ItemField">
+			<id property="id" column="itemField_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="itemField_categoryId" javaType="java.lang.Long" />
+			<result property="tableName" column="itemField_tableName" javaType="java.lang.String" />
+			<result property="columnName" column="itemField_columnName" javaType="java.lang.String" />
+			<result property="columnCode" column="itemField_columnCode" javaType="java.lang.String" />
+			<result property="columnAlias" column="itemField_columnAlias" javaType="java.lang.String" />
+			<result property="isShow" column="itemField_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="itemField_showType" javaType="java.lang.Integer" />
+			<result property="rank" column="itemField_rank" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="modeItemRelations" ofType="com.bs.plugins.custom.eb.modeitemrelation.entity.ModeItemRelation">
+			<id property="id" column="modeItemRelation_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="modeItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="modeItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="modeItemRelation_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemDataId" column="modeItemRelation_budgetItemDataId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="modeItemRelation_budgetItemId" javaType="java.lang.Long" />
+			<result property="isSetData" column="modeItemRelation_isSetData" javaType="java.lang.Integer" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId,	
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.EduModeId modeItemRelation_eduModeId,
+			modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+			modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+			modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+			modeItemRelation.IsSetData modeItemRelation_isSetData
+		from EB_BudgetCategory budgetCategory
+		inner join EB_BudgetItem budgetItem on budgetItem.BudgetCategoryId=budgetCategory.Id
+		inner join EB_ItemField itemField on itemField.CategoryId=budgetCategory.Id
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.BudgetCategoryId=budgetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetCategoryBudgetItem" resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId,
+				budgetItem.Id budgetItem_id,
+	
+				budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+	
+				budgetItem.ParentId budgetItem_parentId,
+	
+				budgetItem.ItemLevel budgetItem_itemLevel,
+	
+				budgetItem.IsChildNode budgetItem_isChildNode,
+	
+				budgetItem.Name budgetItem_name,
+	
+				budgetItem.Code budgetItem_code,
+	
+				budgetItem.Grade budgetItem_grade,
+	
+				budgetItem.Age budgetItem_age,
+	
+				budgetItem.CostFormula budgetItem_costFormula,
+	
+				budgetItem.IsInflation budgetItem_isInflation,
+	
+				budgetItem.IsTranslation budgetItem_isTranslation,
+	
+				budgetItem.CreateDate budgetItem_createDate,
+	
+				budgetItem.ModifyDate budgetItem_modifyDate,
+	
+				budgetItem.CreatorId budgetItem_creatorId,
+	
+				budgetItem.InputLevel budgetItem_inputLevel,
+	
+				budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel
+	
+		from EB_BudgetCategory budgetCategory
+		inner join EB_BudgetItem budgetItem on budgetItem.BudgetCategoryId=budgetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectBudgetCategoryItemField" resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId,
+				itemField.Id itemField_id,
+	
+				itemField.CategoryId itemField_categoryId,
+	
+				itemField.TableName itemField_tableName,
+	
+				itemField.ColumnName itemField_columnName,
+	
+				itemField.ColumnCode itemField_columnCode,
+	
+				itemField.ColumnAlias itemField_columnAlias,
+	
+				itemField.IsShow itemField_isShow,
+	
+				itemField.ShowType itemField_showType,
+	
+				itemField.Rank itemField_rank
+	
+		from EB_BudgetCategory budgetCategory
+		inner join EB_ItemField itemField on itemField.CategoryId=budgetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectBudgetCategoryModeItemRelation" resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId,
+				modeItemRelation.Id modeItemRelation_id,
+	
+				modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+	
+				modeItemRelation.EduModeId modeItemRelation_eduModeId,
+	
+				modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+	
+				modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+	
+				modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+	
+				modeItemRelation.IsSetData modeItemRelation_isSetData
+	
+		from EB_BudgetCategory budgetCategory
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.BudgetCategoryId=budgetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select 
+			Id budgetCategory_id,
+			Name budgetCategory_name,
+			Code budgetCategory_code,
+			CreateDate budgetCategory_createDate,
+			ModifyDate budgetCategory_modifyDate,
+			CreatorId budgetCategory_creatorId
+		from EB_BudgetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetCategoryResult">
+		select 
+			Id budgetCategory_id,
+			Name budgetCategory_name,
+			Code budgetCategory_code,
+			CreateDate budgetCategory_createDate,
+			ModifyDate budgetCategory_modifyDate,
+			CreatorId budgetCategory_creatorId
+		from EB_BudgetCategory
+	</select>
+	
+	<select id="selectOneById"  resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select 
+			Id budgetCategory_id,
+			Name budgetCategory_name,
+			Code budgetCategory_code,
+			CreateDate budgetCategory_createDate,
+			ModifyDate budgetCategory_modifyDate,
+			CreatorId budgetCategory_creatorId
+		from EB_BudgetCategory where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="budgetCategoryResult" parameterMap="budgetCategoryParam">
+		select 
+			Id budgetCategory_id,
+			Name budgetCategory_name,
+			Code budgetCategory_code,
+			CreateDate budgetCategory_createDate,
+			ModifyDate budgetCategory_modifyDate,
+			CreatorId budgetCategory_creatorId
+		from EB_BudgetCategory
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetCategoryParam">
+		select count(*) from EB_BudgetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="budgetCategoryParam">
+		update EB_BudgetCategory
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="budgetCategoryParam">
+		update EB_BudgetCategory
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="budgetCategoryParam">
+		insert into EB_BudgetCategory
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="budgetCategoryParam">
+		delete from EB_BudgetCategory where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="budgetCategoryParam">
+		delete from EB_BudgetCategory
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetCategoryParam">
+		delete from EB_BudgetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

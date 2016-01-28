@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.log.dao.ILogDao">
+
+	<parameterMap id="logParam" type="com.bs.plugins.custom.uc.log.entity.Log" />
+	<resultMap id="logResult" type="com.bs.plugins.custom.uc.log.entity.Log">
+		<id property="id" column="log_id" javaType="java.lang.Long" />
+		<result property="userId" column="log_userId" javaType="java.lang.Long" />
+		<result property="userAccount" column="log_userAccount" javaType="java.lang.String" />
+		<result property="operateTime" column="log_operateTime" javaType="java.lang.String" />
+		<result property="userName" column="log_userName" javaType="java.lang.String" />
+		<result property="type" column="log_type" javaType="java.lang.String" />
+		<result property="content" column="log_content" javaType="java.lang.String" />
+		<result property="accessIP" column="log_accessIP" javaType="java.lang.String" />
+		<result property="createTime" column="log_createTime" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="logResult" parameterMap="logParam">
+		select 
+			Id log_id,
+			UserId log_userId,
+			UserAccount log_userAccount,
+			OperateTime log_operateTime,
+			UserName log_userName,
+			Type log_type,
+			Content log_content,
+			AccessIP log_accessIP,
+			CreateTime log_createTime
+		from UC_Log
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="userAccount != null and userAccount != ''">and UserAccount=#{userAccount}</if>
+				<if test="operateTime != null and operateTime != ''">and OperateTime=#{operateTime}</if>
+				<if test="userName != null and userName != ''">and UserName=#{userName}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="accessIP != null and accessIP != ''">and AccessIP=#{accessIP}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="logResult">
+		select 
+			Id log_id,
+			UserId log_userId,
+			UserAccount log_userAccount,
+			OperateTime log_operateTime,
+			UserName log_userName,
+			Type log_type,
+			Content log_content,
+			AccessIP log_accessIP,
+			CreateTime log_createTime
+		from UC_Log
+	</select>
+	
+	<select id="selectOneById"  resultMap="logResult" parameterMap="logParam">
+		select 
+			Id log_id,
+			UserId log_userId,
+			UserAccount log_userAccount,
+			OperateTime log_operateTime,
+			UserName log_userName,
+			Type log_type,
+			Content log_content,
+			AccessIP log_accessIP,
+			CreateTime log_createTime
+		from UC_Log where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="logResult" parameterMap="logParam">
+		select 
+			Id log_id,
+			UserId log_userId,
+			UserAccount log_userAccount,
+			OperateTime log_operateTime,
+			UserName log_userName,
+			Type log_type,
+			Content log_content,
+			AccessIP log_accessIP,
+			CreateTime log_createTime
+		from UC_Log
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="logParam">
+		select count(*) from UC_Log
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="userAccount != null and userAccount != ''">and UserAccount=#{userAccount}</if>
+				<if test="operateTime != null and operateTime != ''">and OperateTime=#{operateTime}</if>
+				<if test="userName != null and userName != ''">and UserName=#{userName}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="accessIP != null and accessIP != ''">and AccessIP=#{accessIP}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="logParam">
+		update UC_Log
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="userId != null">,UserId=${userId}</if>
+				<if test="userAccount != null and userAccount != ''">,UserAccount=#{userAccount}</if>
+               		 <if test="operateTime != null  and operateTime != ''">,OperateTime=#{operateTime}</if>
+				<if test="userName != null and userName != ''">,UserName=#{userName}</if>
+				<if test="type != null and type != ''">,Type=#{type}</if>
+				<if test="content != null and content != ''">,Content=#{content}</if>
+				<if test="accessIP != null and accessIP != ''">,AccessIP=#{accessIP}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="logParam">
+		update UC_Log
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,UserId=${userId}
+						,UserAccount=#{userAccount}
+                        <if test="operateTime != null  and operateTime != ''">,OperateTime=#{operateTime}</if>
+						,UserName=#{userName}
+						,Type=#{type}
+						,Content=#{content}
+						,AccessIP=#{accessIP}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="logParam">
+		insert into UC_Log
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="userId != null">,UserId</if>
+			<if test="userAccount != null and userAccount != ''">,UserAccount</if>
+                <if test="operateTime != null and operateTime != ''">,OperateTime</if>
+			<if test="userName != null and userName != ''">,UserName</if>
+			<if test="type != null and type != ''">,Type</if>
+			<if test="content != null and content != ''">,Content</if>
+			<if test="accessIP != null and accessIP != ''">,AccessIP</if>
+                ,CreateTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="userId != null">,${userId}</if>
+			<if test="userAccount != null and userAccount != ''">,#{userAccount}</if>
+            	<if test="operateTime != null and operateTime != ''">,#{operateTime}</if>
+			<if test="userName != null and userName != ''">,#{userName}</if>
+			<if test="type != null and type != ''">,#{type}</if>
+			<if test="content != null and content != ''">,#{content}</if>
+			<if test="accessIP != null and accessIP != ''">,#{accessIP}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="logParam">
+		delete from UC_Log where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="logParam">
+		delete from UC_Log
+	</delete>
+	
+	<delete id="delete" parameterMap="logParam">
+		delete from UC_Log
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="userAccount != null and userAccount != ''">and UserAccount=#{userAccount}</if>
+				<if test="operateTime != null and operateTime != ''">and OperateTime=#{operateTime}</if>
+				<if test="userName != null and userName != ''">and UserName=#{userName}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="accessIP != null and accessIP != ''">and AccessIP=#{accessIP}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

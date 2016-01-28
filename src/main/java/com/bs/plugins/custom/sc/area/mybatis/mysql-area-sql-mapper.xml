@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.area.dao.IAreaDao">
+	
+	<parameterMap id="areaParam1" type="com.bs.plugins.custom.sc.area.entity.Area" />
+	<resultMap id="areaResult1" type="com.bs.plugins.custom.sc.area.entity.Area">
+		<id property="id" column="area_id" javaType="java.lang.Long" />
+		<result property="parentCode" column="area_parentCode" javaType="java.lang.String" />
+		<result property="code" column="area_code" javaType="java.lang.String" />
+		<result property="name" column="area_name" javaType="java.lang.String" />
+		<result property="treeLevel" column="area_treeLevel" javaType="java.lang.Integer" />
+		<result property="relationPath" column="area_relationPath" javaType="java.lang.String" />
+		<result property="spelling" column="area_spelling" javaType="java.lang.String" />
+		<result property="type" column="area_type" javaType="java.lang.Integer" />
+		<result property="createDate" column="area_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="area_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="area_creatorId" javaType="java.lang.Long" />
+		<collection property="schools" ofType="com.bs.plugins.custom.sc.school.entity.School">
+			<id property="id" column="school_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="school_areaCode" javaType="java.lang.String" />
+			<result property="code" column="school_code" javaType="java.lang.String" />
+			<result property="name" column="school_name" javaType="java.lang.String" />
+			<result property="type" column="school_type" javaType="java.lang.Integer" />
+			<result property="level" column="school_level" javaType="java.lang.Integer" />
+			<result property="address" column="school_address" javaType="java.lang.String" />
+			<result property="createDate" column="school_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="school_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="school_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="residentIncomess" ofType="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes">
+			<id property="id" column="residentIncomes_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="residentIncomes_areaCode" javaType="java.lang.String" />
+			<result property="amount" column="residentIncomes_amount" javaType="java.lang.String" />
+			<result property="isBaseDate" column="residentIncomes_isBaseDate" javaType="java.lang.Integer" />
+			<result property="ratio" column="residentIncomes_ratio" javaType="java.math.BigDecimal" />
+			<result property="createDate" column="residentIncomes_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="residentIncomes_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="residentIncomes_creatorId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectSubLevel"  resultType="long" parameterMap="areaParam1">
+		select count(*) from SC_Area
+		<where>
+			ParentCode = (select code from SC_Area where Id = ${id} )
+		</where>	
+	</select>
+	
+	<select id="selectRelationPathByParentCode"  resultType = "String" parameterMap="areaParam1">
+		select relationPath from SC_Area
+		<where>
+			code = ${parentCode}
+		</where>	
+	</select>
+	
+	<select id="selectListByCode" resultMap="areaResult1" parameterMap="areaParam">
+		select 
+			Id area_id,
+			Code area_code,
+			ParentCode area_parentCode,
+			Name area_name,
+			TreeLevel area_treeLevel,
+			RelationPath area_relationPath,
+			Spelling area_spelling,
+			Type area_type,
+			CreateDate area_createDate,
+			ModifyDate area_modifyDate,
+			CreatorId area_creatorId
+		from SC_Area
+		<where>
+			<trim prefixOverrides="and">
+				<if test="code != null and code != ''">and ParentCode=#{code}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="getArea" resultMap="areaResult1" parameterMap="areaParam">
+		select 
+			Id area_id,
+			ParentCode area_parentCode,
+			Name area_name,
+			Code area_code,
+			TreeLevel area_treeLevel
+		from SC_Area
+		<where>
+			<if test="id!=null">ParentCode=${id} </if>
+		</where>
+	</select>
+	<select id="selectChildNote" resultType="Integer" parameterMap="areaParam">
+		select count(1)	from SC_Area
+		<where>
+			<if test="id!=null">ParentCode=${code} </if>
+		</where>
+	</select>
+	<select id="selectSpell" resultType="String" parameterMap="areaParam">
+		select 	Spelling area_spelling 	from SC_Area
+		<where>
+			<if test="code!=null">Code=${code} </if>
+		</where>
+	</select>
+</mapper>

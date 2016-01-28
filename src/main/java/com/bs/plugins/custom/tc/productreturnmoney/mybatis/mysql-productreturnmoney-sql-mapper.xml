@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.productreturnmoney.dao.IProductReturnMoneyDao">
+	
+	<parameterMap id="productReturnMoneyParamImpl" type="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney" />
+	<resultMap id="productReturnMoneyResultImpl" type="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney">
+		<id property="id" column="productReturnMoney_id" javaType="java.lang.Long" />
+		<result property="memberId" column="productReturnMoney_memberId" javaType="java.lang.Long" />
+		<result property="memberName" column="productReturnMoney_memberName" javaType="java.lang.String" />
+		<result property="spvId" column="productReturnMoney_spvId" javaType="java.lang.Long" />
+		<result property="productId" column="productReturnMoney_productId" javaType="java.lang.Long" />
+		<result property="subscriptionId" column="productReturnMoney_subscriptionId" javaType="java.lang.Long" />
+		<result property="transactionNumber" column="productReturnMoney_transactionNumber" javaType="java.lang.String" />
+		<result property="umpayAccountNo" column="productReturnMoney_umpayAccountNo" javaType="java.lang.String" />
+		<result property="spvUmpayMerchantNo" column="productReturnMoney_spvUmpayMerchantNo" javaType="java.lang.String" />
+		<result property="spvUmpayAccountNo" column="productReturnMoney_spvUmpayAccountNo" javaType="java.lang.String" />
+		<result property="umpayUserAccountNo" column="productReturnMoney_umpayUserAccountNo" javaType="java.lang.String" />
+		<result property="umpayUserNo" column="productReturnMoney_umpayUserNo" javaType="java.lang.String" />
+		<result property="mobilePhone" column="productReturnMoney_mobilePhone" javaType="java.lang.String" />
+		<result property="orderTime" column="productReturnMoney_orderTime" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="productReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+		<result property="productName" column="productReturnMoney_productName" javaType="java.lang.String" />
+		<result property="productCode" column="productReturnMoney_productCode" javaType="java.lang.String" />
+		<result property="distributePrincipal" column="productReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+		<result property="distributeInterest" column="productReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+		<result property="distributeAmount" column="productReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+		<result property="distributeStatus" column="productReturnMoney_distributeStatus" javaType="java.lang.Integer" />
+		<result property="distributeTime" column="productReturnMoney_distributeTime" javaType="java.lang.String" />
+		<result property="interestRateDate" column="productReturnMoney_interestRateDate" javaType="java.lang.String" />
+		<result property="paymentDate" column="productReturnMoney_paymentDate" javaType="java.lang.String" />
+		<result property="actualExpirationDate" column="productReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+		<result property="expectedProfitRatio" column="productReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+		<result property="expectedProfit" column="productReturnMoney_expectedProfit" javaType="java.math.BigDecimal" />
+		<result property="actualProfitRatio" column="productReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+		<result property="actualReturnAmount" column="productReturnMoney_actualReturnAmount" javaType="java.math.BigDecimal" />
+		<result property="memberServiceFee" column="productReturnMoney_memberServiceFee" javaType="java.math.BigDecimal" />
+		<result property="memberServiceFeeRatio" column="productReturnMoney_memberServiceFeeRatio" javaType="java.math.BigDecimal" />
+		<result property="businessCheckStatus" column="productReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+		<result property="returnTime" column="productReturnMoney_returnTime" javaType="java.lang.String" />
+		<result property="returnStatus" column="productReturnMoney_returnStatus" javaType="java.lang.Integer" />
+		<result property="checkingTime" column="productReturnMoney_checkingTime" javaType="java.lang.String" />
+		<result property="checkingStatus" column="productReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+		<result property="objectIncomeStatus" column="productReturnMoney_objectIncomeStatus" javaType="java.lang.Integer" />
+		<result property="objectIncomeTime" column="productReturnMoney_objectIncomeTime" javaType="java.lang.String" />
+		<result property="remark" column="productReturnMoney_remark" javaType="java.lang.String" />
+		<association property="spvCorporation" javaType="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation">
+			<id property="id" column="spvCorporation_id" javaType="java.lang.Long" />
+			<result property="type" column="spvCorporation_type" javaType="java.lang.Integer" />
+			<result property="code" column="spvCorporation_code" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="spvCorporation_umpayAccountNo" javaType="java.lang.String" />
+			<result property="umpayMerchantNo" column="spvCorporation_umpayMerchantNo" javaType="java.lang.String" />
+			<result property="name" column="spvCorporation_name" javaType="java.lang.String" />
+			<result property="shortName" column="spvCorporation_shortName" javaType="java.lang.String" />
+			<result property="bankName" column="spvCorporation_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="spvCorporation_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="spvCorporation_bankCardNumber" javaType="java.lang.String" />
+			<result property="phone" column="spvCorporation_phone" javaType="java.lang.String" />
+			<result property="fax" column="spvCorporation_fax" javaType="java.lang.String" />
+			<result property="postCode" column="spvCorporation_postCode" javaType="java.lang.String" />
+			<result property="address" column="spvCorporation_address" javaType="java.lang.String" />
+			<result property="description" column="spvCorporation_description" javaType="java.lang.String" />
+			<result property="status" column="spvCorporation_status" javaType="java.lang.Integer" />
+			<result property="createTime" column="spvCorporation_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="spvCorporation_modifyTime" javaType="java.lang.String" />
+		</association>
+		<association property="subscription" javaType="com.bs.plugins.custom.tc.subscription.entity.Subscription">
+			<id property="id" column="subscription_id" javaType="java.lang.Long" />
+			<result property="memberId" column="subscription_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="subscription_spvId" javaType="java.lang.Long" />
+			<result property="loanId" column="subscription_loanId" javaType="java.lang.Long" />
+			<result property="productId" column="subscription_productId" javaType="java.lang.Long" />
+			<result property="amountLockId" column="subscription_amountLockId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="subscription_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="subscription_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="subscription_productName" javaType="java.lang.String" />
+			<result property="productCode" column="subscription_productCode" javaType="java.lang.String" />
+			<result property="tradeStatus" column="subscription_tradeStatus" javaType="java.lang.Integer" />
+			<result property="investAmount" column="subscription_investAmount" javaType="java.math.BigDecimal" />
+			<result property="shares" column="subscription_shares" javaType="java.lang.Integer" />
+			<result property="orderTime" column="subscription_orderTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="subscription_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="subscription_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="subscription_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="subscription_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="subscription_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="subscription_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="subscription_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="actualLoanAmount" column="subscription_actualLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="subscription_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="subscription_loanStatus" javaType="java.lang.Integer" />
+			<result property="status" column="subscription_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="subscription_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="subscription_distributeTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="subscription_checkingStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="subscription_checkingTime" javaType="java.lang.String" />
+			<result property="contractPath" column="subscription_contractPath" javaType="java.lang.String" />
+			<result property="remark" column="subscription_remark" javaType="java.lang.String" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+		</association>
+	</resultMap>	
+	
+	<update id="updateByIdOrIds" parameterMap="productReturnMoneyParamImpl">
+		update TC_ProductReturnMoney
+		<set>
+			<trim prefixOverrides=",">
+				<if test="businessCheckStatus != null">,BusinessCheckStatus=${businessCheckStatus}</if>
+				<if test="objectIncomeStatus != null">,ObjectIncomeStatus=${objectIncomeStatus}</if>
+				<if test="spvIntoObjectId != null">,SpvIntoObjectId=${spvIntoObjectId}</if>
+				<if test="objectIncomeNumber != null">,ObjectIncomeNumber=#{objectIncomeNumber}</if>
+				<if test="returnNumber != null">,ReturnNumber=#{returnNumber}</if>
+				<if test="returnStatus != null">,ReturnStatus=${returnStatus}</if>
+				<if test="returnTime != null">,ReturnTime=now()</if>
+				<if test="remark != null and remark != ''">,Remark=#{remark}</if>
+			</trim>
+		</set>
+		<where>
+			<if test="ids != null and ids != ''">
+				<![CDATA[ Id in ]]> 
+					<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+			       	 	${item}
+			    	</foreach> 
+				<![CDATA[]]>
+			</if>
+		</where>
+	</update>
+	
+	<update id="updateObjectIncomeStatusById" parameterMap="productReturnMoneyParamImpl">
+		update TC_ProductReturnMoney set ObjectIncomeStatus=${objectIncomeStatus},SpvIntoObjectId=${spvIntoObjectId},ObjectIncomeNumber=#{objectIncomeNumber}
+		 where Id = ${id} and ObjectIncomeStatus not in (1,2)
+	</update>
+	
+	<update id="updateObjectIncomeStatusByIds" parameterMap="productReturnMoneyParamImpl">
+		update TC_ProductReturnMoney set ObjectIncomeStatus=${objectIncomeStatus},SpvIntoObjectId=${spvIntoObjectId},ObjectIncomeNumber=#{objectIncomeNumber}
+		<where>
+			<![CDATA[ Id in ]]> 
+				<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+		       	 	${item}
+		    	</foreach> 
+			<![CDATA[]]>
+				and ObjectIncomeStatus not in (1,2)
+		</where>
+	</update>
+	
+	<update id="updateReturnStatusById" parameterMap="productReturnMoneyParamImpl">
+		update TC_ProductReturnMoney set ReturnStatus=${returnStatus},ReturnNumber=#{returnNumber} where Id = ${id} and ReturnStatus not in (1,2)
+	</update>
+	
+	<select id="selectProductReturnMoneyByIdOrIds" resultMap="productReturnMoneyResultImpl" parameterMap="productReturnMoneyParamImpl" >
+		select
+			productReturnMoney.Id productReturnMoney_id,
+			productReturnMoney.MemberId productReturnMoney_memberId,
+			productReturnMoney.SpvId productReturnMoney_spvId,
+			productReturnMoney.ProductId productReturnMoney_productId,
+			productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+			product.UmpayAccountNo productReturnMoney_umpayAccountNo,
+			spvCorporation.UmpayAccountNo productReturnMoney_spvUmpayAccountNo,
+			spvCorporation.UmpayMerchantNo productReturnMoney_spvUmpayMerchantNo,
+			member.UmpayUserNo productReturnMoney_umpayUserNo,
+			member.UmpayAccountNo productReturnMoney_umpayUserAccountNo,
+			member.MobilePhone productReturnMoney_MobilePhone,
+			productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+			productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+			productReturnMoney.ProductName productReturnMoney_productName,
+			productReturnMoney.ProductCode productReturnMoney_productCode,
+			productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+			productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+			productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+			productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+			productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+			productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+			productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+			productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+			productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+			productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+			productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+			productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+			productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+			productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+			productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+			productReturnMoney.ReturnTime productReturnMoney_returnTime,
+			productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+			productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+			productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+			productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+			productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+			productReturnMoney.Remark productReturnMoney_remark
+			from TC_ProductReturnMoney productReturnMoney
+			left join PC_Product product on product.Id = productReturnMoney.ProductId
+			left join CC_SpvCorporation spvCorporation on spvCorporation.Id = productReturnMoney.SpvId
+			left join CC_Member member on member.Id = productReturnMoney.MemberId
+		<where>
+			<if test="id != null">productReturnMoney.Id = ${id}</if>
+			<if test="ids != null and ids != ''">
+				<![CDATA[ productReturnMoney.Id in ]]> 
+					<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+			       	 	${item}
+			    	</foreach> 
+				<![CDATA[]]>
+			</if>
+			and productReturnMoney.ReturnStatus not in (1,2,4)
+		</where>
+	</select>
+	
+	<select id="selectReturnMoneyByIdOrIds" resultMap="productReturnMoneyResultImpl" parameterMap="productReturnMoneyParamImpl" >
+		select
+			productReturnMoney.Id productReturnMoney_id,
+			productReturnMoney.MemberId productReturnMoney_memberId,
+			productReturnMoney.SpvId productReturnMoney_spvId,
+			productReturnMoney.ProductId productReturnMoney_productId,
+			productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+			product.UmpayAccountNo productReturnMoney_umpayAccountNo,
+			spvCorporation.UmpayAccountNo productReturnMoney_spvUmpayAccountNo,
+			spvCorporation.UmpayMerchantNo productReturnMoney_spvUmpayMerchantNo,
+			member.UmpayUserNo productReturnMoney_umpayUserNo,
+			member.UmpayAccountNo productReturnMoney_umpayUserAccountNo,
+			productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+			productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+			productReturnMoney.ProductName productReturnMoney_productName,
+			productReturnMoney.ProductCode productReturnMoney_productCode,
+			productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+			productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+			productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+			productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+			productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+			productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+			productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+			productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+			productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+			productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+			productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+			productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+			productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+			productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+			productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+			productReturnMoney.ReturnTime productReturnMoney_returnTime,
+			productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+			productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+			productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+			productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+			productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+			productReturnMoney.Remark productReturnMoney_remark
+			from TC_ProductReturnMoney productReturnMoney
+			left join PC_Product product on product.Id = productReturnMoney.ProductId
+			left join CC_SpvCorporation spvCorporation on spvCorporation.Id = productReturnMoney.SpvId
+			left join CC_Member member on member.Id = productReturnMoney.MemberId
+		<where>
+			<if test="id != null">Id = ${id}</if>
+			<if test="ids != null and ids != ''">
+				<![CDATA[ Id in ]]> 
+					<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+			       	 	${item}
+			    	</foreach> 
+				<![CDATA[]]>
+			</if>
+			and productReturnMoney.ObjectIncomeStatus = 2 and productReturnMoney.ReturnStatus not in (1,2,4)
+			and productReturnMoney.BusinessCheckStatus = 1
+		</where>
+	</select>
+	
+	<select id="selectProductReturnMoneyList" resultMap="productReturnMoneyResultImpl" parameterMap="productReturnMoneyParamImpl">
+		select 
+			productReturnMoney.Id productReturnMoney_id,
+			productReturnMoney.MemberId productReturnMoney_memberId,
+			member.Name productReturnMoney_memberName,
+			productReturnMoney.SpvId productReturnMoney_spvId,
+			productReturnMoney.ProductId productReturnMoney_productId,
+			productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+			productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+			productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+			productReturnMoney.ProductName productReturnMoney_productName,
+			productReturnMoney.ProductCode productReturnMoney_productCode,
+			productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+			productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+			productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+			productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+			productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+			productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+			productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+			productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+			productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+			productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+			productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+			productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+			productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+			productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+			productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+			productReturnMoney.ReturnTime productReturnMoney_returnTime,
+			productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+			productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+			productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+			productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+			productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+			productReturnMoney.Remark productReturnMoney_remark
+		from TC_ProductReturnMoney productReturnMoney
+		left join CC_Member member on member.Id = productReturnMoney.MemberId
+		<where>
+		<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="subscriptionId != null">and SubscriptionId=${subscriptionId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="distributePrincipal != null">and DistributePrincipal=${distributePrincipal}</if>
+				<if test="distributeInterest != null">and DistributeInterest=${distributeInterest}</if>
+				<if test="distributeAmount != null">and DistributeAmount=${distributeAmount}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="distributeTime != null and distributeTime != ''">and DistributeTime=#{distributeTime}</if>
+				<if test="interestRateDate != null and interestRateDate != ''">and InterestRateDate=#{interestRateDate}</if>
+				<if test="paymentDate != null and paymentDate != ''">and PaymentDate=#{paymentDate}</if>
+				<if test="actualExpirationDate != null and actualExpirationDate != ''">and ActualExpirationDate=#{actualExpirationDate}</if>
+				<if test="expectedProfitRatio != null">and ExpectedProfitRatio=${expectedProfitRatio}</if>
+				<if test="expectedProfit != null">and ExpectedProfit=${expectedProfit}</if>
+				<if test="actualProfitRatio != null">and ActualProfitRatio=${actualProfitRatio}</if>
+				<if test="actualReturnAmount != null">and ActualReturnAmount=${actualReturnAmount}</if>
+				<if test="memberServiceFee != null">and MemberServiceFee=${memberServiceFee}</if>
+				<if test="memberServiceFeeRatio != null">and MemberServiceFeeRatio=${memberServiceFeeRatio}</if>
+				<if test="businessCheckStatus != null">and BusinessCheckStatus=${businessCheckStatus}</if>
+				<if test="returnTime != null and returnTime != ''">and ReturnTime=#{returnTime}</if>
+				<if test="returnStatus != null">and ReturnStatus=${returnStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="objectIncomeStatus != null">and ObjectIncomeStatus=${objectIncomeStatus}</if>
+				<if test="objectIncomeTime != null and objectIncomeTime != ''">and ObjectIncomeTime=#{objectIncomeTime}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+		<if test="offset != null and offset != 0">
+			limit ${start},${offset}
+		</if>
+	</select>
+	
+	
+	<select id="selectProductReturnMoneyCount" resultType="long" parameterMap="productReturnMoneyParamImpl">
+		select count(1) from TC_ProductReturnMoney
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="subscriptionId != null">and SubscriptionId=${subscriptionId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="distributePrincipal != null">and DistributePrincipal=${distributePrincipal}</if>
+				<if test="distributeInterest != null">and DistributeInterest=${distributeInterest}</if>
+				<if test="distributeAmount != null">and DistributeAmount=${distributeAmount}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="distributeTime != null and distributeTime != ''">and DistributeTime=#{distributeTime}</if>
+				<if test="interestRateDate != null and interestRateDate != ''">and InterestRateDate=#{interestRateDate}</if>
+				<if test="paymentDate != null and paymentDate != ''">and PaymentDate=#{paymentDate}</if>
+				<if test="actualExpirationDate != null and actualExpirationDate != ''">and ActualExpirationDate=#{actualExpirationDate}</if>
+				<if test="expectedProfitRatio != null">and ExpectedProfitRatio=${expectedProfitRatio}</if>
+				<if test="expectedProfit != null">and ExpectedProfit=${expectedProfit}</if>
+				<if test="actualProfitRatio != null">and ActualProfitRatio=${actualProfitRatio}</if>
+				<if test="actualReturnAmount != null">and ActualReturnAmount=${actualReturnAmount}</if>
+				<if test="memberServiceFee != null">and MemberServiceFee=${memberServiceFee}</if>
+				<if test="memberServiceFeeRatio != null">and MemberServiceFeeRatio=${memberServiceFeeRatio}</if>
+				<if test="businessCheckStatus != null">and BusinessCheckStatus=${businessCheckStatus}</if>
+				<if test="returnTime != null and returnTime != ''">and ReturnTime=#{returnTime}</if>
+				<if test="returnStatus != null">and ReturnStatus=${returnStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="objectIncomeStatus != null">and ObjectIncomeStatus=${objectIncomeStatus}</if>
+				<if test="objectIncomeTime != null and objectIncomeTime != ''">and ObjectIncomeTime=#{objectIncomeTime}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+</mapper>

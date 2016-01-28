@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.user.dao.IUserDao">
+	<parameterMap id="subUserParam" type="com.bs.plugins.custom.uc.user.entity.User" />
+	<resultMap id="subUserResult" type="com.bs.plugins.custom.uc.user.entity.User">
+	
+	</resultMap>
+	
+	<select id="selectByAccount"  resultMap="userResult" parameterMap="userParam">
+		select 
+			id user_id,
+			orgCode user_orgCode,
+			account user_account,
+			name user_name,
+			type user_type,
+			position user_position,
+			password user_password,
+			gender user_gender,
+			birthday user_birthday,
+			head user_head,
+			individualitySignature user_individualitySignature,
+			mobilePhone user_mobilePhone,
+			officePhone user_officePhone,
+			email user_email,
+			description user_description,
+			status user_status,
+			style user_style,
+			createTime user_createTime,
+			modifyTime user_modifyTime,
+			roleIds user_roleIds
+		from UC_User 
+		<where>  
+            <trim prefixOverrides="and">
+				<if test="account != null and account != ''">and Account=#{account}</if>
+			</trim>
+        </where> 
+	</select>
+	<select id="queryIsDisable"  resultMap="userResult" parameterMap="userParam">
+		select 
+			id user_id,
+			orgCode user_orgCode,
+			account user_account,
+			name user_name,
+			type user_type,
+			position user_position,
+			password user_password,
+			gender user_gender,
+			birthday user_birthday,
+			head user_head,
+			individualitySignature user_individualitySignature,
+			mobilePhone user_mobilePhone,
+			officePhone user_officePhone,
+			email user_email,
+			description user_description,
+			status user_status,
+			style user_style,
+			createTime user_createTime,
+			modifyTime user_modifyTime,
+			roleIds user_roleIds
+		from UC_User 
+		where status=1 and Account = #{account}
+
+
+	</select>
+		
+	<select id="queryRoleIsDisabled"  resultMap="userResult" parameterMap="userParam">
+		select 
+			u1.id user_id,
+			u1.orgCode user_orgCode,
+			u1.account user_account,
+			u1.name user_name,
+			u1.type user_type,
+			u1.position user_position,
+			u1.password user_password,
+			u1.gender user_gender,
+			u1.birthday user_birthday,
+			u1.head user_head,
+			u1.individualitySignature user_individualitySignature,
+			u1.mobilePhone user_mobilePhone,
+			u1.officePhone user_officePhone,
+			u1.email user_email,
+			u1.description user_description,
+			u1.status user_status,
+			u1.style user_style,
+			u1.createTime user_createTime,
+			u1.modifyTime user_modifyTime,
+			u1.roleIds user_roleIds
+		from UC_User u1
+		LEFT JOIN UC_UserRoleRelation u2 ON u1.Id=u2.UserId
+		LEFT JOIN UC_Role u3 ON u3.Id=u2.RoleId 
+		where (u3.status = 1 or u1.Type = 0) and u1.Account = #{account}
+	</select>
+	<update id="updateByAccount" parameterMap="userParam">
+		update UC_User
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="account != null and account != ''">,Account=#{account}</if>
+				<if test="orgCode != null and orgCode != ''">,OrgCode=#{orgCode}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="position != null and position != ''">,Position=#{position}</if>
+				<if test="password != null and password != ''">,Password=#{password}</if>
+				<if test="gender != null">,Gender=${gender}</if>
+				<if test="birthday != null and birthday != ''">,Birthday=#{birthday}</if>
+				<if test="head != null and head != ''">,Head=#{head}</if>
+				<if test="individualitySignature != null and individualitySignature != ''">,IndividualitySignature=#{individualitySignature}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">,OfficePhone=#{officePhone}</if>
+				<if test="email != null and email != ''">,Email=#{email}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="style != null and style != ''">,Style=#{style}</if>
+				<if test="createTime != null and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">,ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">,RoleIds=#{roleIds}</if>
+			</trim>
+		</set>
+		where
+		Account=#{account}
+	</update>
+	<update id="updateByUserId" parameterMap="userParam">
+		update UC_User
+		<set>
+			<trim prefixOverrides=",">
+				<if test="account != null and account != ''">,Account=#{account}</if>
+				<if test="orgCode != null and orgCode != ''">,OrgCode=#{orgCode}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="position != null and position != ''">,Position=#{position}</if>
+				<if test="password != null and password != ''">,Password=#{password}</if>
+				<if test="gender != null">,Gender=${gender}</if>
+				<if test="birthday != null and birthday != ''">,Birthday=#{birthday}</if>
+				<if test="head != null and head != ''">,Head=#{head}</if>
+				<if test="individualitySignature != null and individualitySignature != ''">,IndividualitySignature=#{individualitySignature}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">,OfficePhone=#{officePhone}</if>
+				<if test="email != null and email != ''">,Email=#{email}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="style != null and style != ''">,Style=#{style}</if>
+				<if test="createTime != null and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">,ModifyTime=#{modifyTime}</if>
+				<if test="roleIds != null and roleIds != ''">,RoleIds=#{roleIds}</if>
+			</trim>
+		</set>
+		where
+		 id=${id}
+	</update>
+	<update id="setCodeNull" parameterMap="userParam">
+		update UC_User set OrgCode = null
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="orgCode != null and orgCode != ''">and OrgCode=#{orgCode}</if>
+			</trim>
+		</where>
+	</update>
+		
+	<select id="findPaginatedList"  resultMap="userResult" parameterMap="userParam">
+		select 
+			User.Id user_id,
+			User.OrgCode user_orgCode,
+			User.Account user_account,
+			User.Name user_name,
+			User.Type user_type,
+			User.Position user_position,
+			User.Password user_password,
+			User.Gender user_gender,
+			User.Birthday user_birthday,
+			User.Head user_head,
+			User.IndividualitySignature user_individualitySignature,
+			User.MobilePhone user_mobilePhone,
+			User.OfficePhone user_officePhone,
+			User.Email user_email,
+			User.Description user_description,
+			User.Status user_status,
+			User.Style user_style,
+			User.CreateTime user_createTime,
+			User.ModifyTime user_modifyTime,
+			User.RoleIds user_roleIds,
+			organization.name organization_name
+			from UC_User User
+			LEFT JOIN UC_Organization organization
+			on organization.`Code`=`User`.`OrgCode`
+			where User.Account != 'admin'
+			order by User.Id desc
+			limit ${start},${offset}
+	</select>
+</mapper>

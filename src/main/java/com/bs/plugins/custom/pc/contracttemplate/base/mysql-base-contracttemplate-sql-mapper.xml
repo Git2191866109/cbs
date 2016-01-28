@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.contracttemplate.dao.IContractTemplateDao">
+
+	<parameterMap id="contractTemplateParam" type="com.bs.plugins.custom.pc.contracttemplate.entity.ContractTemplate" />
+	<resultMap id="contractTemplateResult" type="com.bs.plugins.custom.pc.contracttemplate.entity.ContractTemplate">
+		<id property="id" column="contractTemplate_id" javaType="java.lang.Long" />
+		<result property="name" column="contractTemplate_name" javaType="java.lang.String" />
+		<result property="code" column="contractTemplate_code" javaType="java.lang.String" />
+		<result property="templatePath" column="contractTemplate_templatePath" javaType="java.lang.String" />
+		<result property="templateContent" column="contractTemplate_templateContent" javaType="java.lang.String" />
+		<result property="description" column="contractTemplate_description" javaType="java.lang.String" />
+		<result property="creatorId" column="contractTemplate_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="contractTemplate_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="contractTemplate_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="contractTemplate_modifyTime" javaType="java.lang.String" />
+		<result property="delFlag" column="contractTemplate_delFlag" javaType="java.lang.Integer" />
+		<collection property="productContracts" ofType="com.bs.plugins.custom.pc.productcontract.entity.ProductContract">
+			<id property="id" column="productContract_id" javaType="java.lang.Long" />
+			<result property="productId" column="productContract_productId" javaType="java.lang.Long" />
+			<result property="templateId" column="productContract_templateId" javaType="java.lang.Long" />
+			<result property="name" column="productContract_name" javaType="java.lang.String" />
+			<result property="code" column="productContract_code" javaType="java.lang.String" />
+			<result property="filePath" column="productContract_filePath" javaType="java.lang.String" />
+			<result property="content" column="productContract_content" javaType="java.lang.String" />
+			<result property="description" column="productContract_description" javaType="java.lang.String" />
+			<result property="creatorId" column="productContract_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="productContract_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="productContract_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="productContract_modifyTime" javaType="java.lang.String" />
+			<result property="delFlag" column="productContract_delFlag" javaType="java.lang.Integer" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="contractTemplateResult" parameterMap="contractTemplateParam">
+		select
+			contractTemplate.Id contractTemplate_id,
+			contractTemplate.Name contractTemplate_name,
+			contractTemplate.Code contractTemplate_code,
+			contractTemplate.TemplatePath contractTemplate_templatePath,
+			contractTemplate.TemplateContent contractTemplate_templateContent,
+			contractTemplate.Description contractTemplate_description,
+			contractTemplate.CreatorId contractTemplate_creatorId,
+			contractTemplate.CreateTime contractTemplate_createTime,
+			contractTemplate.ModifierId contractTemplate_modifierId,
+			contractTemplate.ModifyTime contractTemplate_modifyTime,
+			contractTemplate.DelFlag contractTemplate_delFlag,	
+			productContract.Id productContract_id,
+			productContract.ProductId productContract_productId,
+			productContract.TemplateId productContract_templateId,
+			productContract.Name productContract_name,
+			productContract.Code productContract_code,
+			productContract.FilePath productContract_filePath,
+			productContract.Content productContract_content,
+			productContract.Description productContract_description,
+			productContract.CreatorId productContract_creatorId,
+			productContract.CreateTime productContract_createTime,
+			productContract.ModifierId productContract_modifierId,
+			productContract.ModifyTime productContract_modifyTime,
+			productContract.DelFlag productContract_delFlag
+		from PC_ContractTemplate contractTemplate
+		inner join PC_ProductContract productContract on productContract.TemplateId=contractTemplate.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">and TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">and TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectContractTemplateProductContract" resultMap="contractTemplateResult" parameterMap="contractTemplateParam">
+		select
+			contractTemplate.Id contractTemplate_id,
+			contractTemplate.Name contractTemplate_name,
+			contractTemplate.Code contractTemplate_code,
+			contractTemplate.TemplatePath contractTemplate_templatePath,
+			contractTemplate.TemplateContent contractTemplate_templateContent,
+			contractTemplate.Description contractTemplate_description,
+			contractTemplate.CreatorId contractTemplate_creatorId,
+			contractTemplate.CreateTime contractTemplate_createTime,
+			contractTemplate.ModifierId contractTemplate_modifierId,
+			contractTemplate.ModifyTime contractTemplate_modifyTime,
+			contractTemplate.DelFlag contractTemplate_delFlag,
+				productContract.Id productContract_id,
+	
+				productContract.ProductId productContract_productId,
+	
+				productContract.TemplateId productContract_templateId,
+	
+				productContract.Name productContract_name,
+	
+				productContract.Code productContract_code,
+	
+				productContract.FilePath productContract_filePath,
+	
+				productContract.Content productContract_content,
+	
+				productContract.Description productContract_description,
+	
+				productContract.CreatorId productContract_creatorId,
+	
+				productContract.CreateTime productContract_createTime,
+	
+				productContract.ModifierId productContract_modifierId,
+	
+				productContract.ModifyTime productContract_modifyTime,
+	
+				productContract.DelFlag productContract_delFlag
+	
+		from PC_ContractTemplate contractTemplate
+		inner join PC_ProductContract productContract on productContract.TemplateId=contractTemplate.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">and TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">and TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="contractTemplateResult" parameterMap="contractTemplateParam">
+		select 
+			Id contractTemplate_id,
+			Name contractTemplate_name,
+			Code contractTemplate_code,
+			TemplatePath contractTemplate_templatePath,
+			TemplateContent contractTemplate_templateContent,
+			Description contractTemplate_description,
+			CreatorId contractTemplate_creatorId,
+			CreateTime contractTemplate_createTime,
+			ModifierId contractTemplate_modifierId,
+			ModifyTime contractTemplate_modifyTime,
+			DelFlag contractTemplate_delFlag
+		from PC_ContractTemplate
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">and TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">and TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="contractTemplateResult">
+		select 
+			Id contractTemplate_id,
+			Name contractTemplate_name,
+			Code contractTemplate_code,
+			TemplatePath contractTemplate_templatePath,
+			TemplateContent contractTemplate_templateContent,
+			Description contractTemplate_description,
+			CreatorId contractTemplate_creatorId,
+			CreateTime contractTemplate_createTime,
+			ModifierId contractTemplate_modifierId,
+			ModifyTime contractTemplate_modifyTime,
+			DelFlag contractTemplate_delFlag
+		from PC_ContractTemplate
+	</select>
+	
+	<select id="selectOneById"  resultMap="contractTemplateResult" parameterMap="contractTemplateParam">
+		select 
+			Id contractTemplate_id,
+			Name contractTemplate_name,
+			Code contractTemplate_code,
+			TemplatePath contractTemplate_templatePath,
+			TemplateContent contractTemplate_templateContent,
+			Description contractTemplate_description,
+			CreatorId contractTemplate_creatorId,
+			CreateTime contractTemplate_createTime,
+			ModifierId contractTemplate_modifierId,
+			ModifyTime contractTemplate_modifyTime,
+			DelFlag contractTemplate_delFlag
+		from PC_ContractTemplate where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="contractTemplateResult" parameterMap="contractTemplateParam">
+		select 
+			Id contractTemplate_id,
+			Name contractTemplate_name,
+			Code contractTemplate_code,
+			TemplatePath contractTemplate_templatePath,
+			TemplateContent contractTemplate_templateContent,
+			Description contractTemplate_description,
+			CreatorId contractTemplate_creatorId,
+			CreateTime contractTemplate_createTime,
+			ModifierId contractTemplate_modifierId,
+			ModifyTime contractTemplate_modifyTime,
+			DelFlag contractTemplate_delFlag
+		from PC_ContractTemplate
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="contractTemplateParam">
+		select count(*) from PC_ContractTemplate
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">and TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">and TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="contractTemplateParam">
+		update PC_ContractTemplate
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">,TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">,TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="delFlag != null">,DelFlag=${delFlag}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="contractTemplateParam">
+		update PC_ContractTemplate
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+						,TemplatePath=#{templatePath}
+						,TemplateContent=#{templateContent}
+						,Description=#{description}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="delFlag != null">,DelFlag=${delFlag}</if>
+                        <if test="delFlag == null">,DelFlag= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="contractTemplateParam">
+		insert into PC_ContractTemplate
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="templatePath != null and templatePath != ''">,TemplatePath</if>
+			<if test="templateContent != null and templateContent != ''">,TemplateContent</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="delFlag != null">,DelFlag</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="templatePath != null and templatePath != ''">,#{templatePath}</if>
+			<if test="templateContent != null and templateContent != ''">,#{templateContent}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="delFlag != null">,${delFlag}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="contractTemplateParam">
+		delete from PC_ContractTemplate where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="contractTemplateParam">
+		delete from PC_ContractTemplate
+	</delete>
+	
+	<delete id="delete" parameterMap="contractTemplateParam">
+		delete from PC_ContractTemplate
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="templatePath != null and templatePath != ''">and TemplatePath=#{templatePath}</if>
+				<if test="templateContent != null and templateContent != ''">and TemplateContent=#{templateContent}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

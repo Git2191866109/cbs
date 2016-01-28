@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.datarelationaltable.dao.IDataRelationalTableDao">
+
+	<parameterMap id="dataRelationalTableParam" type="com.bs.plugins.custom.eb.datarelationaltable.entity.DataRelationalTable" />
+	<resultMap id="dataRelationalTableResult" type="com.bs.plugins.custom.eb.datarelationaltable.entity.DataRelationalTable">
+		<id property="id" column="dataRelationalTable_id" javaType="java.lang.Long" />
+		<result property="itemFieldId" column="dataRelationalTable_itemFieldId" javaType="java.lang.Long" />
+		<result property="name" column="dataRelationalTable_name" javaType="java.lang.String" />
+		<result property="chineseName" column="dataRelationalTable_chineseName" javaType="java.lang.String" />
+		<result property="keyColumn" column="dataRelationalTable_keyColumn" javaType="java.lang.String" />
+		<result property="valueColumn" column="dataRelationalTable_valueColumn" javaType="java.lang.String" />
+		<result property="showType" column="dataRelationalTable_showType" javaType="java.lang.Integer" />
+		<association property="itemField" javaType="com.bs.plugins.custom.eb.itemfield.entity.ItemField">
+			<id property="id" column="itemField_id" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="itemField_budgetItemId" javaType="java.lang.Long" />
+			<result property="name" column="itemField_name" javaType="java.lang.String" />
+			<result property="code" column="itemField_code" javaType="java.lang.String" />
+			<result property="showSort" column="itemField_showSort" javaType="java.lang.Integer" />
+			<result property="isDifferLevel" column="itemField_isDifferLevel" javaType="java.lang.Integer" />
+			<result property="inputLevel" column="itemField_inputLevel" javaType="java.lang.Integer" />
+			<result property="isDataTemplate" column="itemField_isDataTemplate" javaType="java.lang.Integer" />
+			<result property="isValid" column="itemField_isValid" javaType="java.lang.Integer" />
+			<result property="createDate" column="itemField_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="itemField_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="itemField_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="dataRelationalTableResult" parameterMap="dataRelationalTableParam">
+		select
+			dataRelationalTable.Id dataRelationalTable_id,
+			dataRelationalTable.ItemFieldId dataRelationalTable_itemFieldId,
+			dataRelationalTable.Name dataRelationalTable_name,
+			dataRelationalTable.ChineseName dataRelationalTable_chineseName,
+			dataRelationalTable.KeyColumn dataRelationalTable_keyColumn,
+			dataRelationalTable.ValueColumn dataRelationalTable_valueColumn,
+			dataRelationalTable.ShowType dataRelationalTable_showType,	
+			itemField.Id itemField_id,
+			itemField.BudgetItemId itemField_budgetItemId,
+			itemField.Name itemField_name,
+			itemField.Code itemField_code,
+			itemField.ShowSort itemField_showSort,
+			itemField.IsDifferLevel itemField_isDifferLevel,
+			itemField.InputLevel itemField_inputLevel,
+			itemField.IsDataTemplate itemField_isDataTemplate,
+			itemField.IsValid itemField_isValid,
+			itemField.CreateDate itemField_createDate,
+			itemField.ModifyDate itemField_modifyDate,
+			itemField.CreatorId itemField_creatorId
+		from EB_DataRelationalTable dataRelationalTable
+		inner join EB_ItemField itemField on itemField.Id=dataRelationalTable.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">and ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectDataRelationalTableItemField" resultMap="dataRelationalTableResult" parameterMap="dataRelationalTableParam">
+		select
+			dataRelationalTable.Id dataRelationalTable_id,
+			dataRelationalTable.ItemFieldId dataRelationalTable_itemFieldId,
+			dataRelationalTable.Name dataRelationalTable_name,
+			dataRelationalTable.ChineseName dataRelationalTable_chineseName,
+			dataRelationalTable.KeyColumn dataRelationalTable_keyColumn,
+			dataRelationalTable.ValueColumn dataRelationalTable_valueColumn,
+			itemField.Id itemField_id,
+			itemField.BudgetItemId itemField_budgetItemId,
+			itemField.Name itemField_name,
+			itemField.Code itemField_code,
+			itemField.ShowSort itemField_showSort,
+			itemField.IsDifferLevel itemField_isDifferLevel,
+			itemField.InputLevel itemField_inputLevel,
+			itemField.IsDataTemplate itemField_isDataTemplate,
+			itemField.IsValid itemField_isValid,
+			itemField.CreateDate itemField_createDate,
+			itemField.ModifyDate itemField_modifyDate,
+			itemField.CreatorId itemField_creatorId,
+		from EB_DataRelationalTable dataRelationalTable
+		inner join EB_ItemField itemField on itemField.Id=dataRelationalTable.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">and ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="dataRelationalTableResult" parameterMap="dataRelationalTableParam">
+		select 
+			Id dataRelationalTable_id,
+			ItemFieldId dataRelationalTable_itemFieldId,
+			Name dataRelationalTable_name,
+			ChineseName dataRelationalTable_chineseName,
+			KeyColumn dataRelationalTable_keyColumn,
+			ValueColumn dataRelationalTable_valueColumn,
+			ShowType dataRelationalTable_showType
+		from EB_DataRelationalTable
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">and ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="dataRelationalTableResult">
+		select 
+			Id dataRelationalTable_id,
+			ItemFieldId dataRelationalTable_itemFieldId,
+			Name dataRelationalTable_name,
+			ChineseName dataRelationalTable_chineseName,
+			KeyColumn dataRelationalTable_keyColumn,
+			ValueColumn dataRelationalTable_valueColumn,
+			ShowType dataRelationalTable_showType
+		from EB_DataRelationalTable
+	</select>
+	
+	<select id="selectOneById"  resultMap="dataRelationalTableResult" parameterMap="dataRelationalTableParam">
+		select 
+			Id dataRelationalTable_id,
+			ItemFieldId dataRelationalTable_itemFieldId,
+			Name dataRelationalTable_name,
+			ChineseName dataRelationalTable_chineseName,
+			KeyColumn dataRelationalTable_keyColumn,
+			ValueColumn dataRelationalTable_valueColumn,
+			ShowType dataRelationalTable_showType
+		from EB_DataRelationalTable where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="dataRelationalTableResult" parameterMap="dataRelationalTableParam">
+		select 
+			Id dataRelationalTable_id,
+			ItemFieldId dataRelationalTable_itemFieldId,
+			Name dataRelationalTable_name,
+			ChineseName dataRelationalTable_chineseName,
+			KeyColumn dataRelationalTable_keyColumn,
+			ValueColumn dataRelationalTable_valueColumn,
+			ShowType dataRelationalTable_showType
+		from EB_DataRelationalTable
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="dataRelationalTableParam">
+		select count(*) from EB_DataRelationalTable
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">and ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="dataRelationalTableParam">
+		update EB_DataRelationalTable
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="itemFieldId != null">,ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">,ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">,KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">,ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">,ShowType=${showType}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="dataRelationalTableParam">
+		insert into EB_DataRelationalTable
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="itemFieldId != null">,ItemFieldId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="chineseName != null and chineseName != ''">,ChineseName</if>
+			<if test="keyColumn != null and keyColumn != ''">,KeyColumn</if>
+			<if test="valueColumn != null and valueColumn != ''">,ValueColumn</if>
+			<if test="showType != null">,ShowType</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="itemFieldId != null">,${itemFieldId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="chineseName != null and chineseName != ''">,#{chineseName}</if>
+			<if test="keyColumn != null and keyColumn != ''">,#{keyColumn}</if>
+			<if test="valueColumn != null and valueColumn != ''">,#{valueColumn}</if>
+			<if test="showType != null">,${showType}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="dataRelationalTableParam">
+		delete from EB_DataRelationalTable where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="dataRelationalTableParam">
+		delete from EB_DataRelationalTable
+	</delete>
+	
+	<delete id="delete" parameterMap="dataRelationalTableParam">
+		delete from EB_DataRelationalTable
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="chineseName != null and chineseName != ''">and ChineseName=#{chineseName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

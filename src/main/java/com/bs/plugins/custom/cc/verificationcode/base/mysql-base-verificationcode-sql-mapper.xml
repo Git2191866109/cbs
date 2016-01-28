@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.verificationcode.dao.IVerificationCodeDao">
+
+	<parameterMap id="verificationCodeParam" type="com.bs.plugins.custom.cc.verificationcode.entity.VerificationCode" />
+	<resultMap id="verificationCodeResult" type="com.bs.plugins.custom.cc.verificationcode.entity.VerificationCode">
+		<id property="id" column="verificationCode_id" javaType="java.lang.Long" />
+		<result property="bussinessCode" column="verificationCode_bussinessCode" javaType="java.lang.String" />
+		<result property="mobilePhone" column="verificationCode_mobilePhone" javaType="java.lang.String" />
+		<result property="code" column="verificationCode_code" javaType="java.lang.String" />
+		<result property="expiredTime" column="verificationCode_expiredTime" javaType="java.lang.Long" />
+		<result property="createTime" column="verificationCode_createTime" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="verificationCodeResult" parameterMap="verificationCodeParam">
+		select 
+			Id verificationCode_id,
+			BussinessCode verificationCode_bussinessCode,
+			MobilePhone verificationCode_mobilePhone,
+			Code verificationCode_code,
+			ExpiredTime verificationCode_expiredTime,
+			CreateTime verificationCode_createTime
+		from CC_VerificationCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="verificationCodeResult">
+		select 
+			Id verificationCode_id,
+			BussinessCode verificationCode_bussinessCode,
+			MobilePhone verificationCode_mobilePhone,
+			Code verificationCode_code,
+			ExpiredTime verificationCode_expiredTime,
+			CreateTime verificationCode_createTime
+		from CC_VerificationCode
+	</select>
+	
+	<select id="selectOneById"  resultMap="verificationCodeResult" parameterMap="verificationCodeParam">
+		select 
+			Id verificationCode_id,
+			BussinessCode verificationCode_bussinessCode,
+			MobilePhone verificationCode_mobilePhone,
+			Code verificationCode_code,
+			ExpiredTime verificationCode_expiredTime,
+			CreateTime verificationCode_createTime
+		from CC_VerificationCode where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="verificationCodeResult" parameterMap="verificationCodeParam">
+		select 
+			Id verificationCode_id,
+			BussinessCode verificationCode_bussinessCode,
+			MobilePhone verificationCode_mobilePhone,
+			Code verificationCode_code,
+			ExpiredTime verificationCode_expiredTime,
+			CreateTime verificationCode_createTime
+		from CC_VerificationCode
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="verificationCodeParam">
+		select count(*) from CC_VerificationCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="verificationCodeParam">
+		update CC_VerificationCode
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">,BussinessCode=#{bussinessCode}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="expiredTime != null">,ExpiredTime=${expiredTime}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="verificationCodeParam">
+		update CC_VerificationCode
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,BussinessCode=#{bussinessCode}
+						,MobilePhone=#{mobilePhone}
+						,Code=#{code}
+                            ,ExpiredTime=${expiredTime}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="verificationCodeParam">
+		insert into CC_VerificationCode
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="bussinessCode != null and bussinessCode != ''">,BussinessCode</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="expiredTime != null">,ExpiredTime</if>
+                ,CreateTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="bussinessCode != null and bussinessCode != ''">,#{bussinessCode}</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="expiredTime != null">,${expiredTime}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="verificationCodeParam">
+		delete from CC_VerificationCode where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="verificationCodeParam">
+		delete from CC_VerificationCode
+	</delete>
+	
+	<delete id="delete" parameterMap="verificationCodeParam">
+		delete from CC_VerificationCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

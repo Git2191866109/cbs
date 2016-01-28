@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.accountingdetail.dao.IAccountingDetailDao">
+	<parameterMap id="accountingDetailParamImpl" type="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail" />
+	<resultMap id="accountingDetailResultImpl" type="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail">
+		<id property="id" column="accountingDetail_id" javaType="java.lang.Long" />
+		<result property="memberId" column="accountingDetail_memberId" javaType="java.lang.Long" />
+		<result property="flowTo" column="accountingDetail_flowTo" javaType="java.lang.Integer" />
+		<result property="amount" column="accountingDetail_amount" javaType="java.math.BigDecimal" />
+		<result property="counterpartyType" column="accountingDetail_counterpartyType" javaType="java.lang.Integer" />
+		<result property="counterpartyId" column="accountingDetail_counterpartyId" javaType="java.lang.Long" />
+		<result property="counterpartyName" column="accountingDetail_counterpartyName" javaType="java.lang.String" />
+		<result property="businessType" column="accountingDetail_businessType" javaType="java.lang.Integer" />
+		<result property="businessId" column="accountingDetail_businessId" javaType="java.lang.Long" />
+		<result property="accountType" column="accountingDetail_accountType" javaType="java.lang.Integer" />
+		<result property="transactionNumber" column="accountingDetail_transactionNumber" javaType="java.lang.String" />
+		<result property="productId" column="accountingDetail_productId" javaType="java.lang.Long" />
+		<result property="operatorId" column="accountingDetail_operatorId" javaType="java.lang.Long" />
+		<result property="operator" column="accountingDetail_operator" javaType="java.lang.String" />
+		<result property="description" column="accountingDetail_description" javaType="java.lang.String" />
+		<result property="createTime" column="accountingDetail_createTime" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="professionId" column="member_professionId" javaType="java.lang.Long" />
+			<result property="educationId" column="member_educationId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="lastLoginTime" column="member_lastLoginTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectClientPaginated" resultMap="accountingDetailResultImpl" parameterMap="accountingDetailParamImpl">
+		select
+			accountingDetail.Id accountingDetail_id,
+			accountingDetail.MemberId accountingDetail_memberId,
+			accountingDetail.FlowTo accountingDetail_flowTo,
+			accountingDetail.Amount accountingDetail_amount,
+			accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+			accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+			partyMember.Name accountingDetail_counterpartyName,
+			accountingDetail.BusinessType accountingDetail_businessType,
+			accountingDetail.BusinessId accountingDetail_businessId,
+			accountingDetail.AccountType accountingDetail_accountType,
+			accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+			accountingDetail.ProductId accountingDetail_productId,
+			accountingDetail.createTime accountingDetail_createTime,
+			product.Name product_name,
+			member.Id member_id,
+			member.Name member_name,
+			member.PhoneAccount member_phoneAccount
+		from TC_AccountingDetail accountingDetail
+		inner join CC_Member member on member.Id=accountingDetail.MemberId
+		inner join PC_Product product on product.Id = accountingDetail.ProductId
+		left join CC_Member partyMember on partyMember.id = accountingDetail.CounterpartyId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(CreateTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(CreateTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+			</trim>
+		</where>
+		order by accountingDetail.Id asc
+		<if test="offset != null and offset != 0">
+			limit ${start},${offset}
+		</if>
+	</select>
+	
+	<select id="selectClientCount"  resultType="long" parameterMap="accountingDetailParamImpl">
+		select count(1) from TC_AccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="counterpartyType != null">and CounterpartyType=${counterpartyType}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(CreateTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(CreateTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+			</trim>
+		</where>	
+	</select>
+
+</mapper>

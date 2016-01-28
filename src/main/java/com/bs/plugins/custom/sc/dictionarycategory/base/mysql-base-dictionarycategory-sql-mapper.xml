@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.dictionarycategory.dao.IDictionaryCategoryDao">
+
+	<parameterMap id="dictionaryCategoryParam" type="com.bs.plugins.custom.sc.dictionarycategory.entity.DictionaryCategory" />
+	<resultMap id="dictionaryCategoryResult" type="com.bs.plugins.custom.sc.dictionarycategory.entity.DictionaryCategory">
+		<id property="id" column="dictionaryCategory_id" javaType="java.lang.Long" />
+		<result property="code" column="dictionaryCategory_code" javaType="java.lang.String" />
+		<result property="name" column="dictionaryCategory_name" javaType="java.lang.String" />
+		<result property="description" column="dictionaryCategory_description" javaType="java.lang.String" />
+		<result property="creationDate" column="dictionaryCategory_creationDate" javaType="java.lang.Long" />
+		<result property="modificationDate" column="dictionaryCategory_modificationDate" javaType="java.lang.Long" />
+		<collection property="dictionarys" ofType="com.bs.plugins.custom.sc.dictionary.entity.Dictionary">
+			<id property="id" column="dictionary_id" javaType="java.lang.Long" />
+			<result property="dictCategoryId" column="dictionary_dictCategoryId" javaType="java.lang.Long" />
+			<result property="value" column="dictionary_value" javaType="java.lang.String" />
+			<result property="name" column="dictionary_name" javaType="java.lang.String" />
+			<result property="description" column="dictionary_description" javaType="java.lang.String" />
+			<result property="state" column="dictionary_state" javaType="java.lang.Integer" />
+			<result property="creationDate" column="dictionary_creationDate" javaType="java.lang.Long" />
+			<result property="modificationDate" column="dictionary_modificationDate" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="dictionaryCategoryResult" parameterMap="dictionaryCategoryParam">
+		select
+			dictionaryCategory.Id dictionaryCategory_id,
+			dictionaryCategory.Code dictionaryCategory_code,
+			dictionaryCategory.Name dictionaryCategory_name,
+			dictionaryCategory.Description dictionaryCategory_description,
+			dictionaryCategory.CreationDate dictionaryCategory_creationDate,
+			dictionaryCategory.ModificationDate dictionaryCategory_modificationDate,	
+			dictionary.Id dictionary_id,
+			dictionary.DictCategoryId dictionary_dictCategoryId,
+			dictionary.Value dictionary_value,
+			dictionary.Name dictionary_name,
+			dictionary.Description dictionary_description,
+			dictionary.State dictionary_state,
+			dictionary.CreationDate dictionary_creationDate,
+			dictionary.ModificationDate dictionary_modificationDate
+		from SC_DictionaryCategory dictionaryCategory
+		inner join SC_Dictionary dictionary on dictionary.DictCategoryId=dictionaryCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectDictionaryCategoryDictionary" resultMap="dictionaryCategoryResult" parameterMap="dictionaryCategoryParam">
+		select
+			dictionaryCategory.Id dictionaryCategory_id,
+			dictionaryCategory.Code dictionaryCategory_code,
+			dictionaryCategory.Name dictionaryCategory_name,
+			dictionaryCategory.Description dictionaryCategory_description,
+			dictionaryCategory.CreationDate dictionaryCategory_creationDate,
+			dictionaryCategory.ModificationDate dictionaryCategory_modificationDate,
+				dictionary.Id dictionary_id,
+	
+				dictionary.DictCategoryId dictionary_dictCategoryId,
+	
+				dictionary.Value dictionary_value,
+	
+				dictionary.Name dictionary_name,
+	
+				dictionary.Description dictionary_description,
+	
+				dictionary.State dictionary_state,
+	
+				dictionary.CreationDate dictionary_creationDate,
+	
+				dictionary.ModificationDate dictionary_modificationDate
+	
+		from SC_DictionaryCategory dictionaryCategory
+		inner join SC_Dictionary dictionary on dictionary.DictCategoryId=dictionaryCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="dictionaryCategoryResult" parameterMap="dictionaryCategoryParam">
+		select 
+			Id dictionaryCategory_id,
+			Code dictionaryCategory_code,
+			Name dictionaryCategory_name,
+			Description dictionaryCategory_description,
+			CreationDate dictionaryCategory_creationDate,
+			ModificationDate dictionaryCategory_modificationDate
+		from SC_DictionaryCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="dictionaryCategoryResult">
+		select 
+			Id dictionaryCategory_id,
+			Code dictionaryCategory_code,
+			Name dictionaryCategory_name,
+			Description dictionaryCategory_description,
+			CreationDate dictionaryCategory_creationDate,
+			ModificationDate dictionaryCategory_modificationDate
+		from SC_DictionaryCategory
+	</select>
+	
+	<select id="selectOneById"  resultMap="dictionaryCategoryResult" parameterMap="dictionaryCategoryParam">
+		select 
+			Id dictionaryCategory_id,
+			Code dictionaryCategory_code,
+			Name dictionaryCategory_name,
+			Description dictionaryCategory_description,
+			CreationDate dictionaryCategory_creationDate,
+			ModificationDate dictionaryCategory_modificationDate
+		from SC_DictionaryCategory where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="dictionaryCategoryResult" parameterMap="dictionaryCategoryParam">
+		select 
+			Id dictionaryCategory_id,
+			Code dictionaryCategory_code,
+			Name dictionaryCategory_name,
+			Description dictionaryCategory_description,
+			CreationDate dictionaryCategory_creationDate,
+			ModificationDate dictionaryCategory_modificationDate
+		from SC_DictionaryCategory
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="dictionaryCategoryParam">
+		select count(*) from SC_DictionaryCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="dictionaryCategoryParam">
+		update SC_DictionaryCategory
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate=${modificationDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="dictionaryCategoryParam">
+		update SC_DictionaryCategory
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Code=#{code}
+						,Name=#{name}
+						,Description=#{description}
+                            ,CreationDate=${creationDate}
+                            ,ModificationDate=${modificationDate}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="dictionaryCategoryParam">
+		insert into SC_DictionaryCategory
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="creationDate != null">,CreationDate</if>
+			<if test="modificationDate != null">,ModificationDate</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="dictionaryCategoryParam">
+		delete from SC_DictionaryCategory where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="dictionaryCategoryParam">
+		delete from SC_DictionaryCategory
+	</delete>
+	
+	<delete id="delete" parameterMap="dictionaryCategoryParam">
+		delete from SC_DictionaryCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

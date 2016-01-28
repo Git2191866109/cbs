@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.attribute.dao.IAttributeDao">
+
+	<parameterMap id="attributeParam" type="com.bs.plugins.custom.pc.attribute.entity.Attribute" />
+	<resultMap id="attributeResult" type="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+		<id property="id" column="attribute_id" javaType="java.lang.Long" />
+		<result property="name" column="attribute_name" javaType="java.lang.String" />
+		<result property="code" column="attribute_code" javaType="java.lang.String" />
+		<result property="category" column="attribute_category" javaType="java.lang.Integer" />
+		<result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+		<result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+		<result property="description" column="attribute_description" javaType="java.lang.String" />
+		<result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+		<collection property="structureConfigs" ofType="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+			<id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+			<result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+			<result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+			<result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+			<result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+			<result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+			<result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+			<result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="attributeDataConfigs" ofType="com.bs.plugins.custom.pc.attributedataconfig.entity.AttributeDataConfig">
+			<id property="id" column="attributeDataConfig_id" javaType="java.lang.Long" />
+			<result property="attributeId" column="attributeDataConfig_attributeId" javaType="java.lang.Long" />
+			<result property="dataSource" column="attributeDataConfig_dataSource" javaType="java.lang.Integer" />
+			<result property="dictCategoryId" column="attributeDataConfig_dictCategoryId" javaType="java.lang.Long" />
+			<result property="tableName" column="attributeDataConfig_tableName" javaType="java.lang.String" />
+			<result property="keyColumn" column="attributeDataConfig_keyColumn" javaType="java.lang.String" />
+			<result property="valueColumn" column="attributeDataConfig_valueColumn" javaType="java.lang.String" />
+			<result property="customKey" column="attributeDataConfig_customKey" javaType="java.lang.String" />
+			<result property="customValue" column="attributeDataConfig_customValue" javaType="java.lang.String" />
+			<result property="creatorId" column="attributeDataConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="attributeDataConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="attributeDataConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="attributeDataConfig_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="attributeDataConfig_isDelete" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="productAttributeConfigs" ofType="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+			<id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+			<result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+			<result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+			<result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+			<result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+			<result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="attributeResult" parameterMap="attributeParam">
+		select
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete,	
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete
+			attributeDataConfig.Id attributeDataConfig_id,
+			attributeDataConfig.AttributeId attributeDataConfig_attributeId,
+			attributeDataConfig.DataSource attributeDataConfig_dataSource,
+			attributeDataConfig.DictCategoryId attributeDataConfig_dictCategoryId,
+			attributeDataConfig.TableName attributeDataConfig_tableName,
+			attributeDataConfig.KeyColumn attributeDataConfig_keyColumn,
+			attributeDataConfig.ValueColumn attributeDataConfig_valueColumn,
+			attributeDataConfig.CustomKey attributeDataConfig_customKey,
+			attributeDataConfig.CustomValue attributeDataConfig_customValue,
+			attributeDataConfig.CreatorId attributeDataConfig_creatorId,
+			attributeDataConfig.CreateTime attributeDataConfig_createTime,
+			attributeDataConfig.ModifierId attributeDataConfig_modifierId,
+			attributeDataConfig.ModifyTime attributeDataConfig_modifyTime,
+			attributeDataConfig.isDelete attributeDataConfig_isDelete
+			productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			productAttributeConfig.DelFlag productAttributeConfig_delFlag
+		from PC_Attribute attribute
+		inner join PC_StructureConfig structureConfig on structureConfig.AttributeId=attribute.Id
+		inner join PC_AttributeDataConfig attributeDataConfig on attributeDataConfig.AttributeId=attribute.Id
+		inner join PC_ProductAttributeConfig productAttributeConfig on productAttributeConfig.AttributeId=attribute.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAttributeStructureConfig" resultMap="attributeResult" parameterMap="attributeParam">
+		select
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete,
+				structureConfig.Id structureConfig_id,
+	
+				structureConfig.CategoryId structureConfig_categoryId,
+	
+				structureConfig.AttributeId structureConfig_attributeId,
+	
+				structureConfig.IsShow structureConfig_isShow,
+	
+				structureConfig.ShowType structureConfig_showType,
+	
+				structureConfig.IsHeader structureConfig_isHeader,
+	
+				structureConfig.DefaultValue structureConfig_defaultValue,
+	
+				structureConfig.SortBy structureConfig_sortBy,
+	
+				structureConfig.DataSource structureConfig_dataSource,
+	
+				structureConfig.CreatorId structureConfig_creatorId,
+	
+				structureConfig.CreateTime structureConfig_createTime,
+	
+				structureConfig.ModifierId structureConfig_modifierId,
+	
+				structureConfig.ModifyTime structureConfig_modifyTime,
+	
+				structureConfig.isDelete structureConfig_isDelete
+	
+		from PC_Attribute attribute
+		inner join PC_StructureConfig structureConfig on structureConfig.AttributeId=attribute.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectAttributeAttributeDataConfig" resultMap="attributeResult" parameterMap="attributeParam">
+		select
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete,
+				attributeDataConfig.Id attributeDataConfig_id,
+	
+				attributeDataConfig.AttributeId attributeDataConfig_attributeId,
+	
+				attributeDataConfig.DataSource attributeDataConfig_dataSource,
+	
+				attributeDataConfig.DictCategoryId attributeDataConfig_dictCategoryId,
+	
+				attributeDataConfig.TableName attributeDataConfig_tableName,
+	
+				attributeDataConfig.KeyColumn attributeDataConfig_keyColumn,
+	
+				attributeDataConfig.ValueColumn attributeDataConfig_valueColumn,
+	
+				attributeDataConfig.CustomKey attributeDataConfig_customKey,
+	
+				attributeDataConfig.CustomValue attributeDataConfig_customValue,
+	
+				attributeDataConfig.CreatorId attributeDataConfig_creatorId,
+	
+				attributeDataConfig.CreateTime attributeDataConfig_createTime,
+	
+				attributeDataConfig.ModifierId attributeDataConfig_modifierId,
+	
+				attributeDataConfig.ModifyTime attributeDataConfig_modifyTime,
+	
+				attributeDataConfig.isDelete attributeDataConfig_isDelete
+	
+		from PC_Attribute attribute
+		inner join PC_AttributeDataConfig attributeDataConfig on attributeDataConfig.AttributeId=attribute.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectAttributeProductAttributeConfig" resultMap="attributeResult" parameterMap="attributeParam">
+		select
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete,
+				productAttributeConfig.Id productAttributeConfig_id,
+	
+				productAttributeConfig.ProductId productAttributeConfig_productId,
+	
+				productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+	
+				productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+	
+				productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+	
+				productAttributeConfig.CreateTime productAttributeConfig_createTime,
+	
+				productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+	
+				productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+	
+				productAttributeConfig.DelFlag productAttributeConfig_delFlag
+	
+		from PC_Attribute attribute
+		inner join PC_ProductAttributeConfig productAttributeConfig on productAttributeConfig.AttributeId=attribute.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="attributeResult" parameterMap="attributeParam">
+		select 
+			Id attribute_id,
+			Name attribute_name,
+			Code attribute_code,
+			Category attribute_category,
+			IsFixed attribute_isFixed,
+			IsInherit attribute_isInherit,
+			Description attribute_description,
+			CreatorId attribute_creatorId,
+			CreateTime attribute_createTime,
+			ModifierId attribute_modifierId,
+			ModifyTime attribute_modifyTime,
+			isDelete attribute_isDelete
+		from PC_Attribute
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="attributeResult">
+		select 
+			Id attribute_id,
+			Name attribute_name,
+			Code attribute_code,
+			Category attribute_category,
+			IsFixed attribute_isFixed,
+			IsInherit attribute_isInherit,
+			Description attribute_description,
+			CreatorId attribute_creatorId,
+			CreateTime attribute_createTime,
+			ModifierId attribute_modifierId,
+			ModifyTime attribute_modifyTime,
+			isDelete attribute_isDelete
+		from PC_Attribute
+	</select>
+	
+	<select id="selectOneById"  resultMap="attributeResult" parameterMap="attributeParam">
+		select 
+			Id attribute_id,
+			Name attribute_name,
+			Code attribute_code,
+			Category attribute_category,
+			IsFixed attribute_isFixed,
+			IsInherit attribute_isInherit,
+			Description attribute_description,
+			CreatorId attribute_creatorId,
+			CreateTime attribute_createTime,
+			ModifierId attribute_modifierId,
+			ModifyTime attribute_modifyTime,
+			isDelete attribute_isDelete
+		from PC_Attribute where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="attributeResult" parameterMap="attributeParam">
+		select 
+			Id attribute_id,
+			Name attribute_name,
+			Code attribute_code,
+			Category attribute_category,
+			IsFixed attribute_isFixed,
+			IsInherit attribute_isInherit,
+			Description attribute_description,
+			CreatorId attribute_creatorId,
+			CreateTime attribute_createTime,
+			ModifierId attribute_modifierId,
+			ModifyTime attribute_modifyTime,
+			isDelete attribute_isDelete
+		from PC_Attribute
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="attributeParam">
+		select count(*) from PC_Attribute
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="attributeParam">
+		update PC_Attribute
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="category != null">,Category=${category}</if>
+				<if test="isFixed != null">,IsFixed=${isFixed}</if>
+				<if test="isInherit != null">,IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="attributeParam">
+		update PC_Attribute
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+                    	<if test="category != null">,Category=${category}</if>
+                        <if test="category == null">,Category= 0</if>
+                    	<if test="isFixed != null">,IsFixed=${isFixed}</if>
+                        <if test="isFixed == null">,IsFixed= 0</if>
+                    	<if test="isInherit != null">,IsInherit=${isInherit}</if>
+                        <if test="isInherit == null">,IsInherit= 0</if>
+						,Description=#{description}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="attributeParam">
+		insert into PC_Attribute
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="category != null">,Category</if>
+			<if test="isFixed != null">,IsFixed</if>
+			<if test="isInherit != null">,IsInherit</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="category != null">,${category}</if>
+			<if test="isFixed != null">,${isFixed}</if>
+			<if test="isInherit != null">,${isInherit}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="attributeParam">
+		delete from PC_Attribute where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="attributeParam">
+		delete from PC_Attribute
+	</delete>
+	
+	<delete id="delete" parameterMap="attributeParam">
+		delete from PC_Attribute
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="category != null">and Category=${category}</if>
+				<if test="isFixed != null">and IsFixed=${isFixed}</if>
+				<if test="isInherit != null">and IsInherit=${isInherit}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

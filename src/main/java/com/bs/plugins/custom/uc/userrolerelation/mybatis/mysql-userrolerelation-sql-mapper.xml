@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.userrolerelation.dao.IUserRoleRelationDao">
+	<parameterMap id="subUserRoleRelationParam" type="com.bs.plugins.custom.uc.userrolerelation.entity.UserRoleRelation" />
+	<resultMap id="subUserRoleRelationResult" type="com.bs.plugins.custom.uc.userrolerelation.entity.UserRoleRelation">
+	
+	</resultMap>
+	
+	<select id="selectUserById"  resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+			select 
+				a.userId userRoleRelation_userId,
+				b.name user_name,
+				c.name role_name
+			from UC_UserRoleRelation as a inner join UC_User as b on a.UserId = b.Id inner join UC_Role as c on a.UserId = c.Id
+			<!--  <where>  
+	            <trim prefixOverrides="and">
+					<if test="userId != null">and a.UserId=${userId}</if>
+				</trim>
+	        </where>  -->
+	</select>
+	<select id="selectRoleByUserId" resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select
+			userRoleRelation.RoleId userRoleRelation_roleId,
+			userRoleRelation.UserId userRoleRelation_userId,
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			Type role_type,
+			Status role_status,
+			CreateTime role_createTime,
+			ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId
+		from UC_UserRoleRelation userRoleRelation
+		inner join UC_Role role on role.Id=userRoleRelation.RoleId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.aa.assetcategory.dao.IAssetCategoryDao">
+
+	<parameterMap id="assetCategoryParam" type="com.bs.plugins.custom.aa.assetcategory.entity.AssetCategory" />
+	<resultMap id="assetCategoryResult" type="com.bs.plugins.custom.aa.assetcategory.entity.AssetCategory">
+		<id property="id" column="assetCategory_id" javaType="java.lang.Long" />
+		<result property="code" column="assetCategory_code" javaType="java.lang.Integer" />
+		<result property="name" column="assetCategory_name" javaType="java.lang.String" />
+		<result property="type" column="assetCategory_type" javaType="java.lang.Integer" />
+		<result property="rateOfReturn" column="assetCategory_rateOfReturn" javaType="java.lang.Double" />
+		<result property="variance" column="assetCategory_variance" javaType="java.lang.Double" />
+		<result property="rate" column="assetCategory_rate" javaType="java.lang.Double" />
+		<result property="description" column="assetCategory_description" javaType="java.lang.String" />
+		<result property="createTime" column="assetCategory_createTime" javaType="java.lang.String" />
+		<result property="modifyTime" column="assetCategory_modifyTime" javaType="java.lang.String" />
+		<collection property="products" ofType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="assetCategoryResult" parameterMap="assetCategoryParam">
+		select
+			assetCategory.Id assetCategory_id,
+			assetCategory.Code assetCategory_code,
+			assetCategory.Name assetCategory_name,
+			assetCategory.Type assetCategory_type,
+			assetCategory.RateOfReturn assetCategory_rateOfReturn,
+			assetCategory.Variance assetCategory_variance,
+			assetCategory.Rate assetCategory_rate,
+			assetCategory.Description assetCategory_description,
+			assetCategory.CreateTime assetCategory_createTime,
+			assetCategory.ModifyTime assetCategory_modifyTime,	
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from AA_AssetCategory assetCategory
+		inner join PC_Product product on product.AssetCategoryCode=assetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null">and Code=${code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="rateOfReturn != null">and RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">and Variance=${variance}</if>
+				<if test="rate != null">and Rate=${rate}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAssetCategoryProduct" resultMap="assetCategoryResult" parameterMap="assetCategoryParam">
+		select
+			assetCategory.Id assetCategory_id,
+			assetCategory.Code assetCategory_code,
+			assetCategory.Name assetCategory_name,
+			assetCategory.Type assetCategory_type,
+			assetCategory.RateOfReturn assetCategory_rateOfReturn,
+			assetCategory.Variance assetCategory_variance,
+			assetCategory.Rate assetCategory_rate,
+			assetCategory.Description assetCategory_description,
+			assetCategory.CreateTime assetCategory_createTime,
+			assetCategory.ModifyTime assetCategory_modifyTime,
+				product.Id product_id,
+	
+				product.BasicProductId product_basicProductId,
+	
+				product.SpvId product_spvId,
+	
+				product.CategoryId product_categoryId,
+	
+				product.AssetCategoryCode product_assetCategoryCode,
+	
+				product.Name product_name,
+	
+				product.Code product_code,
+	
+				product.TotalAmount product_totalAmount,
+	
+				product.SurplusAmount product_surplusAmount,
+	
+				product.FirstPublishTime product_firstPublishTime,
+	
+				product.UmpayAccountNo product_umpayAccountNo,
+	
+				product.Description product_description,
+	
+				product.Status product_status,
+	
+				product.DistributeStatus product_distributeStatus,
+	
+				product.CreatorId product_creatorId,
+	
+				product.CreateTime product_createTime,
+	
+				product.ModifierId product_modifierId,
+	
+				product.ModifyTime product_modifyTime,
+	
+				product.IsDelete product_isDelete,
+	
+				product.Sort product_sort,
+	
+				product.ViewName product_viewName
+	
+		from AA_AssetCategory assetCategory
+		inner join PC_Product product on product.AssetCategoryCode=assetCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null">and Code=${code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="rateOfReturn != null">and RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">and Variance=${variance}</if>
+				<if test="rate != null">and Rate=${rate}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="assetCategoryResult" parameterMap="assetCategoryParam">
+		select 
+			Id assetCategory_id,
+			Code assetCategory_code,
+			Name assetCategory_name,
+			Type assetCategory_type,
+			RateOfReturn assetCategory_rateOfReturn,
+			Variance assetCategory_variance,
+			Rate assetCategory_rate,
+			Description assetCategory_description,
+			CreateTime assetCategory_createTime,
+			ModifyTime assetCategory_modifyTime
+		from AA_AssetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null">and Code=${code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="rateOfReturn != null">and RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">and Variance=${variance}</if>
+				<if test="rate != null">and Rate=${rate}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="assetCategoryResult">
+		select 
+			Id assetCategory_id,
+			Code assetCategory_code,
+			Name assetCategory_name,
+			Type assetCategory_type,
+			RateOfReturn assetCategory_rateOfReturn,
+			Variance assetCategory_variance,
+			Rate assetCategory_rate,
+			Description assetCategory_description,
+			CreateTime assetCategory_createTime,
+			ModifyTime assetCategory_modifyTime
+		from AA_AssetCategory
+	</select>
+	
+	<select id="selectOneById"  resultMap="assetCategoryResult" parameterMap="assetCategoryParam">
+		select 
+			Id assetCategory_id,
+			Code assetCategory_code,
+			Name assetCategory_name,
+			Type assetCategory_type,
+			RateOfReturn assetCategory_rateOfReturn,
+			Variance assetCategory_variance,
+			Rate assetCategory_rate,
+			Description assetCategory_description,
+			CreateTime assetCategory_createTime,
+			ModifyTime assetCategory_modifyTime
+		from AA_AssetCategory where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="assetCategoryResult" parameterMap="assetCategoryParam">
+		select 
+			Id assetCategory_id,
+			Code assetCategory_code,
+			Name assetCategory_name,
+			Type assetCategory_type,
+			RateOfReturn assetCategory_rateOfReturn,
+			Variance assetCategory_variance,
+			Rate assetCategory_rate,
+			Description assetCategory_description,
+			CreateTime assetCategory_createTime,
+			ModifyTime assetCategory_modifyTime
+		from AA_AssetCategory
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="assetCategoryParam">
+		select count(*) from AA_AssetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null">and Code=${code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="rateOfReturn != null">and RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">and Variance=${variance}</if>
+				<if test="rate != null">and Rate=${rate}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="assetCategoryParam">
+		update AA_AssetCategory
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null">,Code=${code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="rateOfReturn != null">,RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">,Variance=${variance}</if>
+				<if test="rate != null">,Rate=${rate}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="assetCategoryParam">
+		update AA_AssetCategory
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                    	<if test="code != null">,Code=${code}</if>
+                        <if test="code == null">,Code= 0</if>
+						,Name=#{name}
+                    	<if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+						,RateOfReturn=${rateOfReturn}
+						,Variance=${variance}
+						,Rate=${rate}
+						,Description=#{description}
+                            ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="assetCategoryParam">
+		insert into AA_AssetCategory
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="type != null">,Type</if>
+			<if test="rateOfReturn != null">,RateOfReturn</if>
+			<if test="variance != null">,Variance</if>
+			<if test="rate != null">,Rate</if>
+			<if test="description != null and description != ''">,Description</if>
+                ,CreateTime
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null">,${code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="type != null">,${type}</if>
+			<if test="rateOfReturn != null">,${rateOfReturn}</if>
+			<if test="variance != null">,${variance}</if>
+			<if test="rate != null">,${rate}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+                ,now()
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="assetCategoryParam">
+		delete from AA_AssetCategory where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="assetCategoryParam">
+		delete from AA_AssetCategory
+	</delete>
+	
+	<delete id="delete" parameterMap="assetCategoryParam">
+		delete from AA_AssetCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null">and Code=${code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="rateOfReturn != null">and RateOfReturn=${rateOfReturn}</if>
+				<if test="variance != null">and Variance=${variance}</if>
+				<if test="rate != null">and Rate=${rate}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

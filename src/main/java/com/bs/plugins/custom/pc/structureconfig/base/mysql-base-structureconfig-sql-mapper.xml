@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.structureconfig.dao.IStructureConfigDao">
+
+	<parameterMap id="structureConfigParam" type="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig" />
+	<resultMap id="structureConfigResult" type="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+		<id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+		<result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+		<result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+		<result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+		<result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+		<result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+		<result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+		<result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+		<result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+		<result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+		<association property="category" javaType="com.bs.plugins.custom.pc.category.entity.Category">
+			<id property="id" column="category_id" javaType="java.lang.Long" />
+			<result property="name" column="category_name" javaType="java.lang.String" />
+			<result property="code" column="category_code" javaType="java.lang.String" />
+			<result property="description" column="category_description" javaType="java.lang.String" />
+			<result property="creatorId" column="category_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="category_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="category_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="category_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="category_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<association property="attribute" javaType="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+			<id property="id" column="attribute_id" javaType="java.lang.Long" />
+			<result property="name" column="attribute_name" javaType="java.lang.String" />
+			<result property="code" column="attribute_code" javaType="java.lang.String" />
+			<result property="category" column="attribute_category" javaType="java.lang.Integer" />
+			<result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+			<result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+			<result property="description" column="attribute_description" javaType="java.lang.String" />
+			<result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<collection property="structureRuleRelations" ofType="com.bs.plugins.custom.pc.structurerulerelation.entity.StructureRuleRelation">
+			<result property="validationRuleId" column="structureRuleRelation_validationRuleId" javaType="java.lang.Long" />
+			<result property="productStructureId" column="structureRuleRelation_productStructureId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="structureKindRelations" ofType="com.bs.plugins.custom.pc.structurekindrelation.entity.StructureKindRelation">
+			<result property="kindId" column="structureKindRelation_kindId" javaType="java.lang.Long" />
+			<result property="productStructureId" column="structureKindRelation_productStructureId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete,	
+			category.Id category_id,
+			category.Name category_name,
+			category.Code category_code,
+			category.Description category_description,
+			category.CreatorId category_creatorId,
+			category.CreateTime category_createTime,
+			category.ModifierId category_modifierId,
+			category.ModifyTime category_modifyTime,
+			category.isDelete category_isDelete,
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete
+		from PC_StructureConfig structureConfig
+		inner join PC_Category category on category.Id=structureConfig.CategoryId
+		inner join PC_Attribute attribute on attribute.Id=structureConfig.AttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStructureConfigCategory" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			category.Id attribute_id,
+			category.Name attribute_name,
+			category.Code attribute_code,
+			category.Description attribute_description,
+			category.CreatorId attribute_creatorId,
+			category.CreateTime attribute_createTime,
+			category.ModifierId attribute_modifierId,
+			category.ModifyTime attribute_modifyTime,
+			category.isDelete attribute_isDelete
+		from PC_StructureConfig structureConfig
+		inner join PC_Category category on category.Id=structureConfig.CategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectStructureConfigAttribute" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete
+		from PC_StructureConfig structureConfig
+		inner join PC_Attribute attribute on attribute.Id=structureConfig.AttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete,	
+			structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+			structureRuleRelation.ProductStructureId structureRuleRelation_productStructureId
+			structureKindRelation.KindId structureKindRelation_kindId,
+			structureKindRelation.ProductStructureId structureKindRelation_productStructureId
+		from PC_StructureConfig structureConfig
+		inner join PC_StructureRuleRelation structureRuleRelation on structureRuleRelation.ProductStructureId=structureConfig.Id
+		inner join PC_StructureKindRelation structureKindRelation on structureKindRelation.ProductStructureId=structureConfig.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStructureConfigStructureRuleRelation" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete,
+				structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+	
+				structureRuleRelation.ProductStructureId structureRuleRelation_productStructureId
+	
+		from PC_StructureConfig structureConfig
+		inner join PC_StructureRuleRelation structureRuleRelation on structureRuleRelation.ProductStructureId=structureConfig.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectStructureConfigStructureKindRelation" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete,
+				structureKindRelation.KindId structureKindRelation_kindId,
+	
+				structureKindRelation.ProductStructureId structureKindRelation_productStructureId
+	
+		from PC_StructureConfig structureConfig
+		inner join PC_StructureKindRelation structureKindRelation on structureKindRelation.ProductStructureId=structureConfig.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select 
+			Id structureConfig_id,
+			CategoryId structureConfig_categoryId,
+			AttributeId structureConfig_attributeId,
+			IsShow structureConfig_isShow,
+			ShowType structureConfig_showType,
+			IsHeader structureConfig_isHeader,
+			DefaultValue structureConfig_defaultValue,
+			SortBy structureConfig_sortBy,
+			DataSource structureConfig_dataSource,
+			CreatorId structureConfig_creatorId,
+			CreateTime structureConfig_createTime,
+			ModifierId structureConfig_modifierId,
+			ModifyTime structureConfig_modifyTime,
+			isDelete structureConfig_isDelete
+		from PC_StructureConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="structureConfigResult">
+		select 
+			Id structureConfig_id,
+			CategoryId structureConfig_categoryId,
+			AttributeId structureConfig_attributeId,
+			IsShow structureConfig_isShow,
+			ShowType structureConfig_showType,
+			IsHeader structureConfig_isHeader,
+			DefaultValue structureConfig_defaultValue,
+			SortBy structureConfig_sortBy,
+			DataSource structureConfig_dataSource,
+			CreatorId structureConfig_creatorId,
+			CreateTime structureConfig_createTime,
+			ModifierId structureConfig_modifierId,
+			ModifyTime structureConfig_modifyTime,
+			isDelete structureConfig_isDelete
+		from PC_StructureConfig
+	</select>
+	
+	<select id="selectOneById"  resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select 
+			Id structureConfig_id,
+			CategoryId structureConfig_categoryId,
+			AttributeId structureConfig_attributeId,
+			IsShow structureConfig_isShow,
+			ShowType structureConfig_showType,
+			IsHeader structureConfig_isHeader,
+			DefaultValue structureConfig_defaultValue,
+			SortBy structureConfig_sortBy,
+			DataSource structureConfig_dataSource,
+			CreatorId structureConfig_creatorId,
+			CreateTime structureConfig_createTime,
+			ModifierId structureConfig_modifierId,
+			ModifyTime structureConfig_modifyTime,
+			isDelete structureConfig_isDelete
+		from PC_StructureConfig where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="structureConfigResult" parameterMap="structureConfigParam">
+		select 
+			Id structureConfig_id,
+			CategoryId structureConfig_categoryId,
+			AttributeId structureConfig_attributeId,
+			IsShow structureConfig_isShow,
+			ShowType structureConfig_showType,
+			IsHeader structureConfig_isHeader,
+			DefaultValue structureConfig_defaultValue,
+			SortBy structureConfig_sortBy,
+			DataSource structureConfig_dataSource,
+			CreatorId structureConfig_creatorId,
+			CreateTime structureConfig_createTime,
+			ModifierId structureConfig_modifierId,
+			ModifyTime structureConfig_modifyTime,
+			isDelete structureConfig_isDelete
+		from PC_StructureConfig
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="structureConfigParam">
+		select count(*) from PC_StructureConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="structureConfigParam">
+		update PC_StructureConfig
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="categoryId != null">,CategoryId=${categoryId}</if>
+				<if test="attributeId != null">,AttributeId=${attributeId}</if>
+				<if test="isShow != null">,IsShow=${isShow}</if>
+				<if test="showType != null">,ShowType=${showType}</if>
+				<if test="isHeader != null">,IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">,DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">,SortBy=${sortBy}</if>
+				<if test="dataSource != null">,DataSource=${dataSource}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="structureConfigParam">
+		update PC_StructureConfig
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,CategoryId=${categoryId}
+                            ,AttributeId=${attributeId}
+                    	<if test="isShow != null">,IsShow=${isShow}</if>
+                        <if test="isShow == null">,IsShow= 0</if>
+                    	<if test="showType != null">,ShowType=${showType}</if>
+                        <if test="showType == null">,ShowType= 0</if>
+                    	<if test="isHeader != null">,IsHeader=${isHeader}</if>
+                        <if test="isHeader == null">,IsHeader= 0</if>
+						,DefaultValue=#{defaultValue}
+                        <if test="sortBy != null">,SortBy=${sortBy}</if>
+                        <if test="sortBy == null">,SortBy= 0</if>
+                    	<if test="dataSource != null">,DataSource=${dataSource}</if>
+                        <if test="dataSource == null">,DataSource= 0</if>
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="structureConfigParam">
+		insert into PC_StructureConfig
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="categoryId != null">,CategoryId</if>
+			<if test="attributeId != null">,AttributeId</if>
+			<if test="isShow != null">,IsShow</if>
+			<if test="showType != null">,ShowType</if>
+			<if test="isHeader != null">,IsHeader</if>
+			<if test="defaultValue != null and defaultValue != ''">,DefaultValue</if>
+			<if test="sortBy != null">,SortBy</if>
+			<if test="dataSource != null">,DataSource</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="categoryId != null">,${categoryId}</if>
+			<if test="attributeId != null">,${attributeId}</if>
+			<if test="isShow != null">,${isShow}</if>
+			<if test="showType != null">,${showType}</if>
+			<if test="isHeader != null">,${isHeader}</if>
+			<if test="defaultValue != null and defaultValue != ''">,#{defaultValue}</if>
+			<if test="sortBy != null">,${sortBy}</if>
+			<if test="dataSource != null">,${dataSource}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="structureConfigParam">
+		delete from PC_StructureConfig where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="structureConfigParam">
+		delete from PC_StructureConfig
+	</delete>
+	
+	<delete id="delete" parameterMap="structureConfigParam">
+		delete from PC_StructureConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="isHeader != null">and IsHeader=${isHeader}</if>
+				<if test="defaultValue != null and defaultValue != ''">and DefaultValue=#{defaultValue}</if>
+				<if test="sortBy != null">and SortBy=${sortBy}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

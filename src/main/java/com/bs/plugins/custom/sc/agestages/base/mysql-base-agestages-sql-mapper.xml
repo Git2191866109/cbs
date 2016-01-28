@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.agestages.dao.IAgeStagesDao">
+
+	<parameterMap id="ageStagesParam" type="com.bs.plugins.custom.sc.agestages.entity.AgeStages" />
+	<resultMap id="ageStagesResult" type="com.bs.plugins.custom.sc.agestages.entity.AgeStages">
+		<id property="id" column="ageStages_id" javaType="java.lang.Long" />
+		<result property="name" column="ageStages_name" javaType="java.lang.String" />
+		<result property="code" column="ageStages_code" javaType="java.lang.String" />
+		<result property="startAge" column="ageStages_startAge" javaType="java.lang.Integer" />
+		<result property="endAge" column="ageStages_endAge" javaType="java.lang.Integer" />
+		<result property="createDate" column="ageStages_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="ageStages_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="ageStages_creatorId" javaType="java.lang.Long" />
+		<collection property="budgetItems" ofType="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+			<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="lifeStageId" column="budgetItem_lifeStageId" javaType="java.lang.Long" />
+			<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+			<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+			<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+			<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+			<result property="isInflation" column="budgetItem_isInflation" javaType="java.lang.Integer" />
+			<result property="isTranslation" column="budgetItem_isTranslation" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="ageStagesResult" parameterMap="ageStagesParam">
+		select
+			ageStages.Id ageStages_id,
+			ageStages.Name ageStages_name,
+			ageStages.Code ageStages_code,
+			ageStages.StartAge ageStages_startAge,
+			ageStages.EndAge ageStages_endAge,
+			ageStages.CreateDate ageStages_createDate,
+			ageStages.ModifyDate ageStages_modifyDate,
+			ageStages.CreatorId ageStages_creatorId,	
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.LifeStageId budgetItem_lifeStageId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId
+		from SC_AgeStages ageStages
+		inner join EB_BudgetItem budgetItem on budgetItem.LifeStageId=ageStages.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="endAge != null">and EndAge=${endAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAgeStagesBudgetItem" resultMap="ageStagesResult" parameterMap="ageStagesParam">
+		select
+			ageStages.Id ageStages_id,
+			ageStages.Name ageStages_name,
+			ageStages.Code ageStages_code,
+			ageStages.StartAge ageStages_startAge,
+			ageStages.EndAge ageStages_endAge,
+			ageStages.CreateDate ageStages_createDate,
+			ageStages.ModifyDate ageStages_modifyDate,
+			ageStages.CreatorId ageStages_creatorId,
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.LifeStageId budgetItem_lifeStageId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+		from SC_AgeStages ageStages
+		inner join EB_BudgetItem budgetItem on budgetItem.LifeStageId=ageStages.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="endAge != null">and EndAge=${endAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="ageStagesResult" parameterMap="ageStagesParam">
+		select 
+			Id ageStages_id,
+			Name ageStages_name,
+			Code ageStages_code,
+			StartAge ageStages_startAge,
+			EndAge ageStages_endAge,
+			CreateDate ageStages_createDate,
+			ModifyDate ageStages_modifyDate,
+			CreatorId ageStages_creatorId
+		from SC_AgeStages
+	</select>
+	
+	<select id="selectAll" resultMap="ageStagesResult">
+		select 
+			Id ageStages_id,
+			Name ageStages_name,
+			Code ageStages_code,
+			StartAge ageStages_startAge,
+			EndAge ageStages_endAge,
+			CreateDate ageStages_createDate,
+			ModifyDate ageStages_modifyDate,
+			CreatorId ageStages_creatorId
+		from SC_AgeStages
+	</select>
+	
+	<select id="selectOneById"  resultMap="ageStagesResult" parameterMap="ageStagesParam">
+		select 
+			Id ageStages_id,
+			Name ageStages_name,
+			Code ageStages_code,
+			StartAge ageStages_startAge,
+			EndAge ageStages_endAge,
+			CreateDate ageStages_createDate,
+			ModifyDate ageStages_modifyDate,
+			CreatorId ageStages_creatorId
+		from SC_AgeStages where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="ageStagesResult" parameterMap="ageStagesParam">
+		select 
+			Id ageStages_id,
+			Name ageStages_name,
+			Code ageStages_code,
+			StartAge ageStages_startAge,
+			EndAge ageStages_endAge,
+			CreateDate ageStages_createDate,
+			ModifyDate ageStages_modifyDate,
+			CreatorId ageStages_creatorId
+		from SC_AgeStages
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="ageStagesParam">
+		select count(*) from SC_AgeStages
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="endAge != null">and EndAge=${endAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="ageStagesParam">
+		update SC_AgeStages
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="startAge != null">,StartAge=${startAge}</if>
+				<if test="endAge != null">,EndAge=${endAge}</if>
+				<if test="createDate != null and createDate != ''">,CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">,ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="ageStagesParam">
+		insert into SC_AgeStages
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="startAge != null">,StartAge</if>
+			<if test="endAge != null">,EndAge</if>
+			<if test="createDate != null and createDate != ''">,CreateDate</if>
+			<if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="startAge != null">,${startAge}</if>
+			<if test="endAge != null">,${endAge}</if>
+			<if test="createDate != null and createDate != ''">,#{createDate}</if>
+			<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="ageStagesParam">
+		delete from SC_AgeStages where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="ageStagesParam">
+		delete from SC_AgeStages
+	</delete>
+	
+	<delete id="delete" parameterMap="ageStagesParam">
+		delete from SC_AgeStages
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="endAge != null">and EndAge=${endAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

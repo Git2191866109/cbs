@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.attribute.dao.IAttributeDao">
+
+    <parameterMap id="attributeParam1" type="com.bs.plugins.custom.pc.attribute.entity.Attribute" />
+    <resultMap id="attributeResult1" type="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+        <id property="id" column="attribute_id" javaType="java.lang.Long" />
+        <result property="name" column="attribute_name" javaType="java.lang.String" />
+        <result property="code" column="attribute_code" javaType="java.lang.String" />
+        <result property="category" column="attribute_category" javaType="java.lang.Integer" />
+        <result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+        <result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+        <result property="description" column="attribute_description" javaType="java.lang.String" />
+        <result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+        <result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+        <result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+        <result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+        <result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+        <collection property="structureConfigs" ofType="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+            <id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+            <result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+            <result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+            <result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+            <result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+            <result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+            <result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+            <result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+            <result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+            <result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+            <result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+            <result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+        </collection>
+        <collection property="attributeDataConfigs" ofType="com.bs.plugins.custom.pc.attributedataconfig.entity.AttributeDataConfig">
+            <id property="id" column="attributeDataConfig_id" javaType="java.lang.Long" />
+            <result property="attributeId" column="attributeDataConfig_attributeId" javaType="java.lang.Long" />
+            <result property="dataSource" column="attributeDataConfig_dataSource" javaType="java.lang.Integer" />
+            <result property="dictCategoryId" column="attributeDataConfig_dictCategoryId" javaType="java.lang.Long" />
+            <result property="tableName" column="attributeDataConfig_tableName" javaType="java.lang.String" />
+            <result property="keyColumn" column="attributeDataConfig_keyColumn" javaType="java.lang.String" />
+            <result property="valueColumn" column="attributeDataConfig_valueColumn" javaType="java.lang.String" />
+            <result property="customKey" column="attributeDataConfig_customKey" javaType="java.lang.String" />
+            <result property="customValue" column="attributeDataConfig_customValue" javaType="java.lang.String" />
+            <result property="creatorId" column="attributeDataConfig_creatorId" javaType="java.lang.Long" />
+            <result property="createTime" column="attributeDataConfig_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="attributeDataConfig_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="attributeDataConfig_modifyTime" javaType="java.lang.String" />
+            <result property="isDelete" column="attributeDataConfig_isDelete" javaType="java.lang.Integer" />
+        </collection>
+        <collection property="productAttributeConfigs" ofType="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+            <id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+            <result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+            <result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+            <result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+            <result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+            <result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+            <result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+            <result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+            <result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+        </collection>
+    </resultMap>
+
+    <select id="selectNewPaginatedList"  resultMap="attributeResult1" parameterMap="attributeParam1">
+        select
+        Id attribute_id,
+        Name attribute_name,
+        Code attribute_code,
+        Category attribute_category,
+        IsFixed attribute_isFixed,
+        IsInherit attribute_isInherit,
+        Description attribute_description,
+        CreatorId attribute_creatorId,
+        CreateTime attribute_createTime,
+        ModifierId attribute_modifierId,
+        ModifyTime attribute_modifyTime,
+        isDelete attribute_isDelete
+        from PC_Attribute
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="name != null and name != ''">and Name like CONCAT('%',#{name},'%')</if>
+                <if test="code != null and code != ''">and Code like CONCAT('%',#{code},'%')</if>
+                <if test="category != null">and Category=${category}</if>
+                <if test="isFixed != null">and IsFixed=${isFixed}</if>
+                <if test="isInherit != null">and IsInherit=${isInherit}</if>
+                <if test="description != null and description != ''">and Description=#{description}</if>
+                <if test="creatorId != null">and CreatorId=${creatorId}</if>
+                <if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+                <if test="modifierId != null">and ModifierId=${modifierId}</if>
+                <if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+                <if test="isDelete != null">and isDelete=${isDelete}</if>
+            </trim>
+        </where>
+        order by Id asc
+        limit ${start},${offset}
+    </select>
+
+    <select id="getNewPaginatedCount"  resultType="long" parameterMap="attributeParam1">
+        select count(*) from PC_Attribute
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="name != null and name != ''">and Name=#{name}</if>
+                <if test="code != null and code != ''">and Code=#{code}</if>
+                <if test="category != null">and Category=${category}</if>
+                <if test="isFixed != null">and IsFixed=${isFixed}</if>
+                <if test="isInherit != null">and IsInherit=${isInherit}</if>
+                <if test="description != null and description != ''">and Description=#{description}</if>
+                <if test="creatorId != null">and CreatorId=${creatorId}</if>
+                <if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+                <if test="modifierId != null">and ModifierId=${modifierId}</if>
+                <if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+                <if test="isDelete != null">and isDelete=${isDelete}</if>
+            </trim>
+        </where>
+    </select>
+</mapper>

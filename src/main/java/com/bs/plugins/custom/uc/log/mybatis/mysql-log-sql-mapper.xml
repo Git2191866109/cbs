@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.log.dao.ILogDao">
+	<parameterMap id="subLogParam" type="com.bs.plugins.custom.uc.log.entity.Log" />
+	<resultMap id="subLogResult" type="com.bs.plugins.custom.uc.log.entity.Log">
+	
+	</resultMap>
+	
+		<insert id="saveLog" parameterMap="logParam">
+		insert into UC_Log
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="userId != null">,UserId</if>
+			<if test="userAccount != null and userAccount != ''">,UserAccount</if>
+			<if test="operateTime != null and operateTime != ''">,OperateTime</if>
+			<if test="userName != null and userName != ''">,UserName</if>
+			<if test="type != null and type != ''">,Type</if>
+			<if test="content != null and content != ''">,Content</if>
+			<if test="accessIP != null and accessIP != ''">,AccessIP</if>
+			<if test="createTime != null and createTime != ''">,CreateTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="userId != null">,${userId}</if>
+			<if test="userAccount != null and userAccount != ''">,#{userAccount}</if>
+			<if test="operateTime != null and operateTime != ''">,#{operateTime}</if>
+			<if test="userName != null and userName != ''">,#{userName}</if>
+			<if test="type != null and type != ''">,#{type}</if>
+			<if test="content != null and content != ''">,#{content}</if>
+			<if test="accessIP != null and accessIP != ''">,#{accessIP}</if>
+			<if test="createTime != null and createTime != ''">,#{createTime}</if>
+		</trim>
+		<!-- 
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+		
+		 -->
+	</insert>
+	
+	
+	
+	<select id="selectPaginatedListByCondition"  resultMap="logResult" parameterMap="logParam">
+		select 
+			Id log_id,
+			UserId log_userId,
+			UserAccount log_userAccount,
+			OperateTime log_operateTime,
+			UserName log_userName,
+			Type log_type,
+			Content log_content,
+			AccessIP log_accessIP,
+			CreateTime log_createTime
+		from UC_Log
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''">
+				AND date_format(concat(CreateTime),'%Y-%m-%d %H:%i:%s') <![CDATA[>=]]> #{startTime}
+				</if>
+				<if test="endTime != null and endTime != ''">
+				AND date_format(concat(CreateTime),'%Y-%m-%d %H:%i:%s') <![CDATA[<=]]> #{endTime}
+				</if>
+			</trim>
+		</where> 
+		order by Id desc
+		limit ${start},${offset}
+	</select>
+
+	<select id="getCountByCondition"  resultType="long" parameterMap="logParam">
+		select count(*) from UC_Log
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''">
+				AND date_format(concat(CreateTime),'%Y-%m-%d %H:%i:%s') <![CDATA[>=]]> #{startTime}
+				</if>
+				<if test="endTime != null and endTime != ''">
+				AND date_format(concat(CreateTime),'%Y-%m-%d %H:%i:%s') <![CDATA[<=]]> #{endTime}
+				</if>
+			</trim>
+		</where>	
+	</select>
+	
+</mapper>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.es.emailsent.dao.IEmailSentDao">
+
+	<parameterMap id="emailSentParam" type="com.bs.plugins.custom.es.emailsent.entity.EmailSent" />
+	<resultMap id="emailSentResult" type="com.bs.plugins.custom.es.emailsent.entity.EmailSent">
+		<id property="id" column="emailSent_id" javaType="java.lang.Long" />
+		<result property="email" column="emailSent_email" javaType="java.lang.String" />
+		<result property="memberId" column="emailSent_memberId" javaType="java.lang.Long" />
+		<result property="title" column="emailSent_title" javaType="java.lang.String" />
+		<result property="content" column="emailSent_content" javaType="java.lang.String" />
+		<result property="senderEmail" column="emailSent_senderEmail" javaType="java.lang.String" />
+		<result property="senderName" column="emailSent_senderName" javaType="java.lang.String" />
+		<result property="businessCode" column="emailSent_businessCode" javaType="java.lang.String" />
+		<result property="isRetry" column="emailSent_isRetry" javaType="java.lang.Integer" />
+		<result property="retryCount" column="emailSent_retryCount" javaType="java.lang.Integer" />
+		<result property="status" column="emailSent_status" javaType="java.lang.Integer" />
+		<result property="statements" column="emailSent_statements" javaType="java.lang.String" />
+		<result property="sendTime" column="emailSent_sendTime" javaType="java.lang.String" />
+		<result property="createTime" column="emailSent_createTime" javaType="java.lang.String" />
+		<result property="timeout" column="emailSent_timeout" javaType="java.lang.Long" />
+		<result property="beginTime" column="emailSent_beginTime" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="emailSentResult" parameterMap="emailSentParam">
+		select 
+			Id emailSent_id,
+			Email emailSent_email,
+			MemberId emailSent_memberId,
+			Title emailSent_title,
+			Content emailSent_content,
+			SenderEmail emailSent_senderEmail,
+			SenderName emailSent_senderName,
+			BusinessCode emailSent_businessCode,
+			IsRetry emailSent_isRetry,
+			RetryCount emailSent_retryCount,
+			Status emailSent_status,
+			Statements emailSent_statements,
+			SendTime emailSent_sendTime,
+			CreateTime emailSent_createTime,
+			Timeout emailSent_timeout,
+			BeginTime emailSent_beginTime
+		from ES_EmailSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="title != null and title != ''">and Title=#{title}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="senderEmail != null and senderEmail != ''">and SenderEmail=#{senderEmail}</if>
+				<if test="senderName != null and senderName != ''">and SenderName=#{senderName}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="beginTime != null">and BeginTime=${beginTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="emailSentResult">
+		select 
+			Id emailSent_id,
+			Email emailSent_email,
+			MemberId emailSent_memberId,
+			Title emailSent_title,
+			Content emailSent_content,
+			SenderEmail emailSent_senderEmail,
+			SenderName emailSent_senderName,
+			BusinessCode emailSent_businessCode,
+			IsRetry emailSent_isRetry,
+			RetryCount emailSent_retryCount,
+			Status emailSent_status,
+			Statements emailSent_statements,
+			SendTime emailSent_sendTime,
+			CreateTime emailSent_createTime,
+			Timeout emailSent_timeout,
+			BeginTime emailSent_beginTime
+		from ES_EmailSent
+	</select>
+	
+	<select id="selectOneById"  resultMap="emailSentResult" parameterMap="emailSentParam">
+		select 
+			Id emailSent_id,
+			Email emailSent_email,
+			MemberId emailSent_memberId,
+			Title emailSent_title,
+			Content emailSent_content,
+			SenderEmail emailSent_senderEmail,
+			SenderName emailSent_senderName,
+			BusinessCode emailSent_businessCode,
+			IsRetry emailSent_isRetry,
+			RetryCount emailSent_retryCount,
+			Status emailSent_status,
+			Statements emailSent_statements,
+			SendTime emailSent_sendTime,
+			CreateTime emailSent_createTime,
+			Timeout emailSent_timeout,
+			BeginTime emailSent_beginTime
+		from ES_EmailSent where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="emailSentResult" parameterMap="emailSentParam">
+		select 
+			Id emailSent_id,
+			Email emailSent_email,
+			MemberId emailSent_memberId,
+			Title emailSent_title,
+			Content emailSent_content,
+			SenderEmail emailSent_senderEmail,
+			SenderName emailSent_senderName,
+			BusinessCode emailSent_businessCode,
+			IsRetry emailSent_isRetry,
+			RetryCount emailSent_retryCount,
+			Status emailSent_status,
+			Statements emailSent_statements,
+			SendTime emailSent_sendTime,
+			CreateTime emailSent_createTime,
+			Timeout emailSent_timeout,
+			BeginTime emailSent_beginTime
+		from ES_EmailSent
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="emailSentParam">
+		select count(*) from ES_EmailSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="title != null and title != ''">and Title=#{title}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="senderEmail != null and senderEmail != ''">and SenderEmail=#{senderEmail}</if>
+				<if test="senderName != null and senderName != ''">and SenderName=#{senderName}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="beginTime != null">and BeginTime=${beginTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="emailSentParam">
+		update ES_EmailSent
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="email != null and email != ''">,Email=#{email}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="title != null and title != ''">,Title=#{title}</if>
+				<if test="content != null and content != ''">,Content=#{content}</if>
+				<if test="senderEmail != null and senderEmail != ''">,SenderEmail=#{senderEmail}</if>
+				<if test="senderName != null and senderName != ''">,SenderName=#{senderName}</if>
+				<if test="businessCode != null and businessCode != ''">,BusinessCode=#{businessCode}</if>
+				<if test="isRetry != null">,IsRetry=${isRetry}</if>
+				<if test="retryCount != null">,RetryCount=${retryCount}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="statements != null and statements != ''">,Statements=#{statements}</if>
+               		 <if test="sendTime != null  and sendTime != ''">,SendTime=#{sendTime}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="timeout != null">,Timeout=${timeout}</if>
+				<if test="beginTime != null">,BeginTime=${beginTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="emailSentParam">
+		update ES_EmailSent
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Email=#{email}
+                            ,MemberId=${memberId}
+						,Title=#{title}
+						,Content=#{content}
+						,SenderEmail=#{senderEmail}
+						,SenderName=#{senderName}
+						,BusinessCode=#{businessCode}
+                    	<if test="isRetry != null">,IsRetry=${isRetry}</if>
+                        <if test="isRetry == null">,IsRetry= 0</if>
+                    	<if test="retryCount != null">,RetryCount=${retryCount}</if>
+                        <if test="retryCount == null">,RetryCount= 0</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+						,Statements=#{statements}
+                        <if test="sendTime != null  and sendTime != ''">,SendTime=#{sendTime}</if>
+                            ,Timeout=${timeout}
+                            ,BeginTime=${beginTime}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="emailSentParam">
+		insert into ES_EmailSent
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="email != null and email != ''">,Email</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="title != null and title != ''">,Title</if>
+			<if test="content != null and content != ''">,Content</if>
+			<if test="senderEmail != null and senderEmail != ''">,SenderEmail</if>
+			<if test="senderName != null and senderName != ''">,SenderName</if>
+			<if test="businessCode != null and businessCode != ''">,BusinessCode</if>
+			<if test="isRetry != null">,IsRetry</if>
+			<if test="retryCount != null">,RetryCount</if>
+			<if test="status != null">,Status</if>
+			<if test="statements != null and statements != ''">,Statements</if>
+                <if test="sendTime != null and sendTime != ''">,SendTime</if>
+                ,CreateTime
+			<if test="timeout != null">,Timeout</if>
+			<if test="beginTime != null">,BeginTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="email != null and email != ''">,#{email}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="title != null and title != ''">,#{title}</if>
+			<if test="content != null and content != ''">,#{content}</if>
+			<if test="senderEmail != null and senderEmail != ''">,#{senderEmail}</if>
+			<if test="senderName != null and senderName != ''">,#{senderName}</if>
+			<if test="businessCode != null and businessCode != ''">,#{businessCode}</if>
+			<if test="isRetry != null">,${isRetry}</if>
+			<if test="retryCount != null">,${retryCount}</if>
+			<if test="status != null">,${status}</if>
+			<if test="statements != null and statements != ''">,#{statements}</if>
+            	<if test="sendTime != null and sendTime != ''">,#{sendTime}</if>
+                ,now()
+			<if test="timeout != null">,${timeout}</if>
+			<if test="beginTime != null">,${beginTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="emailSentParam">
+		delete from ES_EmailSent where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="emailSentParam">
+		delete from ES_EmailSent
+	</delete>
+	
+	<delete id="delete" parameterMap="emailSentParam">
+		delete from ES_EmailSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="title != null and title != ''">and Title=#{title}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="senderEmail != null and senderEmail != ''">and SenderEmail=#{senderEmail}</if>
+				<if test="senderName != null and senderName != ''">and SenderName=#{senderName}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="beginTime != null">and BeginTime=${beginTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

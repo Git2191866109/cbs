@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetitem.dao.IBudgetItemDao">
+
+	<parameterMap id="budgetItemParam" type="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem" />
+	<resultMap id="budgetItemResult" type="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+		<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+		<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+		<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+		<result property="itemLevel" column="budgetItem_itemLevel" javaType="java.lang.Integer" />
+		<result property="isChildNode" column="budgetItem_isChildNode" javaType="java.lang.Integer" />
+		<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+		<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+		<result property="grade" column="budgetItem_grade" javaType="java.lang.String" />
+		<result property="age" column="budgetItem_age" javaType="java.lang.Integer" />
+		<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+		<result property="isInflation" column="budgetItem_isInflation" javaType="java.lang.Integer" />
+		<result property="isTranslation" column="budgetItem_isTranslation" javaType="java.lang.Integer" />
+		<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+		<result property="inputLevel" column="budgetItem_inputLevel" javaType="java.lang.Integer" />
+		<result property="isDifferInputLevel" column="budgetItem_isDifferInputLevel" javaType="java.lang.Integer" />
+		<association property="budgetCategory" javaType="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory">
+			<id property="id" column="budgetCategory_id" javaType="java.lang.Long" />
+			<result property="name" column="budgetCategory_name" javaType="java.lang.String" />
+			<result property="code" column="budgetCategory_code" javaType="java.lang.String" />
+			<result property="createDate" column="budgetCategory_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetCategory_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetCategory_creatorId" javaType="java.lang.Long" />
+		</association>
+		<collection property="modeItemRelations" ofType="com.bs.plugins.custom.eb.modeitemrelation.entity.ModeItemRelation">
+			<id property="id" column="modeItemRelation_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="modeItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="modeItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="modeItemRelation_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemDataId" column="modeItemRelation_budgetItemDataId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="modeItemRelation_budgetItemId" javaType="java.lang.Long" />
+			<result property="isSetData" column="modeItemRelation_isSetData" javaType="java.lang.Integer" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel,	
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId
+		from EB_BudgetItem budgetItem
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=budgetItem.BudgetCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetItemBudgetCategory" resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId
+		from EB_BudgetItem budgetItem
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=budgetItem.BudgetCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel,	
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.EduModeId modeItemRelation_eduModeId,
+			modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+			modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+			modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+			modeItemRelation.IsSetData modeItemRelation_isSetData
+		from EB_BudgetItem budgetItem
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.BudgetItemId=budgetItem.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetItemModeItemRelation" resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.IsChildNode budgetItem_isChildNode,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.Age budgetItem_age,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.IsDifferInputLevel budgetItem_isDifferInputLevel,
+				modeItemRelation.Id modeItemRelation_id,
+	
+				modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+	
+				modeItemRelation.EduModeId modeItemRelation_eduModeId,
+	
+				modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+	
+				modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+	
+				modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+	
+				modeItemRelation.IsSetData modeItemRelation_isSetData
+	
+		from EB_BudgetItem budgetItem
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.BudgetItemId=budgetItem.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select 
+			Id budgetItem_id,
+			BudgetCategoryId budgetItem_budgetCategoryId,
+			ParentId budgetItem_parentId,
+			ItemLevel budgetItem_itemLevel,
+			IsChildNode budgetItem_isChildNode,
+			Name budgetItem_name,
+			Code budgetItem_code,
+			Grade budgetItem_grade,
+			Age budgetItem_age,
+			CostFormula budgetItem_costFormula,
+			IsInflation budgetItem_isInflation,
+			IsTranslation budgetItem_isTranslation,
+			CreateDate budgetItem_createDate,
+			ModifyDate budgetItem_modifyDate,
+			CreatorId budgetItem_creatorId,
+			InputLevel budgetItem_inputLevel,
+			IsDifferInputLevel budgetItem_isDifferInputLevel
+		from EB_BudgetItem
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetItemResult">
+		select 
+			Id budgetItem_id,
+			BudgetCategoryId budgetItem_budgetCategoryId,
+			ParentId budgetItem_parentId,
+			ItemLevel budgetItem_itemLevel,
+			IsChildNode budgetItem_isChildNode,
+			Name budgetItem_name,
+			Code budgetItem_code,
+			Grade budgetItem_grade,
+			Age budgetItem_age,
+			CostFormula budgetItem_costFormula,
+			IsInflation budgetItem_isInflation,
+			IsTranslation budgetItem_isTranslation,
+			CreateDate budgetItem_createDate,
+			ModifyDate budgetItem_modifyDate,
+			CreatorId budgetItem_creatorId,
+			InputLevel budgetItem_inputLevel,
+			IsDifferInputLevel budgetItem_isDifferInputLevel
+		from EB_BudgetItem
+	</select>
+	
+	<select id="selectOneById"  resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select 
+			Id budgetItem_id,
+			BudgetCategoryId budgetItem_budgetCategoryId,
+			ParentId budgetItem_parentId,
+			ItemLevel budgetItem_itemLevel,
+			IsChildNode budgetItem_isChildNode,
+			Name budgetItem_name,
+			Code budgetItem_code,
+			Grade budgetItem_grade,
+			Age budgetItem_age,
+			CostFormula budgetItem_costFormula,
+			IsInflation budgetItem_isInflation,
+			IsTranslation budgetItem_isTranslation,
+			CreateDate budgetItem_createDate,
+			ModifyDate budgetItem_modifyDate,
+			CreatorId budgetItem_creatorId,
+			InputLevel budgetItem_inputLevel,
+			IsDifferInputLevel budgetItem_isDifferInputLevel
+		from EB_BudgetItem where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="budgetItemResult" parameterMap="budgetItemParam">
+		select 
+			Id budgetItem_id,
+			BudgetCategoryId budgetItem_budgetCategoryId,
+			ParentId budgetItem_parentId,
+			ItemLevel budgetItem_itemLevel,
+			IsChildNode budgetItem_isChildNode,
+			Name budgetItem_name,
+			Code budgetItem_code,
+			Grade budgetItem_grade,
+			Age budgetItem_age,
+			CostFormula budgetItem_costFormula,
+			IsInflation budgetItem_isInflation,
+			IsTranslation budgetItem_isTranslation,
+			CreateDate budgetItem_createDate,
+			ModifyDate budgetItem_modifyDate,
+			CreatorId budgetItem_creatorId,
+			InputLevel budgetItem_inputLevel,
+			IsDifferInputLevel budgetItem_isDifferInputLevel
+		from EB_BudgetItem
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetItemParam">
+		select count(*) from EB_BudgetItem
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="budgetItemParam">
+		update EB_BudgetItem
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="budgetCategoryId != null">,BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">,ParentId=${parentId}</if>
+				<if test="itemLevel != null">,ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">,IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="grade != null and grade != ''">,Grade=#{grade}</if>
+				<if test="age != null">,Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">,CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">,IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">,IsTranslation=${isTranslation}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">,InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">,IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="budgetItemParam">
+		update EB_BudgetItem
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,BudgetCategoryId=${budgetCategoryId}
+                            ,ParentId=${parentId}
+                        <if test="itemLevel != null">,ItemLevel=${itemLevel}</if>
+                        <if test="itemLevel == null">,ItemLevel= 0</if>
+                    	<if test="isChildNode != null">,IsChildNode=${isChildNode}</if>
+                        <if test="isChildNode == null">,IsChildNode= 0</if>
+						,Name=#{name}
+						,Code=#{code}
+						,Grade=#{grade}
+                        <if test="age != null">,Age=${age}</if>
+                        <if test="age == null">,Age= 0</if>
+						,CostFormula=#{costFormula}
+                    	<if test="isInflation != null">,IsInflation=${isInflation}</if>
+                        <if test="isInflation == null">,IsInflation= 0</if>
+                    	<if test="isTranslation != null">,IsTranslation=${isTranslation}</if>
+                        <if test="isTranslation == null">,IsTranslation= 0</if>
+                            ,ModifyDate=now()
+                    	<if test="inputLevel != null">,InputLevel=${inputLevel}</if>
+                        <if test="inputLevel == null">,InputLevel= 0</if>
+                    	<if test="isDifferInputLevel != null">,IsDifferInputLevel=${isDifferInputLevel}</if>
+                        <if test="isDifferInputLevel == null">,IsDifferInputLevel= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="budgetItemParam">
+		insert into EB_BudgetItem
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="budgetCategoryId != null">,BudgetCategoryId</if>
+			<if test="parentId != null">,ParentId</if>
+			<if test="itemLevel != null">,ItemLevel</if>
+			<if test="isChildNode != null">,IsChildNode</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="grade != null and grade != ''">,Grade</if>
+			<if test="age != null">,Age</if>
+			<if test="costFormula != null and costFormula != ''">,CostFormula</if>
+			<if test="isInflation != null">,IsInflation</if>
+			<if test="isTranslation != null">,IsTranslation</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+			<if test="inputLevel != null">,InputLevel</if>
+			<if test="isDifferInputLevel != null">,IsDifferInputLevel</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="budgetCategoryId != null">,${budgetCategoryId}</if>
+			<if test="parentId != null">,${parentId}</if>
+			<if test="itemLevel != null">,${itemLevel}</if>
+			<if test="isChildNode != null">,${isChildNode}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="grade != null and grade != ''">,#{grade}</if>
+			<if test="age != null">,${age}</if>
+			<if test="costFormula != null and costFormula != ''">,#{costFormula}</if>
+			<if test="isInflation != null">,${isInflation}</if>
+			<if test="isTranslation != null">,${isTranslation}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+			<if test="inputLevel != null">,${inputLevel}</if>
+			<if test="isDifferInputLevel != null">,${isDifferInputLevel}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="budgetItemParam">
+		delete from EB_BudgetItem where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="budgetItemParam">
+		delete from EB_BudgetItem
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetItemParam">
+		delete from EB_BudgetItem
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="budgetCategoryId != null">and BudgetCategoryId=${budgetCategoryId}</if>
+				<if test="parentId != null">and ParentId=${parentId}</if>
+				<if test="itemLevel != null">and ItemLevel=${itemLevel}</if>
+				<if test="isChildNode != null">and IsChildNode=${isChildNode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="grade != null and grade != ''">and Grade=#{grade}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="costFormula != null and costFormula != ''">and CostFormula=#{costFormula}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isTranslation != null">and IsTranslation=${isTranslation}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="inputLevel != null">and InputLevel=${inputLevel}</if>
+				<if test="isDifferInputLevel != null">and IsDifferInputLevel=${isDifferInputLevel}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

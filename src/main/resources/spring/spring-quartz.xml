@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+  	<description>
+  		Quzrtz 时间表达式: 
+  		
+  		格式：
+  		秒 分 时 日 月 周 年(可选)
+  		
+  		说明:
+  		Seconds 		秒: 数字0－59 表示
+        Minutes 		分: 数字0－59 表示
+        Hours 			时: 数字0-23表示
+        Day-of-Month 	日：  数字1-31 表示,要注意一些特别的月份
+        Month 			月：  数字0-11 或用字符串  JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC 表示
+        Day-of-Week 	周：  数字1-7表示（1 ＝ 星期日）或用字符串 SUN, MON, TUE, WED, THU, FRI, SAT 表示 
+        Year (可选字段)	年: empty 或 1970-2099
+  		
+  		符号：
+  		*	：代表整个时间段
+  		?	：代表不确定的值
+        ,	：指定数个值
+        -	：指定一个值的范围
+        /	：指定一个值的增加幅度。n/m表示从n开始，每次增加m
+        L	：用在日表示一个月中的最后一天，用在周表示该月最后一个星期X
+        W	：指定离给定日期最近的工作日(周一到周五)
+        #	：表示该月第几个周X。6#3表示该月第3个周五
+  		
+  		示例：
+ 	            每隔5秒执行一次：0/5 * * * * ?
+                        每天凌晨1点执行一次：0 0 1 * * ?
+                        每月1号凌晨1点执行一次：0 0 1 1 * ?
+                        每月最后一天23点执行一次：0 0 23 L * ?
+                        在15分、35分执行一次：0 15,45 * * * ?
+  	</description>
+  	
+    <!-- 工作的bean -->  
+   <bean id="sms" class="com.bs.plugins.thirdparty.sms.SMSHandleImpl"/>
+	  
+	<!-- 短信发送 job 的配置开始 -->  
+    <bean id="smsSendJob"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="sms" />  
+        </property>  
+        <property name="targetMethod">  
+            <value>send</value>  
+        </property>  
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+        <property name="concurrent" value="false"/>
+    </bean>  
+    <!-- 短信发送 job 的配置结束 --> 
+    <!-- 短信发送 job 调度配置开始  quartz-2.x版本的配置 -->  
+    <bean id="smsSendJobTrigger"  
+        class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail">  
+            <ref bean="smsSendJob" />  
+        </property>  
+        <property name="cronExpression">  
+            <value>0/5 * * * * ?</value>
+        </property>  
+    </bean>  
+    <!-- 短信发送 job 调度配置结束 *********************************************************** -->
+    
+    
+	<!-- 短信报告获取并处理的 job 配置开始 -->  
+    <bean id="smsFetchJob"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="sms" />  
+        </property>  
+        <property name="targetMethod">  
+            <value>fetch</value>  
+        </property>  
+    </bean>  
+    <!-- job的配置结束 --> 
+    <!-- 调度的配置开始 -->  
+    <bean id="smsFetchJobTrigger"  
+        class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail">  
+            <ref bean="smsFetchJob" />  
+        </property>  
+        <property name="cronExpression">  
+            <value>0/20 * * * * ?</value> 
+        </property>  
+    </bean>  
+    <!-- 调度的配置结束 ***********************************************************- -->
+    
+    
+    	<!-- 短信补发的 job 配置开始 -->  
+    <bean id="smsReissueJob"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="sms" />  
+        </property>  
+        <property name="targetMethod">  
+            <value>reissue</value>  
+        </property>  
+    </bean>  
+    <!-- job的配置结束 --> 
+    <!-- 调度的配置开始 -->  
+    <bean id="smsReissueJobTrigger"  
+        class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail">  
+            <ref bean="smsReissueJob" />  
+        </property>  
+        <property name="cronExpression">  
+            <value>0/10 * * * * ?</value> 
+        </property>  
+    </bean>  
+    <!-- 调度的配置结束 *********************************************************** --> 
+    
+    
+    <!-- 已完成状态短信移动到历史 job 的配置开始 -->  
+    <bean id="smsMoveJob"  
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject">  
+            <ref bean="sms" />  
+        </property>  
+        <property name="targetMethod">  
+            <value>move</value>  
+        </property>  
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+        <property name="concurrent" value="false"/>
+    </bean>  
+    <!-- 短信发送 job 的配置结束 --> 
+    <bean id="smsMoveJobTrigger"  
+        class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail">  
+            <ref bean="smsMoveJob" />  
+        </property>  
+        <property name="cronExpression">  
+            <value>0/25 * * * * ?</value>
+        </property>  
+    </bean>  
+    <!-- 短信发送 job 调度配置结束 *********************************************************** -->
+    
+    
+    <!-- 启动触发器的配置开始 -->  
+    <bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        
+        <property name="configLocation" value="classpath:quartz.properties" />  
+        <!--延时启动/秒，应用启动后再启动触发器-->
+  		<property name="startupDelay" value="20" />
+        <property name="triggers">  
+        	<!-- 触发器列表 -->
+            <list>  
+               <ref bean="smsSendJobTrigger" />  	<!-- 短信发送 -->
+               <ref bean="smsFetchJobTrigger" /> 	<!-- 短信报告获取并处理  -->
+               <ref bean="smsMoveJobTrigger" /> 	<!-- 短信移动到历史  -->
+               <!-- <ref bean="smsReissueJobTrigger" /> --> 	<!-- 补发短信  -->
+            </list>  
+        </property>  
+    </bean>  
+    <!-- 启动触发器的配置结束 --> 
+    
+</beans>

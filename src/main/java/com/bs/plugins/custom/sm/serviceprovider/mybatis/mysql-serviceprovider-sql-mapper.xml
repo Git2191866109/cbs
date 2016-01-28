@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sm.serviceprovider.dao.IServiceProviderDao">
+	<select id="selectServiceprovide" resultType="com.bs.plugins.custom.sm.serviceprovider.entity.ServiceProvider">
+		SELECT * FROM SM_ServiceProvider WHERE IsUse = 1 
+	</select>
+	
+	<select id="selectAllServiceprovide" resultType="com.bs.plugins.custom.sm.serviceprovider.entity.ServiceProvider">
+		SELECT * FROM SM_ServiceProvider
+	</select>
+</mapper>

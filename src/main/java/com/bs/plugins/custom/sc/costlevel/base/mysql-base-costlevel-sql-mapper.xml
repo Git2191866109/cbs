@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.costlevel.dao.ICostLevelDao">
+
+	<parameterMap id="costLevelParam" type="com.bs.plugins.custom.sc.costlevel.entity.CostLevel" />
+	<resultMap id="costLevelResult" type="com.bs.plugins.custom.sc.costlevel.entity.CostLevel">
+		<id property="id" column="costLevel_id" javaType="java.lang.Long" />
+		<result property="name" column="costLevel_name" javaType="java.lang.String" />
+		<result property="level" column="costLevel_level" javaType="java.lang.Integer" />
+		<result property="isValid" column="costLevel_isValid" javaType="java.lang.Integer" />
+		<result property="createDate" column="costLevel_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="costLevel_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="costLevel_creatorId" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="costLevelResult" parameterMap="costLevelParam">
+		select 
+			Id costLevel_id,
+			Name costLevel_name,
+			Level costLevel_level,
+			IsValid costLevel_isValid,
+			CreateDate costLevel_createDate,
+			ModifyDate costLevel_modifyDate,
+			CreatorId costLevel_creatorId
+		from SC_CostLevel
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="costLevelResult">
+		select 
+			Id costLevel_id,
+			Name costLevel_name,
+			Level costLevel_level,
+			IsValid costLevel_isValid,
+			CreateDate costLevel_createDate,
+			ModifyDate costLevel_modifyDate,
+			CreatorId costLevel_creatorId
+		from SC_CostLevel
+	</select>
+	
+	<select id="selectOneById"  resultMap="costLevelResult" parameterMap="costLevelParam">
+		select 
+			Id costLevel_id,
+			Name costLevel_name,
+			Level costLevel_level,
+			IsValid costLevel_isValid,
+			CreateDate costLevel_createDate,
+			ModifyDate costLevel_modifyDate,
+			CreatorId costLevel_creatorId
+		from SC_CostLevel where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="costLevelResult" parameterMap="costLevelParam">
+		select 
+			Id costLevel_id,
+			Name costLevel_name,
+			Level costLevel_level,
+			IsValid costLevel_isValid,
+			CreateDate costLevel_createDate,
+			ModifyDate costLevel_modifyDate,
+			CreatorId costLevel_creatorId
+		from SC_CostLevel
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="costLevelParam">
+		select count(*) from SC_CostLevel
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="costLevelParam">
+		update SC_CostLevel
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="level != null">,Level=${level}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="costLevelParam">
+		update SC_CostLevel
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+                        <if test="level != null">,Level=${level}</if>
+                        <if test="level == null">,Level= 0</if>
+                    	<if test="isValid != null">,IsValid=${isValid}</if>
+                        <if test="isValid == null">,IsValid= 0</if>
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="costLevelParam">
+		insert into SC_CostLevel
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="level != null">,Level</if>
+			<if test="isValid != null">,IsValid</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="level != null">,${level}</if>
+			<if test="isValid != null">,${isValid}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="costLevelParam">
+		delete from SC_CostLevel where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="costLevelParam">
+		delete from SC_CostLevel
+	</delete>
+	
+	<delete id="delete" parameterMap="costLevelParam">
+		delete from SC_CostLevel
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

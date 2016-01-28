@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.questioncategory.dao.IQuestionCategoryDao">
+
+	<parameterMap id="questionCategoryParam" type="com.bs.plugins.custom.cc.questioncategory.entity.QuestionCategory" />
+	<resultMap id="questionCategoryResult" type="com.bs.plugins.custom.cc.questioncategory.entity.QuestionCategory">
+		<id property="id" column="questionCategory_id" javaType="java.lang.Long" />
+		<result property="name" column="questionCategory_name" javaType="java.lang.String" />
+		<result property="creatorId" column="questionCategory_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="questionCategory_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="questionCategory_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="questionCategory_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="questionCategory_isDelete" javaType="java.lang.Integer" />
+		<collection property="securityQuestions" ofType="com.bs.plugins.custom.cc.securityquestion.entity.SecurityQuestion">
+			<id property="id" column="securityQuestion_id" javaType="java.lang.Long" />
+			<result property="questionCategoryId" column="securityQuestion_questionCategoryId" javaType="java.lang.Long" />
+			<result property="name" column="securityQuestion_name" javaType="java.lang.String" />
+			<result property="status" column="securityQuestion_status" javaType="java.lang.Integer" />
+			<result property="createDate" column="securityQuestion_createDate" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="questionCategoryResult" parameterMap="questionCategoryParam">
+		select
+			questionCategory.Id questionCategory_id,
+			questionCategory.Name questionCategory_name,
+			questionCategory.CreatorId questionCategory_creatorId,
+			questionCategory.CreateTime questionCategory_createTime,
+			questionCategory.ModifierId questionCategory_modifierId,
+			questionCategory.ModifyTime questionCategory_modifyTime,
+			questionCategory.isDelete questionCategory_isDelete,	
+			securityQuestion.Id securityQuestion_id,
+			securityQuestion.QuestionCategoryId securityQuestion_questionCategoryId,
+			securityQuestion.Name securityQuestion_name,
+			securityQuestion.Status securityQuestion_status,
+			securityQuestion.CreateDate securityQuestion_createDate
+		from CC_QuestionCategory questionCategory
+		inner join CC_SecurityQuestion securityQuestion on securityQuestion.QuestionCategoryId=questionCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectQuestionCategorySecurityQuestion" resultMap="questionCategoryResult" parameterMap="questionCategoryParam">
+		select
+			questionCategory.Id questionCategory_id,
+			questionCategory.Name questionCategory_name,
+			questionCategory.CreatorId questionCategory_creatorId,
+			questionCategory.CreateTime questionCategory_createTime,
+			questionCategory.ModifierId questionCategory_modifierId,
+			questionCategory.ModifyTime questionCategory_modifyTime,
+			questionCategory.isDelete questionCategory_isDelete,
+				securityQuestion.Id securityQuestion_id,
+	
+				securityQuestion.QuestionCategoryId securityQuestion_questionCategoryId,
+	
+				securityQuestion.Name securityQuestion_name,
+	
+				securityQuestion.Status securityQuestion_status,
+	
+				securityQuestion.CreateDate securityQuestion_createDate
+	
+		from CC_QuestionCategory questionCategory
+		inner join CC_SecurityQuestion securityQuestion on securityQuestion.QuestionCategoryId=questionCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="questionCategoryResult" parameterMap="questionCategoryParam">
+		select 
+			Id questionCategory_id,
+			Name questionCategory_name,
+			CreatorId questionCategory_creatorId,
+			CreateTime questionCategory_createTime,
+			ModifierId questionCategory_modifierId,
+			ModifyTime questionCategory_modifyTime,
+			isDelete questionCategory_isDelete
+		from CC_QuestionCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="questionCategoryResult">
+		select 
+			Id questionCategory_id,
+			Name questionCategory_name,
+			CreatorId questionCategory_creatorId,
+			CreateTime questionCategory_createTime,
+			ModifierId questionCategory_modifierId,
+			ModifyTime questionCategory_modifyTime,
+			isDelete questionCategory_isDelete
+		from CC_QuestionCategory
+	</select>
+	
+	<select id="selectOneById"  resultMap="questionCategoryResult" parameterMap="questionCategoryParam">
+		select 
+			Id questionCategory_id,
+			Name questionCategory_name,
+			CreatorId questionCategory_creatorId,
+			CreateTime questionCategory_createTime,
+			ModifierId questionCategory_modifierId,
+			ModifyTime questionCategory_modifyTime,
+			isDelete questionCategory_isDelete
+		from CC_QuestionCategory where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="questionCategoryResult" parameterMap="questionCategoryParam">
+		select 
+			Id questionCategory_id,
+			Name questionCategory_name,
+			CreatorId questionCategory_creatorId,
+			CreateTime questionCategory_createTime,
+			ModifierId questionCategory_modifierId,
+			ModifyTime questionCategory_modifyTime,
+			isDelete questionCategory_isDelete
+		from CC_QuestionCategory
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="questionCategoryParam">
+		select count(*) from CC_QuestionCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="questionCategoryParam">
+		update CC_QuestionCategory
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="questionCategoryParam">
+		update CC_QuestionCategory
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="questionCategoryParam">
+		insert into CC_QuestionCategory
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="questionCategoryParam">
+		delete from CC_QuestionCategory where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="questionCategoryParam">
+		delete from CC_QuestionCategory
+	</delete>
+	
+	<delete id="delete" parameterMap="questionCategoryParam">
+		delete from CC_QuestionCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

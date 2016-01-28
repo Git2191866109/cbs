@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.itemfieldcollectvalue.dao.IItemFieldCollectValueDao">
+
+	<parameterMap id="itemFieldCollectValueParam" type="com.bs.plugins.custom.eb.itemfieldcollectvalue.entity.ItemFieldCollectValue" />
+	<resultMap id="itemFieldCollectValueResult" type="com.bs.plugins.custom.eb.itemfieldcollectvalue.entity.ItemFieldCollectValue">
+		<id property="id" column="itemFieldCollectValue_id" javaType="java.lang.Long" />
+		<result property="itemValueId" column="itemFieldCollectValue_itemValueId" javaType="java.lang.Long" />
+		<result property="value" column="itemFieldCollectValue_value" javaType="java.lang.String" />
+		<result property="isDefault" column="itemFieldCollectValue_isDefault" javaType="java.lang.Integer" />
+		<result property="isValid" column="itemFieldCollectValue_isValid" javaType="java.lang.Integer" />
+		<result property="grade" column="itemFieldCollectValue_grade" javaType="java.lang.Integer" />
+		<result property="description" column="itemFieldCollectValue_description" javaType="java.lang.String" />
+		<result property="createDate" column="itemFieldCollectValue_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="itemFieldCollectValue_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="itemFieldCollectValue_creatorId" javaType="java.lang.Long" />
+		<association property="itemFieldValue" javaType="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+			<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+			<result property="areaId" column="itemFieldValue_areaId" javaType="java.lang.Long" />
+			<result property="itemNameId" column="itemFieldValue_itemNameId" javaType="java.lang.Long" />
+			<result property="value" column="itemFieldValue_value" javaType="java.lang.String" />
+			<result property="isValid" column="itemFieldValue_isValid" javaType="java.lang.Integer" />
+			<result property="isDefault" column="itemFieldValue_isDefault" javaType="java.lang.Integer" />
+			<result property="grede" column="itemFieldValue_grede" javaType="java.lang.Integer" />
+			<result property="description" column="itemFieldValue_description" javaType="java.lang.String" />
+			<result property="createDate" column="itemFieldValue_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="itemFieldValue_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="itemFieldValue_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="itemFieldCollectValueResult" parameterMap="itemFieldCollectValueParam">
+		select
+			itemFieldCollectValue.Id itemFieldCollectValue_id,
+			itemFieldCollectValue.ItemValueId itemFieldCollectValue_itemValueId,
+			itemFieldCollectValue.Value itemFieldCollectValue_value,
+			itemFieldCollectValue.IsDefault itemFieldCollectValue_isDefault,
+			itemFieldCollectValue.IsValid itemFieldCollectValue_isValid,
+			itemFieldCollectValue.Grade itemFieldCollectValue_grade,
+			itemFieldCollectValue.Description itemFieldCollectValue_description,
+			itemFieldCollectValue.CreateDate itemFieldCollectValue_createDate,
+			itemFieldCollectValue.ModifyDate itemFieldCollectValue_modifyDate,
+			itemFieldCollectValue.CreatorId itemFieldCollectValue_creatorId,	
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.AreaId itemFieldValue_areaId,
+			itemFieldValue.ItemNameId itemFieldValue_itemNameId,
+			itemFieldValue.Value itemFieldValue_value,
+			itemFieldValue.IsValid itemFieldValue_isValid,
+			itemFieldValue.IsDefault itemFieldValue_isDefault,
+			itemFieldValue.Grede itemFieldValue_grede,
+			itemFieldValue.Description itemFieldValue_description,
+			itemFieldValue.CreateDate itemFieldValue_createDate,
+			itemFieldValue.ModifyDate itemFieldValue_modifyDate,
+			itemFieldValue.CreatorId itemFieldValue_creatorId
+		from EB_ItemFieldCollectValue itemFieldCollectValue
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.Id=itemFieldCollectValue.ItemValueId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemValueId != null">and ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="isDefault != null">and IsDefault=${isDefault}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="grade != null">and Grade=${grade}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectItemFieldCollectValueItemFieldValue" resultMap="itemFieldCollectValueResult" parameterMap="itemFieldCollectValueParam">
+		select
+			itemFieldCollectValue.Id itemFieldCollectValue_id,
+			itemFieldCollectValue.ItemValueId itemFieldCollectValue_itemValueId,
+			itemFieldCollectValue.Value itemFieldCollectValue_value,
+			itemFieldCollectValue.IsDefault itemFieldCollectValue_isDefault,
+			itemFieldCollectValue.IsValid itemFieldCollectValue_isValid,
+			itemFieldCollectValue.Grade itemFieldCollectValue_grade,
+			itemFieldCollectValue.Description itemFieldCollectValue_description,
+			itemFieldCollectValue.CreateDate itemFieldCollectValue_createDate,
+			itemFieldCollectValue.ModifyDate itemFieldCollectValue_modifyDate,
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.AreaId itemFieldValue_areaId,
+			itemFieldValue.ItemNameId itemFieldValue_itemNameId,
+			itemFieldValue.Value itemFieldValue_value,
+			itemFieldValue.IsValid itemFieldValue_isValid,
+			itemFieldValue.IsDefault itemFieldValue_isDefault,
+			itemFieldValue.Grede itemFieldValue_grede,
+			itemFieldValue.Description itemFieldValue_description,
+			itemFieldValue.CreateDate itemFieldValue_createDate,
+			itemFieldValue.ModifyDate itemFieldValue_modifyDate,
+			itemFieldValue.CreatorId itemFieldValue_creatorId,
+		from EB_ItemFieldCollectValue itemFieldCollectValue
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.Id=itemFieldCollectValue.ItemValueId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemValueId != null">and ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="isDefault != null">and IsDefault=${isDefault}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="grade != null">and Grade=${grade}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="itemFieldCollectValueResult" parameterMap="itemFieldCollectValueParam">
+		select 
+			Id itemFieldCollectValue_id,
+			ItemValueId itemFieldCollectValue_itemValueId,
+			Value itemFieldCollectValue_value,
+			IsDefault itemFieldCollectValue_isDefault,
+			IsValid itemFieldCollectValue_isValid,
+			Grade itemFieldCollectValue_grade,
+			Description itemFieldCollectValue_description,
+			CreateDate itemFieldCollectValue_createDate,
+			ModifyDate itemFieldCollectValue_modifyDate,
+			CreatorId itemFieldCollectValue_creatorId
+		from EB_ItemFieldCollectValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemValueId != null">and ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="isDefault != null">and IsDefault=${isDefault}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="grade != null">and Grade=${grade}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="itemFieldCollectValueResult">
+		select 
+			Id itemFieldCollectValue_id,
+			ItemValueId itemFieldCollectValue_itemValueId,
+			Value itemFieldCollectValue_value,
+			IsDefault itemFieldCollectValue_isDefault,
+			IsValid itemFieldCollectValue_isValid,
+			Grade itemFieldCollectValue_grade,
+			Description itemFieldCollectValue_description,
+			CreateDate itemFieldCollectValue_createDate,
+			ModifyDate itemFieldCollectValue_modifyDate,
+			CreatorId itemFieldCollectValue_creatorId
+		from EB_ItemFieldCollectValue
+	</select>
+	
+	<select id="selectOneById"  resultMap="itemFieldCollectValueResult" parameterMap="itemFieldCollectValueParam">
+		select 
+			Id itemFieldCollectValue_id,
+			ItemValueId itemFieldCollectValue_itemValueId,
+			Value itemFieldCollectValue_value,
+			IsDefault itemFieldCollectValue_isDefault,
+			IsValid itemFieldCollectValue_isValid,
+			Grade itemFieldCollectValue_grade,
+			Description itemFieldCollectValue_description,
+			CreateDate itemFieldCollectValue_createDate,
+			ModifyDate itemFieldCollectValue_modifyDate,
+			CreatorId itemFieldCollectValue_creatorId
+		from EB_ItemFieldCollectValue where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="itemFieldCollectValueResult" parameterMap="itemFieldCollectValueParam">
+		select 
+			Id itemFieldCollectValue_id,
+			ItemValueId itemFieldCollectValue_itemValueId,
+			Value itemFieldCollectValue_value,
+			IsDefault itemFieldCollectValue_isDefault,
+			IsValid itemFieldCollectValue_isValid,
+			Grade itemFieldCollectValue_grade,
+			Description itemFieldCollectValue_description,
+			CreateDate itemFieldCollectValue_createDate,
+			ModifyDate itemFieldCollectValue_modifyDate,
+			CreatorId itemFieldCollectValue_creatorId
+		from EB_ItemFieldCollectValue
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="itemFieldCollectValueParam">
+		select count(*) from EB_ItemFieldCollectValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemValueId != null">and ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="isDefault != null">and IsDefault=${isDefault}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="grade != null">and Grade=${grade}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="itemFieldCollectValueParam">
+		update EB_ItemFieldCollectValue
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="itemValueId != null">,ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">,Value=#{value}</if>
+				<if test="isDefault != null">,IsDefault=${isDefault}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+				<if test="grade != null">,Grade=${grade}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				,CreateDate=now()
+				,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="itemFieldCollectValueParam">
+		insert into EB_ItemFieldCollectValue
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="itemValueId != null">,ItemValueId</if>
+			<if test="value != null and value != ''">,Value</if>
+			<if test="isDefault != null">,IsDefault</if>
+			<if test="isValid != null">,IsValid</if>
+			<if test="grade != null">,Grade</if>
+			<if test="description != null and description != ''">,Description</if>
+			,CreateDate
+			,ModifyDate
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="itemValueId != null">,${itemValueId}</if>
+			<if test="value != null and value != ''">,#{value}</if>
+			<if test="isDefault != null">,${isDefault}</if>
+			<if test="isValid != null">,${isValid}</if>
+			<if test="grade != null">,${grade}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			,now()
+			,now()
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="itemFieldCollectValueParam">
+		delete from EB_ItemFieldCollectValue where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="itemFieldCollectValueParam">
+		delete from EB_ItemFieldCollectValue
+	</delete>
+	
+	<delete id="delete" parameterMap="itemFieldCollectValueParam">
+		delete from EB_ItemFieldCollectValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemValueId != null">and ItemValueId=${itemValueId}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="isDefault != null">and IsDefault=${isDefault}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="grade != null">and Grade=${grade}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

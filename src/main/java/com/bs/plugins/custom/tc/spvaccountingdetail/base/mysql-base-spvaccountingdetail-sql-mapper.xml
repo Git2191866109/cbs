@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.spvaccountingdetail.dao.ISpvAccountingDetailDao">
+
+	<parameterMap id="spvAccountingDetailParam" type="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail" />
+	<resultMap id="spvAccountingDetailResult" type="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail">
+		<id property="id" column="spvAccountingDetail_id" javaType="java.lang.Long" />
+		<result property="spvId" column="spvAccountingDetail_spvId" javaType="java.lang.Long" />
+		<result property="productId" column="spvAccountingDetail_productId" javaType="java.lang.Long" />
+		<result property="transactionNumber" column="spvAccountingDetail_transactionNumber" javaType="java.lang.String" />
+		<result property="flowTo" column="spvAccountingDetail_flowTo" javaType="java.lang.Integer" />
+		<result property="amount" column="spvAccountingDetail_amount" javaType="java.math.BigDecimal" />
+		<result property="accountBalance" column="spvAccountingDetail_accountBalance" javaType="java.math.BigDecimal" />
+		<result property="umpayAccountBalance" column="spvAccountingDetail_umpayAccountBalance" javaType="java.math.BigDecimal" />
+		<result property="businessType" column="spvAccountingDetail_businessType" javaType="java.lang.Integer" />
+		<result property="businessId" column="spvAccountingDetail_businessId" javaType="java.lang.Long" />
+		<result property="accountType" column="spvAccountingDetail_accountType" javaType="java.lang.Integer" />
+		<result property="operatorId" column="spvAccountingDetail_operatorId" javaType="java.lang.Long" />
+		<result property="operator" column="spvAccountingDetail_operator" javaType="java.lang.String" />
+		<result property="description" column="spvAccountingDetail_description" javaType="java.lang.String" />
+		<result property="createTime" column="spvAccountingDetail_createTime" javaType="java.lang.String" />
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="spvAccountingDetailResult" parameterMap="spvAccountingDetailParam">
+		select
+			spvAccountingDetail.Id spvAccountingDetail_id,
+			spvAccountingDetail.SpvId spvAccountingDetail_spvId,
+			spvAccountingDetail.ProductId spvAccountingDetail_productId,
+			spvAccountingDetail.TransactionNumber spvAccountingDetail_transactionNumber,
+			spvAccountingDetail.FlowTo spvAccountingDetail_flowTo,
+			spvAccountingDetail.Amount spvAccountingDetail_amount,
+			spvAccountingDetail.AccountBalance spvAccountingDetail_accountBalance,
+			spvAccountingDetail.UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			spvAccountingDetail.BusinessType spvAccountingDetail_businessType,
+			spvAccountingDetail.BusinessId spvAccountingDetail_businessId,
+			spvAccountingDetail.AccountType spvAccountingDetail_accountType,
+			spvAccountingDetail.OperatorId spvAccountingDetail_operatorId,
+			spvAccountingDetail.Operator spvAccountingDetail_operator,
+			spvAccountingDetail.Description spvAccountingDetail_description,
+			spvAccountingDetail.CreateTime spvAccountingDetail_createTime,	
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_SpvAccountingDetail spvAccountingDetail
+		inner join PC_Product product on product.Id=spvAccountingDetail.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSpvAccountingDetailProduct" resultMap="spvAccountingDetailResult" parameterMap="spvAccountingDetailParam">
+		select
+			spvAccountingDetail.Id spvAccountingDetail_id,
+			spvAccountingDetail.SpvId spvAccountingDetail_spvId,
+			spvAccountingDetail.ProductId spvAccountingDetail_productId,
+			spvAccountingDetail.TransactionNumber spvAccountingDetail_transactionNumber,
+			spvAccountingDetail.FlowTo spvAccountingDetail_flowTo,
+			spvAccountingDetail.Amount spvAccountingDetail_amount,
+			spvAccountingDetail.AccountBalance spvAccountingDetail_accountBalance,
+			spvAccountingDetail.UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			spvAccountingDetail.BusinessType spvAccountingDetail_businessType,
+			spvAccountingDetail.BusinessId spvAccountingDetail_businessId,
+			spvAccountingDetail.AccountType spvAccountingDetail_accountType,
+			spvAccountingDetail.OperatorId spvAccountingDetail_operatorId,
+			spvAccountingDetail.Operator spvAccountingDetail_operator,
+			spvAccountingDetail.Description spvAccountingDetail_description,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_SpvAccountingDetail spvAccountingDetail
+		inner join PC_Product product on product.Id=spvAccountingDetail.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="spvAccountingDetailResult" parameterMap="spvAccountingDetailParam">
+		select 
+			Id spvAccountingDetail_id,
+			SpvId spvAccountingDetail_spvId,
+			ProductId spvAccountingDetail_productId,
+			TransactionNumber spvAccountingDetail_transactionNumber,
+			FlowTo spvAccountingDetail_flowTo,
+			Amount spvAccountingDetail_amount,
+			AccountBalance spvAccountingDetail_accountBalance,
+			UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			BusinessType spvAccountingDetail_businessType,
+			BusinessId spvAccountingDetail_businessId,
+			AccountType spvAccountingDetail_accountType,
+			OperatorId spvAccountingDetail_operatorId,
+			Operator spvAccountingDetail_operator,
+			Description spvAccountingDetail_description,
+			CreateTime spvAccountingDetail_createTime
+		from TC_SpvAccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="spvAccountingDetailResult">
+		select 
+			Id spvAccountingDetail_id,
+			SpvId spvAccountingDetail_spvId,
+			ProductId spvAccountingDetail_productId,
+			TransactionNumber spvAccountingDetail_transactionNumber,
+			FlowTo spvAccountingDetail_flowTo,
+			Amount spvAccountingDetail_amount,
+			AccountBalance spvAccountingDetail_accountBalance,
+			UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			BusinessType spvAccountingDetail_businessType,
+			BusinessId spvAccountingDetail_businessId,
+			AccountType spvAccountingDetail_accountType,
+			OperatorId spvAccountingDetail_operatorId,
+			Operator spvAccountingDetail_operator,
+			Description spvAccountingDetail_description,
+			CreateTime spvAccountingDetail_createTime
+		from TC_SpvAccountingDetail
+	</select>
+	
+	<select id="selectOneById"  resultMap="spvAccountingDetailResult" parameterMap="spvAccountingDetailParam">
+		select 
+			Id spvAccountingDetail_id,
+			SpvId spvAccountingDetail_spvId,
+			ProductId spvAccountingDetail_productId,
+			TransactionNumber spvAccountingDetail_transactionNumber,
+			FlowTo spvAccountingDetail_flowTo,
+			Amount spvAccountingDetail_amount,
+			AccountBalance spvAccountingDetail_accountBalance,
+			UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			BusinessType spvAccountingDetail_businessType,
+			BusinessId spvAccountingDetail_businessId,
+			AccountType spvAccountingDetail_accountType,
+			OperatorId spvAccountingDetail_operatorId,
+			Operator spvAccountingDetail_operator,
+			Description spvAccountingDetail_description,
+			CreateTime spvAccountingDetail_createTime
+		from TC_SpvAccountingDetail where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="spvAccountingDetailResult" parameterMap="spvAccountingDetailParam">
+		select 
+			Id spvAccountingDetail_id,
+			SpvId spvAccountingDetail_spvId,
+			ProductId spvAccountingDetail_productId,
+			TransactionNumber spvAccountingDetail_transactionNumber,
+			FlowTo spvAccountingDetail_flowTo,
+			Amount spvAccountingDetail_amount,
+			AccountBalance spvAccountingDetail_accountBalance,
+			UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			BusinessType spvAccountingDetail_businessType,
+			BusinessId spvAccountingDetail_businessId,
+			AccountType spvAccountingDetail_accountType,
+			OperatorId spvAccountingDetail_operatorId,
+			Operator spvAccountingDetail_operator,
+			Description spvAccountingDetail_description,
+			CreateTime spvAccountingDetail_createTime
+		from TC_SpvAccountingDetail
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="spvAccountingDetailParam">
+		select count(*) from TC_SpvAccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="spvAccountingDetailParam">
+		update TC_SpvAccountingDetail
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="spvId != null">,SpvId=${spvId}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">,FlowTo=${flowTo}</if>
+				<if test="amount != null">,Amount=${amount}</if>
+				<if test="accountBalance != null">,AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">,UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">,BusinessType=${businessType}</if>
+				<if test="businessId != null">,BusinessId=${businessId}</if>
+				<if test="accountType != null">,AccountType=${accountType}</if>
+				<if test="operatorId != null">,OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">,Operator=#{operator}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="spvAccountingDetailParam">
+		update TC_SpvAccountingDetail
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,SpvId=${spvId}
+                            ,ProductId=${productId}
+						,TransactionNumber=#{transactionNumber}
+                    	<if test="flowTo != null">,FlowTo=${flowTo}</if>
+                        <if test="flowTo == null">,FlowTo= 0</if>
+						,Amount=${amount}
+						,AccountBalance=${accountBalance}
+						,UmpayAccountBalance=${umpayAccountBalance}
+                    	<if test="businessType != null">,BusinessType=${businessType}</if>
+                        <if test="businessType == null">,BusinessType= 0</if>
+                            ,BusinessId=${businessId}
+                    	<if test="accountType != null">,AccountType=${accountType}</if>
+                        <if test="accountType == null">,AccountType= 0</if>
+                            ,OperatorId=${operatorId}
+						,Operator=#{operator}
+						,Description=#{description}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="spvAccountingDetailParam">
+		insert into TC_SpvAccountingDetail
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="spvId != null">,SpvId</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="flowTo != null">,FlowTo</if>
+			<if test="amount != null">,Amount</if>
+			<if test="accountBalance != null">,AccountBalance</if>
+			<if test="umpayAccountBalance != null">,UmpayAccountBalance</if>
+			<if test="businessType != null">,BusinessType</if>
+			<if test="businessId != null">,BusinessId</if>
+			<if test="accountType != null">,AccountType</if>
+			<if test="operatorId != null">,OperatorId</if>
+			<if test="operator != null and operator != ''">,Operator</if>
+			<if test="description != null and description != ''">,Description</if>
+                ,CreateTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="spvId != null">,${spvId}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="flowTo != null">,${flowTo}</if>
+			<if test="amount != null">,${amount}</if>
+			<if test="accountBalance != null">,${accountBalance}</if>
+			<if test="umpayAccountBalance != null">,${umpayAccountBalance}</if>
+			<if test="businessType != null">,${businessType}</if>
+			<if test="businessId != null">,${businessId}</if>
+			<if test="accountType != null">,${accountType}</if>
+			<if test="operatorId != null">,${operatorId}</if>
+			<if test="operator != null and operator != ''">,#{operator}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="spvAccountingDetailParam">
+		delete from TC_SpvAccountingDetail where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="spvAccountingDetailParam">
+		delete from TC_SpvAccountingDetail
+	</delete>
+	
+	<delete id="delete" parameterMap="spvAccountingDetailParam">
+		delete from TC_SpvAccountingDetail
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="accountBalance != null">and AccountBalance=${accountBalance}</if>
+				<if test="umpayAccountBalance != null">and UmpayAccountBalance=${umpayAccountBalance}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="businessId != null">and BusinessId=${businessId}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="operator != null and operator != ''">and Operator=#{operator}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.emailregistervalid.dao.IEmailRegisterValidDao">
+
+	<parameterMap id="emailRegisterValidParam" type="com.bs.plugins.custom.cc.emailregistervalid.entity.EmailRegisterValid" />
+	<resultMap id="emailRegisterValidResult" type="com.bs.plugins.custom.cc.emailregistervalid.entity.EmailRegisterValid">
+		<id property="id" column="emailRegisterValid_id" javaType="java.lang.Long" />
+		<result property="emailAccount" column="emailRegisterValid_emailAccount" javaType="java.lang.String" />
+		<result property="password" column="emailRegisterValid_password" javaType="java.lang.String" />
+		<result property="nickname" column="emailRegisterValid_nickname" javaType="java.lang.String" />
+		<result property="validEmail" column="emailRegisterValid_validEmail" javaType="java.lang.String" />
+		<result property="registerTime" column="emailRegisterValid_registerTime" javaType="java.lang.String" />
+		<collection property="members" ofType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="professionId" column="member_professionId" javaType="java.lang.Long" />
+			<result property="educationId" column="member_educationId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="lastLoginTime" column="member_lastLoginTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="emailRegisterValidResult" parameterMap="emailRegisterValidParam">
+		select
+			emailRegisterValid.Id emailRegisterValid_id,
+			emailRegisterValid.EmailAccount emailRegisterValid_emailAccount,
+			emailRegisterValid.Password emailRegisterValid_password,
+			emailRegisterValid.Nickname emailRegisterValid_nickname,
+			emailRegisterValid.ValidEmail emailRegisterValid_validEmail,
+			emailRegisterValid.RegisterTime emailRegisterValid_registerTime,	
+			member.Id member_id,
+			member.ProfessionId member_professionId,
+			member.EducationId member_educationId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.RegisterTime member_registerTime,
+			member.LastLoginTime member_lastLoginTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime
+		from CC_EmailRegisterValid emailRegisterValid
+		inner join CC_Member member on member.EmailRegisterValidId=emailRegisterValid.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEmailRegisterValidMember" resultMap="emailRegisterValidResult" parameterMap="emailRegisterValidParam">
+		select
+			emailRegisterValid.Id emailRegisterValid_id,
+			emailRegisterValid.EmailAccount emailRegisterValid_emailAccount,
+			emailRegisterValid.Password emailRegisterValid_password,
+			emailRegisterValid.Nickname emailRegisterValid_nickname,
+			emailRegisterValid.ValidEmail emailRegisterValid_validEmail,
+			emailRegisterValid.RegisterTime emailRegisterValid_registerTime,
+				member.Id member_id,
+	
+				member.ProfessionId member_professionId,
+	
+				member.EducationId member_educationId,
+	
+				member.EmailRegisterValidId member_emailRegisterValidId,
+	
+				member.Account member_account,
+	
+				member.PhoneAccount member_phoneAccount,
+	
+				member.EmailAccount member_emailAccount,
+	
+				member.Password member_password,
+	
+				member.PayPassword member_payPassword,
+	
+				member.Nickname member_nickname,
+	
+				member.Avatar member_avatar,
+	
+				member.ValidEmail member_validEmail,
+	
+				member.MobilePhone member_mobilePhone,
+	
+				member.OfficePhone member_officePhone,
+	
+				member.CertificateType member_certificateType,
+	
+				member.CertificateNo member_certificateNo,
+	
+				member.Name member_name,
+	
+				member.Male member_male,
+	
+				member.Birthday member_birthday,
+	
+				member.FamilyRole member_familyRole,
+	
+				member.Rrac member_rrac,
+	
+				member.RiskScore member_riskScore,
+	
+				member.ProvinceSpell member_provinceSpell,
+	
+				member.ProvinceCode member_provinceCode,
+	
+				member.CityCode member_cityCode,
+	
+				member.CountryCode member_countryCode,
+	
+				member.ProvinceName member_provinceName,
+	
+				member.CityName member_cityName,
+	
+				member.CountryName member_countryName,
+	
+				member.Address member_address,
+	
+				member.IsEmailValid member_isEmailValid,
+	
+				member.IsRealname member_isRealname,
+	
+				member.IsActivate member_isActivate,
+	
+				member.IsSignature member_isSignature,
+	
+				member.SignatureTime member_signatureTime,
+	
+				member.RegisterTime member_registerTime,
+	
+				member.LastLoginTime member_lastLoginTime,
+	
+				member.SerialNo member_serialNo,
+	
+				member.ResetTime member_resetTime
+	
+		from CC_EmailRegisterValid emailRegisterValid
+		inner join CC_Member member on member.EmailRegisterValidId=emailRegisterValid.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="emailRegisterValidResult" parameterMap="emailRegisterValidParam">
+		select 
+			Id emailRegisterValid_id,
+			EmailAccount emailRegisterValid_emailAccount,
+			Password emailRegisterValid_password,
+			Nickname emailRegisterValid_nickname,
+			ValidEmail emailRegisterValid_validEmail,
+			RegisterTime emailRegisterValid_registerTime
+		from CC_EmailRegisterValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="emailRegisterValidResult">
+		select 
+			Id emailRegisterValid_id,
+			EmailAccount emailRegisterValid_emailAccount,
+			Password emailRegisterValid_password,
+			Nickname emailRegisterValid_nickname,
+			ValidEmail emailRegisterValid_validEmail,
+			RegisterTime emailRegisterValid_registerTime
+		from CC_EmailRegisterValid
+	</select>
+	
+	<select id="selectOneById"  resultMap="emailRegisterValidResult" parameterMap="emailRegisterValidParam">
+		select 
+			Id emailRegisterValid_id,
+			EmailAccount emailRegisterValid_emailAccount,
+			Password emailRegisterValid_password,
+			Nickname emailRegisterValid_nickname,
+			ValidEmail emailRegisterValid_validEmail,
+			RegisterTime emailRegisterValid_registerTime
+		from CC_EmailRegisterValid where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="emailRegisterValidResult" parameterMap="emailRegisterValidParam">
+		select 
+			Id emailRegisterValid_id,
+			EmailAccount emailRegisterValid_emailAccount,
+			Password emailRegisterValid_password,
+			Nickname emailRegisterValid_nickname,
+			ValidEmail emailRegisterValid_validEmail,
+			RegisterTime emailRegisterValid_registerTime
+		from CC_EmailRegisterValid
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="emailRegisterValidParam">
+		select count(*) from CC_EmailRegisterValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="emailRegisterValidParam">
+		update CC_EmailRegisterValid
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">,EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">,Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">,Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">,ValidEmail=#{validEmail}</if>
+				,RegisterTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="emailRegisterValidParam">
+		insert into CC_EmailRegisterValid
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="emailAccount != null and emailAccount != ''">,EmailAccount</if>
+			<if test="password != null and password != ''">,Password</if>
+			<if test="nickname != null and nickname != ''">,Nickname</if>
+			<if test="validEmail != null and validEmail != ''">,ValidEmail</if>
+			,RegisterTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="emailAccount != null and emailAccount != ''">,#{emailAccount}</if>
+			<if test="password != null and password != ''">,#{password}</if>
+			<if test="nickname != null and nickname != ''">,#{nickname}</if>
+			<if test="validEmail != null and validEmail != ''">,#{validEmail}</if>
+			,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="emailRegisterValidParam">
+		delete from CC_EmailRegisterValid where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="emailRegisterValidParam">
+		delete from CC_EmailRegisterValid
+	</delete>
+	
+	<delete id="delete" parameterMap="emailRegisterValidParam">
+		delete from CC_EmailRegisterValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

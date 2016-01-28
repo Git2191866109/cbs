@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.goalitemrelation.dao.IGoalItemRelationDao">
+
+	<parameterMap id="goalItemRelationParam" type="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation" />
+	<resultMap id="goalItemRelationResult" type="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation">
+		<id property="id" column="goalItemRelation_id" javaType="java.lang.Long" />
+		<result property="eduGoalId" column="goalItemRelation_eduGoalId" javaType="java.lang.Long" />
+		<result property="eduModeId" column="goalItemRelation_eduModeId" javaType="java.lang.Long" />
+		<result property="growStagesId" column="goalItemRelation_growStagesId" javaType="java.lang.Long" />
+		<result property="inputType" column="goalItemRelation_inputType" javaType="java.lang.Integer" />
+		<result property="isInland" column="goalItemRelation_isInland" javaType="java.lang.Integer" />
+		<association property="educationGoal" javaType="com.bs.plugins.custom.eb.educationgoal.entity.EducationGoal">
+			<id property="id" column="educationGoal_id" javaType="java.lang.Long" />
+			<result property="name" column="educationGoal_name" javaType="java.lang.String" />
+			<result property="isInland" column="educationGoal_isInland" javaType="java.lang.Integer" />
+			<result property="createDate" column="educationGoal_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationGoal_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationGoal_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="educationMode" javaType="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+			<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+			<result property="name" column="educationMode_name" javaType="java.lang.String" />
+			<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			goalItemRelation.IsInland goalItemRelation_isInland,	
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId
+		from EB_GoalItemRelation goalItemRelation
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=goalItemRelation.EduGoalId
+		inner join EB_GrowStages growStages on growStages.Id=goalItemRelation.GrowStagesId
+		inner join EB_EducationMode educationMode on educationMode.Id=goalItemRelation.EduModeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectGoalItemRelationEducationGoal" resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			educationGoal.Id educationMode_id,
+			educationGoal.Name educationMode_name,
+			educationGoal.IsInland educationMode_isInland,
+			educationGoal.CreateDate educationMode_createDate,
+			educationGoal.ModifyDate educationMode_modifyDate,
+			educationGoal.CreatorId educationMode_creatorId
+		from EB_GoalItemRelation goalItemRelation
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=goalItemRelation.EduGoalId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectGoalItemRelationGrowStages" resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			growStages.Id educationMode_id,
+			growStages.Name educationMode_name,
+			growStages.Code educationMode_code,
+			growStages.StartAge educationMode_startAge,
+			growStages.EndAge educationMode_endAge,
+			growStages.IsInclude educationMode_isInclude,
+			growStages.CreateDate educationMode_createDate,
+			growStages.ModifyDate educationMode_modifyDate,
+			growStages.CreatorId educationMode_creatorId
+		from EB_GoalItemRelation goalItemRelation
+		inner join EB_GrowStages growStages on growStages.Id=goalItemRelation.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectGoalItemRelationEducationMode" resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId
+		from EB_GoalItemRelation goalItemRelation
+		inner join EB_EducationMode educationMode on educationMode.Id=goalItemRelation.EduModeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select 
+			Id goalItemRelation_id,
+			EduGoalId goalItemRelation_eduGoalId,
+			EduModeId goalItemRelation_eduModeId,
+			GrowStagesId goalItemRelation_growStagesId,
+			InputType goalItemRelation_inputType,
+			IsInland goalItemRelation_isInland
+		from EB_GoalItemRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="goalItemRelationResult">
+		select 
+			Id goalItemRelation_id,
+			EduGoalId goalItemRelation_eduGoalId,
+			EduModeId goalItemRelation_eduModeId,
+			GrowStagesId goalItemRelation_growStagesId,
+			InputType goalItemRelation_inputType,
+			IsInland goalItemRelation_isInland
+		from EB_GoalItemRelation
+	</select>
+	
+	<select id="selectOneById"  resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select 
+			Id goalItemRelation_id,
+			EduGoalId goalItemRelation_eduGoalId,
+			EduModeId goalItemRelation_eduModeId,
+			GrowStagesId goalItemRelation_growStagesId,
+			InputType goalItemRelation_inputType,
+			IsInland goalItemRelation_isInland
+		from EB_GoalItemRelation where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="goalItemRelationResult" parameterMap="goalItemRelationParam">
+		select 
+			Id goalItemRelation_id,
+			EduGoalId goalItemRelation_eduGoalId,
+			EduModeId goalItemRelation_eduModeId,
+			GrowStagesId goalItemRelation_growStagesId,
+			InputType goalItemRelation_inputType,
+			IsInland goalItemRelation_isInland
+		from EB_GoalItemRelation
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="goalItemRelationParam">
+		select count(*) from EB_GoalItemRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="goalItemRelationParam">
+		update EB_GoalItemRelation
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="eduGoalId != null">,EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">,EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">,InputType=${inputType}</if>
+				<if test="isInland != null">,IsInland=${isInland}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="goalItemRelationParam">
+		update EB_GoalItemRelation
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,EduGoalId=${eduGoalId}
+                            ,EduModeId=${eduModeId}
+                            ,GrowStagesId=${growStagesId}
+                    	<if test="inputType != null">,InputType=${inputType}</if>
+                        <if test="inputType == null">,InputType= 0</if>
+                    	<if test="isInland != null">,IsInland=${isInland}</if>
+                        <if test="isInland == null">,IsInland= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="goalItemRelationParam">
+		insert into EB_GoalItemRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="eduGoalId != null">,EduGoalId</if>
+			<if test="eduModeId != null">,EduModeId</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="inputType != null">,InputType</if>
+			<if test="isInland != null">,IsInland</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="eduGoalId != null">,${eduGoalId}</if>
+			<if test="eduModeId != null">,${eduModeId}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="inputType != null">,${inputType}</if>
+			<if test="isInland != null">,${isInland}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="goalItemRelationParam">
+		delete from EB_GoalItemRelation where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="goalItemRelationParam">
+		delete from EB_GoalItemRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="goalItemRelationParam">
+		delete from EB_GoalItemRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="inputType != null">and InputType=${inputType}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

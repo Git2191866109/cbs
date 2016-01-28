@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称"
+code="功能代码"
+model-name="模型名称[实体bean名称]"
+method-name="调用方法[任意]"
+view-type="视图类型[list,create,modify,detail]"
+template-name="模板名称[自定义模板使用该属性]">
+ -->
+<tc name="交易中心" code="8">
+  	<transaction name="交易管理" code="801">
+  		<subscription name="认购放款查询" code="80101" model-name="TC_Subscription">
+  			<detail name="详情" code="8010101" menu-type="shortcut" model-name="TC_Subscription" view-type="detail"/>
+	      	<modify name="备注" code="8010102" menu-type="shortcut" model-name="TC_Subscription" view-type="detail"/>
+	      	<export name="一键导出" code="8010103" menu-type="shortcut" model-name="TC_Subscription" view-type="detail"/>
+	      	<transfer name="放款" code="8010104" menu-type="shortcut" model-name="TC_Subscription" view-type="detail"/>
+     	</subscription>
+	    <businessaudit name="分账审核" code="80102" model-name="TC_ProductReturnMoney">
+	    	<check name="审核" code="8010201" menu-type="top" model-name="TC_ProductReturnMoney" view-type="detail"/>
+	    	<remark name="备注" code="8010202" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify"/>
+	    	<batchcheck name="批量审核" code="8010203" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify"/>
+	    	<onekeycheck name="一键审核" code="8010204" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify"/>
+	    </businessaudit>
+	    <objectincome name="标的转入" code="80103" model-name="TC_ProductReturnMoney">
+		  	<check name="转入" code="8010301" menu-type="top" model-name="TC_ProductReturnMoney" view-type="detail"/>
+	  	</objectincome>
+	  	<financeaudit name="分账支付" code="80104" model-name="TC_ProductReturnMoney">
+		  	<pay name="支付" code="8010401" menu-type="top" model-name="TC_ProductReturnMoney" view-type="detail"/>
+		  	<export name="导出" code="8010402" model-name="TC_ProductReturnMoney"/>
+		  	<paynote name="支付说明" code="8010403" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify" />
+	  	</financeaudit>
+	  	<problem name="问题单管理" code="80105" model-name="TC_ProductReturnMoney">
+	  		<modify name="修改" code="8010501" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify"/>
+	  		<pay name="支付" code="8010502" menu-type="top" model-name="TC_ProductReturnMoney" view-type="modify"/>
+	  	</problem>
+  	</transaction>
+	<accounting name="账务管理" code="802">
+		<clientflow name="客户资金流水" code="80201" model-name="TC_AccountingDetail"></clientflow>
+		<spvflow name="spv资金流水" code="80202" model-name="TC_SpvAccountingDetail"></spvflow>
+		<fee name="支付手续费" code="80203" model-name="TC_Order"></fee>
+		<recharge name="客户充值查询" code="80204" model-name="TC_RechargeRecords"></recharge>
+		<withdraw name="客户提现查询" code="80205" model-name="TC_WithdrawCashRecords"></withdraw>
+		<spvrecharge name="SPV充值查询" code="80206" model-name="TC_SpvRechargeRecords"></spvrecharge>
+		<spvwithdraw name="SPV提现查询" code="80207" model-name="TC_SpvWithdrawCashRecords"></spvwithdraw>
+	</accounting>
+	<statistics name="销售统计" code="803">
+		<statistics name="销售统计" code="80301" model-name="TC_Subscription"></statistics>
+	</statistics>
+	<appointment name="预约管理" code="804">
+		<appointment name="预约查询" code="80401" model-name="TC_Appointment">
+	     	<delete name="删除" code="8040101" menu-type="shortcut" model-name="TC_Appointment" view-type="delete"/>
+		</appointment>
+	</appointment>
+</tc>

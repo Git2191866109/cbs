@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.school.dao.ISchoolDao">
+
+	<parameterMap id="schoolParam" type="com.bs.plugins.custom.sc.school.entity.School" />
+	<resultMap id="schoolResult" type="com.bs.plugins.custom.sc.school.entity.School">
+		<id property="id" column="school_id" javaType="java.lang.Long" />
+		<result property="areaCode" column="school_areaCode" javaType="java.lang.String" />
+		<result property="code" column="school_code" javaType="java.lang.String" />
+		<result property="name" column="school_name" javaType="java.lang.String" />
+		<result property="type" column="school_type" javaType="java.lang.Integer" />
+		<result property="level" column="school_level" javaType="java.lang.Integer" />
+		<result property="address" column="school_address" javaType="java.lang.String" />
+		<result property="createDate" column="school_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="school_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="school_creatorId" javaType="java.lang.Long" />
+		<association property="area" javaType="com.bs.plugins.custom.sc.area.entity.Area">
+			<id property="id" column="area_id" javaType="java.lang.Long" />
+			<result property="code" column="area_code" javaType="java.lang.String" />
+			<result property="parentCode" column="area_parentCode" javaType="java.lang.String" />
+			<result property="name" column="area_name" javaType="java.lang.String" />
+			<result property="treeLevel" column="area_treeLevel" javaType="java.lang.Integer" />
+			<result property="relationPath" column="area_relationPath" javaType="java.lang.String" />
+			<result property="spelling" column="area_spelling" javaType="java.lang.String" />
+			<result property="type" column="area_type" javaType="java.lang.Integer" />
+			<result property="payAreaCode" column="area_payAreaCode" javaType="java.lang.String" />
+			<result property="createDate" column="area_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="area_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="area_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="schoolResult" parameterMap="schoolParam">
+		select
+			school.Id school_id,
+			school.AreaCode school_areaCode,
+			school.Code school_code,
+			school.Name school_name,
+			school.Type school_type,
+			school.Level school_level,
+			school.Address school_address,
+			school.CreateDate school_createDate,
+			school.ModifyDate school_modifyDate,
+			school.CreatorId school_creatorId,	
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId
+		from SC_School school
+		inner join SC_Area area on area.Id=school.AreaCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSchoolArea" resultMap="schoolResult" parameterMap="schoolParam">
+		select
+			school.Id school_id,
+			school.AreaCode school_areaCode,
+			school.Code school_code,
+			school.Name school_name,
+			school.Type school_type,
+			school.Level school_level,
+			school.Address school_address,
+			school.CreateDate school_createDate,
+			school.ModifyDate school_modifyDate,
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId
+		from SC_School school
+		inner join SC_Area area on area.Id=school.AreaCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="schoolResult" parameterMap="schoolParam">
+		select 
+			Id school_id,
+			AreaCode school_areaCode,
+			Code school_code,
+			Name school_name,
+			Type school_type,
+			Level school_level,
+			Address school_address,
+			CreateDate school_createDate,
+			ModifyDate school_modifyDate,
+			CreatorId school_creatorId
+		from SC_School
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="schoolResult">
+		select 
+			Id school_id,
+			AreaCode school_areaCode,
+			Code school_code,
+			Name school_name,
+			Type school_type,
+			Level school_level,
+			Address school_address,
+			CreateDate school_createDate,
+			ModifyDate school_modifyDate,
+			CreatorId school_creatorId
+		from SC_School
+	</select>
+	
+	<select id="selectOneById"  resultMap="schoolResult" parameterMap="schoolParam">
+		select 
+			Id school_id,
+			AreaCode school_areaCode,
+			Code school_code,
+			Name school_name,
+			Type school_type,
+			Level school_level,
+			Address school_address,
+			CreateDate school_createDate,
+			ModifyDate school_modifyDate,
+			CreatorId school_creatorId
+		from SC_School where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="schoolResult" parameterMap="schoolParam">
+		select 
+			Id school_id,
+			AreaCode school_areaCode,
+			Code school_code,
+			Name school_name,
+			Type school_type,
+			Level school_level,
+			Address school_address,
+			CreateDate school_createDate,
+			ModifyDate school_modifyDate,
+			CreatorId school_creatorId
+		from SC_School
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="schoolParam">
+		select count(*) from SC_School
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="schoolParam">
+		update SC_School
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">,AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="level != null">,Level=${level}</if>
+				<if test="address != null and address != ''">,Address=#{address}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="schoolParam">
+		update SC_School
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,AreaCode=#{areaCode}
+						,Code=#{code}
+						,Name=#{name}
+                    	<if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+                    	<if test="level != null">,Level=${level}</if>
+                        <if test="level == null">,Level= 0</if>
+						,Address=#{address}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="schoolParam">
+		insert into SC_School
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="areaCode != null and areaCode != ''">,AreaCode</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="type != null">,Type</if>
+			<if test="level != null">,Level</if>
+			<if test="address != null and address != ''">,Address</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="areaCode != null and areaCode != ''">,#{areaCode}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="type != null">,${type}</if>
+			<if test="level != null">,${level}</if>
+			<if test="address != null and address != ''">,#{address}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="schoolParam">
+		delete from SC_School where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="schoolParam">
+		delete from SC_School
+	</delete>
+	
+	<delete id="delete" parameterMap="schoolParam">
+		delete from SC_School
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="level != null">and Level=${level}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.goalbudgetrelation.dao.IGoalBudgetRelationDao">
+
+	<parameterMap id="goalBudgetRelationParam" type="com.bs.plugins.custom.eb.goalbudgetrelation.entity.GoalBudgetRelation" />
+	<resultMap id="goalBudgetRelationResult" type="com.bs.plugins.custom.eb.goalbudgetrelation.entity.GoalBudgetRelation">
+		<id property="id" column="goalBudgetRelation_id" javaType="java.lang.Long" />
+		<result property="eduGoalId" column="goalBudgetRelation_eduGoalId" javaType="java.lang.Long" />
+		<result property="growStagesId" column="goalBudgetRelation_growStagesId" javaType="java.lang.Long" />
+		<result property="categoryId" column="goalBudgetRelation_categoryId" javaType="java.lang.Long" />
+		<result property="itemId" column="goalBudgetRelation_itemId" javaType="java.lang.Long" />
+		<association property="educationGoal" javaType="com.bs.plugins.custom.eb.educationgoal.entity.EducationGoal">
+			<id property="id" column="educationGoal_id" javaType="java.lang.Long" />
+			<result property="name" column="educationGoal_name" javaType="java.lang.String" />
+			<result property="createDate" column="educationGoal_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationGoal_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationGoal_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="budgetCategory" javaType="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory">
+			<id property="id" column="budgetCategory_id" javaType="java.lang.Long" />
+			<result property="name" column="budgetCategory_name" javaType="java.lang.String" />
+			<result property="code" column="budgetCategory_code" javaType="java.lang.String" />
+			<result property="createDate" column="budgetCategory_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetCategory_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetCategory_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="budgetItem" javaType="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+			<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+			<result property="itemLevel" column="budgetItem_itemLevel" javaType="java.lang.Integer" />
+			<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+			<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+			<result property="grade" column="budgetItem_grade" javaType="java.lang.String" />
+			<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+			<result property="isInflation" column="budgetItem_isInflation" javaType="java.lang.Integer" />
+			<result property="isTranslation" column="budgetItem_isTranslation" javaType="java.lang.Integer" />
+			<result property="inputLevel" column="budgetItem_inputLevel" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select
+			goalBudgetRelation.Id goalBudgetRelation_id,
+			goalBudgetRelation.EduGoalId goalBudgetRelation_eduGoalId,
+			goalBudgetRelation.GrowStagesId goalBudgetRelation_growStagesId,
+			goalBudgetRelation.CategoryId goalBudgetRelation_categoryId,
+			goalBudgetRelation.ItemId goalBudgetRelation_itemId,	
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId
+		from EB_GoalBudgetRelation goalBudgetRelation
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=goalBudgetRelation.EduGoalId
+		inner join EB_GrowStages growStages on growStages.Id=goalBudgetRelation.GrowStagesId
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=goalBudgetRelation.CategoryId
+		inner join EB_BudgetItem budgetItem on budgetItem.Id=goalBudgetRelation.ItemId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectGoalBudgetRelationEducationGoal" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select
+			goalBudgetRelation.Id goalBudgetRelation_id,
+			goalBudgetRelation.EduGoalId goalBudgetRelation_eduGoalId,
+			goalBudgetRelation.GrowStagesId goalBudgetRelation_growStagesId,
+			goalBudgetRelation.CategoryId goalBudgetRelation_categoryId,
+			educationGoal.Id budgetItem_id,
+			educationGoal.Name budgetItem_name,
+			educationGoal.CreateDate budgetItem_createDate,
+			educationGoal.ModifyDate budgetItem_modifyDate,
+			educationGoal.CreatorId budgetItem_creatorId,
+		from EB_GoalBudgetRelation goalBudgetRelation
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=goalBudgetRelation.EduGoalId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectGoalBudgetRelationGrowStages" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select
+			goalBudgetRelation.Id goalBudgetRelation_id,
+			goalBudgetRelation.EduGoalId goalBudgetRelation_eduGoalId,
+			goalBudgetRelation.GrowStagesId goalBudgetRelation_growStagesId,
+			goalBudgetRelation.CategoryId goalBudgetRelation_categoryId,
+			growStages.Id budgetItem_id,
+			growStages.Name budgetItem_name,
+			growStages.Code budgetItem_code,
+			growStages.StartAge budgetItem_startAge,
+			growStages.EndAge budgetItem_endAge,
+			growStages.IsInclude budgetItem_isInclude,
+			growStages.CreateDate budgetItem_createDate,
+			growStages.ModifyDate budgetItem_modifyDate,
+			growStages.CreatorId budgetItem_creatorId,
+		from EB_GoalBudgetRelation goalBudgetRelation
+		inner join EB_GrowStages growStages on growStages.Id=goalBudgetRelation.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectGoalBudgetRelationBudgetCategory" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select
+			goalBudgetRelation.Id goalBudgetRelation_id,
+			goalBudgetRelation.EduGoalId goalBudgetRelation_eduGoalId,
+			goalBudgetRelation.GrowStagesId goalBudgetRelation_growStagesId,
+			goalBudgetRelation.CategoryId goalBudgetRelation_categoryId,
+			budgetCategory.Id budgetItem_id,
+			budgetCategory.Name budgetItem_name,
+			budgetCategory.Code budgetItem_code,
+			budgetCategory.CreateDate budgetItem_createDate,
+			budgetCategory.ModifyDate budgetItem_modifyDate,
+			budgetCategory.CreatorId budgetItem_creatorId,
+		from EB_GoalBudgetRelation goalBudgetRelation
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=goalBudgetRelation.CategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectGoalBudgetRelationBudgetItem" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select
+			goalBudgetRelation.Id goalBudgetRelation_id,
+			goalBudgetRelation.EduGoalId goalBudgetRelation_eduGoalId,
+			goalBudgetRelation.GrowStagesId goalBudgetRelation_growStagesId,
+			goalBudgetRelation.CategoryId goalBudgetRelation_categoryId,
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId,
+		from EB_GoalBudgetRelation goalBudgetRelation
+		inner join EB_BudgetItem budgetItem on budgetItem.Id=goalBudgetRelation.ItemId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select 
+			Id goalBudgetRelation_id,
+			EduGoalId goalBudgetRelation_eduGoalId,
+			GrowStagesId goalBudgetRelation_growStagesId,
+			CategoryId goalBudgetRelation_categoryId,
+			ItemId goalBudgetRelation_itemId
+		from EB_GoalBudgetRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="goalBudgetRelationResult">
+		select 
+			Id goalBudgetRelation_id,
+			EduGoalId goalBudgetRelation_eduGoalId,
+			GrowStagesId goalBudgetRelation_growStagesId,
+			CategoryId goalBudgetRelation_categoryId,
+			ItemId goalBudgetRelation_itemId
+		from EB_GoalBudgetRelation
+	</select>
+	
+	<select id="selectOneById"  resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select 
+			Id goalBudgetRelation_id,
+			EduGoalId goalBudgetRelation_eduGoalId,
+			GrowStagesId goalBudgetRelation_growStagesId,
+			CategoryId goalBudgetRelation_categoryId,
+			ItemId goalBudgetRelation_itemId
+		from EB_GoalBudgetRelation where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="goalBudgetRelationResult" parameterMap="goalBudgetRelationParam">
+		select 
+			Id goalBudgetRelation_id,
+			EduGoalId goalBudgetRelation_eduGoalId,
+			GrowStagesId goalBudgetRelation_growStagesId,
+			CategoryId goalBudgetRelation_categoryId,
+			ItemId goalBudgetRelation_itemId
+		from EB_GoalBudgetRelation
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="goalBudgetRelationParam">
+		select count(*) from EB_GoalBudgetRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="goalBudgetRelationParam">
+		update EB_GoalBudgetRelation
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="eduGoalId != null">,EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">,CategoryId=${categoryId}</if>
+				<if test="itemId != null">,ItemId=${itemId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="goalBudgetRelationParam">
+		insert into EB_GoalBudgetRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="eduGoalId != null">,EduGoalId</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="categoryId != null">,CategoryId</if>
+			<if test="itemId != null">,ItemId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="eduGoalId != null">,${eduGoalId}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="categoryId != null">,${categoryId}</if>
+			<if test="itemId != null">,${itemId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="goalBudgetRelationParam">
+		delete from EB_GoalBudgetRelation where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="goalBudgetRelationParam">
+		delete from EB_GoalBudgetRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="goalBudgetRelationParam">
+		delete from EB_GoalBudgetRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId != null">and EduGoalId=${eduGoalId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

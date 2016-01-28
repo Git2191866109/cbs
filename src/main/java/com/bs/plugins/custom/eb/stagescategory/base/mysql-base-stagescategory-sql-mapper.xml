@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.stagescategory.dao.IStagesCategoryDao">
+
+	<parameterMap id="stagesCategoryParam" type="com.bs.plugins.custom.eb.stagescategory.entity.StagesCategory" />
+	<resultMap id="stagesCategoryResult" type="com.bs.plugins.custom.eb.stagescategory.entity.StagesCategory">
+		<id property="id" column="stagesCategory_id" javaType="java.lang.Long" />
+		<result property="growStagesId" column="stagesCategory_growStagesId" javaType="java.lang.Long" />
+		<result property="name" column="stagesCategory_name" javaType="java.lang.String" />
+		<result property="type" column="stagesCategory_type" javaType="java.lang.Integer" />
+		<result property="startAge" column="stagesCategory_startAge" javaType="java.lang.Integer" />
+		<result property="createDate" column="stagesCategory_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="stagesCategory_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="stagesCategory_creatorId" javaType="java.lang.Long" />
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+		<collection property="budgetDataRelations" ofType="com.bs.plugins.custom.eb.budgetdatarelation.entity.BudgetDataRelation">
+			<result property="itemId" column="budgetDataRelation_itemId" javaType="java.lang.Long" />
+			<result property="fieldValueId" column="budgetDataRelation_fieldValueId" javaType="java.lang.Long" />
+			<result property="dataAttributeId" column="budgetDataRelation_dataAttributeId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select
+			stagesCategory.Id stagesCategory_id,
+			stagesCategory.GrowStagesId stagesCategory_growStagesId,
+			stagesCategory.Name stagesCategory_name,
+			stagesCategory.Type stagesCategory_type,
+			stagesCategory.StartAge stagesCategory_startAge,
+			stagesCategory.CreateDate stagesCategory_createDate,
+			stagesCategory.ModifyDate stagesCategory_modifyDate,
+			stagesCategory.CreatorId stagesCategory_creatorId,	
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+		from EB_StagesCategory stagesCategory
+		inner join EB_GrowStages growStages on growStages.Id=stagesCategory.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStagesCategoryGrowStages" resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select
+			stagesCategory.Id stagesCategory_id,
+			stagesCategory.GrowStagesId stagesCategory_growStagesId,
+			stagesCategory.Name stagesCategory_name,
+			stagesCategory.Type stagesCategory_type,
+			stagesCategory.StartAge stagesCategory_startAge,
+			stagesCategory.CreateDate stagesCategory_createDate,
+			stagesCategory.ModifyDate stagesCategory_modifyDate,
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId,
+		from EB_StagesCategory stagesCategory
+		inner join EB_GrowStages growStages on growStages.Id=stagesCategory.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select
+			stagesCategory.Id stagesCategory_id,
+			stagesCategory.GrowStagesId stagesCategory_growStagesId,
+			stagesCategory.Name stagesCategory_name,
+			stagesCategory.Type stagesCategory_type,
+			stagesCategory.StartAge stagesCategory_startAge,
+			stagesCategory.CreateDate stagesCategory_createDate,
+			stagesCategory.ModifyDate stagesCategory_modifyDate,
+			stagesCategory.CreatorId stagesCategory_creatorId,	
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			budgetDataRelation.DataAttributeId budgetDataRelation_dataAttributeId
+		from EB_StagesCategory stagesCategory
+		inner join EB_BudgetDataRelation budgetDataRelation on budgetDataRelation.DataAttributeId=stagesCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStagesCategoryBudgetDataRelation" resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select
+			stagesCategory.Id stagesCategory_id,
+			stagesCategory.GrowStagesId stagesCategory_growStagesId,
+			stagesCategory.Name stagesCategory_name,
+			stagesCategory.Type stagesCategory_type,
+			stagesCategory.StartAge stagesCategory_startAge,
+			stagesCategory.CreateDate stagesCategory_createDate,
+			stagesCategory.ModifyDate stagesCategory_modifyDate,
+			stagesCategory.CreatorId stagesCategory_creatorId,
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			budgetDataRelation.DataAttributeId budgetDataRelation_dataAttributeId,
+		from EB_StagesCategory stagesCategory
+		inner join EB_BudgetDataRelation budgetDataRelation on budgetDataRelation.DataAttributeId=stagesCategory.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select 
+			Id stagesCategory_id,
+			GrowStagesId stagesCategory_growStagesId,
+			Name stagesCategory_name,
+			Type stagesCategory_type,
+			StartAge stagesCategory_startAge,
+			CreateDate stagesCategory_createDate,
+			ModifyDate stagesCategory_modifyDate,
+			CreatorId stagesCategory_creatorId
+		from EB_StagesCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="stagesCategoryResult">
+		select 
+			Id stagesCategory_id,
+			GrowStagesId stagesCategory_growStagesId,
+			Name stagesCategory_name,
+			Type stagesCategory_type,
+			StartAge stagesCategory_startAge,
+			CreateDate stagesCategory_createDate,
+			ModifyDate stagesCategory_modifyDate,
+			CreatorId stagesCategory_creatorId
+		from EB_StagesCategory
+	</select>
+	
+	<select id="selectOneById"  resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select 
+			Id stagesCategory_id,
+			GrowStagesId stagesCategory_growStagesId,
+			Name stagesCategory_name,
+			Type stagesCategory_type,
+			StartAge stagesCategory_startAge,
+			CreateDate stagesCategory_createDate,
+			ModifyDate stagesCategory_modifyDate,
+			CreatorId stagesCategory_creatorId
+		from EB_StagesCategory where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="stagesCategoryResult" parameterMap="stagesCategoryParam">
+		select 
+			Id stagesCategory_id,
+			GrowStagesId stagesCategory_growStagesId,
+			Name stagesCategory_name,
+			Type stagesCategory_type,
+			StartAge stagesCategory_startAge,
+			CreateDate stagesCategory_createDate,
+			ModifyDate stagesCategory_modifyDate,
+			CreatorId stagesCategory_creatorId
+		from EB_StagesCategory
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="stagesCategoryParam">
+		select count(*) from EB_StagesCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="stagesCategoryParam">
+		update EB_StagesCategory
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="startAge != null">,StartAge=${startAge}</if>
+				,CreateDate=now()
+				,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="stagesCategoryParam">
+		insert into EB_StagesCategory
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="type != null">,Type</if>
+			<if test="startAge != null">,StartAge</if>
+			,CreateDate
+			,ModifyDate
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="type != null">,${type}</if>
+			<if test="startAge != null">,${startAge}</if>
+			,now()
+			,now()
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="stagesCategoryParam">
+		delete from EB_StagesCategory where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="stagesCategoryParam">
+		delete from EB_StagesCategory
+	</delete>
+	
+	<delete id="delete" parameterMap="stagesCategoryParam">
+		delete from EB_StagesCategory
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="startAge != null">and StartAge=${startAge}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

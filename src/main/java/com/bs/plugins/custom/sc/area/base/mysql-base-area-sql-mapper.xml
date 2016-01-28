@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.area.dao.IAreaDao">
+
+	<parameterMap id="areaParam" type="com.bs.plugins.custom.sc.area.entity.Area" />
+	<resultMap id="areaResult" type="com.bs.plugins.custom.sc.area.entity.Area">
+		<id property="id" column="area_id" javaType="java.lang.Long" />
+		<result property="code" column="area_code" javaType="java.lang.String" />
+		<result property="parentCode" column="area_parentCode" javaType="java.lang.String" />
+		<result property="name" column="area_name" javaType="java.lang.String" />
+		<result property="treeLevel" column="area_treeLevel" javaType="java.lang.Integer" />
+		<result property="relationPath" column="area_relationPath" javaType="java.lang.String" />
+		<result property="spelling" column="area_spelling" javaType="java.lang.String" />
+		<result property="type" column="area_type" javaType="java.lang.Integer" />
+		<result property="payAreaCode" column="area_payAreaCode" javaType="java.lang.String" />
+		<result property="createDate" column="area_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="area_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="area_creatorId" javaType="java.lang.Long" />
+		<collection property="schools" ofType="com.bs.plugins.custom.sc.school.entity.School">
+			<id property="id" column="school_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="school_areaCode" javaType="java.lang.String" />
+			<result property="code" column="school_code" javaType="java.lang.String" />
+			<result property="name" column="school_name" javaType="java.lang.String" />
+			<result property="type" column="school_type" javaType="java.lang.Integer" />
+			<result property="level" column="school_level" javaType="java.lang.Integer" />
+			<result property="address" column="school_address" javaType="java.lang.String" />
+			<result property="createDate" column="school_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="school_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="school_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="residentIncomess" ofType="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes">
+			<id property="id" column="residentIncomes_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="residentIncomes_areaCode" javaType="java.lang.String" />
+			<result property="amount" column="residentIncomes_amount" javaType="java.lang.String" />
+			<result property="isBaseData" column="residentIncomes_isBaseData" javaType="java.lang.Integer" />
+			<result property="ratio" column="residentIncomes_ratio" javaType="java.math.BigDecimal" />
+			<result property="createDate" column="residentIncomes_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="residentIncomes_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="residentIncomes_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="budgetItemDatas" ofType="com.bs.plugins.custom.eb.budgetitemdata.entity.BudgetItemData">
+			<id property="id" column="budgetItemData_id" javaType="java.lang.Long" />
+			<result property="areaCode" column="budgetItemData_areaCode" javaType="java.lang.String" />
+			<result property="eduGoalId" column="budgetItemData_eduGoalId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="budgetItemData_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="budgetItemData_eduModeId" javaType="java.lang.Long" />
+			<result property="categoryId" column="budgetItemData_categoryId" javaType="java.lang.Long" />
+			<result property="itemId" column="budgetItemData_itemId" javaType="java.lang.Long" />
+			<result property="isInland" column="budgetItemData_isInland" javaType="java.lang.Integer" />
+			<result property="lowAmountTotal" column="budgetItemData_lowAmountTotal" javaType="java.math.BigDecimal" />
+			<result property="highAmountTotal" column="budgetItemData_highAmountTotal" javaType="java.math.BigDecimal" />
+			<result property="lowAmount" column="budgetItemData_lowAmount" javaType="java.math.BigDecimal" />
+			<result property="highAmount" column="budgetItemData_highAmount" javaType="java.math.BigDecimal" />
+			<result property="maxAmount" column="budgetItemData_maxAmount" javaType="java.math.BigDecimal" />
+			<result property="systemYearCount" column="budgetItemData_systemYearCount" javaType="java.lang.Integer" />
+			<result property="yearCount" column="budgetItemData_yearCount" javaType="java.lang.Double" />
+			<result property="maxYearCount" column="budgetItemData_maxYearCount" javaType="java.lang.Integer" />
+			<result property="years" column="budgetItemData_years" javaType="java.lang.Integer" />
+			<result property="endYears" column="budgetItemData_endYears" javaType="java.lang.Integer" />
+			<result property="paymentGrade" column="budgetItemData_paymentGrade" javaType="java.lang.Integer" />
+			<result property="isGrading" column="budgetItemData_isGrading" javaType="java.lang.Integer" />
+			<result property="gradingType" column="budgetItemData_gradingType" javaType="java.lang.Integer" />
+			<result property="paymentMethod" column="budgetItemData_paymentMethod" javaType="java.lang.Integer" />
+			<result property="paymentMonth" column="budgetItemData_paymentMonth" javaType="java.lang.Integer" />
+			<result property="isInflation" column="budgetItemData_isInflation" javaType="java.lang.Integer" />
+			<result property="isAreaTranslation" column="budgetItemData_isAreaTranslation" javaType="java.lang.Integer" />
+			<result property="comment" column="budgetItemData_comment" javaType="java.lang.String" />
+			<result property="dataSources" column="budgetItemData_dataSources" javaType="java.lang.String" />
+			<result property="trainingAgencyName" column="budgetItemData_trainingAgencyName" javaType="java.lang.String" />
+			<result property="createDate" column="budgetItemData_createDate" javaType="java.lang.String" />
+			<result property="updateDate" column="budgetItemData_updateDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItemData_creatorId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="areaResult" parameterMap="areaParam">
+		select
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId,	
+			school.Id school_id,
+			school.AreaCode school_areaCode,
+			school.Code school_code,
+			school.Name school_name,
+			school.Type school_type,
+			school.Level school_level,
+			school.Address school_address,
+			school.CreateDate school_createDate,
+			school.ModifyDate school_modifyDate,
+			school.CreatorId school_creatorId
+			residentIncomes.Id residentIncomes_id,
+			residentIncomes.AreaCode residentIncomes_areaCode,
+			residentIncomes.Amount residentIncomes_amount,
+			residentIncomes.IsBaseData residentIncomes_isBaseData,
+			residentIncomes.Ratio residentIncomes_ratio,
+			residentIncomes.CreateDate residentIncomes_createDate,
+			residentIncomes.ModifyDate residentIncomes_modifyDate,
+			residentIncomes.CreatorId residentIncomes_creatorId
+			budgetItemData.Id budgetItemData_id,
+			budgetItemData.AreaCode budgetItemData_areaCode,
+			budgetItemData.EduGoalId budgetItemData_eduGoalId,
+			budgetItemData.GrowStagesId budgetItemData_growStagesId,
+			budgetItemData.EduModeId budgetItemData_eduModeId,
+			budgetItemData.CategoryId budgetItemData_categoryId,
+			budgetItemData.ItemId budgetItemData_itemId,
+			budgetItemData.IsInland budgetItemData_isInland,
+			budgetItemData.LowAmountTotal budgetItemData_lowAmountTotal,
+			budgetItemData.HighAmountTotal budgetItemData_highAmountTotal,
+			budgetItemData.LowAmount budgetItemData_lowAmount,
+			budgetItemData.HighAmount budgetItemData_highAmount,
+			budgetItemData.MaxAmount budgetItemData_maxAmount,
+			budgetItemData.SystemYearCount budgetItemData_systemYearCount,
+			budgetItemData.YearCount budgetItemData_yearCount,
+			budgetItemData.MaxYearCount budgetItemData_maxYearCount,
+			budgetItemData.Years budgetItemData_years,
+			budgetItemData.EndYears budgetItemData_endYears,
+			budgetItemData.PaymentGrade budgetItemData_paymentGrade,
+			budgetItemData.IsGrading budgetItemData_isGrading,
+			budgetItemData.GradingType budgetItemData_gradingType,
+			budgetItemData.PaymentMethod budgetItemData_paymentMethod,
+			budgetItemData.PaymentMonth budgetItemData_paymentMonth,
+			budgetItemData.IsInflation budgetItemData_isInflation,
+			budgetItemData.IsAreaTranslation budgetItemData_isAreaTranslation,
+			budgetItemData.Comment budgetItemData_comment,
+			budgetItemData.DataSources budgetItemData_dataSources,
+			budgetItemData.TrainingAgencyName budgetItemData_trainingAgencyName,
+			budgetItemData.CreateDate budgetItemData_createDate,
+			budgetItemData.UpdateDate budgetItemData_updateDate,
+			budgetItemData.CreatorId budgetItemData_creatorId
+		from SC_Area area
+		inner join SC_School school on school.AreaCode=area.Id
+		inner join SC_ResidentIncomes residentIncomes on residentIncomes.AreaCode=area.Id
+		inner join EB_BudgetItemData budgetItemData on budgetItemData.AreaCode=area.Code
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAreaSchool" resultMap="areaResult" parameterMap="areaParam">
+		select
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId,
+				school.Id school_id,
+	
+				school.AreaCode school_areaCode,
+	
+				school.Code school_code,
+	
+				school.Name school_name,
+	
+				school.Type school_type,
+	
+				school.Level school_level,
+	
+				school.Address school_address,
+	
+				school.CreateDate school_createDate,
+	
+				school.ModifyDate school_modifyDate,
+	
+				school.CreatorId school_creatorId
+	
+		from SC_Area area
+		inner join SC_School school on school.AreaCode=area.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectAreaResidentIncomes" resultMap="areaResult" parameterMap="areaParam">
+		select
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId,
+				residentIncomes.Id residentIncomes_id,
+	
+				residentIncomes.AreaCode residentIncomes_areaCode,
+	
+				residentIncomes.Amount residentIncomes_amount,
+	
+				residentIncomes.IsBaseData residentIncomes_isBaseData,
+	
+				residentIncomes.Ratio residentIncomes_ratio,
+	
+				residentIncomes.CreateDate residentIncomes_createDate,
+	
+				residentIncomes.ModifyDate residentIncomes_modifyDate,
+	
+				residentIncomes.CreatorId residentIncomes_creatorId
+	
+		from SC_Area area
+		inner join SC_ResidentIncomes residentIncomes on residentIncomes.AreaCode=area.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectAreaBudgetItemData" resultMap="areaResult" parameterMap="areaParam">
+		select
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId,
+				budgetItemData.Id budgetItemData_id,
+	
+				budgetItemData.AreaCode budgetItemData_areaCode,
+	
+				budgetItemData.EduGoalId budgetItemData_eduGoalId,
+	
+				budgetItemData.GrowStagesId budgetItemData_growStagesId,
+	
+				budgetItemData.EduModeId budgetItemData_eduModeId,
+	
+				budgetItemData.CategoryId budgetItemData_categoryId,
+	
+				budgetItemData.ItemId budgetItemData_itemId,
+	
+				budgetItemData.IsInland budgetItemData_isInland,
+	
+				budgetItemData.LowAmountTotal budgetItemData_lowAmountTotal,
+	
+				budgetItemData.HighAmountTotal budgetItemData_highAmountTotal,
+	
+				budgetItemData.LowAmount budgetItemData_lowAmount,
+	
+				budgetItemData.HighAmount budgetItemData_highAmount,
+	
+				budgetItemData.MaxAmount budgetItemData_maxAmount,
+	
+				budgetItemData.SystemYearCount budgetItemData_systemYearCount,
+	
+				budgetItemData.YearCount budgetItemData_yearCount,
+	
+				budgetItemData.MaxYearCount budgetItemData_maxYearCount,
+	
+				budgetItemData.Years budgetItemData_years,
+	
+				budgetItemData.EndYears budgetItemData_endYears,
+	
+				budgetItemData.PaymentGrade budgetItemData_paymentGrade,
+	
+				budgetItemData.IsGrading budgetItemData_isGrading,
+	
+				budgetItemData.GradingType budgetItemData_gradingType,
+	
+				budgetItemData.PaymentMethod budgetItemData_paymentMethod,
+	
+				budgetItemData.PaymentMonth budgetItemData_paymentMonth,
+	
+				budgetItemData.IsInflation budgetItemData_isInflation,
+	
+				budgetItemData.IsAreaTranslation budgetItemData_isAreaTranslation,
+	
+				budgetItemData.Comment budgetItemData_comment,
+	
+				budgetItemData.DataSources budgetItemData_dataSources,
+	
+				budgetItemData.TrainingAgencyName budgetItemData_trainingAgencyName,
+	
+				budgetItemData.CreateDate budgetItemData_createDate,
+	
+				budgetItemData.UpdateDate budgetItemData_updateDate,
+	
+				budgetItemData.CreatorId budgetItemData_creatorId
+	
+		from SC_Area area
+		inner join EB_BudgetItemData budgetItemData on budgetItemData.AreaCode=area.Code
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="areaResult" parameterMap="areaParam">
+		select 
+			Id area_id,
+			Code area_code,
+			ParentCode area_parentCode,
+			Name area_name,
+			TreeLevel area_treeLevel,
+			RelationPath area_relationPath,
+			Spelling area_spelling,
+			Type area_type,
+			PayAreaCode area_payAreaCode,
+			CreateDate area_createDate,
+			ModifyDate area_modifyDate,
+			CreatorId area_creatorId
+		from SC_Area
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="areaResult">
+		select 
+			Id area_id,
+			Code area_code,
+			ParentCode area_parentCode,
+			Name area_name,
+			TreeLevel area_treeLevel,
+			RelationPath area_relationPath,
+			Spelling area_spelling,
+			Type area_type,
+			PayAreaCode area_payAreaCode,
+			CreateDate area_createDate,
+			ModifyDate area_modifyDate,
+			CreatorId area_creatorId
+		from SC_Area
+	</select>
+	
+	<select id="selectOneById"  resultMap="areaResult" parameterMap="areaParam">
+		select 
+			Id area_id,
+			Code area_code,
+			ParentCode area_parentCode,
+			Name area_name,
+			TreeLevel area_treeLevel,
+			RelationPath area_relationPath,
+			Spelling area_spelling,
+			Type area_type,
+			PayAreaCode area_payAreaCode,
+			CreateDate area_createDate,
+			ModifyDate area_modifyDate,
+			CreatorId area_creatorId
+		from SC_Area where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="areaResult" parameterMap="areaParam">
+		select 
+			Id area_id,
+			Code area_code,
+			ParentCode area_parentCode,
+			Name area_name,
+			TreeLevel area_treeLevel,
+			RelationPath area_relationPath,
+			Spelling area_spelling,
+			Type area_type,
+			PayAreaCode area_payAreaCode,
+			CreateDate area_createDate,
+			ModifyDate area_modifyDate,
+			CreatorId area_creatorId
+		from SC_Area
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="areaParam">
+		select count(*) from SC_Area
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="areaParam">
+		update SC_Area
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">,ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">,RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">,Spelling=#{spelling}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">,PayAreaCode=#{payAreaCode}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="areaParam">
+		update SC_Area
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Code=#{code}
+						,ParentCode=#{parentCode}
+						,Name=#{name}
+                    	<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+                        <if test="treeLevel == null">,TreeLevel= 0</if>
+						,RelationPath=#{relationPath}
+						,Spelling=#{spelling}
+                    	<if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+						,PayAreaCode=#{payAreaCode}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="areaParam">
+		insert into SC_Area
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="parentCode != null and parentCode != ''">,ParentCode</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="treeLevel != null">,TreeLevel</if>
+			<if test="relationPath != null and relationPath != ''">,RelationPath</if>
+			<if test="spelling != null and spelling != ''">,Spelling</if>
+			<if test="type != null">,Type</if>
+			<if test="payAreaCode != null and payAreaCode != ''">,PayAreaCode</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="parentCode != null and parentCode != ''">,#{parentCode}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="treeLevel != null">,${treeLevel}</if>
+			<if test="relationPath != null and relationPath != ''">,#{relationPath}</if>
+			<if test="spelling != null and spelling != ''">,#{spelling}</if>
+			<if test="type != null">,${type}</if>
+			<if test="payAreaCode != null and payAreaCode != ''">,#{payAreaCode}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="areaParam">
+		delete from SC_Area where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="areaParam">
+		delete from SC_Area
+	</delete>
+	
+	<delete id="delete" parameterMap="areaParam">
+		delete from SC_Area
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="spelling != null and spelling != ''">and Spelling=#{spelling}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="payAreaCode != null and payAreaCode != ''">and PayAreaCode=#{payAreaCode}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

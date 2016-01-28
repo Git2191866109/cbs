@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.rechargerecords.dao.IRechargeRecordsDao">
+
+	<parameterMap id="rechargeRecordsParam" type="com.bs.plugins.custom.tc.rechargerecords.entity.RechargeRecords" />
+	<resultMap id="rechargeRecordsResult" type="com.bs.plugins.custom.tc.rechargerecords.entity.RechargeRecords">
+		<id property="id" column="rechargeRecords_id" javaType="java.lang.Long" />
+		<result property="memberId" column="rechargeRecords_memberId" javaType="java.lang.Long" />
+		<result property="transactionNumber" column="rechargeRecords_transactionNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="rechargeRecords_payPlantformNumber" javaType="java.lang.String" />
+		<result property="amount" column="rechargeRecords_amount" javaType="java.math.BigDecimal" />
+		<result property="iDCardType" column="rechargeRecords_iDCardType" javaType="java.lang.Integer" />
+		<result property="iDCard" column="rechargeRecords_iDCard" javaType="java.lang.String" />
+		<result property="bankName" column="rechargeRecords_bankName" javaType="java.lang.String" />
+		<result property="bankCode" column="rechargeRecords_bankCode" javaType="java.lang.String" />
+		<result property="bankCardNumber" column="rechargeRecords_bankCardNumber" javaType="java.lang.String" />
+		<result property="handlingChargeType" column="rechargeRecords_handlingChargeType" javaType="java.lang.Integer" />
+		<result property="handlingCharge" column="rechargeRecords_handlingCharge" javaType="java.math.BigDecimal" />
+		<result property="handlingChargeRatio" column="rechargeRecords_handlingChargeRatio" javaType="java.math.BigDecimal" />
+		<result property="applyTime" column="rechargeRecords_applyTime" javaType="java.lang.String" />
+		<result property="finishTime" column="rechargeRecords_finishTime" javaType="java.lang.String" />
+		<result property="status" column="rechargeRecords_status" javaType="java.lang.Integer" />
+		<result property="isQuestionnaire" column="rechargeRecords_isQuestionnaire" javaType="java.lang.Integer" />
+		<result property="checkingTime" column="rechargeRecords_checkingTime" javaType="java.lang.String" />
+		<result property="checkingStatus" column="rechargeRecords_checkingStatus" javaType="java.lang.Integer" />
+		<result property="remark" column="rechargeRecords_remark" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+		select
+			rechargeRecords.Id rechargeRecords_id,
+			rechargeRecords.MemberId rechargeRecords_memberId,
+			rechargeRecords.TransactionNumber rechargeRecords_transactionNumber,
+			rechargeRecords.PayPlantformNumber rechargeRecords_payPlantformNumber,
+			rechargeRecords.Amount rechargeRecords_amount,
+			rechargeRecords.IDCardType rechargeRecords_iDCardType,
+			rechargeRecords.IDCard rechargeRecords_iDCard,
+			rechargeRecords.BankName rechargeRecords_bankName,
+			rechargeRecords.BankCode rechargeRecords_bankCode,
+			rechargeRecords.BankCardNumber rechargeRecords_bankCardNumber,
+			rechargeRecords.HandlingChargeType rechargeRecords_handlingChargeType,
+			rechargeRecords.HandlingCharge rechargeRecords_handlingCharge,
+			rechargeRecords.HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			rechargeRecords.ApplyTime rechargeRecords_applyTime,
+			rechargeRecords.FinishTime rechargeRecords_finishTime,
+			rechargeRecords.Status rechargeRecords_status,
+			rechargeRecords.IsQuestionnaire rechargeRecords_isQuestionnaire,
+			rechargeRecords.CheckingTime rechargeRecords_checkingTime,
+			rechargeRecords.CheckingStatus rechargeRecords_checkingStatus,
+			rechargeRecords.Remark rechargeRecords_remark,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from TC_RechargeRecords rechargeRecords
+		inner join CC_Member member on member.Id=rechargeRecords.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">and HandlingChargeRatio=${handlingChargeRatio}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectRechargeRecordsMember" resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+		select
+			rechargeRecords.Id rechargeRecords_id,
+			rechargeRecords.MemberId rechargeRecords_memberId,
+			rechargeRecords.TransactionNumber rechargeRecords_transactionNumber,
+			rechargeRecords.PayPlantformNumber rechargeRecords_payPlantformNumber,
+			rechargeRecords.Amount rechargeRecords_amount,
+			rechargeRecords.IDCardType rechargeRecords_iDCardType,
+			rechargeRecords.IDCard rechargeRecords_iDCard,
+			rechargeRecords.BankName rechargeRecords_bankName,
+			rechargeRecords.BankCode rechargeRecords_bankCode,
+			rechargeRecords.BankCardNumber rechargeRecords_bankCardNumber,
+			rechargeRecords.HandlingChargeType rechargeRecords_handlingChargeType,
+			rechargeRecords.HandlingCharge rechargeRecords_handlingCharge,
+			rechargeRecords.HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			rechargeRecords.ApplyTime rechargeRecords_applyTime,
+			rechargeRecords.FinishTime rechargeRecords_finishTime,
+			rechargeRecords.Status rechargeRecords_status,
+			rechargeRecords.IsQuestionnaire rechargeRecords_isQuestionnaire,
+			rechargeRecords.CheckingTime rechargeRecords_checkingTime,
+			rechargeRecords.CheckingStatus rechargeRecords_checkingStatus,
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from TC_RechargeRecords rechargeRecords
+		inner join CC_Member member on member.Id=rechargeRecords.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">and HandlingChargeRatio=${handlingChargeRatio}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+		select 
+			Id rechargeRecords_id,
+			MemberId rechargeRecords_memberId,
+			TransactionNumber rechargeRecords_transactionNumber,
+			PayPlantformNumber rechargeRecords_payPlantformNumber,
+			Amount rechargeRecords_amount,
+			IDCardType rechargeRecords_iDCardType,
+			IDCard rechargeRecords_iDCard,
+			BankName rechargeRecords_bankName,
+			BankCode rechargeRecords_bankCode,
+			BankCardNumber rechargeRecords_bankCardNumber,
+			HandlingChargeType rechargeRecords_handlingChargeType,
+			HandlingCharge rechargeRecords_handlingCharge,
+			HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			ApplyTime rechargeRecords_applyTime,
+			FinishTime rechargeRecords_finishTime,
+			Status rechargeRecords_status,
+			IsQuestionnaire rechargeRecords_isQuestionnaire,
+			CheckingTime rechargeRecords_checkingTime,
+			CheckingStatus rechargeRecords_checkingStatus,
+			Remark rechargeRecords_remark
+		from TC_RechargeRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">and HandlingChargeRatio=${handlingChargeRatio}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="rechargeRecordsResult">
+		select 
+			Id rechargeRecords_id,
+			MemberId rechargeRecords_memberId,
+			TransactionNumber rechargeRecords_transactionNumber,
+			PayPlantformNumber rechargeRecords_payPlantformNumber,
+			Amount rechargeRecords_amount,
+			IDCardType rechargeRecords_iDCardType,
+			IDCard rechargeRecords_iDCard,
+			BankName rechargeRecords_bankName,
+			BankCode rechargeRecords_bankCode,
+			BankCardNumber rechargeRecords_bankCardNumber,
+			HandlingChargeType rechargeRecords_handlingChargeType,
+			HandlingCharge rechargeRecords_handlingCharge,
+			HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			ApplyTime rechargeRecords_applyTime,
+			FinishTime rechargeRecords_finishTime,
+			Status rechargeRecords_status,
+			IsQuestionnaire rechargeRecords_isQuestionnaire,
+			CheckingTime rechargeRecords_checkingTime,
+			CheckingStatus rechargeRecords_checkingStatus,
+			Remark rechargeRecords_remark
+		from TC_RechargeRecords
+	</select>
+	
+	<select id="selectOneById"  resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+		select 
+			Id rechargeRecords_id,
+			MemberId rechargeRecords_memberId,
+			TransactionNumber rechargeRecords_transactionNumber,
+			PayPlantformNumber rechargeRecords_payPlantformNumber,
+			Amount rechargeRecords_amount,
+			IDCardType rechargeRecords_iDCardType,
+			IDCard rechargeRecords_iDCard,
+			BankName rechargeRecords_bankName,
+			BankCode rechargeRecords_bankCode,
+			BankCardNumber rechargeRecords_bankCardNumber,
+			HandlingChargeType rechargeRecords_handlingChargeType,
+			HandlingCharge rechargeRecords_handlingCharge,
+			HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			ApplyTime rechargeRecords_applyTime,
+			FinishTime rechargeRecords_finishTime,
+			Status rechargeRecords_status,
+			IsQuestionnaire rechargeRecords_isQuestionnaire,
+			CheckingTime rechargeRecords_checkingTime,
+			CheckingStatus rechargeRecords_checkingStatus,
+			Remark rechargeRecords_remark
+		from TC_RechargeRecords where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+		select 
+			Id rechargeRecords_id,
+			MemberId rechargeRecords_memberId,
+			TransactionNumber rechargeRecords_transactionNumber,
+			PayPlantformNumber rechargeRecords_payPlantformNumber,
+			Amount rechargeRecords_amount,
+			IDCardType rechargeRecords_iDCardType,
+			IDCard rechargeRecords_iDCard,
+			BankName rechargeRecords_bankName,
+			BankCode rechargeRecords_bankCode,
+			BankCardNumber rechargeRecords_bankCardNumber,
+			HandlingChargeType rechargeRecords_handlingChargeType,
+			HandlingCharge rechargeRecords_handlingCharge,
+			HandlingChargeRatio rechargeRecords_handlingChargeRatio,
+			ApplyTime rechargeRecords_applyTime,
+			FinishTime rechargeRecords_finishTime,
+			Status rechargeRecords_status,
+			IsQuestionnaire rechargeRecords_isQuestionnaire,
+			CheckingTime rechargeRecords_checkingTime,
+			CheckingStatus rechargeRecords_checkingStatus,
+			Remark rechargeRecords_remark
+		from TC_RechargeRecords
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="rechargeRecordsParam">
+		select count(*) from TC_RechargeRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">and HandlingChargeRatio=${handlingChargeRatio}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="rechargeRecordsParam">
+		update TC_RechargeRecords
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">,Amount=${amount}</if>
+				<if test="iDCardType != null">,IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">,IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">,BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">,BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">,HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">,HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">,HandlingChargeRatio=${handlingChargeRatio}</if>
+               		 <if test="applyTime != null  and applyTime != ''">,ApplyTime=#{applyTime}</if>
+               		 <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="isQuestionnaire != null">,IsQuestionnaire=${isQuestionnaire}</if>
+               		 <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">,Remark=#{remark}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="rechargeRecordsParam">
+		update TC_RechargeRecords
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+						,TransactionNumber=#{transactionNumber}
+						,PayPlantformNumber=#{payPlantformNumber}
+						,Amount=${amount}
+                    	<if test="iDCardType != null">,IDCardType=${iDCardType}</if>
+                        <if test="iDCardType == null">,IDCardType= 0</if>
+						,IDCard=#{iDCard}
+						,BankName=#{bankName}
+						,BankCode=#{bankCode}
+						,BankCardNumber=#{bankCardNumber}
+                    	<if test="handlingChargeType != null">,HandlingChargeType=${handlingChargeType}</if>
+                        <if test="handlingChargeType == null">,HandlingChargeType= 0</if>
+						,HandlingCharge=${handlingCharge}
+						,HandlingChargeRatio=${handlingChargeRatio}
+                        <if test="applyTime != null  and applyTime != ''">,ApplyTime=#{applyTime}</if>
+                        <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                    	<if test="isQuestionnaire != null">,IsQuestionnaire=${isQuestionnaire}</if>
+                        <if test="isQuestionnaire == null">,IsQuestionnaire= 0</if>
+                        <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+                    	<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+                        <if test="checkingStatus == null">,CheckingStatus= 0</if>
+						,Remark=#{remark}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="rechargeRecordsParam">
+		insert into TC_RechargeRecords
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber</if>
+			<if test="amount != null">,Amount</if>
+			<if test="iDCardType != null">,IDCardType</if>
+			<if test="iDCard != null and iDCard != ''">,IDCard</if>
+			<if test="bankName != null and bankName != ''">,BankName</if>
+			<if test="bankCode != null and bankCode != ''">,BankCode</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber</if>
+			<if test="handlingChargeType != null">,HandlingChargeType</if>
+			<if test="handlingCharge != null">,HandlingCharge</if>
+			<if test="handlingChargeRatio != null">,HandlingChargeRatio</if>
+                <if test="applyTime != null and applyTime != ''">,ApplyTime</if>
+                <if test="finishTime != null and finishTime != ''">,FinishTime</if>
+			<if test="status != null">,Status</if>
+			<if test="isQuestionnaire != null">,IsQuestionnaire</if>
+                <if test="checkingTime != null and checkingTime != ''">,CheckingTime</if>
+			<if test="checkingStatus != null">,CheckingStatus</if>
+			<if test="remark != null and remark != ''">,Remark</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,#{payPlantformNumber}</if>
+			<if test="amount != null">,${amount}</if>
+			<if test="iDCardType != null">,${iDCardType}</if>
+			<if test="iDCard != null and iDCard != ''">,#{iDCard}</if>
+			<if test="bankName != null and bankName != ''">,#{bankName}</if>
+			<if test="bankCode != null and bankCode != ''">,#{bankCode}</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,#{bankCardNumber}</if>
+			<if test="handlingChargeType != null">,${handlingChargeType}</if>
+			<if test="handlingCharge != null">,${handlingCharge}</if>
+			<if test="handlingChargeRatio != null">,${handlingChargeRatio}</if>
+            	<if test="applyTime != null and applyTime != ''">,#{applyTime}</if>
+            	<if test="finishTime != null and finishTime != ''">,#{finishTime}</if>
+			<if test="status != null">,${status}</if>
+			<if test="isQuestionnaire != null">,${isQuestionnaire}</if>
+            	<if test="checkingTime != null and checkingTime != ''">,#{checkingTime}</if>
+			<if test="checkingStatus != null">,${checkingStatus}</if>
+			<if test="remark != null and remark != ''">,#{remark}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="rechargeRecordsParam">
+		delete from TC_RechargeRecords where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="rechargeRecordsParam">
+		delete from TC_RechargeRecords
+	</delete>
+	
+	<delete id="delete" parameterMap="rechargeRecordsParam">
+		delete from TC_RechargeRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+				<if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="handlingChargeRatio != null">and HandlingChargeRatio=${handlingChargeRatio}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

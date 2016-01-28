@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.structurekindrelation.dao.IStructureKindRelationDao">
+
+	<parameterMap id="structureKindRelationParam" type="com.bs.plugins.custom.pc.structurekindrelation.entity.StructureKindRelation" />
+	<resultMap id="structureKindRelationResult" type="com.bs.plugins.custom.pc.structurekindrelation.entity.StructureKindRelation">
+		<result property="kindId" column="structureKindRelation_kindId" javaType="java.lang.Long" />
+		<result property="productStructureId" column="structureKindRelation_productStructureId" javaType="java.lang.Long" />
+		<association property="structureConfig" javaType="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+			<id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+			<result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+			<result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+			<result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+			<result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+			<result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+			<result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+			<result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="structureKindRelationResult" parameterMap="structureKindRelationParam">
+		select
+			structureKindRelation.KindId structureKindRelation_kindId,
+			structureKindRelation.ProductStructureId structureKindRelation_productStructureId,	
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete
+		from PC_StructureKindRelation structureKindRelation
+		inner join PC_StructureConfig structureConfig on structureConfig.Id=structureKindRelation.ProductStructureId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="kindId != null">and KindId=${kindId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStructureKindRelationStructureConfig" resultMap="structureKindRelationResult" parameterMap="structureKindRelationParam">
+		select
+			structureKindRelation.KindId structureKindRelation_kindId,
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete
+		from PC_StructureKindRelation structureKindRelation
+		inner join PC_StructureConfig structureConfig on structureConfig.Id=structureKindRelation.ProductStructureId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="kindId != null">and KindId=${kindId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="structureKindRelationResult" parameterMap="structureKindRelationParam">
+		select 
+			KindId structureKindRelation_kindId,
+			ProductStructureId structureKindRelation_productStructureId
+		from PC_StructureKindRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="kindId != null">and KindId=${kindId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="structureKindRelationResult">
+		select 
+			KindId structureKindRelation_kindId,
+			ProductStructureId structureKindRelation_productStructureId
+		from PC_StructureKindRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="structureKindRelationResult" parameterMap="structureKindRelationParam">
+		select 
+			KindId structureKindRelation_kindId,
+			ProductStructureId structureKindRelation_productStructureId
+		from PC_StructureKindRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="structureKindRelationParam">
+		select count(*) from PC_StructureKindRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="kindId != null">and KindId=${kindId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="structureKindRelationParam">
+		insert into PC_StructureKindRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="kindId != null">,KindId</if>
+			<if test="productStructureId != null">,ProductStructureId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="kindId != null">,${kindId}</if>
+			<if test="productStructureId != null">,${productStructureId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="structureKindRelationParam">
+		delete from PC_StructureKindRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="structureKindRelationParam">
+		delete from PC_StructureKindRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="kindId != null">and KindId=${kindId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

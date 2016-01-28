@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sm name="短信管理" code="6" icon="images/menu/menu_sys.png"> 
+  <sms name="短信管理" code="601">
+  	<config name="通道配置" code="60101" model-name="SM_ServiceProvider" view-type="list">
+  		<create name="创建" code="6010101" menu-type="top" model-name="SM_ServiceProvider" view-type="create"/>  
+      	<modify name="修改" code="6010102" menu-type="shortcut" model-name="SM_ServiceProvider" view-type="modify"/>  
+     	<delete name="删除" code="6010103" menu-type="shortcut" model-name="SM_ServiceProvider" view-type="delete"/> 
+  	</config>
+  	<select name="短信查询" code="60102" model-name="SM_BusinessSend" view-type="list">
+  		<view name="查看" code="6010201" menu-type="top" model-name="SM_BusinessSend" view-type="view"/>  
+  	</select>
+  	<statistics name="短信统计" code="60103" model-name="SM_BusinessSend" view-type="list">
+  		<view name="查看" code="6010301" menu-type="top" model-name="SM_BusinessSend" view-type="view"/>  
+  	</statistics>
+  </sms>
+</sm>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.itemfield.dao.IItemFieldDao">
+
+	<parameterMap id="itemFieldParam" type="com.bs.plugins.custom.eb.itemfield.entity.ItemField" />
+	<resultMap id="itemFieldResult" type="com.bs.plugins.custom.eb.itemfield.entity.ItemField">
+		<id property="id" column="itemField_id" javaType="java.lang.Long" />
+		<result property="categoryId" column="itemField_categoryId" javaType="java.lang.Long" />
+		<result property="tableName" column="itemField_tableName" javaType="java.lang.String" />
+		<result property="columnName" column="itemField_columnName" javaType="java.lang.String" />
+		<result property="columnCode" column="itemField_columnCode" javaType="java.lang.String" />
+		<result property="columnAlias" column="itemField_columnAlias" javaType="java.lang.String" />
+		<result property="isShow" column="itemField_isShow" javaType="java.lang.Integer" />
+		<result property="showType" column="itemField_showType" javaType="java.lang.Integer" />
+		<result property="rank" column="itemField_rank" javaType="java.lang.Integer" />
+		<association property="budgetCategory" javaType="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory">
+			<id property="id" column="budgetCategory_id" javaType="java.lang.Long" />
+			<result property="name" column="budgetCategory_name" javaType="java.lang.String" />
+			<result property="code" column="budgetCategory_code" javaType="java.lang.String" />
+			<result property="createDate" column="budgetCategory_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetCategory_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetCategory_creatorId" javaType="java.lang.Long" />
+		</association>
+		<collection property="itemFieldValues" ofType="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+			<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+			<result property="itemFieldId" column="itemFieldValue_itemFieldId" javaType="java.lang.Long" />
+			<result property="dataCollectionId" column="itemFieldValue_dataCollectionId" javaType="java.lang.Long" />
+			<result property="fieldName" column="itemFieldValue_fieldName" javaType="java.lang.String" />
+			<result property="fieldValue" column="itemFieldValue_fieldValue" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank,	
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId
+		from EB_ItemField itemField
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=itemField.CategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectItemFieldBudgetCategory" resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			budgetCategory.Id budgetCategory_id,
+			budgetCategory.Name budgetCategory_name,
+			budgetCategory.Code budgetCategory_code,
+			budgetCategory.CreateDate budgetCategory_createDate,
+			budgetCategory.ModifyDate budgetCategory_modifyDate,
+			budgetCategory.CreatorId budgetCategory_creatorId
+		from EB_ItemField itemField
+		inner join EB_BudgetCategory budgetCategory on budgetCategory.Id=itemField.CategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank,	
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			itemFieldValue.FieldValue itemFieldValue_fieldValue
+		from EB_ItemField itemField
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.ItemFieldId=itemField.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectItemFieldItemFieldValue" resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank,
+				itemFieldValue.Id itemFieldValue_id,
+	
+				itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+	
+				itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+	
+				itemFieldValue.FieldName itemFieldValue_fieldName,
+	
+				itemFieldValue.FieldValue itemFieldValue_fieldValue
+	
+		from EB_ItemField itemField
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.ItemFieldId=itemField.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select 
+			Id itemField_id,
+			CategoryId itemField_categoryId,
+			TableName itemField_tableName,
+			ColumnName itemField_columnName,
+			ColumnCode itemField_columnCode,
+			ColumnAlias itemField_columnAlias,
+			IsShow itemField_isShow,
+			ShowType itemField_showType,
+			Rank itemField_rank
+		from EB_ItemField
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="itemFieldResult">
+		select 
+			Id itemField_id,
+			CategoryId itemField_categoryId,
+			TableName itemField_tableName,
+			ColumnName itemField_columnName,
+			ColumnCode itemField_columnCode,
+			ColumnAlias itemField_columnAlias,
+			IsShow itemField_isShow,
+			ShowType itemField_showType,
+			Rank itemField_rank
+		from EB_ItemField
+	</select>
+	
+	<select id="selectOneById"  resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select 
+			Id itemField_id,
+			CategoryId itemField_categoryId,
+			TableName itemField_tableName,
+			ColumnName itemField_columnName,
+			ColumnCode itemField_columnCode,
+			ColumnAlias itemField_columnAlias,
+			IsShow itemField_isShow,
+			ShowType itemField_showType,
+			Rank itemField_rank
+		from EB_ItemField where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="itemFieldResult" parameterMap="itemFieldParam">
+		select 
+			Id itemField_id,
+			CategoryId itemField_categoryId,
+			TableName itemField_tableName,
+			ColumnName itemField_columnName,
+			ColumnCode itemField_columnCode,
+			ColumnAlias itemField_columnAlias,
+			IsShow itemField_isShow,
+			ShowType itemField_showType,
+			Rank itemField_rank
+		from EB_ItemField
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="itemFieldParam">
+		select count(*) from EB_ItemField
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="itemFieldParam">
+		update EB_ItemField
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="categoryId != null">,CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">,TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">,ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">,ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">,ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">,IsShow=${isShow}</if>
+				<if test="showType != null">,ShowType=${showType}</if>
+				<if test="rank != null">,Rank=${rank}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="itemFieldParam">
+		update EB_ItemField
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,CategoryId=${categoryId}
+						,TableName=#{tableName}
+						,ColumnName=#{columnName}
+						,ColumnCode=#{columnCode}
+						,ColumnAlias=#{columnAlias}
+                    	<if test="isShow != null">,IsShow=${isShow}</if>
+                        <if test="isShow == null">,IsShow= 0</if>
+                    	<if test="showType != null">,ShowType=${showType}</if>
+                        <if test="showType == null">,ShowType= 0</if>
+                        <if test="rank != null">,Rank=${rank}</if>
+                        <if test="rank == null">,Rank= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="itemFieldParam">
+		insert into EB_ItemField
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="categoryId != null">,CategoryId</if>
+			<if test="tableName != null and tableName != ''">,TableName</if>
+			<if test="columnName != null and columnName != ''">,ColumnName</if>
+			<if test="columnCode != null and columnCode != ''">,ColumnCode</if>
+			<if test="columnAlias != null and columnAlias != ''">,ColumnAlias</if>
+			<if test="isShow != null">,IsShow</if>
+			<if test="showType != null">,ShowType</if>
+			<if test="rank != null">,Rank</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="categoryId != null">,${categoryId}</if>
+			<if test="tableName != null and tableName != ''">,#{tableName}</if>
+			<if test="columnName != null and columnName != ''">,#{columnName}</if>
+			<if test="columnCode != null and columnCode != ''">,#{columnCode}</if>
+			<if test="columnAlias != null and columnAlias != ''">,#{columnAlias}</if>
+			<if test="isShow != null">,${isShow}</if>
+			<if test="showType != null">,${showType}</if>
+			<if test="rank != null">,${rank}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="itemFieldParam">
+		delete from EB_ItemField where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="itemFieldParam">
+		delete from EB_ItemField
+	</delete>
+	
+	<delete id="delete" parameterMap="itemFieldParam">
+		delete from EB_ItemField
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="columnName != null and columnName != ''">and ColumnName=#{columnName}</if>
+				<if test="columnCode != null and columnCode != ''">and ColumnCode=#{columnCode}</if>
+				<if test="columnAlias != null and columnAlias != ''">and ColumnAlias=#{columnAlias}</if>
+				<if test="isShow != null">and IsShow=${isShow}</if>
+				<if test="showType != null">and ShowType=${showType}</if>
+				<if test="rank != null">and Rank=${rank}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

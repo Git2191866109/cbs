@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.validationrule.dao.IValidationRuleDao">
+
+	<parameterMap id="validationRuleParam" type="com.bs.plugins.custom.pc.validationrule.entity.ValidationRule" />
+	<resultMap id="validationRuleResult" type="com.bs.plugins.custom.pc.validationrule.entity.ValidationRule">
+		<id property="id" column="validationRule_id" javaType="java.lang.Long" />
+		<result property="name" column="validationRule_name" javaType="java.lang.String" />
+		<result property="code" column="validationRule_code" javaType="java.lang.String" />
+		<result property="value" column="validationRule_value" javaType="java.lang.String" />
+		<result property="description" column="validationRule_description" javaType="java.lang.String" />
+		<result property="creatorId" column="validationRule_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="validationRule_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="validationRule_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="validationRule_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="validationRule_isDelete" javaType="java.lang.Integer" />
+		<collection property="structureRuleRelations" ofType="com.bs.plugins.custom.pc.structurerulerelation.entity.StructureRuleRelation">
+			<result property="validationRuleId" column="structureRuleRelation_validationRuleId" javaType="java.lang.Long" />
+			<result property="productStructureId" column="structureRuleRelation_productStructureId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="validationRuleResult" parameterMap="validationRuleParam">
+		select
+			validationRule.Id validationRule_id,
+			validationRule.Name validationRule_name,
+			validationRule.Code validationRule_code,
+			validationRule.Value validationRule_value,
+			validationRule.Description validationRule_description,
+			validationRule.CreatorId validationRule_creatorId,
+			validationRule.CreateTime validationRule_createTime,
+			validationRule.ModifierId validationRule_modifierId,
+			validationRule.ModifyTime validationRule_modifyTime,
+			validationRule.isDelete validationRule_isDelete,	
+			structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+			structureRuleRelation.ProductStructureId structureRuleRelation_productStructureId
+		from PC_ValidationRule validationRule
+		inner join PC_StructureRuleRelation structureRuleRelation on structureRuleRelation.ValidationRuleId=validationRule.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectValidationRuleStructureRuleRelation" resultMap="validationRuleResult" parameterMap="validationRuleParam">
+		select
+			validationRule.Id validationRule_id,
+			validationRule.Name validationRule_name,
+			validationRule.Code validationRule_code,
+			validationRule.Value validationRule_value,
+			validationRule.Description validationRule_description,
+			validationRule.CreatorId validationRule_creatorId,
+			validationRule.CreateTime validationRule_createTime,
+			validationRule.ModifierId validationRule_modifierId,
+			validationRule.ModifyTime validationRule_modifyTime,
+			validationRule.isDelete validationRule_isDelete,
+				structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+	
+				structureRuleRelation.ProductStructureId structureRuleRelation_productStructureId
+	
+		from PC_ValidationRule validationRule
+		inner join PC_StructureRuleRelation structureRuleRelation on structureRuleRelation.ValidationRuleId=validationRule.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="validationRuleResult" parameterMap="validationRuleParam">
+		select 
+			Id validationRule_id,
+			Name validationRule_name,
+			Code validationRule_code,
+			Value validationRule_value,
+			Description validationRule_description,
+			CreatorId validationRule_creatorId,
+			CreateTime validationRule_createTime,
+			ModifierId validationRule_modifierId,
+			ModifyTime validationRule_modifyTime,
+			isDelete validationRule_isDelete
+		from PC_ValidationRule
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="validationRuleResult">
+		select 
+			Id validationRule_id,
+			Name validationRule_name,
+			Code validationRule_code,
+			Value validationRule_value,
+			Description validationRule_description,
+			CreatorId validationRule_creatorId,
+			CreateTime validationRule_createTime,
+			ModifierId validationRule_modifierId,
+			ModifyTime validationRule_modifyTime,
+			isDelete validationRule_isDelete
+		from PC_ValidationRule
+	</select>
+	
+	<select id="selectOneById"  resultMap="validationRuleResult" parameterMap="validationRuleParam">
+		select 
+			Id validationRule_id,
+			Name validationRule_name,
+			Code validationRule_code,
+			Value validationRule_value,
+			Description validationRule_description,
+			CreatorId validationRule_creatorId,
+			CreateTime validationRule_createTime,
+			ModifierId validationRule_modifierId,
+			ModifyTime validationRule_modifyTime,
+			isDelete validationRule_isDelete
+		from PC_ValidationRule where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="validationRuleResult" parameterMap="validationRuleParam">
+		select 
+			Id validationRule_id,
+			Name validationRule_name,
+			Code validationRule_code,
+			Value validationRule_value,
+			Description validationRule_description,
+			CreatorId validationRule_creatorId,
+			CreateTime validationRule_createTime,
+			ModifierId validationRule_modifierId,
+			ModifyTime validationRule_modifyTime,
+			isDelete validationRule_isDelete
+		from PC_ValidationRule
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="validationRuleParam">
+		select count(*) from PC_ValidationRule
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="validationRuleParam">
+		update PC_ValidationRule
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="value != null and value != ''">,Value=#{value}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="validationRuleParam">
+		update PC_ValidationRule
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+						,Value=#{value}
+						,Description=#{description}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="validationRuleParam">
+		insert into PC_ValidationRule
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="value != null and value != ''">,Value</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="value != null and value != ''">,#{value}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="validationRuleParam">
+		delete from PC_ValidationRule where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="validationRuleParam">
+		delete from PC_ValidationRule
+	</delete>
+	
+	<delete id="delete" parameterMap="validationRuleParam">
+		delete from PC_ValidationRule
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

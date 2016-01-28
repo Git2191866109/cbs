@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.parameter.dao.IParameterDao">
+
+	<parameterMap id="parameterParam" type="com.bs.plugins.custom.sc.parameter.entity.Parameter" />
+	<resultMap id="parameterResult" type="com.bs.plugins.custom.sc.parameter.entity.Parameter">
+		<id property="id" column="parameter_id" javaType="java.lang.Long" />
+		<result property="parameterCategoryId" column="parameter_parameterCategoryId" javaType="java.lang.Long" />
+		<result property="name" column="parameter_name" javaType="java.lang.String" />
+		<result property="code" column="parameter_code" javaType="java.lang.String" />
+		<result property="value" column="parameter_value" javaType="java.lang.String" />
+		<result property="description" column="parameter_description" javaType="java.lang.String" />
+		<result property="state" column="parameter_state" javaType="java.lang.Integer" />
+		<result property="creationDate" column="parameter_creationDate" javaType="java.lang.Long" />
+		<result property="modificationDate" column="parameter_modificationDate" javaType="java.lang.Long" />
+		<association property="parameterCategory" javaType="com.bs.plugins.custom.sc.parametercategory.entity.ParameterCategory">
+			<id property="id" column="parameterCategory_id" javaType="java.lang.Long" />
+			<result property="code" column="parameterCategory_code" javaType="java.lang.String" />
+			<result property="name" column="parameterCategory_name" javaType="java.lang.String" />
+			<result property="description" column="parameterCategory_description" javaType="java.lang.String" />
+			<result property="state" column="parameterCategory_state" javaType="java.lang.Integer" />
+			<result property="creationDate" column="parameterCategory_creationDate" javaType="java.lang.Long" />
+			<result property="modificationDate" column="parameterCategory_modificationDate" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="parameterResult" parameterMap="parameterParam">
+		select
+			parameter.Id parameter_id,
+			parameter.ParameterCategoryId parameter_parameterCategoryId,
+			parameter.Name parameter_name,
+			parameter.Code parameter_code,
+			parameter.Value parameter_value,
+			parameter.Description parameter_description,
+			parameter.State parameter_state,
+			parameter.CreationDate parameter_creationDate,
+			parameter.ModificationDate parameter_modificationDate,	
+			parameterCategory.Id parameterCategory_id,
+			parameterCategory.Code parameterCategory_code,
+			parameterCategory.Name parameterCategory_name,
+			parameterCategory.Description parameterCategory_description,
+			parameterCategory.State parameterCategory_state,
+			parameterCategory.CreationDate parameterCategory_creationDate,
+			parameterCategory.ModificationDate parameterCategory_modificationDate
+		from SC_Parameter parameter
+		inner join SC_ParameterCategory parameterCategory on parameterCategory.Id=parameter.ParameterCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parameterCategoryId != null">and ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectParameterParameterCategory" resultMap="parameterResult" parameterMap="parameterParam">
+		select
+			parameter.Id parameter_id,
+			parameter.ParameterCategoryId parameter_parameterCategoryId,
+			parameter.Name parameter_name,
+			parameter.Code parameter_code,
+			parameter.Value parameter_value,
+			parameter.Description parameter_description,
+			parameter.State parameter_state,
+			parameter.CreationDate parameter_creationDate,
+			parameterCategory.Id parameterCategory_id,
+			parameterCategory.Code parameterCategory_code,
+			parameterCategory.Name parameterCategory_name,
+			parameterCategory.Description parameterCategory_description,
+			parameterCategory.State parameterCategory_state,
+			parameterCategory.CreationDate parameterCategory_creationDate,
+			parameterCategory.ModificationDate parameterCategory_modificationDate
+		from SC_Parameter parameter
+		inner join SC_ParameterCategory parameterCategory on parameterCategory.Id=parameter.ParameterCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parameterCategoryId != null">and ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="parameterResult" parameterMap="parameterParam">
+		select 
+			Id parameter_id,
+			ParameterCategoryId parameter_parameterCategoryId,
+			Name parameter_name,
+			Code parameter_code,
+			Value parameter_value,
+			Description parameter_description,
+			State parameter_state,
+			CreationDate parameter_creationDate,
+			ModificationDate parameter_modificationDate
+		from SC_Parameter
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parameterCategoryId != null">and ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="parameterResult">
+		select 
+			Id parameter_id,
+			ParameterCategoryId parameter_parameterCategoryId,
+			Name parameter_name,
+			Code parameter_code,
+			Value parameter_value,
+			Description parameter_description,
+			State parameter_state,
+			CreationDate parameter_creationDate,
+			ModificationDate parameter_modificationDate
+		from SC_Parameter
+	</select>
+	
+	<select id="selectOneById"  resultMap="parameterResult" parameterMap="parameterParam">
+		select 
+			Id parameter_id,
+			ParameterCategoryId parameter_parameterCategoryId,
+			Name parameter_name,
+			Code parameter_code,
+			Value parameter_value,
+			Description parameter_description,
+			State parameter_state,
+			CreationDate parameter_creationDate,
+			ModificationDate parameter_modificationDate
+		from SC_Parameter where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="parameterResult" parameterMap="parameterParam">
+		select 
+			Id parameter_id,
+			ParameterCategoryId parameter_parameterCategoryId,
+			Name parameter_name,
+			Code parameter_code,
+			Value parameter_value,
+			Description parameter_description,
+			State parameter_state,
+			CreationDate parameter_creationDate,
+			ModificationDate parameter_modificationDate
+		from SC_Parameter
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="parameterParam">
+		select count(*) from SC_Parameter
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parameterCategoryId != null">and ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="parameterParam">
+		update SC_Parameter
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="parameterCategoryId != null">,ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="value != null and value != ''">,Value=#{value}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="state != null">,State=${state}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate=${modificationDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="parameterParam">
+		update SC_Parameter
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ParameterCategoryId=${parameterCategoryId}
+						,Name=#{name}
+						,Code=#{code}
+						,Value=#{value}
+						,Description=#{description}
+                    	<if test="state != null">,State=${state}</if>
+                        <if test="state == null">,State= 0</if>
+                            ,CreationDate=${creationDate}
+                            ,ModificationDate=${modificationDate}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="parameterParam">
+		insert into SC_Parameter
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="parameterCategoryId != null">,ParameterCategoryId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="value != null and value != ''">,Value</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="state != null">,State</if>
+			<if test="creationDate != null">,CreationDate</if>
+			<if test="modificationDate != null">,ModificationDate</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="parameterCategoryId != null">,${parameterCategoryId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="value != null and value != ''">,#{value}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="state != null">,${state}</if>
+			<if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="parameterParam">
+		delete from SC_Parameter where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="parameterParam">
+		delete from SC_Parameter
+	</delete>
+	
+	<delete id="delete" parameterMap="parameterParam">
+		delete from SC_Parameter
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="parameterCategoryId != null">and ParameterCategoryId=${parameterCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="value != null and value != ''">and Value=#{value}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

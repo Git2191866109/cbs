@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.tablereference.dao.ITableReferenceDao">
+
+	<parameterMap id="tableReferenceParam" type="com.bs.plugins.custom.sc.tablereference.entity.TableReference" />
+	<resultMap id="tableReferenceResult" type="com.bs.plugins.custom.sc.tablereference.entity.TableReference">
+		<id property="id" column="tableReference_id" javaType="java.lang.Long" />
+		<result property="objectId" column="tableReference_objectId" javaType="java.lang.String" />
+		<result property="code" column="tableReference_code" javaType="java.lang.String" />
+		<result property="name" column="tableReference_name" javaType="java.lang.String" />
+		<result property="parentTableId" column="tableReference_parentTableId" javaType="java.lang.Long" />
+		<result property="childTableId" column="tableReference_childTableId" javaType="java.lang.Long" />
+		<result property="implementationType" column="tableReference_implementationType" javaType="java.lang.String" />
+		<result property="creationDate" column="tableReference_creationDate" javaType="java.lang.Long" />
+		<result property="modificationDate" column="tableReference_modificationDate" javaType="java.lang.Long" />
+		<result property="comment" column="tableReference_comment" javaType="java.lang.String" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="tableReferenceResult" parameterMap="tableReferenceParam">
+		select 
+			Id tableReference_id,
+			ObjectId tableReference_objectId,
+			Code tableReference_code,
+			Name tableReference_name,
+			ParentTableId tableReference_parentTableId,
+			ChildTableId tableReference_childTableId,
+			ImplementationType tableReference_implementationType,
+			CreationDate tableReference_creationDate,
+			ModificationDate tableReference_modificationDate,
+			Comment tableReference_comment
+		from SC_TableReference
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="parentTableId != null">and ParentTableId=${parentTableId}</if>
+				<if test="childTableId != null">and ChildTableId=${childTableId}</if>
+				<if test="implementationType != null and implementationType != ''">and ImplementationType=#{implementationType}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="tableReferenceResult">
+		select 
+			Id tableReference_id,
+			ObjectId tableReference_objectId,
+			Code tableReference_code,
+			Name tableReference_name,
+			ParentTableId tableReference_parentTableId,
+			ChildTableId tableReference_childTableId,
+			ImplementationType tableReference_implementationType,
+			CreationDate tableReference_creationDate,
+			ModificationDate tableReference_modificationDate,
+			Comment tableReference_comment
+		from SC_TableReference
+	</select>
+	
+	<select id="selectOneById"  resultMap="tableReferenceResult" parameterMap="tableReferenceParam">
+		select 
+			Id tableReference_id,
+			ObjectId tableReference_objectId,
+			Code tableReference_code,
+			Name tableReference_name,
+			ParentTableId tableReference_parentTableId,
+			ChildTableId tableReference_childTableId,
+			ImplementationType tableReference_implementationType,
+			CreationDate tableReference_creationDate,
+			ModificationDate tableReference_modificationDate,
+			Comment tableReference_comment
+		from SC_TableReference where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="tableReferenceResult" parameterMap="tableReferenceParam">
+		select 
+			Id tableReference_id,
+			ObjectId tableReference_objectId,
+			Code tableReference_code,
+			Name tableReference_name,
+			ParentTableId tableReference_parentTableId,
+			ChildTableId tableReference_childTableId,
+			ImplementationType tableReference_implementationType,
+			CreationDate tableReference_creationDate,
+			ModificationDate tableReference_modificationDate,
+			Comment tableReference_comment
+		from SC_TableReference
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="tableReferenceParam">
+		select count(*) from SC_TableReference
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="parentTableId != null">and ParentTableId=${parentTableId}</if>
+				<if test="childTableId != null">and ChildTableId=${childTableId}</if>
+				<if test="implementationType != null and implementationType != ''">and ImplementationType=#{implementationType}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="tableReferenceParam">
+		update SC_TableReference
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="objectId != null and objectId != ''">,ObjectId=#{objectId}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="parentTableId != null">,ParentTableId=${parentTableId}</if>
+				<if test="childTableId != null">,ChildTableId=${childTableId}</if>
+				<if test="implementationType != null and implementationType != ''">,ImplementationType=#{implementationType}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">,Comment=#{comment}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="tableReferenceParam">
+		update SC_TableReference
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,ObjectId=#{objectId}
+						,Code=#{code}
+						,Name=#{name}
+                            ,ParentTableId=${parentTableId}
+                            ,ChildTableId=${childTableId}
+						,ImplementationType=#{implementationType}
+                            ,CreationDate=${creationDate}
+                            ,ModificationDate=${modificationDate}
+						,Comment=#{comment}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="tableReferenceParam">
+		insert into SC_TableReference
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="objectId != null and objectId != ''">,ObjectId</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="parentTableId != null">,ParentTableId</if>
+			<if test="childTableId != null">,ChildTableId</if>
+			<if test="implementationType != null and implementationType != ''">,ImplementationType</if>
+			<if test="creationDate != null">,CreationDate</if>
+			<if test="modificationDate != null">,ModificationDate</if>
+			<if test="comment != null and comment != ''">,Comment</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="objectId != null and objectId != ''">,#{objectId}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="parentTableId != null">,${parentTableId}</if>
+			<if test="childTableId != null">,${childTableId}</if>
+			<if test="implementationType != null and implementationType != ''">,#{implementationType}</if>
+			<if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="tableReferenceParam">
+		delete from SC_TableReference where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="tableReferenceParam">
+		delete from SC_TableReference
+	</delete>
+	
+	<delete id="delete" parameterMap="tableReferenceParam">
+		delete from SC_TableReference
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="parentTableId != null">and ParentTableId=${parentTableId}</if>
+				<if test="childTableId != null">and ChildTableId=${childTableId}</if>
+				<if test="implementationType != null and implementationType != ''">and ImplementationType=#{implementationType}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

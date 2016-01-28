@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!--系统国际化文件读取-->
+	<bean id="messageSource" class="com.bs.core.resource.MultipleReloadableResourceBundleMessageSource">  
+      <property name="basenames">
+         <list>
+            <value>classpath:*Messages</value>
+            <value>classpath:com/bs/plugins/**/*Messages</value>
+         </list>
+      </property>
+	</bean>
+
+	<bean id="customSource" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/asset-allocation.properties</value>
+				<value>classpath:payment.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 
+	<bean id="templateSource" class="com.bs.core.resource.MultipleReloadableResourceBundleTemplateSource">  
+      <property name="basenames">
+         <list>
+         	<value>classpath:default/*.ftl</value>
+            <value>classpath:com/bs/plugins/**/*.ftl</value>
+         </list>
+      </property>
+	</bean>
+	 -->
+	
+	<bean id="pluginConfig" class="com.bs.core.resource.MultipleReloadablePluginConfigXml">
+		<property name="pluginNames">
+			<list>
+				<value>classpath:com/bs/plugins/custom/_config/*-config.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" p:validationMessageSource-ref = "messageSource">
+	</bean>
+	
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
+    
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+
+</beans>

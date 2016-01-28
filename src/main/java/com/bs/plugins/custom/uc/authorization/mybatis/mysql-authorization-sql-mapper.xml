@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.authorization.dao.IAuthorizationDao">
+	<parameterMap id="subAuthorizationParam" type="com.bs.plugins.custom.uc.authorization.entity.Authorization" />
+	<resultMap id="subAuthorizationResult" type="com.bs.plugins.custom.uc.authorization.entity.Authorization">
+	
+	</resultMap>
+	
+	<select id="selectAllTreeLevel" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select DISTINCT treeLevel authorization_treeLevel from uc_authorization
+	</select>
+	
+	<select id="selectOneByCode"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			AuthType authorization_authType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization
+		where Code=${code}
+	</select>
+	
+	<select id="selectRoleAuthRelationByAuthId"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			a.code authorization_code,
+			b.roleId roleAuthRelation_roleId,
+			b.authId roleAuthRelation_authId 
+		from UC_Authorization as a left join UC_RoleAuthRelation as b on a.Id = b.authId
+		 <where>  
+            <trim prefixOverrides="and">
+				<if test="id != null">and a.Id=${id}</if>
+			</trim>
+        </where> 
+	</select>
+	
+	<select id="selectSubAuthByParentCode"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			AuthType authorization_authType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization 
+		where ParentCode=#{parentCode}
+		order by code asc
+	</select>
+	
+	<select id="selectSubAuthByLevel"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			AuthType authorization_authType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization 
+		where TreeLevel=${treeLevel}
+	</select>
+	
+
+	<update id="updateByCode" parameterMap="authorizationParam">
+		update UC_Authorization
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="parentCode != null">,ParentCode=${parentCode}</if>
+				<if test="parentName != null and parentName != ''">,ParentName=#{parentName}</if>
+				<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">,RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">,ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">,EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">,MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">,ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">,ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">,TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">,ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">,MenuType=#{menuType}</if>
+				<if test="authType != null and authType != ''">,AuthType=#{authType}</if>
+				<if test="isChildNode != null and isChildNode != ''">,IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">,IconPath=#{iconPath}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Code=${code}
+	</update>	
+	
+		<select id="selectAuthorizationRoleList" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime
+		from UC_Authorization authorization
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.AuthId=authorization.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and roleAuthRelation.roleId=${id}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectAuthsByRoleIds" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime
+		from UC_Authorization authorization
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.AuthId=authorization.Id
+		<where>
+		roleAuthRelation.roleId in 
+		<![CDATA[]]> 
+		<foreach collection="roleId" item="item" index="index" 
+			open="(" separator="," close=")">${item}</foreach>
+			<![CDATA[]]>
+	
+		
+		</where>
+	</select>
+</mapper>

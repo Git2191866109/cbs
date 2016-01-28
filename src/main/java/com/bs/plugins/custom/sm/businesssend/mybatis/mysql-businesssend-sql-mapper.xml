@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sm.businesssend.dao.IBusinessSendDao">
+	
+	<select id="selectNotSends" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend">
+		SELECT * FROM 
+		SM_BusinessSend 
+		WHERE 
+		Status IS NULL 
+		AND IFNULL(IsRetry,0) = 0  
+		AND #{now} - OriginTime <![CDATA[<=]]> Timeout
+	</select> 
+	
+	<select id="selectSupplementSends" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend">
+		SELECT *  FROM SM_BusinessSend 
+		WHERE 
+			(
+				Status IS NULL OR Status <![CDATA[<>]]> 0  
+			) 
+		AND IFNULL(IsRetry,0) = 1 
+		AND IFNULL(RetryCount,0) <![CDATA[<]]> #{retryCount}
+		AND #{now} - OriginTime <![CDATA[<=]]> Timeout
+	</select>
+	
+	<select id="updateBySid" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="int">
+		UPDATE SM_BusinessSend SET 
+		StatusReport = #{statusReport},
+		Statements= #{statements},
+		TotalCount = #{totalCount} 
+		WHERE MessageSerial = #{messageSerial}
+	</select>
+	
+	<select id="selectSents" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend">
+		SELECT * FROM
+		SM_BusinessSend
+		WHERE 
+		(
+			StatusReport IS NOT NULL 
+			AND  
+			(
+				IFNULL(IsRetry, 0) = 0
+				OR 
+				( 
+					IFNULL(IsRetry, 0) = 1 
+					AND 
+					(
+						(
+							IFNULL(RetryCount, 0) <![CDATA[>=]]> #{retryCount}  
+							AND 
+							Status <![CDATA[<>]]> 0
+						)
+						OR
+						(
+							IFNULL(RetryCount, 0) <![CDATA[<]]> #{retryCount}  
+							AND 
+							Status = 0
+						)
+					)
+				)
+			)
+		) 
+		OR
+		(
+			Status IS NULL
+			AND
+			#{now} - OriginTime <![CDATA[>]]> Timeout
+		)
+	</select> 
+	
+ 	<select id="selectAllSms" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend">
+		
+		SELECT * FROM (
+			SELECT Id,MobilePhone,Content,SendTime,Status,StatusReport,Statements,MemberId,BusinessType,SpCode,IsRetry,RetryCount,MessageSerial FROM SM_BusinessSend
+			UNION ALL
+			SELECT Id,MobilePhone,Content,SendTime,Status,StatusReport,Statements,MemberId,BusinessType,SpCode,IsRetry,RetryCount,MessageSerial FROM SM_BusinessSent
+			) sm  
+		
+		<where>
+			<trim prefixOverrides="and">
+				<if test="mobilePhone != null and mobilePhone != ''">AND sm.MobilePhone = #{mobilePhone}</if>
+				<if test="spCode != null and spCode != ''">AND sm.SpCode = #{spCode}</if>
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(sm.SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(sm.SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="status != null">AND sm.Status = #{status}</if>
+				<if test="statusReport != null">AND sm.StatusReport = #{statusReport}</if>
+			</trim>
+		</where> 
+		order by sm.SendTime desc
+		limit ${start},${offset}
+			
+	</select> 
+	
+	<select id="getAllSmsCount"  resultType="long" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend">
+		SELECT count(*) FROM (
+				SELECT Id,MobilePhone,Content,SendTime,Status,StatusReport,Statements,MemberId,BusinessType,SpCode,IsRetry,RetryCount,MessageSerial FROM SM_BusinessSend
+				UNION ALL
+				SELECT Id,MobilePhone,Content,SendTime,Status,StatusReport,Statements,MemberId,BusinessType,SpCode,IsRetry,RetryCount,MessageSerial FROM SM_BusinessSent
+				) sm  
+		<where>
+			<trim prefixOverrides="and">
+				<if test="mobilePhone != null and mobilePhone != ''">AND sm.MobilePhone = #{mobilePhone}</if>
+				<if test="spCode != null and spCode != ''">AND sm.SpCode = #{spCode}</if>
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(sm.SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(sm.SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="status != null">AND sm.Status = #{status}</if>
+				<if test="statusReport != null">AND sm.StatusReport = #{statusReport}</if>
+			</trim>
+		</where> 
+	</select>
+	
+	<!-- 新创建的短信 -->
+	<select id="selectWaitSubmitCount" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="long">
+		SELECT IFNULL(COUNT(*),0) AS waitSubmit FROM SM_BusinessSend 
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="spCode != null and spCode != ''">AND SpCode = #{spCode}</if>
+			 	AND Status IS NULL 
+			</trim>
+		</where> 
+	</select>
+	
+	<!-- 已经提交成功的短信 -->
+	<select id="selectSubmitSuccessCount" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="long">
+		SELECT IFNULL(COUNT(*),0) AS successSubmit FROM SM_BusinessSent 
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="spCode != null and spCode != ''">AND SpCode = #{spCode}</if>
+				AND Status = 0 
+			</trim>
+		</where> 
+	</select>
+	
+	
+	<!-- 短信发送成功 -->
+	<select id="selectSuccessSendCount" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="long">
+		SELECT IFNULL(COUNT(*),0) AS successSend FROM SM_BusinessSent 
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="spCode != null and spCode != ''">AND SpCode = #{spCode}</if>
+				AND StatusReport = 0 
+			</trim>
+		</where> 
+	</select>
+	
+	<!-- 短信提交成功 -->
+	<select id="selectSuccessSubmitNotSendCount" parameterType="com.bs.plugins.custom.sm.businesssend.entity.BusinessSend" resultType="long">
+		SELECT IFNULL(COUNT(*),0) AS successSubmit FROM SM_BusinessSend 
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startTime != null and startTime != ''"><![CDATA[	AND DATE_FORMAT(SendTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(SendTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="spCode != null and spCode != ''">AND SpCode = #{spCode}</if>
+				 AND Status = 0  
+			</trim>
+		</where> 
+	</select>
+	
+</mapper>

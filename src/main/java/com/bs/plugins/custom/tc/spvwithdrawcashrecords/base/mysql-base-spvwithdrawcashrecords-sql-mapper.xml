@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.spvwithdrawcashrecords.dao.ISpvWithdrawCashRecordsDao">
+
+	<parameterMap id="spvWithdrawCashRecordsParam" type="com.bs.plugins.custom.tc.spvwithdrawcashrecords.entity.SpvWithdrawCashRecords" />
+	<resultMap id="spvWithdrawCashRecordsResult" type="com.bs.plugins.custom.tc.spvwithdrawcashrecords.entity.SpvWithdrawCashRecords">
+		<id property="id" column="spvWithdrawCashRecords_id" javaType="java.lang.Long" />
+		<result property="spvId" column="spvWithdrawCashRecords_spvId" javaType="java.lang.Long" />
+		<result property="spvName" column="spvWithdrawCashRecords_spvName" javaType="java.lang.String" />
+		<result property="transactionNumber" column="spvWithdrawCashRecords_transactionNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="spvWithdrawCashRecords_payPlantformNumber" javaType="java.lang.String" />
+		<result property="amount" column="spvWithdrawCashRecords_amount" javaType="java.math.BigDecimal" />
+		<result property="bankName" column="spvWithdrawCashRecords_bankName" javaType="java.lang.String" />
+		<result property="bankCode" column="spvWithdrawCashRecords_bankCode" javaType="java.lang.String" />
+		<result property="bankCardNumber" column="spvWithdrawCashRecords_bankCardNumber" javaType="java.lang.String" />
+		<result property="handlingChargeType" column="spvWithdrawCashRecords_handlingChargeType" javaType="java.lang.Integer" />
+		<result property="handlingCharge" column="spvWithdrawCashRecords_handlingCharge" javaType="java.math.BigDecimal" />
+		<result property="applyTime" column="spvWithdrawCashRecords_applyTime" javaType="java.lang.String" />
+		<result property="finishTime" column="spvWithdrawCashRecords_finishTime" javaType="java.lang.String" />
+		<result property="status" column="spvWithdrawCashRecords_status" javaType="java.lang.Integer" />
+		<result property="isQuestionnaire" column="spvWithdrawCashRecords_isQuestionnaire" javaType="java.lang.Integer" />
+		<result property="checkingTime" column="spvWithdrawCashRecords_checkingTime" javaType="java.lang.String" />
+		<result property="checkingStatus" column="spvWithdrawCashRecords_checkingStatus" javaType="java.lang.Integer" />
+		<result property="remark" column="spvWithdrawCashRecords_remark" javaType="java.lang.String" />
+		<association property="spvCorporation" javaType="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation">
+			<id property="id" column="spvCorporation_id" javaType="java.lang.Long" />
+			<result property="type" column="spvCorporation_type" javaType="java.lang.Integer" />
+			<result property="code" column="spvCorporation_code" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="spvCorporation_umpayAccountNo" javaType="java.lang.String" />
+			<result property="availableAmount" column="spvCorporation_availableAmount" javaType="java.math.BigDecimal" />
+			<result property="frozenAmount" column="spvCorporation_frozenAmount" javaType="java.math.BigDecimal" />
+			<result property="umpayMerchantNo" column="spvCorporation_umpayMerchantNo" javaType="java.lang.String" />
+			<result property="name" column="spvCorporation_name" javaType="java.lang.String" />
+			<result property="shortName" column="spvCorporation_shortName" javaType="java.lang.String" />
+			<result property="bankName" column="spvCorporation_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="spvCorporation_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="spvCorporation_bankCardNumber" javaType="java.lang.String" />
+			<result property="signaturePicPath" column="spvCorporation_signaturePicPath" javaType="java.lang.String" />
+			<result property="phone" column="spvCorporation_phone" javaType="java.lang.String" />
+			<result property="fax" column="spvCorporation_fax" javaType="java.lang.String" />
+			<result property="postCode" column="spvCorporation_postCode" javaType="java.lang.String" />
+			<result property="address" column="spvCorporation_address" javaType="java.lang.String" />
+			<result property="description" column="spvCorporation_description" javaType="java.lang.String" />
+			<result property="status" column="spvCorporation_status" javaType="java.lang.Integer" />
+			<result property="createTime" column="spvCorporation_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="spvCorporation_modifyTime" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+		select
+			spvWithdrawCashRecords.Id spvWithdrawCashRecords_id,
+			spvWithdrawCashRecords.SpvId spvWithdrawCashRecords_spvId,
+			spvWithdrawCashRecords.SpvName spvWithdrawCashRecords_spvName,
+			spvWithdrawCashRecords.TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			spvWithdrawCashRecords.PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			spvWithdrawCashRecords.Amount spvWithdrawCashRecords_amount,
+			spvWithdrawCashRecords.BankName spvWithdrawCashRecords_bankName,
+			spvWithdrawCashRecords.BankCode spvWithdrawCashRecords_bankCode,
+			spvWithdrawCashRecords.BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			spvWithdrawCashRecords.HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			spvWithdrawCashRecords.HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			spvWithdrawCashRecords.ApplyTime spvWithdrawCashRecords_applyTime,
+			spvWithdrawCashRecords.FinishTime spvWithdrawCashRecords_finishTime,
+			spvWithdrawCashRecords.Status spvWithdrawCashRecords_status,
+			spvWithdrawCashRecords.IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			spvWithdrawCashRecords.CheckingTime spvWithdrawCashRecords_checkingTime,
+			spvWithdrawCashRecords.CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			spvWithdrawCashRecords.Remark spvWithdrawCashRecords_remark,	
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime
+		from TC_SpvWithdrawCashRecords spvWithdrawCashRecords
+		inner join CC_SpvCorporation spvCorporation on spvCorporation.Id=spvWithdrawCashRecords.SpvId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSpvWithdrawCashRecordsSpvCorporation" resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+		select
+			spvWithdrawCashRecords.Id spvWithdrawCashRecords_id,
+			spvWithdrawCashRecords.SpvId spvWithdrawCashRecords_spvId,
+			spvWithdrawCashRecords.SpvName spvWithdrawCashRecords_spvName,
+			spvWithdrawCashRecords.TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			spvWithdrawCashRecords.PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			spvWithdrawCashRecords.Amount spvWithdrawCashRecords_amount,
+			spvWithdrawCashRecords.BankName spvWithdrawCashRecords_bankName,
+			spvWithdrawCashRecords.BankCode spvWithdrawCashRecords_bankCode,
+			spvWithdrawCashRecords.BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			spvWithdrawCashRecords.HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			spvWithdrawCashRecords.HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			spvWithdrawCashRecords.ApplyTime spvWithdrawCashRecords_applyTime,
+			spvWithdrawCashRecords.FinishTime spvWithdrawCashRecords_finishTime,
+			spvWithdrawCashRecords.Status spvWithdrawCashRecords_status,
+			spvWithdrawCashRecords.IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			spvWithdrawCashRecords.CheckingTime spvWithdrawCashRecords_checkingTime,
+			spvWithdrawCashRecords.CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime
+		from TC_SpvWithdrawCashRecords spvWithdrawCashRecords
+		inner join CC_SpvCorporation spvCorporation on spvCorporation.Id=spvWithdrawCashRecords.SpvId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+		select 
+			Id spvWithdrawCashRecords_id,
+			SpvId spvWithdrawCashRecords_spvId,
+			SpvName spvWithdrawCashRecords_spvName,
+			TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			Amount spvWithdrawCashRecords_amount,
+			BankName spvWithdrawCashRecords_bankName,
+			BankCode spvWithdrawCashRecords_bankCode,
+			BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			ApplyTime spvWithdrawCashRecords_applyTime,
+			FinishTime spvWithdrawCashRecords_finishTime,
+			Status spvWithdrawCashRecords_status,
+			IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			CheckingTime spvWithdrawCashRecords_checkingTime,
+			CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			Remark spvWithdrawCashRecords_remark
+		from TC_SpvWithdrawCashRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="spvWithdrawCashRecordsResult">
+		select 
+			Id spvWithdrawCashRecords_id,
+			SpvId spvWithdrawCashRecords_spvId,
+			SpvName spvWithdrawCashRecords_spvName,
+			TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			Amount spvWithdrawCashRecords_amount,
+			BankName spvWithdrawCashRecords_bankName,
+			BankCode spvWithdrawCashRecords_bankCode,
+			BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			ApplyTime spvWithdrawCashRecords_applyTime,
+			FinishTime spvWithdrawCashRecords_finishTime,
+			Status spvWithdrawCashRecords_status,
+			IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			CheckingTime spvWithdrawCashRecords_checkingTime,
+			CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			Remark spvWithdrawCashRecords_remark
+		from TC_SpvWithdrawCashRecords
+	</select>
+	
+	<select id="selectOneById"  resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+		select 
+			Id spvWithdrawCashRecords_id,
+			SpvId spvWithdrawCashRecords_spvId,
+			SpvName spvWithdrawCashRecords_spvName,
+			TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			Amount spvWithdrawCashRecords_amount,
+			BankName spvWithdrawCashRecords_bankName,
+			BankCode spvWithdrawCashRecords_bankCode,
+			BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			ApplyTime spvWithdrawCashRecords_applyTime,
+			FinishTime spvWithdrawCashRecords_finishTime,
+			Status spvWithdrawCashRecords_status,
+			IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			CheckingTime spvWithdrawCashRecords_checkingTime,
+			CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			Remark spvWithdrawCashRecords_remark
+		from TC_SpvWithdrawCashRecords where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+		select 
+			Id spvWithdrawCashRecords_id,
+			SpvId spvWithdrawCashRecords_spvId,
+			SpvName spvWithdrawCashRecords_spvName,
+			TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			Amount spvWithdrawCashRecords_amount,
+			BankName spvWithdrawCashRecords_bankName,
+			BankCode spvWithdrawCashRecords_bankCode,
+			BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			ApplyTime spvWithdrawCashRecords_applyTime,
+			FinishTime spvWithdrawCashRecords_finishTime,
+			Status spvWithdrawCashRecords_status,
+			IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			CheckingTime spvWithdrawCashRecords_checkingTime,
+			CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			Remark spvWithdrawCashRecords_remark
+		from TC_SpvWithdrawCashRecords
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="spvWithdrawCashRecordsParam">
+		select count(*) from TC_SpvWithdrawCashRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="spvWithdrawCashRecordsParam">
+		update TC_SpvWithdrawCashRecords
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="spvId != null">,SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">,SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">,Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">,BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">,BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">,HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">,HandlingCharge=${handlingCharge}</if>
+               		 <if test="applyTime != null  and applyTime != ''">,ApplyTime=#{applyTime}</if>
+               		 <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="isQuestionnaire != null">,IsQuestionnaire=${isQuestionnaire}</if>
+               		 <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">,Remark=#{remark}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="spvWithdrawCashRecordsParam">
+		update TC_SpvWithdrawCashRecords
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,SpvId=${spvId}
+						,SpvName=#{spvName}
+						,TransactionNumber=#{transactionNumber}
+						,PayPlantformNumber=#{payPlantformNumber}
+						,Amount=${amount}
+						,BankName=#{bankName}
+						,BankCode=#{bankCode}
+						,BankCardNumber=#{bankCardNumber}
+                    	<if test="handlingChargeType != null">,HandlingChargeType=${handlingChargeType}</if>
+                        <if test="handlingChargeType == null">,HandlingChargeType= 0</if>
+						,HandlingCharge=${handlingCharge}
+                        <if test="applyTime != null  and applyTime != ''">,ApplyTime=#{applyTime}</if>
+                        <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                    	<if test="isQuestionnaire != null">,IsQuestionnaire=${isQuestionnaire}</if>
+                        <if test="isQuestionnaire == null">,IsQuestionnaire= 0</if>
+                        <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+                    	<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+                        <if test="checkingStatus == null">,CheckingStatus= 0</if>
+						,Remark=#{remark}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="spvWithdrawCashRecordsParam">
+		insert into TC_SpvWithdrawCashRecords
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="spvId != null">,SpvId</if>
+			<if test="spvName != null and spvName != ''">,SpvName</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber</if>
+			<if test="amount != null">,Amount</if>
+			<if test="bankName != null and bankName != ''">,BankName</if>
+			<if test="bankCode != null and bankCode != ''">,BankCode</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber</if>
+			<if test="handlingChargeType != null">,HandlingChargeType</if>
+			<if test="handlingCharge != null">,HandlingCharge</if>
+                <if test="applyTime != null and applyTime != ''">,ApplyTime</if>
+                <if test="finishTime != null and finishTime != ''">,FinishTime</if>
+			<if test="status != null">,Status</if>
+			<if test="isQuestionnaire != null">,IsQuestionnaire</if>
+                <if test="checkingTime != null and checkingTime != ''">,CheckingTime</if>
+			<if test="checkingStatus != null">,CheckingStatus</if>
+			<if test="remark != null and remark != ''">,Remark</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="spvId != null">,${spvId}</if>
+			<if test="spvName != null and spvName != ''">,#{spvName}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,#{payPlantformNumber}</if>
+			<if test="amount != null">,${amount}</if>
+			<if test="bankName != null and bankName != ''">,#{bankName}</if>
+			<if test="bankCode != null and bankCode != ''">,#{bankCode}</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,#{bankCardNumber}</if>
+			<if test="handlingChargeType != null">,${handlingChargeType}</if>
+			<if test="handlingCharge != null">,${handlingCharge}</if>
+            	<if test="applyTime != null and applyTime != ''">,#{applyTime}</if>
+            	<if test="finishTime != null and finishTime != ''">,#{finishTime}</if>
+			<if test="status != null">,${status}</if>
+			<if test="isQuestionnaire != null">,${isQuestionnaire}</if>
+            	<if test="checkingTime != null and checkingTime != ''">,#{checkingTime}</if>
+			<if test="checkingStatus != null">,${checkingStatus}</if>
+			<if test="remark != null and remark != ''">,#{remark}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="spvWithdrawCashRecordsParam">
+		delete from TC_SpvWithdrawCashRecords where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="spvWithdrawCashRecordsParam">
+		delete from TC_SpvWithdrawCashRecords
+	</delete>
+	
+	<delete id="delete" parameterMap="spvWithdrawCashRecordsParam">
+		delete from TC_SpvWithdrawCashRecords
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="amount != null">and Amount=${amount}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="handlingChargeType != null">and HandlingChargeType=${handlingChargeType}</if>
+				<if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+				<if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="isQuestionnaire != null">and IsQuestionnaire=${isQuestionnaire}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

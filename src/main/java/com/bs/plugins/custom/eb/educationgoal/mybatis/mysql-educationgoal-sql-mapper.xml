@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.educationgoal.dao.IEducationGoalDao">
+	
+	
+	<select id="selectListByid" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select 
+			Id educationGoal_id,
+			Name educationGoal_name,
+			IsInland educationGoal_isInland,
+			ItemIds educationGoal_itemIds,
+			CreateDate educationGoal_createDate,
+			ModifyDate educationGoal_modifyDate,
+			CreatorId educationGoal_creatorId
+		from EB_EducationGoal where Id !=${id}
+	</select>
+<select id="selectEducationConfigure" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.ItemIds educationGoal_itemIds,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,
+			educationConfigure.Id educationConfigure_id,
+			educationConfigure.EduGoalId_master educationConfigure_eduGoalId_master,
+			educationConfigure.EduGoalId_vice educationConfigure_eduGoalId_vice,
+			educationConfigure.CreateDate educationConfigure_createDate,
+			educationConfigure.ModifyDate educationConfigure_modifyDate,
+			educationConfigure.CreatorId educationConfigure_creatorId
+		from EB_EducationGoal educationGoal
+		inner join EB_EducationConfigure educationConfigure on educationConfigure.EduGoalId_master=educationGoal.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and educationGoal.Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="itemIds != null and itemIds != ''">and ItemIds=#{itemIds}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+</mapper>

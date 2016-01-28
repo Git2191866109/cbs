@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<cc name="客户中心" code="3"> 
+  <member name="会员管理" code="301">
+    <account name="会员信息" code="30101" model-name="CC_Member" view-type="tree_list"> 
+      <modify name="修改" code="3010101" menu-type="shortcut" model-name="CC_Member" view-type="modify"/>  
+      <delete name="删除" code="3010102" menu-type="shortcut" model-name="CC_Member" view-type="delete"/> 
+      <detail name="明细" code="3010103" menu-type="shortcut" model-name="CC_Member" view-type="detail"/> 
+      <resetpwd name="重置密码" code="3010104" menu-type="shortcut" model-name="CC_Member" />
+      <search name="查询" code="3010105" menu-type="shortcut" model-name="CC_Member" />
+      <create name="创建企业账户" code="3010106" menu-type="shortcut" model-name="CC_Member" view-type="create"  />
+    </account>
+  </member>
+  <feedback name="意见反馈" code="302"> 
+  	<feedbackquery name="反馈信息" code="30201" model-name="CC_Feedback" view-type="tree_list">
+  		<modify name="修改" code="3020101" menu-type="shortcut" model-name="CC_Feedback" view-type="modify"/> 
+  		<detail name="明细" code="3020102" menu-type="shortcut" model-name="CC_Feedback" view-type="detail"/> 
+    	<delete name="删除" code="3020103" menu-type="shortcut" model-name="CC_Feedback" view-type="delete"/>
+        <search name="查询" code="3020104" menu-type="shortcut" model-name="CC_Feedback" />
+  	</feedbackquery>
+  </feedback>
+  <bank name="银行卡管理" code="303"> 
+  	<bankCardChangeApply name="银行卡更换" code="30301" model-name="CC_BankCardChangeApply" view-type="tree_list"/>
+  </bank>
+  <spvcorporation  name="企业账户管理" code="304"> 
+  	<spvcorporation name="企业列表" code="30401" model-name="CC_SpvCorporation" view-type="tree_list">
+  		<modify name="修改" code="3040101" menu-type="shortcut" model-name="CC_SpvCorporation" view-type="modify"/> 
+    	<delete name="删除" code="3040102" menu-type="shortcut" model-name="CC_SpvCorporation" view-type="delete"/>
+        <create name="增加" code="3040103" menu-type="top" model-name="CC_SpvCorporation" view-type="create" />
+  	</spvcorporation>
+  </spvcorporation>
+</cc>

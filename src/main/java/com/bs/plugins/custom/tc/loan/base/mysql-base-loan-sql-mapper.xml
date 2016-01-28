@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.loan.dao.ILoanDao">
+
+	<parameterMap id="loanParam" type="com.bs.plugins.custom.tc.loan.entity.Loan" />
+	<resultMap id="loanResult" type="com.bs.plugins.custom.tc.loan.entity.Loan">
+		<id property="id" column="loan_id" javaType="java.lang.Long" />
+		<result property="spvId" column="loan_spvId" javaType="java.lang.Long" />
+		<result property="productId" column="loan_productId" javaType="java.lang.Long" />
+		<result property="tradeNumber" column="loan_tradeNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="loan_payPlantformNumber" javaType="java.lang.String" />
+		<result property="productName" column="loan_productName" javaType="java.lang.String" />
+		<result property="productCode" column="loan_productCode" javaType="java.lang.String" />
+		<result property="totalLoanAmount" column="loan_totalLoanAmount" javaType="java.math.BigDecimal" />
+		<result property="spvServiceFee" column="loan_spvServiceFee" javaType="java.math.BigDecimal" />
+		<result property="spvServiceFeeRatio" column="loan_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+		<result property="loanTime" column="loan_loanTime" javaType="java.lang.String" />
+		<result property="loanStatus" column="loan_loanStatus" javaType="java.lang.Integer" />
+		<result property="checkingTime" column="loan_checkingTime" javaType="java.lang.String" />
+		<result property="checkingStatus" column="loan_checkingStatus" javaType="java.lang.Integer" />
+		<result property="remark" column="loan_remark" javaType="java.lang.String" />
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+		<collection property="subscriptions" ofType="com.bs.plugins.custom.tc.subscription.entity.Subscription">
+			<id property="id" column="subscription_id" javaType="java.lang.Long" />
+			<result property="memberId" column="subscription_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="subscription_spvId" javaType="java.lang.Long" />
+			<result property="loanId" column="subscription_loanId" javaType="java.lang.Long" />
+			<result property="loanNumber" column="subscription_loanNumber" javaType="java.lang.String" />
+			<result property="productId" column="subscription_productId" javaType="java.lang.Long" />
+			<result property="amountLockId" column="subscription_amountLockId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="subscription_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="subscription_payPlantformNumber" javaType="java.lang.String" />
+			<result property="umpayProductAccountNo" column="subscription_umpayProductAccountNo" javaType="java.lang.String" />
+			<result property="productName" column="subscription_productName" javaType="java.lang.String" />
+			<result property="productCode" column="subscription_productCode" javaType="java.lang.String" />
+			<result property="tradeStatus" column="subscription_tradeStatus" javaType="java.lang.Integer" />
+			<result property="investAmount" column="subscription_investAmount" javaType="java.math.BigDecimal" />
+			<result property="shares" column="subscription_shares" javaType="java.lang.Integer" />
+			<result property="orderTime" column="subscription_orderTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="subscription_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="subscription_paymentDate" javaType="java.lang.String" />
+			<result property="expectedExpirationDate" column="subscription_expectedExpirationDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="subscription_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="subscription_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="subscription_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="subscription_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="subscription_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="actualLoanAmount" column="subscription_actualLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="subscription_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="subscription_loanStatus" javaType="java.lang.Integer" />
+			<result property="status" column="subscription_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="subscription_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="subscription_distributeTime" javaType="java.lang.String" />
+			<result property="isBuyBack" column="subscription_isBuyBack" javaType="java.lang.Integer" />
+			<result property="checkingStatus" column="subscription_checkingStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="subscription_checkingTime" javaType="java.lang.String" />
+			<result property="contractPath" column="subscription_contractPath" javaType="java.lang.String" />
+			<result property="remark" column="subscription_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="platformServiceFees" ofType="com.bs.plugins.custom.tc.platformservicefee.entity.PlatformServiceFee">
+			<id property="id" column="platformServiceFee_id" javaType="java.lang.Long" />
+			<result property="platformId" column="platformServiceFee_platformId" javaType="java.lang.Long" />
+			<result property="spvId" column="platformServiceFee_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="platformServiceFee_productId" javaType="java.lang.Long" />
+			<result property="returnMoneyId" column="platformServiceFee_returnMoneyId" javaType="java.lang.Long" />
+			<result property="spvLoanId" column="platformServiceFee_spvLoanId" javaType="java.lang.Long" />
+			<result property="tradeNumber" column="platformServiceFee_tradeNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="platformServiceFee_payPlantformNumber" javaType="java.lang.String" />
+			<result property="principalAmount" column="platformServiceFee_principalAmount" javaType="java.math.BigDecimal" />
+			<result property="serviceFee" column="platformServiceFee_serviceFee" javaType="java.math.BigDecimal" />
+			<result property="serviceFeeRatio" column="platformServiceFee_serviceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="takeTime" column="platformServiceFee_takeTime" javaType="java.lang.String" />
+			<result property="takeStatus" column="platformServiceFee_takeStatus" javaType="java.lang.Integer" />
+			<result property="takeFinishTime" column="platformServiceFee_takeFinishTime" javaType="java.lang.String" />
+			<result property="checkingTime" column="platformServiceFee_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="platformServiceFee_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="platformServiceFee_remark" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="loanResult" parameterMap="loanParam">
+		select
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			loan.Remark loan_remark,	
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_Loan loan
+		inner join PC_Product product on product.Id=loan.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectLoanProduct" resultMap="loanResult" parameterMap="loanParam">
+		select
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from TC_Loan loan
+		inner join PC_Product product on product.Id=loan.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="loanResult" parameterMap="loanParam">
+		select
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			loan.Remark loan_remark,	
+			subscription.Id subscription_id,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			subscription.LoanId subscription_loanId,
+			subscription.LoanNumber subscription_loanNumber,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.IsBuyBack subscription_isBuyBack,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.ContractPath subscription_contractPath,
+			subscription.Remark subscription_remark
+			platformServiceFee.Id platformServiceFee_id,
+			platformServiceFee.PlatformId platformServiceFee_platformId,
+			platformServiceFee.SpvId platformServiceFee_spvId,
+			platformServiceFee.ProductId platformServiceFee_productId,
+			platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+			platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+			platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+			platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+			platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+			platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+			platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+			platformServiceFee.TakeTime platformServiceFee_takeTime,
+			platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+			platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+			platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+			platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+			platformServiceFee.Remark platformServiceFee_remark
+		from TC_Loan loan
+		inner join TC_Subscription subscription on subscription.LoanId=loan.Id
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.SpvLoanId=loan.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectLoanSubscription" resultMap="loanResult" parameterMap="loanParam">
+		select
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			loan.Remark loan_remark,
+				subscription.Id subscription_id,
+	
+				subscription.MemberId subscription_memberId,
+	
+				subscription.SpvId subscription_spvId,
+	
+				subscription.LoanId subscription_loanId,
+	
+				subscription.LoanNumber subscription_loanNumber,
+	
+				subscription.ProductId subscription_productId,
+	
+				subscription.AmountLockId subscription_amountLockId,
+	
+				subscription.TransactionNumber subscription_transactionNumber,
+	
+				subscription.PayPlantformNumber subscription_payPlantformNumber,
+	
+				subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+	
+				subscription.ProductName subscription_productName,
+	
+				subscription.ProductCode subscription_productCode,
+	
+				subscription.TradeStatus subscription_tradeStatus,
+	
+				subscription.InvestAmount subscription_investAmount,
+	
+				subscription.Shares subscription_shares,
+	
+				subscription.OrderTime subscription_orderTime,
+	
+				subscription.InterestRateDate subscription_interestRateDate,
+	
+				subscription.PaymentDate subscription_paymentDate,
+	
+				subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+	
+				subscription.ActualExpirationDate subscription_actualExpirationDate,
+	
+				subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+	
+				subscription.ExpectedProfit subscription_expectedProfit,
+	
+				subscription.SpvServiceFee subscription_spvServiceFee,
+	
+				subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+	
+				subscription.ActualLoanAmount subscription_actualLoanAmount,
+	
+				subscription.LoanTime subscription_loanTime,
+	
+				subscription.LoanStatus subscription_loanStatus,
+	
+				subscription.Status subscription_status,
+	
+				subscription.DistributeStatus subscription_distributeStatus,
+	
+				subscription.DistributeTime subscription_distributeTime,
+	
+				subscription.IsBuyBack subscription_isBuyBack,
+	
+				subscription.CheckingStatus subscription_checkingStatus,
+	
+				subscription.CheckingTime subscription_checkingTime,
+	
+				subscription.ContractPath subscription_contractPath,
+	
+				subscription.Remark subscription_remark
+	
+		from TC_Loan loan
+		inner join TC_Subscription subscription on subscription.LoanId=loan.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectLoanPlatformServiceFee" resultMap="loanResult" parameterMap="loanParam">
+		select
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			loan.Remark loan_remark,
+				platformServiceFee.Id platformServiceFee_id,
+	
+				platformServiceFee.PlatformId platformServiceFee_platformId,
+	
+				platformServiceFee.SpvId platformServiceFee_spvId,
+	
+				platformServiceFee.ProductId platformServiceFee_productId,
+	
+				platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+	
+				platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+	
+				platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+	
+				platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+	
+				platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+	
+				platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+	
+				platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+	
+				platformServiceFee.TakeTime platformServiceFee_takeTime,
+	
+				platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+	
+				platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+	
+				platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+	
+				platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+	
+				platformServiceFee.Remark platformServiceFee_remark
+	
+		from TC_Loan loan
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.SpvLoanId=loan.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="loanResult" parameterMap="loanParam">
+		select 
+			Id loan_id,
+			SpvId loan_spvId,
+			ProductId loan_productId,
+			TradeNumber loan_tradeNumber,
+			PayPlantformNumber loan_payPlantformNumber,
+			ProductName loan_productName,
+			ProductCode loan_productCode,
+			TotalLoanAmount loan_totalLoanAmount,
+			SpvServiceFee loan_spvServiceFee,
+			SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			LoanTime loan_loanTime,
+			LoanStatus loan_loanStatus,
+			CheckingTime loan_checkingTime,
+			CheckingStatus loan_checkingStatus,
+			Remark loan_remark
+		from TC_Loan
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="loanResult">
+		select 
+			Id loan_id,
+			SpvId loan_spvId,
+			ProductId loan_productId,
+			TradeNumber loan_tradeNumber,
+			PayPlantformNumber loan_payPlantformNumber,
+			ProductName loan_productName,
+			ProductCode loan_productCode,
+			TotalLoanAmount loan_totalLoanAmount,
+			SpvServiceFee loan_spvServiceFee,
+			SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			LoanTime loan_loanTime,
+			LoanStatus loan_loanStatus,
+			CheckingTime loan_checkingTime,
+			CheckingStatus loan_checkingStatus,
+			Remark loan_remark
+		from TC_Loan
+	</select>
+	
+	<select id="selectOneById"  resultMap="loanResult" parameterMap="loanParam">
+		select 
+			Id loan_id,
+			SpvId loan_spvId,
+			ProductId loan_productId,
+			TradeNumber loan_tradeNumber,
+			PayPlantformNumber loan_payPlantformNumber,
+			ProductName loan_productName,
+			ProductCode loan_productCode,
+			TotalLoanAmount loan_totalLoanAmount,
+			SpvServiceFee loan_spvServiceFee,
+			SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			LoanTime loan_loanTime,
+			LoanStatus loan_loanStatus,
+			CheckingTime loan_checkingTime,
+			CheckingStatus loan_checkingStatus,
+			Remark loan_remark
+		from TC_Loan where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="loanResult" parameterMap="loanParam">
+		select 
+			Id loan_id,
+			SpvId loan_spvId,
+			ProductId loan_productId,
+			TradeNumber loan_tradeNumber,
+			PayPlantformNumber loan_payPlantformNumber,
+			ProductName loan_productName,
+			ProductCode loan_productCode,
+			TotalLoanAmount loan_totalLoanAmount,
+			SpvServiceFee loan_spvServiceFee,
+			SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			LoanTime loan_loanTime,
+			LoanStatus loan_loanStatus,
+			CheckingTime loan_checkingTime,
+			CheckingStatus loan_checkingStatus,
+			Remark loan_remark
+		from TC_Loan
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="loanParam">
+		select count(*) from TC_Loan
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="loanParam">
+		update TC_Loan
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="spvId != null">,SpvId=${spvId}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">,TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">,ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">,ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">,TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">,SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">,SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+               		 <if test="loanTime != null  and loanTime != ''">,LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">,LoanStatus=${loanStatus}</if>
+               		 <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">,Remark=#{remark}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="loanParam">
+		update TC_Loan
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,SpvId=${spvId}
+                            ,ProductId=${productId}
+						,TradeNumber=#{tradeNumber}
+						,PayPlantformNumber=#{payPlantformNumber}
+						,ProductName=#{productName}
+						,ProductCode=#{productCode}
+						,TotalLoanAmount=${totalLoanAmount}
+						,SpvServiceFee=${spvServiceFee}
+						,SpvServiceFeeRatio=${spvServiceFeeRatio}
+                        <if test="loanTime != null  and loanTime != ''">,LoanTime=#{loanTime}</if>
+                    	<if test="loanStatus != null">,LoanStatus=${loanStatus}</if>
+                        <if test="loanStatus == null">,LoanStatus= 0</if>
+                        <if test="checkingTime != null  and checkingTime != ''">,CheckingTime=#{checkingTime}</if>
+                    	<if test="checkingStatus != null">,CheckingStatus=${checkingStatus}</if>
+                        <if test="checkingStatus == null">,CheckingStatus= 0</if>
+						,Remark=#{remark}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="loanParam">
+		insert into TC_Loan
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="spvId != null">,SpvId</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="tradeNumber != null and tradeNumber != ''">,TradeNumber</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber</if>
+			<if test="productName != null and productName != ''">,ProductName</if>
+			<if test="productCode != null and productCode != ''">,ProductCode</if>
+			<if test="totalLoanAmount != null">,TotalLoanAmount</if>
+			<if test="spvServiceFee != null">,SpvServiceFee</if>
+			<if test="spvServiceFeeRatio != null">,SpvServiceFeeRatio</if>
+                <if test="loanTime != null and loanTime != ''">,LoanTime</if>
+			<if test="loanStatus != null">,LoanStatus</if>
+                <if test="checkingTime != null and checkingTime != ''">,CheckingTime</if>
+			<if test="checkingStatus != null">,CheckingStatus</if>
+			<if test="remark != null and remark != ''">,Remark</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="spvId != null">,${spvId}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="tradeNumber != null and tradeNumber != ''">,#{tradeNumber}</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,#{payPlantformNumber}</if>
+			<if test="productName != null and productName != ''">,#{productName}</if>
+			<if test="productCode != null and productCode != ''">,#{productCode}</if>
+			<if test="totalLoanAmount != null">,${totalLoanAmount}</if>
+			<if test="spvServiceFee != null">,${spvServiceFee}</if>
+			<if test="spvServiceFeeRatio != null">,${spvServiceFeeRatio}</if>
+            	<if test="loanTime != null and loanTime != ''">,#{loanTime}</if>
+			<if test="loanStatus != null">,${loanStatus}</if>
+            	<if test="checkingTime != null and checkingTime != ''">,#{checkingTime}</if>
+			<if test="checkingStatus != null">,${checkingStatus}</if>
+			<if test="remark != null and remark != ''">,#{remark}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="loanParam">
+		delete from TC_Loan where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="loanParam">
+		delete from TC_Loan
+	</delete>
+	
+	<delete id="delete" parameterMap="loanParam">
+		delete from TC_Loan
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="tradeNumber != null and tradeNumber != ''">and TradeNumber=#{tradeNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName=#{productName}</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="totalLoanAmount != null">and TotalLoanAmount=${totalLoanAmount}</if>
+				<if test="spvServiceFee != null">and SpvServiceFee=${spvServiceFee}</if>
+				<if test="spvServiceFeeRatio != null">and SpvServiceFeeRatio=${spvServiceFeeRatio}</if>
+				<if test="loanTime != null and loanTime != ''">and LoanTime=#{loanTime}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+				<if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+				<if test="remark != null and remark != ''">and Remark=#{remark}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

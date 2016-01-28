@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.residentincomes.dao.IResidentIncomesDao">
+
+	<parameterMap id="residentIncomesParam" type="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes" />
+	<resultMap id="residentIncomesResult" type="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes">
+		<id property="id" column="residentIncomes_id" javaType="java.lang.Long" />
+		<result property="areaCode" column="residentIncomes_areaCode" javaType="java.lang.String" />
+		<result property="amount" column="residentIncomes_amount" javaType="java.lang.String" />
+		<result property="isBaseData" column="residentIncomes_isBaseData" javaType="java.lang.Integer" />
+		<result property="ratio" column="residentIncomes_ratio" javaType="java.math.BigDecimal" />
+		<result property="createDate" column="residentIncomes_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="residentIncomes_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="residentIncomes_creatorId" javaType="java.lang.Long" />
+		<association property="area" javaType="com.bs.plugins.custom.sc.area.entity.Area">
+			<id property="id" column="area_id" javaType="java.lang.Long" />
+			<result property="code" column="area_code" javaType="java.lang.String" />
+			<result property="parentCode" column="area_parentCode" javaType="java.lang.String" />
+			<result property="name" column="area_name" javaType="java.lang.String" />
+			<result property="treeLevel" column="area_treeLevel" javaType="java.lang.Integer" />
+			<result property="relationPath" column="area_relationPath" javaType="java.lang.String" />
+			<result property="spelling" column="area_spelling" javaType="java.lang.String" />
+			<result property="type" column="area_type" javaType="java.lang.Integer" />
+			<result property="payAreaCode" column="area_payAreaCode" javaType="java.lang.String" />
+			<result property="createDate" column="area_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="area_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="area_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="residentIncomesResult" parameterMap="residentIncomesParam">
+		select
+			residentIncomes.Id residentIncomes_id,
+			residentIncomes.AreaCode residentIncomes_areaCode,
+			residentIncomes.Amount residentIncomes_amount,
+			residentIncomes.IsBaseData residentIncomes_isBaseData,
+			residentIncomes.Ratio residentIncomes_ratio,
+			residentIncomes.CreateDate residentIncomes_createDate,
+			residentIncomes.ModifyDate residentIncomes_modifyDate,
+			residentIncomes.CreatorId residentIncomes_creatorId,	
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId
+		from SC_ResidentIncomes residentIncomes
+		inner join SC_Area area on area.Id=residentIncomes.AreaCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">and Ratio=${ratio}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectResidentIncomesArea" resultMap="residentIncomesResult" parameterMap="residentIncomesParam">
+		select
+			residentIncomes.Id residentIncomes_id,
+			residentIncomes.AreaCode residentIncomes_areaCode,
+			residentIncomes.Amount residentIncomes_amount,
+			residentIncomes.IsBaseData residentIncomes_isBaseData,
+			residentIncomes.Ratio residentIncomes_ratio,
+			residentIncomes.CreateDate residentIncomes_createDate,
+			residentIncomes.ModifyDate residentIncomes_modifyDate,
+			area.Id area_id,
+			area.Code area_code,
+			area.ParentCode area_parentCode,
+			area.Name area_name,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath area_relationPath,
+			area.Spelling area_spelling,
+			area.Type area_type,
+			area.PayAreaCode area_payAreaCode,
+			area.CreateDate area_createDate,
+			area.ModifyDate area_modifyDate,
+			area.CreatorId area_creatorId
+		from SC_ResidentIncomes residentIncomes
+		inner join SC_Area area on area.Id=residentIncomes.AreaCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">and Ratio=${ratio}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="residentIncomesResult" parameterMap="residentIncomesParam">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData,
+			Ratio residentIncomes_ratio,
+			CreateDate residentIncomes_createDate,
+			ModifyDate residentIncomes_modifyDate,
+			CreatorId residentIncomes_creatorId
+		from SC_ResidentIncomes
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">and Ratio=${ratio}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="residentIncomesResult">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData,
+			Ratio residentIncomes_ratio,
+			CreateDate residentIncomes_createDate,
+			ModifyDate residentIncomes_modifyDate,
+			CreatorId residentIncomes_creatorId
+		from SC_ResidentIncomes
+	</select>
+	
+	<select id="selectOneById"  resultMap="residentIncomesResult" parameterMap="residentIncomesParam">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData,
+			Ratio residentIncomes_ratio,
+			CreateDate residentIncomes_createDate,
+			ModifyDate residentIncomes_modifyDate,
+			CreatorId residentIncomes_creatorId
+		from SC_ResidentIncomes where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="residentIncomesResult" parameterMap="residentIncomesParam">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData,
+			Ratio residentIncomes_ratio,
+			CreateDate residentIncomes_createDate,
+			ModifyDate residentIncomes_modifyDate,
+			CreatorId residentIncomes_creatorId
+		from SC_ResidentIncomes
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="residentIncomesParam">
+		select count(*) from SC_ResidentIncomes
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">and Ratio=${ratio}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="residentIncomesParam">
+		update SC_ResidentIncomes
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">,AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">,Amount=#{amount}</if>
+				<if test="isBaseData != null">,IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">,Ratio=${ratio}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="residentIncomesParam">
+		update SC_ResidentIncomes
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,AreaCode=#{areaCode}
+						,Amount=#{amount}
+                    	<if test="isBaseData != null">,IsBaseData=${isBaseData}</if>
+                        <if test="isBaseData == null">,IsBaseData= 0</if>
+						,Ratio=${ratio}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="residentIncomesParam">
+		insert into SC_ResidentIncomes
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="areaCode != null and areaCode != ''">,AreaCode</if>
+			<if test="amount != null and amount != ''">,Amount</if>
+			<if test="isBaseData != null">,IsBaseData</if>
+			<if test="ratio != null">,Ratio</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="areaCode != null and areaCode != ''">,#{areaCode}</if>
+			<if test="amount != null and amount != ''">,#{amount}</if>
+			<if test="isBaseData != null">,${isBaseData}</if>
+			<if test="ratio != null">,${ratio}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="residentIncomesParam">
+		delete from SC_ResidentIncomes where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="residentIncomesParam">
+		delete from SC_ResidentIncomes
+	</delete>
+	
+	<delete id="delete" parameterMap="residentIncomesParam">
+		delete from SC_ResidentIncomes
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+				<if test="ratio != null">and Ratio=${ratio}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

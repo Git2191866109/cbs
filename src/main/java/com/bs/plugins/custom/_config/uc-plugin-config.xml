@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<uc name="用户中心" code="1"> 
+  <system name="系统管理" code="101"> 
+    <organization name="机构管理" code="10101" model-name="UC_Organization" view-type="list" > 
+      <create name="创建" code="1010101" menu-type="top" model-name="UC_Organization" view-type="create"/>  
+      <modify name="修改" code="1010102" menu-type="shortcut" model-name="UC_Organization" view-type="modify"/>  
+      <delete name="删除" code="1010103" menu-type="shortcut" model-name="UC_Organization" view-type="delete"/>  
+      <detail name="明细" code="1010104" menu-type="shortcut" model-name="UC_Organization" view-type="detail"/> 
+    </organization>  
+    <role name="角色管理" code="10102" model-name="UC_Role" method-name="" view-type="list"  > 
+      <create name="创建" code="1010201" menu-type="top" model-name="UC_Role" view-type="create" />  
+      <modify name="修改" code="1010202" menu-type="shortcut" model-name="UC_Role" view-type="modify" />  
+      <funcauth name="功能授权" code="1010203" menu-type="shortcut" model-name="UC_Role" />  
+      <delete name="删除" code="1010204" menu-type="shortcut" model-name="UC_Role" view-type="delete" /> 
+     <disable name="禁用" code="1010205" menu-type="shortcut" model-name="UC_User" />  
+    </role>  
+    <user name="用户管理" code="10103" model-name="UC_User" method-name="" view-type="list"  > 
+      <create name="创建" code="1010301" menu-type="top" model-name="UC_User" view-type="create" />  
+      <modify name="修改" code="1010302" menu-type="shortcut" model-name="UC_User" view-type="modify" />  
+      <bind name="绑定角色" code="1010303" menu-type="shortcut" model-name="UC_User" view-type="bind" />  
+      <resetpwd name="重置密码" code="1010304" menu-type="shortcut" model-name="UC_User" />  
+      <disable name="禁用" code="1010305" menu-type="shortcut" model-name="UC_User" />  
+      <dataauth name="数据授权" code="1010306"/> 
+    </user>  
+    <log name="操作日志" code="10104" model-name="UC_Log" view-type="list"> 
+      <delete name="删除" code="1010401" menu-type="shortcut" model-name="UC_Log" view-type="delete"/> 
+    </log>  
+    <password name="修改密码" code="10105" model-name="UC_User" method-name="" view-type="create"/> 
+  </system> 
+</uc>

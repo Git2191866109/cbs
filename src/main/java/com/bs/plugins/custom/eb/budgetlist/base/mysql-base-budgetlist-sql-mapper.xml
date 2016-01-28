@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetlist.dao.IBudgetListDao">
+
+	<parameterMap id="budgetListParam" type="com.bs.plugins.custom.eb.budgetlist.entity.BudgetList" />
+	<resultMap id="budgetListResult" type="com.bs.plugins.custom.eb.budgetlist.entity.BudgetList">
+		<id property="id" column="budgetList_id" javaType="java.lang.Long" />
+		<result property="basicInfoId" column="budgetList_basicInfoId" javaType="java.lang.Long" />
+		<result property="memberId" column="budgetList_memberId" javaType="java.lang.Long" />
+		<result property="categoryId" column="budgetList_categoryId" javaType="java.lang.Long" />
+		<result property="itemId" column="budgetList_itemId" javaType="java.lang.Long" />
+		<result property="itemDataId" column="budgetList_itemDataId" javaType="java.lang.Long" />
+		<result property="growStagesId" column="budgetList_growStagesId" javaType="java.lang.Long" />
+		<result property="eduModeId" column="budgetList_eduModeId" javaType="java.lang.Long" />
+		<result property="serialNumber" column="budgetList_serialNumber" javaType="java.lang.String" />
+		<result property="provinceCode" column="budgetList_provinceCode" javaType="java.lang.String" />
+		<result property="provinceName" column="budgetList_provinceName" javaType="java.lang.String" />
+		<result property="cityCode" column="budgetList_cityCode" javaType="java.lang.String" />
+		<result property="cityName" column="budgetList_cityName" javaType="java.lang.String" />
+		<result property="countryCode" column="budgetList_countryCode" javaType="java.lang.String" />
+		<result property="countryName" column="budgetList_countryName" javaType="java.lang.String" />
+		<result property="isCustom" column="budgetList_isCustom" javaType="java.lang.Integer" />
+		<result property="isValid" column="budgetList_isValid" javaType="java.lang.Integer" />
+		<result property="creatorId" column="budgetList_creatorId" javaType="java.lang.Long" />
+		<result property="lowAmountTotal" column="budgetList_lowAmountTotal" javaType="java.math.BigDecimal" />
+		<result property="highAmountTotal" column="budgetList_highAmountTotal" javaType="java.math.BigDecimal" />
+		<result property="lowAmount" column="budgetList_lowAmount" javaType="java.math.BigDecimal" />
+		<result property="highAmount" column="budgetList_highAmount" javaType="java.math.BigDecimal" />
+		<result property="systemYearCount" column="budgetList_systemYearCount" javaType="java.lang.Integer" />
+		<result property="yearCount" column="budgetList_yearCount" javaType="java.lang.Double" />
+		<result property="years" column="budgetList_years" javaType="java.lang.Integer" />
+		<result property="paymentGrade" column="budgetList_paymentGrade" javaType="java.lang.Integer" />
+		<result property="isGrading" column="budgetList_isGrading" javaType="java.lang.Integer" />
+		<result property="gradingType" column="budgetList_gradingType" javaType="java.lang.Integer" />
+		<result property="paymentMethod" column="budgetList_paymentMethod" javaType="java.lang.Integer" />
+		<result property="paymentMonth" column="budgetList_paymentMonth" javaType="java.lang.Integer" />
+		<result property="isInflation" column="budgetList_isInflation" javaType="java.lang.Integer" />
+		<result property="isAreaTranslation" column="budgetList_isAreaTranslation" javaType="java.lang.Integer" />
+		<result property="comment" column="budgetList_comment" javaType="java.lang.String" />
+		<result property="dataSources" column="budgetList_dataSources" javaType="java.lang.String" />
+		<result property="createDate" column="budgetList_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="budgetList_modifyDate" javaType="java.lang.String" />
+		<result property="inflationAmountTotal" column="budgetList_inflationAmountTotal" javaType="java.math.BigDecimal" />
+		<result property="currentAmount" column="budgetList_currentAmount" javaType="java.math.BigDecimal" />
+		<result property="currentAmountTotal" column="budgetList_currentAmountTotal" javaType="java.math.BigDecimal" />
+		<result property="trainingAgencyName" column="budgetList_trainingAgencyName" javaType="java.lang.String" />
+		<result property="maxAmount" column="budgetList_maxAmount" javaType="java.math.BigDecimal" />
+		<result property="maxYearCount" column="budgetList_maxYearCount" javaType="java.lang.Integer" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="budgetListResult" parameterMap="budgetListParam">
+		select 
+			Id budgetList_id,
+			BasicInfoId budgetList_basicInfoId,
+			MemberId budgetList_memberId,
+			CategoryId budgetList_categoryId,
+			ItemId budgetList_itemId,
+			ItemDataId budgetList_itemDataId,
+			GrowStagesId budgetList_growStagesId,
+			EduModeId budgetList_eduModeId,
+			SerialNumber budgetList_serialNumber,
+			ProvinceCode budgetList_provinceCode,
+			ProvinceName budgetList_provinceName,
+			CityCode budgetList_cityCode,
+			CityName budgetList_cityName,
+			CountryCode budgetList_countryCode,
+			CountryName budgetList_countryName,
+			IsCustom budgetList_isCustom,
+			IsValid budgetList_isValid,
+			CreatorId budgetList_creatorId,
+			LowAmountTotal budgetList_lowAmountTotal,
+			HighAmountTotal budgetList_highAmountTotal,
+			LowAmount budgetList_lowAmount,
+			HighAmount budgetList_highAmount,
+			SystemYearCount budgetList_systemYearCount,
+			YearCount budgetList_yearCount,
+			Years budgetList_years,
+			PaymentGrade budgetList_paymentGrade,
+			IsGrading budgetList_isGrading,
+			GradingType budgetList_gradingType,
+			PaymentMethod budgetList_paymentMethod,
+			PaymentMonth budgetList_paymentMonth,
+			IsInflation budgetList_isInflation,
+			IsAreaTranslation budgetList_isAreaTranslation,
+			Comment budgetList_comment,
+			DataSources budgetList_dataSources,
+			CreateDate budgetList_createDate,
+			ModifyDate budgetList_modifyDate,
+			InflationAmountTotal budgetList_inflationAmountTotal,
+			CurrentAmount budgetList_currentAmount,
+			CurrentAmountTotal budgetList_currentAmountTotal,
+			TrainingAgencyName budgetList_trainingAgencyName,
+			MaxAmount budgetList_maxAmount,
+			MaxYearCount budgetList_maxYearCount
+		from EB_BudgetList
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="serialNumber != null and serialNumber != ''">and SerialNumber=#{serialNumber}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="isCustom != null">and IsCustom=${isCustom}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="lowAmountTotal != null">and LowAmountTotal=${lowAmountTotal}</if>
+				<if test="highAmountTotal != null">and HighAmountTotal=${highAmountTotal}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="systemYearCount != null">and SystemYearCount=${systemYearCount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="paymentGrade != null">and PaymentGrade=${paymentGrade}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="inflationAmountTotal != null">and InflationAmountTotal=${inflationAmountTotal}</if>
+				<if test="currentAmount != null">and CurrentAmount=${currentAmount}</if>
+				<if test="currentAmountTotal != null">and CurrentAmountTotal=${currentAmountTotal}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetListResult">
+		select 
+			Id budgetList_id,
+			BasicInfoId budgetList_basicInfoId,
+			MemberId budgetList_memberId,
+			CategoryId budgetList_categoryId,
+			ItemId budgetList_itemId,
+			ItemDataId budgetList_itemDataId,
+			GrowStagesId budgetList_growStagesId,
+			EduModeId budgetList_eduModeId,
+			SerialNumber budgetList_serialNumber,
+			ProvinceCode budgetList_provinceCode,
+			ProvinceName budgetList_provinceName,
+			CityCode budgetList_cityCode,
+			CityName budgetList_cityName,
+			CountryCode budgetList_countryCode,
+			CountryName budgetList_countryName,
+			IsCustom budgetList_isCustom,
+			IsValid budgetList_isValid,
+			CreatorId budgetList_creatorId,
+			LowAmountTotal budgetList_lowAmountTotal,
+			HighAmountTotal budgetList_highAmountTotal,
+			LowAmount budgetList_lowAmount,
+			HighAmount budgetList_highAmount,
+			SystemYearCount budgetList_systemYearCount,
+			YearCount budgetList_yearCount,
+			Years budgetList_years,
+			PaymentGrade budgetList_paymentGrade,
+			IsGrading budgetList_isGrading,
+			GradingType budgetList_gradingType,
+			PaymentMethod budgetList_paymentMethod,
+			PaymentMonth budgetList_paymentMonth,
+			IsInflation budgetList_isInflation,
+			IsAreaTranslation budgetList_isAreaTranslation,
+			Comment budgetList_comment,
+			DataSources budgetList_dataSources,
+			CreateDate budgetList_createDate,
+			ModifyDate budgetList_modifyDate,
+			InflationAmountTotal budgetList_inflationAmountTotal,
+			CurrentAmount budgetList_currentAmount,
+			CurrentAmountTotal budgetList_currentAmountTotal,
+			TrainingAgencyName budgetList_trainingAgencyName,
+			MaxAmount budgetList_maxAmount,
+			MaxYearCount budgetList_maxYearCount
+		from EB_BudgetList
+	</select>
+	
+	<select id="selectOneById"  resultMap="budgetListResult" parameterMap="budgetListParam">
+		select 
+			Id budgetList_id,
+			BasicInfoId budgetList_basicInfoId,
+			MemberId budgetList_memberId,
+			CategoryId budgetList_categoryId,
+			ItemId budgetList_itemId,
+			ItemDataId budgetList_itemDataId,
+			GrowStagesId budgetList_growStagesId,
+			EduModeId budgetList_eduModeId,
+			SerialNumber budgetList_serialNumber,
+			ProvinceCode budgetList_provinceCode,
+			ProvinceName budgetList_provinceName,
+			CityCode budgetList_cityCode,
+			CityName budgetList_cityName,
+			CountryCode budgetList_countryCode,
+			CountryName budgetList_countryName,
+			IsCustom budgetList_isCustom,
+			IsValid budgetList_isValid,
+			CreatorId budgetList_creatorId,
+			LowAmountTotal budgetList_lowAmountTotal,
+			HighAmountTotal budgetList_highAmountTotal,
+			LowAmount budgetList_lowAmount,
+			HighAmount budgetList_highAmount,
+			SystemYearCount budgetList_systemYearCount,
+			YearCount budgetList_yearCount,
+			Years budgetList_years,
+			PaymentGrade budgetList_paymentGrade,
+			IsGrading budgetList_isGrading,
+			GradingType budgetList_gradingType,
+			PaymentMethod budgetList_paymentMethod,
+			PaymentMonth budgetList_paymentMonth,
+			IsInflation budgetList_isInflation,
+			IsAreaTranslation budgetList_isAreaTranslation,
+			Comment budgetList_comment,
+			DataSources budgetList_dataSources,
+			CreateDate budgetList_createDate,
+			ModifyDate budgetList_modifyDate,
+			InflationAmountTotal budgetList_inflationAmountTotal,
+			CurrentAmount budgetList_currentAmount,
+			CurrentAmountTotal budgetList_currentAmountTotal,
+			TrainingAgencyName budgetList_trainingAgencyName,
+			MaxAmount budgetList_maxAmount,
+			MaxYearCount budgetList_maxYearCount
+		from EB_BudgetList where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="budgetListResult" parameterMap="budgetListParam">
+		select 
+			Id budgetList_id,
+			BasicInfoId budgetList_basicInfoId,
+			MemberId budgetList_memberId,
+			CategoryId budgetList_categoryId,
+			ItemId budgetList_itemId,
+			ItemDataId budgetList_itemDataId,
+			GrowStagesId budgetList_growStagesId,
+			EduModeId budgetList_eduModeId,
+			SerialNumber budgetList_serialNumber,
+			ProvinceCode budgetList_provinceCode,
+			ProvinceName budgetList_provinceName,
+			CityCode budgetList_cityCode,
+			CityName budgetList_cityName,
+			CountryCode budgetList_countryCode,
+			CountryName budgetList_countryName,
+			IsCustom budgetList_isCustom,
+			IsValid budgetList_isValid,
+			CreatorId budgetList_creatorId,
+			LowAmountTotal budgetList_lowAmountTotal,
+			HighAmountTotal budgetList_highAmountTotal,
+			LowAmount budgetList_lowAmount,
+			HighAmount budgetList_highAmount,
+			SystemYearCount budgetList_systemYearCount,
+			YearCount budgetList_yearCount,
+			Years budgetList_years,
+			PaymentGrade budgetList_paymentGrade,
+			IsGrading budgetList_isGrading,
+			GradingType budgetList_gradingType,
+			PaymentMethod budgetList_paymentMethod,
+			PaymentMonth budgetList_paymentMonth,
+			IsInflation budgetList_isInflation,
+			IsAreaTranslation budgetList_isAreaTranslation,
+			Comment budgetList_comment,
+			DataSources budgetList_dataSources,
+			CreateDate budgetList_createDate,
+			ModifyDate budgetList_modifyDate,
+			InflationAmountTotal budgetList_inflationAmountTotal,
+			CurrentAmount budgetList_currentAmount,
+			CurrentAmountTotal budgetList_currentAmountTotal,
+			TrainingAgencyName budgetList_trainingAgencyName,
+			MaxAmount budgetList_maxAmount,
+			MaxYearCount budgetList_maxYearCount
+		from EB_BudgetList
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetListParam">
+		select count(*) from EB_BudgetList
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="serialNumber != null and serialNumber != ''">and SerialNumber=#{serialNumber}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="isCustom != null">and IsCustom=${isCustom}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="lowAmountTotal != null">and LowAmountTotal=${lowAmountTotal}</if>
+				<if test="highAmountTotal != null">and HighAmountTotal=${highAmountTotal}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="systemYearCount != null">and SystemYearCount=${systemYearCount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="paymentGrade != null">and PaymentGrade=${paymentGrade}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="inflationAmountTotal != null">and InflationAmountTotal=${inflationAmountTotal}</if>
+				<if test="currentAmount != null">and CurrentAmount=${currentAmount}</if>
+				<if test="currentAmountTotal != null">and CurrentAmountTotal=${currentAmountTotal}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="budgetListParam">
+		update EB_BudgetList
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="basicInfoId != null">,BasicInfoId=${basicInfoId}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="categoryId != null">,CategoryId=${categoryId}</if>
+				<if test="itemId != null">,ItemId=${itemId}</if>
+				<if test="itemDataId != null">,ItemDataId=${itemDataId}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">,EduModeId=${eduModeId}</if>
+				<if test="serialNumber != null and serialNumber != ''">,SerialNumber=#{serialNumber}</if>
+				<if test="provinceCode != null and provinceCode != ''">,ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">,ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">,CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">,CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">,CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">,CountryName=#{countryName}</if>
+				<if test="isCustom != null">,IsCustom=${isCustom}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+				<if test="lowAmountTotal != null">,LowAmountTotal=${lowAmountTotal}</if>
+				<if test="highAmountTotal != null">,HighAmountTotal=${highAmountTotal}</if>
+				<if test="lowAmount != null">,LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">,HighAmount=${highAmount}</if>
+				<if test="systemYearCount != null">,SystemYearCount=${systemYearCount}</if>
+				<if test="yearCount != null">,YearCount=${yearCount}</if>
+				<if test="years != null">,Years=${years}</if>
+				<if test="paymentGrade != null">,PaymentGrade=${paymentGrade}</if>
+				<if test="isGrading != null">,IsGrading=${isGrading}</if>
+				<if test="gradingType != null">,GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">,PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">,PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">,IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">,IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">,Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">,DataSources=#{dataSources}</if>
+				,CreateDate=now()
+				,ModifyDate=now()
+				<if test="inflationAmountTotal != null">,InflationAmountTotal=${inflationAmountTotal}</if>
+				<if test="currentAmount != null">,CurrentAmount=${currentAmount}</if>
+				<if test="currentAmountTotal != null">,CurrentAmountTotal=${currentAmountTotal}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">,TrainingAgencyName=#{trainingAgencyName}</if>
+				<if test="maxAmount != null">,MaxAmount=${maxAmount}</if>
+				<if test="maxYearCount != null">,MaxYearCount=${maxYearCount}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="budgetListParam">
+		insert into EB_BudgetList
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="basicInfoId != null">,BasicInfoId</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="categoryId != null">,CategoryId</if>
+			<if test="itemId != null">,ItemId</if>
+			<if test="itemDataId != null">,ItemDataId</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="eduModeId != null">,EduModeId</if>
+			<if test="serialNumber != null and serialNumber != ''">,SerialNumber</if>
+			<if test="provinceCode != null and provinceCode != ''">,ProvinceCode</if>
+			<if test="provinceName != null and provinceName != ''">,ProvinceName</if>
+			<if test="cityCode != null and cityCode != ''">,CityCode</if>
+			<if test="cityName != null and cityName != ''">,CityName</if>
+			<if test="countryCode != null and countryCode != ''">,CountryCode</if>
+			<if test="countryName != null and countryName != ''">,CountryName</if>
+			<if test="isCustom != null">,IsCustom</if>
+			<if test="isValid != null">,IsValid</if>
+			<if test="creatorId != null">,CreatorId</if>
+			<if test="lowAmountTotal != null">,LowAmountTotal</if>
+			<if test="highAmountTotal != null">,HighAmountTotal</if>
+			<if test="lowAmount != null">,LowAmount</if>
+			<if test="highAmount != null">,HighAmount</if>
+			<if test="systemYearCount != null">,SystemYearCount</if>
+			<if test="yearCount != null">,YearCount</if>
+			<if test="years != null">,Years</if>
+			<if test="paymentGrade != null">,PaymentGrade</if>
+			<if test="isGrading != null">,IsGrading</if>
+			<if test="gradingType != null">,GradingType</if>
+			<if test="paymentMethod != null">,PaymentMethod</if>
+			<if test="paymentMonth != null">,PaymentMonth</if>
+			<if test="isInflation != null">,IsInflation</if>
+			<if test="isAreaTranslation != null">,IsAreaTranslation</if>
+			<if test="comment != null and comment != ''">,Comment</if>
+			<if test="dataSources != null and dataSources != ''">,DataSources</if>
+			,CreateDate
+			,ModifyDate
+			<if test="inflationAmountTotal != null">,InflationAmountTotal</if>
+			<if test="currentAmount != null">,CurrentAmount</if>
+			<if test="currentAmountTotal != null">,CurrentAmountTotal</if>
+			<if test="trainingAgencyName != null and trainingAgencyName != ''">,TrainingAgencyName</if>
+			<if test="maxAmount != null">,MaxAmount</if>
+			<if test="maxYearCount != null">,MaxYearCount</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="basicInfoId != null">,${basicInfoId}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="categoryId != null">,${categoryId}</if>
+			<if test="itemId != null">,${itemId}</if>
+			<if test="itemDataId != null">,${itemDataId}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="eduModeId != null">,${eduModeId}</if>
+			<if test="serialNumber != null and serialNumber != ''">,#{serialNumber}</if>
+			<if test="provinceCode != null and provinceCode != ''">,#{provinceCode}</if>
+			<if test="provinceName != null and provinceName != ''">,#{provinceName}</if>
+			<if test="cityCode != null and cityCode != ''">,#{cityCode}</if>
+			<if test="cityName != null and cityName != ''">,#{cityName}</if>
+			<if test="countryCode != null and countryCode != ''">,#{countryCode}</if>
+			<if test="countryName != null and countryName != ''">,#{countryName}</if>
+			<if test="isCustom != null">,${isCustom}</if>
+			<if test="isValid != null">,${isValid}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+			<if test="lowAmountTotal != null">,${lowAmountTotal}</if>
+			<if test="highAmountTotal != null">,${highAmountTotal}</if>
+			<if test="lowAmount != null">,${lowAmount}</if>
+			<if test="highAmount != null">,${highAmount}</if>
+			<if test="systemYearCount != null">,${systemYearCount}</if>
+			<if test="yearCount != null">,${yearCount}</if>
+			<if test="years != null">,${years}</if>
+			<if test="paymentGrade != null">,${paymentGrade}</if>
+			<if test="isGrading != null">,${isGrading}</if>
+			<if test="gradingType != null">,${gradingType}</if>
+			<if test="paymentMethod != null">,${paymentMethod}</if>
+			<if test="paymentMonth != null">,${paymentMonth}</if>
+			<if test="isInflation != null">,${isInflation}</if>
+			<if test="isAreaTranslation != null">,${isAreaTranslation}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+			<if test="dataSources != null and dataSources != ''">,#{dataSources}</if>
+			,now()
+			,now()
+			<if test="inflationAmountTotal != null">,${inflationAmountTotal}</if>
+			<if test="currentAmount != null">,${currentAmount}</if>
+			<if test="currentAmountTotal != null">,${currentAmountTotal}</if>
+			<if test="trainingAgencyName != null and trainingAgencyName != ''">,#{trainingAgencyName}</if>
+			<if test="maxAmount != null">,${maxAmount}</if>
+			<if test="maxYearCount != null">,${maxYearCount}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="budgetListParam">
+		delete from EB_BudgetList where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="budgetListParam">
+		delete from EB_BudgetList
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetListParam">
+		delete from EB_BudgetList
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="itemDataId != null">and ItemDataId=${itemDataId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="eduModeId != null">and EduModeId=${eduModeId}</if>
+				<if test="serialNumber != null and serialNumber != ''">and SerialNumber=#{serialNumber}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="isCustom != null">and IsCustom=${isCustom}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="lowAmountTotal != null">and LowAmountTotal=${lowAmountTotal}</if>
+				<if test="highAmountTotal != null">and HighAmountTotal=${highAmountTotal}</if>
+				<if test="lowAmount != null">and LowAmount=${lowAmount}</if>
+				<if test="highAmount != null">and HighAmount=${highAmount}</if>
+				<if test="systemYearCount != null">and SystemYearCount=${systemYearCount}</if>
+				<if test="yearCount != null">and YearCount=${yearCount}</if>
+				<if test="years != null">and Years=${years}</if>
+				<if test="paymentGrade != null">and PaymentGrade=${paymentGrade}</if>
+				<if test="isGrading != null">and IsGrading=${isGrading}</if>
+				<if test="gradingType != null">and GradingType=${gradingType}</if>
+				<if test="paymentMethod != null">and PaymentMethod=${paymentMethod}</if>
+				<if test="paymentMonth != null">and PaymentMonth=${paymentMonth}</if>
+				<if test="isInflation != null">and IsInflation=${isInflation}</if>
+				<if test="isAreaTranslation != null">and IsAreaTranslation=${isAreaTranslation}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+				<if test="dataSources != null and dataSources != ''">and DataSources=#{dataSources}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="inflationAmountTotal != null">and InflationAmountTotal=${inflationAmountTotal}</if>
+				<if test="currentAmount != null">and CurrentAmount=${currentAmount}</if>
+				<if test="currentAmountTotal != null">and CurrentAmountTotal=${currentAmountTotal}</if>
+				<if test="trainingAgencyName != null and trainingAgencyName != ''">and TrainingAgencyName=#{trainingAgencyName}</if>
+				<if test="maxAmount != null">and MaxAmount=${maxAmount}</if>
+				<if test="maxYearCount != null">and MaxYearCount=${maxYearCount}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

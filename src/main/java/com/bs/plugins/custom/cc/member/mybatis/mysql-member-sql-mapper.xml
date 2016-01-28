@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.member.dao.IMemberDao">
+	<parameterMap id="memberParam1" type="com.bs.plugins.custom.cc.member.entity.Member" />
+	<resultMap id="memberResult1" type="com.bs.plugins.custom.cc.member.entity.Member">
+	<id property="id" column="member_id" javaType="java.lang.Long" />
+		<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+		<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+		<result property="type" column="member_type" javaType="java.lang.Integer" />
+		<result property="code" column="member_code" javaType="java.lang.String" />
+		<result property="account" column="member_account" javaType="java.lang.String" />
+		<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+		<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+		<result property="password" column="member_password" javaType="java.lang.String" />
+		<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+		<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+		<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+		<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+		<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+		<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+		<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+		<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+		<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+		<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+		<result property="name" column="member_name" javaType="java.lang.String" />
+		<result property="male" column="member_male" javaType="java.lang.Integer" />
+		<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+		<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+		<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+		<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+		<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+		<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+		<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+		<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+		<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+		<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+		<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+		<result property="address" column="member_address" javaType="java.lang.String" />
+		<result property="income" column="member_income" javaType="java.lang.Integer" />
+		<result property="job" column="member_job" javaType="java.lang.Integer" />
+		<result property="education" column="member_education" javaType="java.lang.Integer" />
+		<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+		<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+		<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+		<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+		<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+		<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+		<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+		<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+		<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+		<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+		<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+		<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+		<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+		<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+		<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+		<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		<result property="startTime" column="member_startTime" javaType="java.lang.String" />
+		<result property="endTime" column="member_endTime" javaType="java.lang.String" />
+		<result property="availableAmount" column="member_availableAmount" javaType="java.math.BigDecimal" />
+		<result property="frozenAmount" column="member_frozenAmount" javaType="java.math.BigDecimal" />
+		<result property="freeChargeAmount" column="member_freeChargeAmount" javaType="java.math.BigDecimal" />
+	</resultMap>
+
+	<select id="getMemberCount"  resultType="long" parameterMap="memberParam1">
+		select count(*) from CC_Member member
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="emailRegisterValidId != null">and EmailRegisterValidId=${emailRegisterValidId}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="account != null and account != ''">and Account=#{account}</if>
+				<if test="phoneAccount != null and phoneAccount != ''">and PhoneAccount=#{phoneAccount}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="umpayUserNo != null and umpayUserNo != ''">and UmpayUserNo=#{umpayUserNo}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="payPassword != null and payPassword != ''">and PayPassword=#{payPassword}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="avatar != null and avatar != ''">and Avatar=#{avatar}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">and OfficePhone=#{officePhone}</if>
+				<if test="certificateType != null">and CertificateType=${certificateType}</if>
+				<if test="certificateNo != null and certificateNo != ''">and CertificateNo=#{certificateNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="male != null">and Male=${male}</if>
+				<if test="birthday != null and birthday != ''">and Birthday=#{birthday}</if>
+				<if test="familyRole != null">and FamilyRole=${familyRole}</if>
+				<if test="rrac != null">and Rrac=${rrac}</if>
+				<if test="riskScore != null">and RiskScore=${riskScore}</if>
+				<if test="provinceSpell != null and provinceSpell != ''">and ProvinceSpell=#{provinceSpell}</if>
+				<if test="provinceCode != null">and ProvinceCode=${provinceCode}</if>
+				<if test="cityCode != null">and CityCode=${cityCode}</if>
+				<if test="countryCode != null">and CountryCode=${countryCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="income != null">and Income=${income}</if>
+				<if test="job != null">and Job=${job}</if>
+				<if test="education != null">and Education=${education}</if>
+				<if test="childrenCount != null">and ChildrenCount=${childrenCount}</if>
+				<if test="isFreePassword != null">and IsFreePassword=${isFreePassword}</if>
+				<if test="isEmailValid != null">and IsEmailValid=${isEmailValid}</if>
+				<if test="isRealname != null">and IsRealname=${isRealname}</if>
+				<if test="isActivate != null">and IsActivate=${isActivate}</if>
+				<if test="isOpenAccount != null">and IsOpenAccount=${isOpenAccount}</if>
+				<if test="isBindingCard != null">and IsBindingCard=${isBindingCard}</if>
+				<if test="isSignature != null">and IsSignature=${isSignature}</if>
+				<if test="signatureTime != null and signatureTime != ''">and SignatureTime=#{signatureTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="resetTime != null">and ResetTime=${resetTime}</if>
+				<if test="referralCode != null and referralCode != ''">and ReferralCode=#{referralCode}</if>
+				<if test="recommendIdcode != null and recommendIdcode != ''">and RecommendIdcode=#{recommendIdcode}</if>
+				<if test="resetTime != null">and ResetTime=${resetTime}</if>
+				<if test="startTime != null and startTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(member.registerTime) >= TO_DAYS(#{startTime})
+					]]>
+				</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+						AND TO_DAYS(member.registerTime) <= TO_DAYS(#{endTime})
+			  	]]>
+				</if>
+			</trim>
+		</where>
+	</select>
+	<update id="updateMember" parameterMap="memberParam1">
+		update CC_Member
+		<set>
+			<trim prefixOverrides="and">
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="emailRegisterValidId != null">and EmailRegisterValidId=${emailRegisterValidId}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="account != null and account != ''">and Account=#{account}</if>
+				<if test="phoneAccount != null and phoneAccount != ''">and PhoneAccount=#{phoneAccount}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="umpayUserNo != null and umpayUserNo != ''">and UmpayUserNo=#{umpayUserNo}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="payPassword != null and payPassword != ''">and PayPassword=#{payPassword}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="avatar != null and avatar != ''">and Avatar=#{avatar}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">and OfficePhone=#{officePhone}</if>
+				<if test="certificateType != null">and CertificateType=${certificateType}</if>
+				<if test="certificateNo != null and certificateNo != ''">and CertificateNo=#{certificateNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="male != null">and Male=${male}</if>
+				<if test="birthday != null and birthday != ''">and Birthday=#{birthday}</if>
+				<if test="familyRole != null">and FamilyRole=${familyRole}</if>
+				<if test="rrac != null">and Rrac=${rrac}</if>
+				<if test="riskScore != null">and RiskScore=${riskScore}</if>
+				<if test="provinceSpell != null and provinceSpell != ''">and ProvinceSpell=#{provinceSpell}</if>
+				<if test="provinceCode != null">and ProvinceCode=${provinceCode}</if>
+				<if test="cityCode != null">and CityCode=${cityCode}</if>
+				<if test="countryCode != null">and CountryCode=${countryCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="income != null">and Income=${income}</if>
+				<if test="job != null">and Job=${job}</if>
+				<if test="education != null">and Education=${education}</if>
+				<if test="childrenCount != null">and ChildrenCount=${childrenCount}</if>
+				<if test="isFreePassword != null">and IsFreePassword=${isFreePassword}</if>
+				<if test="isEmailValid != null">and IsEmailValid=${isEmailValid}</if>
+				<if test="isRealname != null">and IsRealname=${isRealname}</if>
+				<if test="isActivate != null">and IsActivate=${isActivate}</if>
+				<if test="isOpenAccount != null">and IsOpenAccount=${isOpenAccount}</if>
+				<if test="isBindingCard != null">and IsBindingCard=${isBindingCard}</if>
+				<if test="isSignature != null">and IsSignature=${isSignature}</if>
+				<if test="signatureTime != null and signatureTime != ''">and SignatureTime=#{signatureTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="resetTime != null">and ResetTime=${resetTime}</if>
+				<if test="referralCode != null and referralCode != ''">and ReferralCode=#{referralCode}</if>
+				<if test="recommendIdcode != null and recommendIdcode != ''">and RecommendIdcode=#{recommendIdcode}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<select id="selectByAccount" resultMap="memberResult1" parameterMap="memberParam1">
+		select
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_Member member
+		where Account = #{account}
+	</select>
+	
+		
+	<update id="updateByAccount" parameterMap="memberParam1">
+		update CC_Member
+		<set>
+			<trim prefixOverrides="and">
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="emailRegisterValidId != null">and EmailRegisterValidId=${emailRegisterValidId}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="account != null and account != ''">and Account=#{account}</if>
+				<if test="phoneAccount != null and phoneAccount != ''">and PhoneAccount=#{phoneAccount}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="umpayUserNo != null and umpayUserNo != ''">and UmpayUserNo=#{umpayUserNo}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="payPassword != null and payPassword != ''">and PayPassword=#{payPassword}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="avatar != null and avatar != ''">and Avatar=#{avatar}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">and OfficePhone=#{officePhone}</if>
+				<if test="certificateType != null">and CertificateType=${certificateType}</if>
+				<if test="certificateNo != null and certificateNo != ''">and CertificateNo=#{certificateNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="male != null">and Male=${male}</if>
+				<if test="birthday != null and birthday != ''">and Birthday=#{birthday}</if>
+				<if test="familyRole != null">and FamilyRole=${familyRole}</if>
+				<if test="rrac != null">and Rrac=${rrac}</if>
+				<if test="riskScore != null">and RiskScore=${riskScore}</if>
+				<if test="provinceSpell != null and provinceSpell != ''">and ProvinceSpell=#{provinceSpell}</if>
+				<if test="provinceCode != null">and ProvinceCode=${provinceCode}</if>
+				<if test="cityCode != null">and CityCode=${cityCode}</if>
+				<if test="countryCode != null">and CountryCode=${countryCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="income != null">and Income=${income}</if>
+				<if test="job != null">and Job=${job}</if>
+				<if test="education != null">and Education=${education}</if>
+				<if test="childrenCount != null">and ChildrenCount=${childrenCount}</if>
+				<if test="isFreePassword != null">and IsFreePassword=${isFreePassword}</if>
+				<if test="isEmailValid != null">and IsEmailValid=${isEmailValid}</if>
+				<if test="isRealname != null">and IsRealname=${isRealname}</if>
+				<if test="isActivate != null">and IsActivate=${isActivate}</if>
+				<if test="isOpenAccount != null">and IsOpenAccount=${isOpenAccount}</if>
+				<if test="isBindingCard != null">and IsBindingCard=${isBindingCard}</if>
+				<if test="isSignature != null">and IsSignature=${isSignature}</if>
+				<if test="signatureTime != null and signatureTime != ''">and SignatureTime=#{signatureTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="resetTime != null">and ResetTime=${resetTime}</if>
+				<if test="referralCode != null and referralCode != ''">and ReferralCode=#{referralCode}</if>
+				<if test="recommendIdcode != null and recommendIdcode != ''">and RecommendIdcode=#{recommendIdcode}</if>
+			</trim>
+		</set>
+		where Account=#{account}
+	</update>
+	
+	<update id="resetpwd" parameterMap="memberParam1">
+		update CC_Member
+		set
+			<if test="password != null and password != ''">Password=#{password}</if>
+		where Id=${id}
+	</update>
+
+	<select id="totalAllMembers"  resultType="long" parameterMap="memberParam1">
+		select
+		count(member.Id)
+		from CC_Member member
+		<where>
+			<if test="startTime != null and startTime != ''">
+			<![CDATA[ 
+				TO_DAYS(member.registerTime) >= TO_DAYS(#{startTime})
+				]]> 
+			</if>
+			<if test="endTime != null and endTime != ''">
+			<![CDATA[ 
+				AND TO_DAYS(member.registerTime) <= TO_DAYS(#{endTime}) 
+			   ]]> 
+			</if>
+		</where>
+	</select>
+
+	<select id="paginated" resultMap="memberResult1" parameterMap="memberParam1">
+		select
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode,
+			accounting.Id accounting_id,
+			accounting.MemberId accounting_memberId,
+			ifnull(accounting.AvailableAmount,0) member_availableAmount,
+			ifnull(accounting.FrozenAmount,0) member_frozenAmount,
+			ifnull(accounting.FreeChargeAmount,0) member_freeChargeAmount
+		from CC_Member member
+		left join CC_Accounting accounting on accounting.MemberId=member.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="emailRegisterValidId != null">and EmailRegisterValidId=${emailRegisterValidId}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="account != null and account != ''">and Account=#{account}</if>
+				<if test="phoneAccount != null and phoneAccount != ''">and PhoneAccount=#{phoneAccount}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="umpayUserNo != null and umpayUserNo != ''">and UmpayUserNo=#{umpayUserNo}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="payPassword != null and payPassword != ''">and PayPassword=#{payPassword}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="avatar != null and avatar != ''">and Avatar=#{avatar}</if>
+				<if test="validEmail != null and validEmail != ''">and ValidEmail=#{validEmail}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="officePhone != null and officePhone != ''">and OfficePhone=#{officePhone}</if>
+				<if test="certificateType != null">and CertificateType=${certificateType}</if>
+				<if test="certificateNo != null and certificateNo != ''">and CertificateNo=#{certificateNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="male != null">and Male=${male}</if>
+				<if test="birthday != null and birthday != ''">and Birthday=#{birthday}</if>
+				<if test="familyRole != null">and FamilyRole=${familyRole}</if>
+				<if test="rrac != null">and Rrac=${rrac}</if>
+				<if test="riskScore != null">and RiskScore=${riskScore}</if>
+				<if test="provinceSpell != null and provinceSpell != ''">and ProvinceSpell=#{provinceSpell}</if>
+				<if test="provinceCode != null">and ProvinceCode=${provinceCode}</if>
+				<if test="cityCode != null">and CityCode=${cityCode}</if>
+				<if test="countryCode != null">and CountryCode=${countryCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="income != null">and Income=${income}</if>
+				<if test="job != null">and Job=${job}</if>
+				<if test="education != null">and Education=${education}</if>
+				<if test="childrenCount != null">and ChildrenCount=${childrenCount}</if>
+				<if test="isFreePassword != null">and IsFreePassword=${isFreePassword}</if>
+				<if test="isEmailValid != null">and IsEmailValid=${isEmailValid}</if>
+				<if test="isRealname != null">and IsRealname=${isRealname}</if>
+				<if test="isActivate != null">and IsActivate=${isActivate}</if>
+				<if test="isOpenAccount != null">and IsOpenAccount=${isOpenAccount}</if>
+				<if test="isBindingCard != null">and IsBindingCard=${isBindingCard}</if>
+				<if test="isSignature != null">and IsSignature=${isSignature}</if>
+				<if test="signatureTime != null and signatureTime != ''">and SignatureTime=#{signatureTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="resetTime != null">and ResetTime=${resetTime}</if>
+				<if test="referralCode != null and referralCode != ''">and ReferralCode=#{referralCode}</if>
+				<if test="recommendIdcode != null and recommendIdcode != ''">and RecommendIdcode=#{recommendIdcode}</if>
+			<if test="startTime != null and startTime != ''">
+					<![CDATA[
+						and TO_DAYS(member.registerTime) >= TO_DAYS(#{startTime})
+					]]>
+				</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+						AND TO_DAYS(member.registerTime) <= TO_DAYS(#{endTime})
+			  		 ]]>
+				</if>
+			</trim>
+		</where>
+		order by member.Id asc
+		limit ${start},${offset}
+	</select>
+</mapper>

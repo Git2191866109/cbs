@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="column">
+	<parameterMap id="columnParam" type="com.bs.plugins.system.entity.Column" />
+	<!-- 用户结果集 -->
+	<resultMap id="columnResult" type="com.bs.plugins.system.entity.Column">
+		<id property="id" column="Id" javaType="java.lang.Long" />
+		<result property="objectId" column="ObjectId" />
+		<result property="tableId" column="TableId" />
+		<result property="code" column="Code" />
+		<result property="name" column="Name" />
+		<result property="showName" column="ShowName" />
+		<result property="defaultValue" column="DefaultValue" />
+		<result property="dataType" column="DataType" />
+		<result property="length" column="Length" />
+		<result property="creationDate" column="CreationDate" />
+		<result property="modificationDate" column="ModificationDate" />
+		<result property="comment" column="Comment" />
+	</resultMap>
+	
+	<select id="select_all" resultMap="columnResult" parameterMap="columnParam">
+		select * from SC_TableColumn
+	</select>
+	
+	<select id="select_one_by_id"  resultMap="columnResult" parameterMap="columnParam">
+		select * from SC_TableColumn where Id=${id}
+	</select>
+	
+	<select id="select_one_by_objid"  resultMap="columnResult" parameterMap="columnParam">
+		select * from SC_TableColumn where ObjectId=#{objectId}
+	</select>
+	
+	
+	
+	<update id="update" parameterMap="columnParam">
+		update SC_TableColumn
+		<set>
+			<trim prefixOverrides=",">
+				<if test="objectId != null and objectId != ''">,ObjectId = #{objectId}</if>
+				<if test="code != null and code != ''">,Code = #{code}</if>
+				<if test="name != null and name != ''">,Name = #{name}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate = ${modificationDate}</if>
+				<if test="comment != null and comment != ''">,Comment = #{comment}</if>
+			</trim>
+		</set>
+		<where>
+			<if test="id != null and id != ''">
+				and Id=${id}
+			</if>
+		</where>	
+	</update>
+	
+	<update id="update_by_code" parameterMap="columnParam">
+		update SC_TableColumn
+		<set>
+			<trim prefixOverrides=",">
+				<if test="objectId != null and objectId != ''">,ObjectId = #{objectId}</if>
+				<if test="tableId != null">,TableId = ${tableId}</if>
+				<if test="code != null and code != ''">,Code = #{code}</if>
+				<if test="name != null and name != ''">,Name = #{name}</if>
+				<if test="showName != null and showName != ''">,ShowName = #{showName}</if>
+				<if test="dataType != null and dataType != ''">,DataType = #{dataType}</if>
+				<if test="defaultValue != null">,DefaultValue=${defaultValue}</if>
+				<if test="length != null">,Length=${length}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate = ${modificationDate}</if>
+				<if test="comment != null and comment != ''">,Comment = #{comment}</if>
+			</trim>
+		</set>
+		<where>
+			<if test="code != null and code != ''">
+				and Code=${code}
+			</if>
+		</where>	
+	</update>
+	
+	<insert id="insert" parameterMap="columnParam">
+		insert into SC_TableColumn
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="objectId != null and objectId != ''">,ObjectId</if>
+			<if test="tableId != null">,TableId</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="showName != null and showName != ''">,ShowName</if>
+			<if test="dataType != null and dataType != ''">,DataType</if>
+			<if test="defaultValue != null and defaultValue != ''">,DefaultValue</if>
+			<if test="length != null">,Length</if>
+			<if test="creationDate != null">,CreationDate</if>
+			<if test="modificationDate != null">,ModificationDate</if>
+			<if test="comment != null and comment != ''">,Comment</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="objectId != null and objectId != ''">,#{objectId}</if>
+			<if test="tableId != null">,${tableId}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="showName != null and showName != ''">,#{showName}</if>
+			<if test="dataType != null and dataType != ''">,#{dataType}</if>
+			<if test="defaultValue != null and defaultValue != ''">,#{defaultValue}</if>
+			<if test="length != null">,${length}</if>
+		    <if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	
+	<delete id="delete_by_id" parameterMap="columnParam">
+		delete from SC_TableColumn where id=${id}
+	</delete>
+	
+	<delete id="delete_all" parameterMap="columnParam">
+		delete from SC_TableColumn
+	</delete>
+	
+	<delete id="delete" parameterMap="columnParam">
+		delete from SC_TableColumn
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">
+					and Id=${id}
+				</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

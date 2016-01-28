@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.authorization.dao.IAuthorizationDao">
+
+	<parameterMap id="authorizationParam" type="com.bs.plugins.custom.uc.authorization.entity.Authorization" />
+	<resultMap id="authorizationResult" type="com.bs.plugins.custom.uc.authorization.entity.Authorization">
+		<id property="id" column="authorization_id" javaType="java.lang.Long" />
+		<result property="code" column="authorization_code" javaType="java.lang.String" />
+		<result property="parentCode" column="authorization_parentCode" javaType="java.lang.String" />
+		<result property="parentName" column="authorization_parentName" javaType="java.lang.String" />
+		<result property="treeLevel" column="authorization_treeLevel" javaType="java.lang.Integer" />
+		<result property="relationPath" column="authorization_relationPath" javaType="java.lang.String" />
+		<result property="name" column="authorization_name" javaType="java.lang.String" />
+		<result property="modelName" column="authorization_modelName" javaType="java.lang.String" />
+		<result property="entityName" column="authorization_entityName" javaType="java.lang.String" />
+		<result property="methodName" column="authorization_methodName" javaType="java.lang.String" />
+		<result property="viewType" column="authorization_viewType" javaType="java.lang.String" />
+		<result property="viewName" column="authorization_viewName" javaType="java.lang.String" />
+		<result property="templateName" column="authorization_templateName" javaType="java.lang.String" />
+		<result property="modelFileName" column="authorization_modelFileName" javaType="java.lang.String" />
+		<result property="menuType" column="authorization_menuType" javaType="java.lang.String" />
+		<result property="isChildNode" column="authorization_isChildNode" javaType="java.lang.String" />
+		<result property="iconPath" column="authorization_iconPath" javaType="java.lang.String" />
+		<result property="authType" column="authorization_authType" javaType="java.lang.Integer" />
+		<result property="description" column="authorization_description" javaType="java.lang.String" />
+		<result property="createTime" column="authorization_createTime" javaType="java.lang.String" />
+		<collection property="roleAuthRelations" ofType="com.bs.plugins.custom.uc.roleauthrelation.entity.RoleAuthRelation">
+			<result property="roleId" column="roleAuthRelation_roleId" javaType="java.lang.Long" />
+			<result property="authId" column="roleAuthRelation_authId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime,	
+			roleAuthRelation.RoleId roleAuthRelation_roleId,
+			roleAuthRelation.AuthId roleAuthRelation_authId
+		from UC_Authorization authorization
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.AuthId=authorization.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">and ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">and EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">and MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">and ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">and TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">and ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">and MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">and IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">and IconPath=#{iconPath}</if>
+				<if test="authType != null">and AuthType=${authType}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAuthorizationRoleAuthRelation" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime,
+				roleAuthRelation.RoleId roleAuthRelation_roleId,
+	
+				roleAuthRelation.AuthId roleAuthRelation_authId
+	
+		from UC_Authorization authorization
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.AuthId=authorization.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">and ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">and EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">and MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">and ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">and TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">and ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">and MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">and IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">and IconPath=#{iconPath}</if>
+				<if test="authType != null">and AuthType=${authType}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			AuthType authorization_authType,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">and ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">and EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">and MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">and ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">and TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">and ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">and MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">and IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">and IconPath=#{iconPath}</if>
+				<if test="authType != null">and AuthType=${authType}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="authorizationResult">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			AuthType authorization_authType,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization
+	</select>
+	
+	<select id="selectOneById"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			AuthType authorization_authType,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="authorizationResult" parameterMap="authorizationParam">
+		select 
+			Id authorization_id,
+			Code authorization_code,
+			ParentCode authorization_parentCode,
+			ParentName authorization_parentName,
+			TreeLevel authorization_treeLevel,
+			RelationPath authorization_relationPath,
+			Name authorization_name,
+			ModelName authorization_modelName,
+			EntityName authorization_entityName,
+			MethodName authorization_methodName,
+			ViewType authorization_viewType,
+			ViewName authorization_viewName,
+			TemplateName authorization_templateName,
+			ModelFileName authorization_modelFileName,
+			MenuType authorization_menuType,
+			IsChildNode authorization_isChildNode,
+			IconPath authorization_iconPath,
+			AuthType authorization_authType,
+			Description authorization_description,
+			CreateTime authorization_createTime
+		from UC_Authorization
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="authorizationParam">
+		select count(*) from UC_Authorization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">and ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">and EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">and MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">and ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">and TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">and ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">and MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">and IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">and IconPath=#{iconPath}</if>
+				<if test="authType != null">and AuthType=${authType}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="authorizationParam">
+		update UC_Authorization
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">,ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">,ParentName=#{parentName}</if>
+				<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">,RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">,ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">,EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">,MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">,ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">,ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">,TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">,ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">,MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">,IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">,IconPath=#{iconPath}</if>
+				<if test="authType != null">,AuthType=${authType}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="authorizationParam">
+		update UC_Authorization
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Code=#{code}
+						,ParentCode=#{parentCode}
+						,ParentName=#{parentName}
+                    	<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+                        <if test="treeLevel == null">,TreeLevel= 0</if>
+						,RelationPath=#{relationPath}
+						,Name=#{name}
+						,ModelName=#{modelName}
+						,EntityName=#{entityName}
+						,MethodName=#{methodName}
+						,ViewType=#{viewType}
+						,ViewName=#{viewName}
+						,TemplateName=#{templateName}
+						,ModelFileName=#{modelFileName}
+						,MenuType=#{menuType}
+						,IsChildNode=#{isChildNode}
+						,IconPath=#{iconPath}
+                    	<if test="authType != null">,AuthType=${authType}</if>
+                        <if test="authType == null">,AuthType= 0</if>
+						,Description=#{description}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="authorizationParam">
+		insert into UC_Authorization
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="parentCode != null and parentCode != ''">,ParentCode</if>
+			<if test="parentName != null and parentName != ''">,ParentName</if>
+			<if test="treeLevel != null">,TreeLevel</if>
+			<if test="relationPath != null and relationPath != ''">,RelationPath</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="modelName != null and modelName != ''">,ModelName</if>
+			<if test="entityName != null and entityName != ''">,EntityName</if>
+			<if test="methodName != null and methodName != ''">,MethodName</if>
+			<if test="viewType != null and viewType != ''">,ViewType</if>
+			<if test="viewName != null and viewName != ''">,ViewName</if>
+			<if test="templateName != null and templateName != ''">,TemplateName</if>
+			<if test="modelFileName != null and modelFileName != ''">,ModelFileName</if>
+			<if test="menuType != null and menuType != ''">,MenuType</if>
+			<if test="isChildNode != null and isChildNode != ''">,IsChildNode</if>
+			<if test="iconPath != null and iconPath != ''">,IconPath</if>
+			<if test="authType != null">,AuthType</if>
+			<if test="description != null and description != ''">,Description</if>
+                ,CreateTime
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="parentCode != null and parentCode != ''">,#{parentCode}</if>
+			<if test="parentName != null and parentName != ''">,#{parentName}</if>
+			<if test="treeLevel != null">,${treeLevel}</if>
+			<if test="relationPath != null and relationPath != ''">,#{relationPath}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="modelName != null and modelName != ''">,#{modelName}</if>
+			<if test="entityName != null and entityName != ''">,#{entityName}</if>
+			<if test="methodName != null and methodName != ''">,#{methodName}</if>
+			<if test="viewType != null and viewType != ''">,#{viewType}</if>
+			<if test="viewName != null and viewName != ''">,#{viewName}</if>
+			<if test="templateName != null and templateName != ''">,#{templateName}</if>
+			<if test="modelFileName != null and modelFileName != ''">,#{modelFileName}</if>
+			<if test="menuType != null and menuType != ''">,#{menuType}</if>
+			<if test="isChildNode != null and isChildNode != ''">,#{isChildNode}</if>
+			<if test="iconPath != null and iconPath != ''">,#{iconPath}</if>
+			<if test="authType != null">,${authType}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="authorizationParam">
+		delete from UC_Authorization where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="authorizationParam">
+		delete from UC_Authorization
+	</delete>
+	
+	<delete id="delete" parameterMap="authorizationParam">
+		delete from UC_Authorization
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="parentCode != null and parentCode != ''">and ParentCode=#{parentCode}</if>
+				<if test="parentName != null and parentName != ''">and ParentName=#{parentName}</if>
+				<if test="treeLevel != null">and TreeLevel=${treeLevel}</if>
+				<if test="relationPath != null and relationPath != ''">and RelationPath=#{relationPath}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="modelName != null and modelName != ''">and ModelName=#{modelName}</if>
+				<if test="entityName != null and entityName != ''">and EntityName=#{entityName}</if>
+				<if test="methodName != null and methodName != ''">and MethodName=#{methodName}</if>
+				<if test="viewType != null and viewType != ''">and ViewType=#{viewType}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+				<if test="templateName != null and templateName != ''">and TemplateName=#{templateName}</if>
+				<if test="modelFileName != null and modelFileName != ''">and ModelFileName=#{modelFileName}</if>
+				<if test="menuType != null and menuType != ''">and MenuType=#{menuType}</if>
+				<if test="isChildNode != null and isChildNode != ''">and IsChildNode=#{isChildNode}</if>
+				<if test="iconPath != null and iconPath != ''">and IconPath=#{iconPath}</if>
+				<if test="authType != null">and AuthType=${authType}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

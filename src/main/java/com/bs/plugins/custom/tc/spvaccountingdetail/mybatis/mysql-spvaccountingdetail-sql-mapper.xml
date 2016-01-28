@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.spvaccountingdetail.dao.ISpvAccountingDetailDao">
+	
+	<parameterMap id="spvAccountingDetailParamImpl" type="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail" />
+	<resultMap id="spvAccountingDetailResultImpl" type="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail">
+		<id property="id" column="spvAccountingDetail_id" javaType="java.lang.Long" />
+		<result property="spvId" column="spvAccountingDetail_spvId" javaType="java.lang.Long" />
+		<result property="corporationName" column="spvAccountingDetail_corporationName" javaType="java.lang.String" />
+		<result property="productId" column="spvAccountingDetail_productId" javaType="java.lang.Long" />
+		<result property="productName" column="spvAccountingDetail_productName" javaType="java.lang.String" />
+		<result property="serialNumber" column="spvAccountingDetail_serialNumber" javaType="java.lang.String" />
+		<result property="flowTo" column="spvAccountingDetail_flowTo" javaType="java.lang.Integer" />
+		<result property="amount" column="spvAccountingDetail_amount" javaType="java.math.BigDecimal" />
+		<result property="businessType" column="spvAccountingDetail_businessType" javaType="java.lang.Integer" />
+		<result property="businessId" column="spvAccountingDetail_businessId" javaType="java.lang.Long" />
+		<result property="accountType" column="spvAccountingDetail_accountType" javaType="java.lang.Integer" />
+		<result property="operatorId" column="spvAccountingDetail_operatorId" javaType="java.lang.Long" />
+		<result property="operator" column="spvAccountingDetail_operator" javaType="java.lang.String" />
+		<result property="description" column="spvAccountingDetail_description" javaType="java.lang.String" />
+		<result property="createTime" column="spvAccountingDetail_createTime" javaType="java.lang.String" />
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectSPVPaginated" resultMap="spvAccountingDetailResultImpl" parameterMap="spvAccountingDetailParamImpl">
+		select 
+			spvAccountingDetail.Id spvAccountingDetail_id,
+			spvAccountingDetail.SpvId spvAccountingDetail_spvId,
+			spvCorporation.name spvAccountingDetail_corporationName,
+			spvAccountingDetail.ProductId spvAccountingDetail_productId,
+			product.Name spvAccountingDetail_productName,
+			spvAccountingDetail.SerialNumber spvAccountingDetail_serialNumber,
+			spvAccountingDetail.FlowTo spvAccountingDetail_flowTo,
+			spvAccountingDetail.Amount spvAccountingDetail_amount,
+			spvAccountingDetail.BusinessType spvAccountingDetail_businessType,
+			spvAccountingDetail.BusinessId spvAccountingDetail_businessId,
+			spvAccountingDetail.AccountType spvAccountingDetail_accountType,
+			spvAccountingDetail.OperatorId spvAccountingDetail_operatorId,
+			spvAccountingDetail.Operator spvAccountingDetail_operator,
+			spvAccountingDetail.Description spvAccountingDetail_description,
+			spvAccountingDetail.CreateTime spvAccountingDetail_createTime
+		from TC_SpvAccountingDetail spvAccountingDetail
+		left join PC_Product product on product.Id = spvAccountingDetail.ProductId
+		left join CC_SpvCorporation spvCorporation on spvCorporation.Id = spvAccountingDetail.SpvId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and spvAccountingDetail.Id=${id}</if>
+				<if test="flowTo != null">and spvAccountingDetail.FlowTo=${flowTo}</if>
+				<if test="businessType != null">and spvAccountingDetail.BusinessType=${businessType}</if>
+				<if test="accountType != null">and spvAccountingDetail.AccountType=${accountType}</if>
+				<if test="serialNumber != null and serialNumber != ''">and spvAccountingDetail.SerialNumber=#{serialNumber}</if>
+				<if test="productId != null">and spvAccountingDetail.ProductId=${productId}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(spvAccountingDetail.CreateTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(spvAccountingDetail.CreateTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+			</trim>
+		</where>
+		order by spvAccountingDetail.Id asc
+		<if test="offset != null and offset != 0">
+			limit ${start},${offset}
+		</if>
+	</select>
+	
+	<select id="selectSPVCount"  resultType="long" parameterMap="spvAccountingDetailParamImpl">
+		select count(1) from TC_SpvAccountingDetail 
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="flowTo != null">and FlowTo=${flowTo}</if>
+				<if test="businessType != null">and BusinessType=${businessType}</if>
+				<if test="accountType != null">and AccountType=${accountType}</if>
+				<if test="serialNumber != null and serialNumber != ''">and SerialNumber=#{serialNumber}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(CreateTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(CreateTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+			</trim>
+		</where>
+	</select>
+	
+</mapper>

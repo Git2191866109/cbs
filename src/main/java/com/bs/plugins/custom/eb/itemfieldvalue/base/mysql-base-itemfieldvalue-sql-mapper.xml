@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.itemfieldvalue.dao.IItemFieldValueDao">
+
+	<parameterMap id="itemFieldValueParam" type="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue" />
+	<resultMap id="itemFieldValueResult" type="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+		<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+		<result property="itemFieldId" column="itemFieldValue_itemFieldId" javaType="java.lang.Long" />
+		<result property="dataCollectionId" column="itemFieldValue_dataCollectionId" javaType="java.lang.Long" />
+		<result property="fieldName" column="itemFieldValue_fieldName" javaType="java.lang.String" />
+		<result property="fieldValue" column="itemFieldValue_fieldValue" javaType="java.lang.String" />
+		<association property="itemField" javaType="com.bs.plugins.custom.eb.itemfield.entity.ItemField">
+			<id property="id" column="itemField_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="itemField_categoryId" javaType="java.lang.Long" />
+			<result property="tableName" column="itemField_tableName" javaType="java.lang.String" />
+			<result property="columnName" column="itemField_columnName" javaType="java.lang.String" />
+			<result property="columnCode" column="itemField_columnCode" javaType="java.lang.String" />
+			<result property="columnAlias" column="itemField_columnAlias" javaType="java.lang.String" />
+			<result property="isShow" column="itemField_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="itemField_showType" javaType="java.lang.Integer" />
+			<result property="rank" column="itemField_rank" javaType="java.lang.Integer" />
+		</association>
+		<association property="budgetItemDataCollection" javaType="com.bs.plugins.custom.eb.budgetitemdatacollection.entity.BudgetItemDataCollection">
+			<id property="id" column="budgetItemDataCollection_id" javaType="java.lang.Long" />
+			<result property="itemDataId" column="budgetItemDataCollection_itemDataId" javaType="java.lang.Long" />
+			<result property="areaId" column="budgetItemDataCollection_areaId" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="budgetItemDataCollection_eduGoalId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="budgetItemDataCollection_growStagesId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="budgetItemDataCollection_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="budgetItemDataCollection_budgetItemId" javaType="java.lang.Long" />
+			<result property="itemLowAmount" column="budgetItemDataCollection_itemLowAmount" javaType="java.math.BigDecimal" />
+			<result property="itemHighAmount" column="budgetItemDataCollection_itemHighAmount" javaType="java.math.BigDecimal" />
+			<result property="lowAmount" column="budgetItemDataCollection_lowAmount" javaType="java.math.BigDecimal" />
+			<result property="highAmount" column="budgetItemDataCollection_highAmount" javaType="java.math.BigDecimal" />
+			<result property="amount" column="budgetItemDataCollection_amount" javaType="java.math.BigDecimal" />
+			<result property="maxAmount" column="budgetItemDataCollection_maxAmount" javaType="java.math.BigDecimal" />
+			<result property="yearCount" column="budgetItemDataCollection_yearCount" javaType="java.lang.Integer" />
+			<result property="years" column="budgetItemDataCollection_years" javaType="java.lang.Integer" />
+			<result property="maxYearCount" column="budgetItemDataCollection_maxYearCount" javaType="java.lang.Integer" />
+			<result property="paymentAge" column="budgetItemDataCollection_paymentAge" javaType="java.lang.Integer" />
+			<result property="isGrading" column="budgetItemDataCollection_isGrading" javaType="java.lang.Integer" />
+			<result property="gradingType" column="budgetItemDataCollection_gradingType" javaType="java.lang.Integer" />
+			<result property="paymentMethod" column="budgetItemDataCollection_paymentMethod" javaType="java.lang.Integer" />
+			<result property="paymentMonth" column="budgetItemDataCollection_paymentMonth" javaType="java.lang.Integer" />
+			<result property="isInflation" column="budgetItemDataCollection_isInflation" javaType="java.lang.Integer" />
+			<result property="isAreaTranslation" column="budgetItemDataCollection_isAreaTranslation" javaType="java.lang.Integer" />
+			<result property="comment" column="budgetItemDataCollection_comment" javaType="java.lang.String" />
+			<result property="dataSources" column="budgetItemDataCollection_dataSources" javaType="java.lang.String" />
+			<result property="trainingAgencyName" column="budgetItemDataCollection_trainingAgencyName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			itemFieldValue.FieldValue itemFieldValue_fieldValue,	
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank,
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemDataCollection.TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_ItemFieldValue itemFieldValue
+		inner join EB_ItemField itemField on itemField.Id=itemFieldValue.ItemFieldId
+		inner join EB_BudgetItemDataCollection budgetItemDataCollection on budgetItemDataCollection.Id=itemFieldValue.DataCollectionId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectItemFieldValueItemField" resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			itemField.Id budgetItemDataCollection_id,
+			itemField.CategoryId budgetItemDataCollection_categoryId,
+			itemField.TableName budgetItemDataCollection_tableName,
+			itemField.ColumnName budgetItemDataCollection_columnName,
+			itemField.ColumnCode budgetItemDataCollection_columnCode,
+			itemField.ColumnAlias budgetItemDataCollection_columnAlias,
+			itemField.IsShow budgetItemDataCollection_isShow,
+			itemField.ShowType budgetItemDataCollection_showType,
+			itemField.Rank budgetItemDataCollection_rank
+		from EB_ItemFieldValue itemFieldValue
+		inner join EB_ItemField itemField on itemField.Id=itemFieldValue.ItemFieldId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectItemFieldValueBudgetItemDataCollection" resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			budgetItemDataCollection.Id budgetItemDataCollection_id,
+			budgetItemDataCollection.ItemDataId budgetItemDataCollection_itemDataId,
+			budgetItemDataCollection.AreaId budgetItemDataCollection_areaId,
+			budgetItemDataCollection.EduGoalId budgetItemDataCollection_eduGoalId,
+			budgetItemDataCollection.GrowStagesId budgetItemDataCollection_growStagesId,
+			budgetItemDataCollection.BudgetCategoryId budgetItemDataCollection_budgetCategoryId,
+			budgetItemDataCollection.BudgetItemId budgetItemDataCollection_budgetItemId,
+			budgetItemDataCollection.ItemLowAmount budgetItemDataCollection_itemLowAmount,
+			budgetItemDataCollection.ItemHighAmount budgetItemDataCollection_itemHighAmount,
+			budgetItemDataCollection.LowAmount budgetItemDataCollection_lowAmount,
+			budgetItemDataCollection.HighAmount budgetItemDataCollection_highAmount,
+			budgetItemDataCollection.Amount budgetItemDataCollection_amount,
+			budgetItemDataCollection.MaxAmount budgetItemDataCollection_maxAmount,
+			budgetItemDataCollection.YearCount budgetItemDataCollection_yearCount,
+			budgetItemDataCollection.Years budgetItemDataCollection_years,
+			budgetItemDataCollection.MaxYearCount budgetItemDataCollection_maxYearCount,
+			budgetItemDataCollection.PaymentAge budgetItemDataCollection_paymentAge,
+			budgetItemDataCollection.IsGrading budgetItemDataCollection_isGrading,
+			budgetItemDataCollection.GradingType budgetItemDataCollection_gradingType,
+			budgetItemDataCollection.PaymentMethod budgetItemDataCollection_paymentMethod,
+			budgetItemDataCollection.PaymentMonth budgetItemDataCollection_paymentMonth,
+			budgetItemDataCollection.IsInflation budgetItemDataCollection_isInflation,
+			budgetItemDataCollection.IsAreaTranslation budgetItemDataCollection_isAreaTranslation,
+			budgetItemDataCollection.Comment budgetItemDataCollection_comment,
+			budgetItemDataCollection.DataSources budgetItemDataCollection_dataSources,
+			budgetItemDataCollection.TrainingAgencyName budgetItemDataCollection_trainingAgencyName
+		from EB_ItemFieldValue itemFieldValue
+		inner join EB_BudgetItemDataCollection budgetItemDataCollection on budgetItemDataCollection.Id=itemFieldValue.DataCollectionId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select 
+			Id itemFieldValue_id,
+			ItemFieldId itemFieldValue_itemFieldId,
+			DataCollectionId itemFieldValue_dataCollectionId,
+			FieldName itemFieldValue_fieldName,
+			FieldValue itemFieldValue_fieldValue
+		from EB_ItemFieldValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="itemFieldValueResult">
+		select 
+			Id itemFieldValue_id,
+			ItemFieldId itemFieldValue_itemFieldId,
+			DataCollectionId itemFieldValue_dataCollectionId,
+			FieldName itemFieldValue_fieldName,
+			FieldValue itemFieldValue_fieldValue
+		from EB_ItemFieldValue
+	</select>
+	
+	<select id="selectOneById"  resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select 
+			Id itemFieldValue_id,
+			ItemFieldId itemFieldValue_itemFieldId,
+			DataCollectionId itemFieldValue_dataCollectionId,
+			FieldName itemFieldValue_fieldName,
+			FieldValue itemFieldValue_fieldValue
+		from EB_ItemFieldValue where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="itemFieldValueResult" parameterMap="itemFieldValueParam">
+		select 
+			Id itemFieldValue_id,
+			ItemFieldId itemFieldValue_itemFieldId,
+			DataCollectionId itemFieldValue_dataCollectionId,
+			FieldName itemFieldValue_fieldName,
+			FieldValue itemFieldValue_fieldValue
+		from EB_ItemFieldValue
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="itemFieldValueParam">
+		select count(*) from EB_ItemFieldValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="itemFieldValueParam">
+		update EB_ItemFieldValue
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="itemFieldId != null">,ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">,DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">,FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">,FieldValue=#{fieldValue}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="itemFieldValueParam">
+		update EB_ItemFieldValue
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ItemFieldId=${itemFieldId}
+                            ,DataCollectionId=${dataCollectionId}
+						,FieldName=#{fieldName}
+						,FieldValue=#{fieldValue}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="itemFieldValueParam">
+		insert into EB_ItemFieldValue
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="itemFieldId != null">,ItemFieldId</if>
+			<if test="dataCollectionId != null">,DataCollectionId</if>
+			<if test="fieldName != null and fieldName != ''">,FieldName</if>
+			<if test="fieldValue != null and fieldValue != ''">,FieldValue</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="itemFieldId != null">,${itemFieldId}</if>
+			<if test="dataCollectionId != null">,${dataCollectionId}</if>
+			<if test="fieldName != null and fieldName != ''">,#{fieldName}</if>
+			<if test="fieldValue != null and fieldValue != ''">,#{fieldValue}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="itemFieldValueParam">
+		delete from EB_ItemFieldValue where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="itemFieldValueParam">
+		delete from EB_ItemFieldValue
+	</delete>
+	
+	<delete id="delete" parameterMap="itemFieldValueParam">
+		delete from EB_ItemFieldValue
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="itemFieldId != null">and ItemFieldId=${itemFieldId}</if>
+				<if test="dataCollectionId != null">and DataCollectionId=${dataCollectionId}</if>
+				<if test="fieldName != null and fieldName != ''">and FieldName=#{fieldName}</if>
+				<if test="fieldValue != null and fieldValue != ''">and FieldValue=#{fieldValue}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

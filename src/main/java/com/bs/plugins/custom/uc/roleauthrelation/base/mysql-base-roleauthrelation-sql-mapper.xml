@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.roleauthrelation.dao.IRoleAuthRelationDao">
+
+	<parameterMap id="roleAuthRelationParam" type="com.bs.plugins.custom.uc.roleauthrelation.entity.RoleAuthRelation" />
+	<resultMap id="roleAuthRelationResult" type="com.bs.plugins.custom.uc.roleauthrelation.entity.RoleAuthRelation">
+		<result property="roleId" column="roleAuthRelation_roleId" javaType="java.lang.Long" />
+		<result property="authId" column="roleAuthRelation_authId" javaType="java.lang.Long" />
+		<association property="role" javaType="com.bs.plugins.custom.uc.role.entity.Role">
+			<id property="id" column="role_id" javaType="java.lang.Long" />
+			<result property="name" column="role_name" javaType="java.lang.String" />
+			<result property="description" column="role_description" javaType="java.lang.String" />
+			<result property="type" column="role_type" javaType="java.lang.Integer" />
+			<result property="status" column="role_status" javaType="java.lang.Integer" />
+			<result property="createTime" column="role_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="role_modifyTime" javaType="java.lang.String" />
+			<result property="creatorId" column="role_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="authorization" javaType="com.bs.plugins.custom.uc.authorization.entity.Authorization">
+			<id property="id" column="authorization_id" javaType="java.lang.Long" />
+			<result property="code" column="authorization_code" javaType="java.lang.String" />
+			<result property="parentCode" column="authorization_parentCode" javaType="java.lang.String" />
+			<result property="parentName" column="authorization_parentName" javaType="java.lang.String" />
+			<result property="treeLevel" column="authorization_treeLevel" javaType="java.lang.Integer" />
+			<result property="relationPath" column="authorization_relationPath" javaType="java.lang.String" />
+			<result property="name" column="authorization_name" javaType="java.lang.String" />
+			<result property="modelName" column="authorization_modelName" javaType="java.lang.String" />
+			<result property="entityName" column="authorization_entityName" javaType="java.lang.String" />
+			<result property="methodName" column="authorization_methodName" javaType="java.lang.String" />
+			<result property="viewType" column="authorization_viewType" javaType="java.lang.String" />
+			<result property="viewName" column="authorization_viewName" javaType="java.lang.String" />
+			<result property="templateName" column="authorization_templateName" javaType="java.lang.String" />
+			<result property="modelFileName" column="authorization_modelFileName" javaType="java.lang.String" />
+			<result property="menuType" column="authorization_menuType" javaType="java.lang.String" />
+			<result property="isChildNode" column="authorization_isChildNode" javaType="java.lang.String" />
+			<result property="iconPath" column="authorization_iconPath" javaType="java.lang.String" />
+			<result property="authType" column="authorization_authType" javaType="java.lang.Integer" />
+			<result property="description" column="authorization_description" javaType="java.lang.String" />
+			<result property="createTime" column="authorization_createTime" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="roleAuthRelationResult" parameterMap="roleAuthRelationParam">
+		select
+			roleAuthRelation.RoleId roleAuthRelation_roleId,
+			roleAuthRelation.AuthId roleAuthRelation_authId,	
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			role.Type role_type,
+			role.Status role_status,
+			role.CreateTime role_createTime,
+			role.ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId,
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime
+		from UC_RoleAuthRelation roleAuthRelation
+		inner join UC_Role role on role.Id=roleAuthRelation.RoleId
+		inner join UC_Authorization authorization on authorization.Id=roleAuthRelation.AuthId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectRoleAuthRelationRole" resultMap="roleAuthRelationResult" parameterMap="roleAuthRelationParam">
+		select
+			roleAuthRelation.RoleId roleAuthRelation_roleId,
+			role.Id authorization_id,
+			role.Name authorization_name,
+			role.Description authorization_description,
+			role.Type authorization_type,
+			role.Status authorization_status,
+			role.CreateTime authorization_createTime,
+			role.ModifyTime authorization_modifyTime,
+			role.CreatorId authorization_creatorId
+		from UC_RoleAuthRelation roleAuthRelation
+		inner join UC_Role role on role.Id=roleAuthRelation.RoleId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectRoleAuthRelationAuthorization" resultMap="roleAuthRelationResult" parameterMap="roleAuthRelationParam">
+		select
+			roleAuthRelation.RoleId roleAuthRelation_roleId,
+			authorization.Id authorization_id,
+			authorization.Code authorization_code,
+			authorization.ParentCode authorization_parentCode,
+			authorization.ParentName authorization_parentName,
+			authorization.TreeLevel authorization_treeLevel,
+			authorization.RelationPath authorization_relationPath,
+			authorization.Name authorization_name,
+			authorization.ModelName authorization_modelName,
+			authorization.EntityName authorization_entityName,
+			authorization.MethodName authorization_methodName,
+			authorization.ViewType authorization_viewType,
+			authorization.ViewName authorization_viewName,
+			authorization.TemplateName authorization_templateName,
+			authorization.ModelFileName authorization_modelFileName,
+			authorization.MenuType authorization_menuType,
+			authorization.IsChildNode authorization_isChildNode,
+			authorization.IconPath authorization_iconPath,
+			authorization.AuthType authorization_authType,
+			authorization.Description authorization_description,
+			authorization.CreateTime authorization_createTime
+		from UC_RoleAuthRelation roleAuthRelation
+		inner join UC_Authorization authorization on authorization.Id=roleAuthRelation.AuthId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="roleAuthRelationResult" parameterMap="roleAuthRelationParam">
+		select 
+			RoleId roleAuthRelation_roleId,
+			AuthId roleAuthRelation_authId
+		from UC_RoleAuthRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="roleAuthRelationResult">
+		select 
+			RoleId roleAuthRelation_roleId,
+			AuthId roleAuthRelation_authId
+		from UC_RoleAuthRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="roleAuthRelationResult" parameterMap="roleAuthRelationParam">
+		select 
+			RoleId roleAuthRelation_roleId,
+			AuthId roleAuthRelation_authId
+		from UC_RoleAuthRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="roleAuthRelationParam">
+		select count(*) from UC_RoleAuthRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="roleAuthRelationParam">
+		insert into UC_RoleAuthRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="roleId != null">,RoleId</if>
+			<if test="authId != null">,AuthId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="roleId != null">,${roleId}</if>
+			<if test="authId != null">,${authId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="roleAuthRelationParam">
+		delete from UC_RoleAuthRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="roleAuthRelationParam">
+		delete from UC_RoleAuthRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="roleId != null">and RoleId=${roleId}</if>
+				<if test="authId != null">and AuthId=${authId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

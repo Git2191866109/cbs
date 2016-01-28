@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.profession.dao.IProfessionDao">
+
+	<parameterMap id="professionParam" type="com.bs.plugins.custom.sc.profession.entity.Profession" />
+	<resultMap id="professionResult" type="com.bs.plugins.custom.sc.profession.entity.Profession">
+		<id property="id" column="profession_id" javaType="java.lang.Long" />
+		<result property="name" column="profession_name" javaType="java.lang.String" />
+		<result property="description" column="profession_description" javaType="java.lang.String" />
+		<result property="isValid" column="profession_isValid" javaType="java.lang.Integer" />
+		<result property="createDate" column="profession_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="profession_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="profession_creatorId" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="professionResult" parameterMap="professionParam">
+		select 
+			Id profession_id,
+			Name profession_name,
+			Description profession_description,
+			IsValid profession_isValid,
+			CreateDate profession_createDate,
+			ModifyDate profession_modifyDate,
+			CreatorId profession_creatorId
+		from SC_Profession
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="professionResult">
+		select 
+			Id profession_id,
+			Name profession_name,
+			Description profession_description,
+			IsValid profession_isValid,
+			CreateDate profession_createDate,
+			ModifyDate profession_modifyDate,
+			CreatorId profession_creatorId
+		from SC_Profession
+	</select>
+	
+	<select id="selectOneById"  resultMap="professionResult" parameterMap="professionParam">
+		select 
+			Id profession_id,
+			Name profession_name,
+			Description profession_description,
+			IsValid profession_isValid,
+			CreateDate profession_createDate,
+			ModifyDate profession_modifyDate,
+			CreatorId profession_creatorId
+		from SC_Profession where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="professionResult" parameterMap="professionParam">
+		select 
+			Id profession_id,
+			Name profession_name,
+			Description profession_description,
+			IsValid profession_isValid,
+			CreateDate profession_createDate,
+			ModifyDate profession_modifyDate,
+			CreatorId profession_creatorId
+		from SC_Profession
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="professionParam">
+		select count(*) from SC_Profession
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="professionParam">
+		update SC_Profession
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="professionParam">
+		update SC_Profession
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Description=#{description}
+                    	<if test="isValid != null">,IsValid=${isValid}</if>
+                        <if test="isValid == null">,IsValid= 0</if>
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="professionParam">
+		insert into SC_Profession
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="isValid != null">,IsValid</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="isValid != null">,${isValid}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="professionParam">
+		delete from SC_Profession where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="professionParam">
+		delete from SC_Profession
+	</delete>
+	
+	<delete id="delete" parameterMap="professionParam">
+		delete from SC_Profession
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

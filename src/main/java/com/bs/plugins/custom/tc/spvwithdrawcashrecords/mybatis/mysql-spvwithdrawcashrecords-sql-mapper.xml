@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.spvwithdrawcashrecords.dao.ISpvWithdrawCashRecordsDao">
+    <select id="selectPaginatedNewList"  resultMap="spvWithdrawCashRecordsResult" parameterMap="spvWithdrawCashRecordsParam">
+        select
+        Id spvWithdrawCashRecords_id,
+        SpvId spvWithdrawCashRecords_spvId,
+        SpvName spvWithdrawCashRecords_spvName,
+        TransactionNumber spvWithdrawCashRecords_transactionNumber,
+        PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+        Amount spvWithdrawCashRecords_amount,
+        BankName spvWithdrawCashRecords_bankName,
+        BankCode spvWithdrawCashRecords_bankCode,
+        BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+        HandlingCharge spvWithdrawCashRecords_handlingCharge,
+        ApplyTime spvWithdrawCashRecords_applyTime,
+        Status spvWithdrawCashRecords_status,
+        CheckingTime spvWithdrawCashRecords_checkingTime,
+        CheckingStatus spvWithdrawCashRecords_checkingStatus,
+        Remark spvWithdrawCashRecords_remark
+        from TC_SpvWithdrawCashRecords
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="spvId != null">and SpvId=${spvId}</if>
+                <if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+                <if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+                <if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+                <if test="amount != null">and Amount=${amount}</if>
+                <if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+                <if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+                <if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+                <if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+                <if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+                <if test="applyTimeStartTime != null and applyTimeStartTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(ApplyTime) >= TO_DAYS(#{applyTimeStartTime})
+					]]>
+
+                </if>
+                <if test="applyTimeEndTime != null and applyTimeEndTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(applyTime) <= TO_DAYS(#{applyTimeEndTime})
+					]]>
+                </if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+                <if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+                <if test="remark != null and remark != ''">and Remark=#{remark}</if>
+            </trim>
+        </where>
+        order by Id asc
+        limit ${start},${offset}
+    </select>
+
+    <select id="getNewCount"  resultType="long" parameterMap="spvWithdrawCashRecordsParam">
+        select count(*) from TC_SpvWithdrawCashRecords
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="spvId != null">and SpvId=${spvId}</if>
+                <if test="spvName != null and spvName != ''">and SpvName=#{spvName}</if>
+                <if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+                <if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+                <if test="amount != null">and Amount=${amount}</if>
+                <if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+                <if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+                <if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+                <if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+                <if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+                <if test="applyTimeStartTime != null and applyTimeStartTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(ApplyTime) >= TO_DAYS(#{applyTimeStartTime})
+					]]>
+
+                </if>
+                <if test="applyTimeEndTime != null and applyTimeEndTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(applyTime) <= TO_DAYS(#{applyTimeEndTime})
+					]]>
+                </if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+                <if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+                <if test="remark != null and remark != ''">and Remark=#{remark}</if>
+            </trim>
+        </where>
+    </select>
+</mapper>

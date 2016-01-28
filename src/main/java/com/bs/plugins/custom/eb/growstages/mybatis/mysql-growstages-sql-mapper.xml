@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.growstages.dao.IGrowStagesDao">
+	<parameterMap id="growStagesParamone" type="com.bs.plugins.custom.eb.growstages.entity.GrowStages" />
+	<resultMap id="growStagesResultone" type="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+		<id property="id" column="id" javaType="java.lang.Long" />
+		<result property="name" column="name" javaType="java.lang.String" />
+		<result property="code" column="code" javaType="java.lang.String" />
+		<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+		<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+		<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+		<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		<collection property="goalItemRelations" ofType="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation">
+			<id property="id" column="goalItemRelation_id" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="goalItemRelation_eduGoalId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="goalItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="goalItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="categoryId" column="goalItemRelation_categoryId" javaType="java.lang.Long" />
+			<result property="itemId" column="goalItemRelation_itemId" javaType="java.lang.Long" />
+			<result property="inputType" column="goalItemRelation_inputType" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="educationModes" ofType="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+			<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+			<result property="name" column="educationMode_name" javaType="java.lang.String" />
+			<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="modeItemRelations" ofType="com.bs.plugins.custom.eb.modeitemrelation.entity.ModeItemRelation">
+			<id property="id" column="modeItemRelation_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="modeItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="modeItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="modeItemRelation_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemDataId" column="modeItemRelation_budgetItemDataId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="modeItemRelation_budgetItemId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	<parameterMap id="growStagesParam1" type="com.bs.plugins.custom.eb.growstages.entity.GrowStages" />
+	<resultMap id="growStagesResult1" type="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+		<id property="id" column="growStages_id" javaType="java.lang.Long" />
+		<result property="name" column="growStages_name" javaType="java.lang.String" />
+		<result property="code" column="growStages_code" javaType="java.lang.String" />
+		<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+		<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+		<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+		<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		<collection property="goalItemRelations" ofType="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation">
+			<id property="id" column="goalItemRelation_id" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="goalItemRelation_eduGoalId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="goalItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="goalItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="categoryId" column="goalItemRelation_categoryId" javaType="java.lang.Long" />
+			<result property="itemId" column="goalItemRelation_itemId" javaType="java.lang.Long" />
+			<result property="inputType" column="goalItemRelation_inputType" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="educationModes" ofType="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+			<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+			<result property="name" column="educationMode_name" javaType="java.lang.String" />
+			<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="modeItemRelations" ofType="com.bs.plugins.custom.eb.modeitemrelation.entity.ModeItemRelation">
+			<id property="id" column="modeItemRelation_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="modeItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="modeItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="modeItemRelation_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemDataId" column="modeItemRelation_budgetItemDataId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="modeItemRelation_budgetItemId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	<select id="findParentNode" resultMap="growStagesResultone" >
+	SELECT name,code ,id from EB_GrowStages
+	</select>
+	
+	
+	
+	
+	<select id="selectPaginatedListOrderByCode"  resultMap="growStagesResult1" parameterMap="growStagesParam1">
+		select 
+			Id growStages_id,
+			Name growStages_name,
+			Code growStages_code,
+			StartAge growStages_startAge,
+			EndAge growStages_endAge,
+			IsInclude growStages_isInclude,
+			CreateDate growStages_createDate,
+			ModifyDate growStages_modifyDate,
+			CreatorId growStages_creatorId
+		from EB_GrowStages
+		order by Code asc
+		limit ${start},${offset}
+	</select>
+	
+</mapper>

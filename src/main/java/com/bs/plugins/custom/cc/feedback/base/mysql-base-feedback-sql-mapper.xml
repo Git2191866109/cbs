@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.feedback.dao.IFeedbackDao">
+
+	<parameterMap id="feedbackParam" type="com.bs.plugins.custom.cc.feedback.entity.Feedback" />
+	<resultMap id="feedbackResult" type="com.bs.plugins.custom.cc.feedback.entity.Feedback">
+		<id property="id" column="feedback_id" javaType="java.lang.Long" />
+		<result property="memberId" column="feedback_memberId" javaType="java.lang.Long" />
+		<result property="ipAddress" column="feedback_ipAddress" javaType="java.lang.String" />
+		<result property="nickName" column="feedback_nickName" javaType="java.lang.String" />
+		<result property="email" column="feedback_email" javaType="java.lang.String" />
+		<result property="mobilePhone" column="feedback_mobilePhone" javaType="java.lang.String" />
+		<result property="content" column="feedback_content" javaType="java.lang.String" />
+		<result property="createTime" column="feedback_createTime" javaType="java.lang.String" />
+		<result property="state" column="feedback_state" javaType="java.lang.Integer" />
+		<result property="replyContent" column="feedback_replyContent" javaType="java.lang.String" />
+		<result property="operatorId" column="feedback_operatorId" javaType="java.lang.Long" />
+		<result property="dealTime" column="feedback_dealTime" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="feedbackResult" parameterMap="feedbackParam">
+		select
+			feedback.Id feedback_id,
+			feedback.MemberId feedback_memberId,
+			feedback.IpAddress feedback_ipAddress,
+			feedback.NickName feedback_nickName,
+			feedback.Email feedback_email,
+			feedback.MobilePhone feedback_mobilePhone,
+			feedback.Content feedback_content,
+			feedback.CreateTime feedback_createTime,
+			feedback.State feedback_state,
+			feedback.ReplyContent feedback_replyContent,
+			feedback.OperatorId feedback_operatorId,
+			feedback.DealTime feedback_dealTime,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_Feedback feedback
+		inner join CC_Member member on member.Id=feedback.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">and NickName=#{nickName}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectFeedbackMember" resultMap="feedbackResult" parameterMap="feedbackParam">
+		select
+			feedback.Id feedback_id,
+			feedback.MemberId feedback_memberId,
+			feedback.IpAddress feedback_ipAddress,
+			feedback.NickName feedback_nickName,
+			feedback.Email feedback_email,
+			feedback.MobilePhone feedback_mobilePhone,
+			feedback.Content feedback_content,
+			feedback.CreateTime feedback_createTime,
+			feedback.State feedback_state,
+			feedback.ReplyContent feedback_replyContent,
+			feedback.OperatorId feedback_operatorId,
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_Feedback feedback
+		inner join CC_Member member on member.Id=feedback.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">and NickName=#{nickName}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="feedbackResult" parameterMap="feedbackParam">
+		select 
+			Id feedback_id,
+			MemberId feedback_memberId,
+			IpAddress feedback_ipAddress,
+			NickName feedback_nickName,
+			Email feedback_email,
+			MobilePhone feedback_mobilePhone,
+			Content feedback_content,
+			CreateTime feedback_createTime,
+			State feedback_state,
+			ReplyContent feedback_replyContent,
+			OperatorId feedback_operatorId,
+			DealTime feedback_dealTime
+		from CC_Feedback
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">and NickName=#{nickName}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="feedbackResult">
+		select 
+			Id feedback_id,
+			MemberId feedback_memberId,
+			IpAddress feedback_ipAddress,
+			NickName feedback_nickName,
+			Email feedback_email,
+			MobilePhone feedback_mobilePhone,
+			Content feedback_content,
+			CreateTime feedback_createTime,
+			State feedback_state,
+			ReplyContent feedback_replyContent,
+			OperatorId feedback_operatorId,
+			DealTime feedback_dealTime
+		from CC_Feedback
+	</select>
+	
+	<select id="selectOneById"  resultMap="feedbackResult" parameterMap="feedbackParam">
+		select 
+			Id feedback_id,
+			MemberId feedback_memberId,
+			IpAddress feedback_ipAddress,
+			NickName feedback_nickName,
+			Email feedback_email,
+			MobilePhone feedback_mobilePhone,
+			Content feedback_content,
+			CreateTime feedback_createTime,
+			State feedback_state,
+			ReplyContent feedback_replyContent,
+			OperatorId feedback_operatorId,
+			DealTime feedback_dealTime
+		from CC_Feedback where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="feedbackResult" parameterMap="feedbackParam">
+		select 
+			Id feedback_id,
+			MemberId feedback_memberId,
+			IpAddress feedback_ipAddress,
+			NickName feedback_nickName,
+			Email feedback_email,
+			MobilePhone feedback_mobilePhone,
+			Content feedback_content,
+			CreateTime feedback_createTime,
+			State feedback_state,
+			ReplyContent feedback_replyContent,
+			OperatorId feedback_operatorId,
+			DealTime feedback_dealTime
+		from CC_Feedback
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="feedbackParam">
+		select count(*) from CC_Feedback
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">and NickName=#{nickName}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="feedbackParam">
+		update CC_Feedback
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">,IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">,NickName=#{nickName}</if>
+				<if test="email != null and email != ''">,Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">,Content=#{content}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="state != null">,State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">,ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">,OperatorId=${operatorId}</if>
+               		 <if test="dealTime != null  and dealTime != ''">,DealTime=#{dealTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="feedbackParam">
+		update CC_Feedback
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+						,IpAddress=#{ipAddress}
+						,NickName=#{nickName}
+						,Email=#{email}
+						,MobilePhone=#{mobilePhone}
+						,Content=#{content}
+                        <if test="state != null">,State=${state}</if>
+                        <if test="state == null">,State= 0</if>
+						,ReplyContent=#{replyContent}
+                            ,OperatorId=${operatorId}
+                        <if test="dealTime != null  and dealTime != ''">,DealTime=#{dealTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="feedbackParam">
+		insert into CC_Feedback
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="ipAddress != null and ipAddress != ''">,IpAddress</if>
+			<if test="nickName != null and nickName != ''">,NickName</if>
+			<if test="email != null and email != ''">,Email</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone</if>
+			<if test="content != null and content != ''">,Content</if>
+                ,CreateTime
+			<if test="state != null">,State</if>
+			<if test="replyContent != null and replyContent != ''">,ReplyContent</if>
+			<if test="operatorId != null">,OperatorId</if>
+                <if test="dealTime != null and dealTime != ''">,DealTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="ipAddress != null and ipAddress != ''">,#{ipAddress}</if>
+			<if test="nickName != null and nickName != ''">,#{nickName}</if>
+			<if test="email != null and email != ''">,#{email}</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone}</if>
+			<if test="content != null and content != ''">,#{content}</if>
+                ,now()
+			<if test="state != null">,${state}</if>
+			<if test="replyContent != null and replyContent != ''">,#{replyContent}</if>
+			<if test="operatorId != null">,${operatorId}</if>
+            	<if test="dealTime != null and dealTime != ''">,#{dealTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="feedbackParam">
+		delete from CC_Feedback where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="feedbackParam">
+		delete from CC_Feedback
+	</delete>
+	
+	<delete id="delete" parameterMap="feedbackParam">
+		delete from CC_Feedback
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress=#{ipAddress}</if>
+				<if test="nickName != null and nickName != ''">and NickName=#{nickName}</if>
+				<if test="email != null and email != ''">and Email=#{email}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent=#{replyContent}</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

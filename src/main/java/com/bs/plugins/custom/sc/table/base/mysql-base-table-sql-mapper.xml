@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.table.dao.ITableDao">
+
+	<parameterMap id="tableParam" type="com.bs.plugins.custom.sc.table.entity.Table" />
+	<resultMap id="tableResult" type="com.bs.plugins.custom.sc.table.entity.Table">
+		<id property="id" column="table_id" javaType="java.lang.Long" />
+		<result property="code" column="table_code" javaType="java.lang.String" />
+		<result property="objectId" column="table_objectId" javaType="java.lang.String" />
+		<result property="name" column="table_name" javaType="java.lang.String" />
+		<result property="creationDate" column="table_creationDate" javaType="java.lang.Long" />
+		<result property="modificationDate" column="table_modificationDate" javaType="java.lang.Long" />
+		<result property="comment" column="table_comment" javaType="java.lang.String" />
+		<collection property="tableColumns" ofType="com.bs.plugins.custom.sc.tablecolumn.entity.TableColumn">
+			<id property="id" column="tableColumn_id" javaType="java.lang.Long" />
+			<result property="tableId" column="tableColumn_tableId" javaType="java.lang.Long" />
+			<result property="objectId" column="tableColumn_objectId" javaType="java.lang.String" />
+			<result property="code" column="tableColumn_code" javaType="java.lang.String" />
+			<result property="name" column="tableColumn_name" javaType="java.lang.String" />
+			<result property="showName" column="tableColumn_showName" javaType="java.lang.String" />
+			<result property="defaultValue" column="tableColumn_defaultValue" javaType="java.lang.String" />
+			<result property="dataType" column="tableColumn_dataType" javaType="java.lang.String" />
+			<result property="length" column="tableColumn_length" javaType="java.lang.Integer" />
+			<result property="creationDate" column="tableColumn_creationDate" javaType="java.lang.Long" />
+			<result property="modificationDate" column="tableColumn_modificationDate" javaType="java.lang.Long" />
+			<result property="comment" column="tableColumn_comment" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="tableResult" parameterMap="tableParam">
+		select
+			table.Id table_id,
+			table.Code table_code,
+			table.ObjectId table_objectId,
+			table.Name table_name,
+			table.CreationDate table_creationDate,
+			table.ModificationDate table_modificationDate,
+			table.Comment table_comment,	
+			tableColumn.Id tableColumn_id,
+			tableColumn.TableId tableColumn_tableId,
+			tableColumn.ObjectId tableColumn_objectId,
+			tableColumn.Code tableColumn_code,
+			tableColumn.Name tableColumn_name,
+			tableColumn.ShowName tableColumn_showName,
+			tableColumn.DefaultValue tableColumn_defaultValue,
+			tableColumn.DataType tableColumn_dataType,
+			tableColumn.Length tableColumn_length,
+			tableColumn.CreationDate tableColumn_creationDate,
+			tableColumn.ModificationDate tableColumn_modificationDate,
+			tableColumn.Comment tableColumn_comment
+		from SC_Table table
+		inner join SC_TableColumn tableColumn on tableColumn.TableId=table.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectTableTableColumn" resultMap="tableResult" parameterMap="tableParam">
+		select
+			table.Id table_id,
+			table.Code table_code,
+			table.ObjectId table_objectId,
+			table.Name table_name,
+			table.CreationDate table_creationDate,
+			table.ModificationDate table_modificationDate,
+			table.Comment table_comment,
+				tableColumn.Id tableColumn_id,
+	
+				tableColumn.TableId tableColumn_tableId,
+	
+				tableColumn.ObjectId tableColumn_objectId,
+	
+				tableColumn.Code tableColumn_code,
+	
+				tableColumn.Name tableColumn_name,
+	
+				tableColumn.ShowName tableColumn_showName,
+	
+				tableColumn.DefaultValue tableColumn_defaultValue,
+	
+				tableColumn.DataType tableColumn_dataType,
+	
+				tableColumn.Length tableColumn_length,
+	
+				tableColumn.CreationDate tableColumn_creationDate,
+	
+				tableColumn.ModificationDate tableColumn_modificationDate,
+	
+				tableColumn.Comment tableColumn_comment
+	
+		from SC_Table table
+		inner join SC_TableColumn tableColumn on tableColumn.TableId=table.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="tableResult" parameterMap="tableParam">
+		select 
+			Id table_id,
+			Code table_code,
+			ObjectId table_objectId,
+			Name table_name,
+			CreationDate table_creationDate,
+			ModificationDate table_modificationDate,
+			Comment table_comment
+		from SC_Table
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="tableResult">
+		select 
+			Id table_id,
+			Code table_code,
+			ObjectId table_objectId,
+			Name table_name,
+			CreationDate table_creationDate,
+			ModificationDate table_modificationDate,
+			Comment table_comment
+		from SC_Table
+	</select>
+	
+	<select id="selectOneById"  resultMap="tableResult" parameterMap="tableParam">
+		select 
+			Id table_id,
+			Code table_code,
+			ObjectId table_objectId,
+			Name table_name,
+			CreationDate table_creationDate,
+			ModificationDate table_modificationDate,
+			Comment table_comment
+		from SC_Table where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="tableResult" parameterMap="tableParam">
+		select 
+			Id table_id,
+			Code table_code,
+			ObjectId table_objectId,
+			Name table_name,
+			CreationDate table_creationDate,
+			ModificationDate table_modificationDate,
+			Comment table_comment
+		from SC_Table
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="tableParam">
+		select count(*) from SC_Table
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="tableParam">
+		update SC_Table
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">,ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="creationDate != null">,CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">,ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">,Comment=#{comment}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="tableParam">
+		update SC_Table
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Code=#{code}
+						,ObjectId=#{objectId}
+						,Name=#{name}
+                            ,CreationDate=${creationDate}
+                            ,ModificationDate=${modificationDate}
+						,Comment=#{comment}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="tableParam">
+		insert into SC_Table
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="objectId != null and objectId != ''">,ObjectId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="creationDate != null">,CreationDate</if>
+			<if test="modificationDate != null">,ModificationDate</if>
+			<if test="comment != null and comment != ''">,Comment</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="objectId != null and objectId != ''">,#{objectId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="tableParam">
+		delete from SC_Table where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="tableParam">
+		delete from SC_Table
+	</delete>
+	
+	<delete id="delete" parameterMap="tableParam">
+		delete from SC_Table
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="objectId != null and objectId != ''">and ObjectId=#{objectId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="creationDate != null">and CreationDate=${creationDate}</if>
+				<if test="modificationDate != null">and ModificationDate=${modificationDate}</if>
+				<if test="comment != null and comment != ''">and Comment=#{comment}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

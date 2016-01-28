@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.educationmode.dao.IEducationModeDao">
+
+	<parameterMap id="educationModeParam" type="com.bs.plugins.custom.eb.educationmode.entity.EducationMode" />
+	<resultMap id="educationModeResult" type="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+		<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+		<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+		<result property="name" column="educationMode_name" javaType="java.lang.String" />
+		<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+		<collection property="modeItemRelations" ofType="com.bs.plugins.custom.eb.modeitemrelation.entity.ModeItemRelation">
+			<id property="id" column="modeItemRelation_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="modeItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="modeItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="modeItemRelation_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="budgetItemDataId" column="modeItemRelation_budgetItemDataId" javaType="java.lang.Long" />
+			<result property="budgetItemId" column="modeItemRelation_budgetItemId" javaType="java.lang.Long" />
+			<result property="isSetData" column="modeItemRelation_isSetData" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="goalItemRelations" ofType="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation">
+			<id property="id" column="goalItemRelation_id" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="goalItemRelation_eduGoalId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="goalItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="goalItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="inputType" column="goalItemRelation_inputType" javaType="java.lang.Integer" />
+			<result property="isInland" column="goalItemRelation_isInland" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="budgetSelections" ofType="com.bs.plugins.custom.eb.budgetselection.entity.BudgetSelection">
+			<id property="id" column="budgetSelection_id" javaType="java.lang.Long" />
+			<result property="basicInfoId" column="budgetSelection_basicInfoId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="budgetSelection_growStagesId" javaType="java.lang.Long" />
+			<result property="costLevel" column="budgetSelection_costLevel" javaType="java.lang.Integer" />
+			<result property="eduModelId" column="budgetSelection_eduModelId" javaType="java.lang.Long" />
+			<result property="provinceSpelling" column="budgetSelection_provinceSpelling" javaType="java.lang.String" />
+			<result property="provinceCode" column="budgetSelection_provinceCode" javaType="java.lang.String" />
+			<result property="provinceName" column="budgetSelection_provinceName" javaType="java.lang.String" />
+			<result property="cityCode" column="budgetSelection_cityCode" javaType="java.lang.String" />
+			<result property="cityName" column="budgetSelection_cityName" javaType="java.lang.String" />
+			<result property="countryCode" column="budgetSelection_countryCode" javaType="java.lang.String" />
+			<result property="countryName" column="budgetSelection_countryName" javaType="java.lang.String" />
+			<result property="createDate" column="budgetSelection_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetSelection_modifyDate" javaType="java.lang.String" />
+			<result property="isValid" column="budgetSelection_isValid" javaType="java.lang.Integer" />
+			<result property="creatorId" column="budgetSelection_creatorId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,	
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+		from EB_EducationMode educationMode
+		inner join EB_GrowStages growStages on growStages.Id=educationMode.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEducationModeGrowStages" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+		from EB_EducationMode educationMode
+		inner join EB_GrowStages growStages on growStages.Id=educationMode.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,	
+			modeItemRelation.Id modeItemRelation_id,
+			modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+			modeItemRelation.EduModeId modeItemRelation_eduModeId,
+			modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+			modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+			modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+			modeItemRelation.IsSetData modeItemRelation_isSetData
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			goalItemRelation.IsInland goalItemRelation_isInland
+			budgetSelection.Id budgetSelection_id,
+			budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+			budgetSelection.GrowStagesId budgetSelection_growStagesId,
+			budgetSelection.CostLevel budgetSelection_costLevel,
+			budgetSelection.EduModelId budgetSelection_eduModelId,
+			budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+			budgetSelection.ProvinceCode budgetSelection_provinceCode,
+			budgetSelection.ProvinceName budgetSelection_provinceName,
+			budgetSelection.CityCode budgetSelection_cityCode,
+			budgetSelection.CityName budgetSelection_cityName,
+			budgetSelection.CountryCode budgetSelection_countryCode,
+			budgetSelection.CountryName budgetSelection_countryName,
+			budgetSelection.CreateDate budgetSelection_createDate,
+			budgetSelection.ModifyDate budgetSelection_modifyDate,
+			budgetSelection.IsValid budgetSelection_isValid,
+			budgetSelection.CreatorId budgetSelection_creatorId
+		from EB_EducationMode educationMode
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.EduModeId=educationMode.Id
+		inner join EB_GoalItemRelation goalItemRelation on goalItemRelation.EduModeId=educationMode.Id
+		inner join EB_BudgetSelection budgetSelection on budgetSelection.EduModelId=educationMode.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEducationModeModeItemRelation" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,
+				modeItemRelation.Id modeItemRelation_id,
+	
+				modeItemRelation.GrowStagesId modeItemRelation_growStagesId,
+	
+				modeItemRelation.EduModeId modeItemRelation_eduModeId,
+	
+				modeItemRelation.BudgetCategoryId modeItemRelation_budgetCategoryId,
+	
+				modeItemRelation.BudgetItemDataId modeItemRelation_budgetItemDataId,
+	
+				modeItemRelation.BudgetItemId modeItemRelation_budgetItemId,
+	
+				modeItemRelation.IsSetData modeItemRelation_isSetData
+	
+		from EB_EducationMode educationMode
+		inner join EB_ModeItemRelation modeItemRelation on modeItemRelation.EduModeId=educationMode.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectEducationModeGoalItemRelation" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,
+				goalItemRelation.Id goalItemRelation_id,
+	
+				goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+	
+				goalItemRelation.EduModeId goalItemRelation_eduModeId,
+	
+				goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+	
+				goalItemRelation.InputType goalItemRelation_inputType,
+	
+				goalItemRelation.IsInland goalItemRelation_isInland
+	
+		from EB_EducationMode educationMode
+		inner join EB_GoalItemRelation goalItemRelation on goalItemRelation.EduModeId=educationMode.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectEducationModeBudgetSelection" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,
+				budgetSelection.Id budgetSelection_id,
+	
+				budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+	
+				budgetSelection.GrowStagesId budgetSelection_growStagesId,
+	
+				budgetSelection.CostLevel budgetSelection_costLevel,
+	
+				budgetSelection.EduModelId budgetSelection_eduModelId,
+	
+				budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+	
+				budgetSelection.ProvinceCode budgetSelection_provinceCode,
+	
+				budgetSelection.ProvinceName budgetSelection_provinceName,
+	
+				budgetSelection.CityCode budgetSelection_cityCode,
+	
+				budgetSelection.CityName budgetSelection_cityName,
+	
+				budgetSelection.CountryCode budgetSelection_countryCode,
+	
+				budgetSelection.CountryName budgetSelection_countryName,
+	
+				budgetSelection.CreateDate budgetSelection_createDate,
+	
+				budgetSelection.ModifyDate budgetSelection_modifyDate,
+	
+				budgetSelection.IsValid budgetSelection_isValid,
+	
+				budgetSelection.CreatorId budgetSelection_creatorId
+	
+		from EB_EducationMode educationMode
+		inner join EB_BudgetSelection budgetSelection on budgetSelection.EduModelId=educationMode.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="educationModeResult" parameterMap="educationModeParam">
+		select 
+			Id educationMode_id,
+			GrowStagesId educationMode_growStagesId,
+			Name educationMode_name,
+			CreateDate educationMode_createDate,
+			ModifyDate educationMode_modifyDate,
+			CreatorId educationMode_creatorId
+		from EB_EducationMode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="educationModeResult">
+		select 
+			Id educationMode_id,
+			GrowStagesId educationMode_growStagesId,
+			Name educationMode_name,
+			CreateDate educationMode_createDate,
+			ModifyDate educationMode_modifyDate,
+			CreatorId educationMode_creatorId
+		from EB_EducationMode
+	</select>
+	
+	<select id="selectOneById"  resultMap="educationModeResult" parameterMap="educationModeParam">
+		select 
+			Id educationMode_id,
+			GrowStagesId educationMode_growStagesId,
+			Name educationMode_name,
+			CreateDate educationMode_createDate,
+			ModifyDate educationMode_modifyDate,
+			CreatorId educationMode_creatorId
+		from EB_EducationMode where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="educationModeResult" parameterMap="educationModeParam">
+		select 
+			Id educationMode_id,
+			GrowStagesId educationMode_growStagesId,
+			Name educationMode_name,
+			CreateDate educationMode_createDate,
+			ModifyDate educationMode_modifyDate,
+			CreatorId educationMode_creatorId
+		from EB_EducationMode
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="educationModeParam">
+		select count(*) from EB_EducationMode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="educationModeParam">
+		update EB_EducationMode
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="educationModeParam">
+		update EB_EducationMode
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,GrowStagesId=${growStagesId}
+						,Name=#{name}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="educationModeParam">
+		insert into EB_EducationMode
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="name != null and name != ''">,Name</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="educationModeParam">
+		delete from EB_EducationMode where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="educationModeParam">
+		delete from EB_EducationMode
+	</delete>
+	
+	<delete id="delete" parameterMap="educationModeParam">
+		delete from EB_EducationMode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

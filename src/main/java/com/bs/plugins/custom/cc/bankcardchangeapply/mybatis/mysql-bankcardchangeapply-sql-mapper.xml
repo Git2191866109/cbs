@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.bankcardchangeapply.dao.IBankCardChangeApplyDao">
+	<select id="selectAllPaginatedList"  resultMap="bankCardChangeApplyResult" parameterMap="bankCardChangeApplyParam">
+		select 
+			bankCardChangeApply.Id bankCardChangeApply_id,
+			bankCardChangeApply.MemberId bankCardChangeApply_memberId,
+			bankCardChangeApply.CardNumber bankCardChangeApply_cardNumber,
+			bankCardChangeApply.BankAccount bankCardChangeApply_bankAccount,
+			bankCardChangeApply.BankCode bankCardChangeApply_bankCode,
+			bankCardChangeApply.BankName bankCardChangeApply_bankName,
+			bankCardChangeApply.OpeningBankName bankCardChangeApply_openingBankName,
+			bankCardChangeApply.LinkLineNumber bankCardChangeApply_linkLineNumber,
+			bankCardChangeApply.Province bankCardChangeApply_province,
+			bankCardChangeApply.City bankCardChangeApply_city,
+			bankCardChangeApply.IsValid bankCardChangeApply_isValid,
+			bankCardChangeApply.IsSafeCard bankCardChangeApply_isSafeCard,
+			bankCardChangeApply.ApplyTime bankCardChangeApply_applyTime,
+			member.Name member_name
+		from CC_BankCardChangeApply bankCardChangeApply
+		inner join CC_Member member on member.Id=bankCardChangeApply.MemberId
+		order by bankCardChangeApply.Id desc
+		limit ${start},${offset}
+	</select>
+	
+</mapper>

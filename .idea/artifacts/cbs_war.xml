@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cbs:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="cbs_1.0r${env.SVN_REVISION}b20151220.war">
+      <element id="artifact" artifact-name="cbs:war exploded" />
+    </root>
+  </artifact>
+</component>

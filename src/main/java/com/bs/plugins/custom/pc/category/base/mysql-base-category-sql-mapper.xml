@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.category.dao.ICategoryDao">
+
+	<parameterMap id="categoryParam" type="com.bs.plugins.custom.pc.category.entity.Category" />
+	<resultMap id="categoryResult" type="com.bs.plugins.custom.pc.category.entity.Category">
+		<id property="id" column="category_id" javaType="java.lang.Long" />
+		<result property="name" column="category_name" javaType="java.lang.String" />
+		<result property="code" column="category_code" javaType="java.lang.String" />
+		<result property="description" column="category_description" javaType="java.lang.String" />
+		<result property="creatorId" column="category_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="category_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="category_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="category_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="category_isDelete" javaType="java.lang.Integer" />
+		<collection property="structureConfigs" ofType="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+			<id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+			<result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+			<result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+			<result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+			<result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+			<result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+			<result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+			<result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="categoryResult" parameterMap="categoryParam">
+		select
+			category.Id category_id,
+			category.Name category_name,
+			category.Code category_code,
+			category.Description category_description,
+			category.CreatorId category_creatorId,
+			category.CreateTime category_createTime,
+			category.ModifierId category_modifierId,
+			category.ModifyTime category_modifyTime,
+			category.isDelete category_isDelete,	
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete
+		from PC_Category category
+		inner join PC_StructureConfig structureConfig on structureConfig.CategoryId=category.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCategoryStructureConfig" resultMap="categoryResult" parameterMap="categoryParam">
+		select
+			category.Id category_id,
+			category.Name category_name,
+			category.Code category_code,
+			category.Description category_description,
+			category.CreatorId category_creatorId,
+			category.CreateTime category_createTime,
+			category.ModifierId category_modifierId,
+			category.ModifyTime category_modifyTime,
+			category.isDelete category_isDelete,
+				structureConfig.Id structureConfig_id,
+	
+				structureConfig.CategoryId structureConfig_categoryId,
+	
+				structureConfig.AttributeId structureConfig_attributeId,
+	
+				structureConfig.IsShow structureConfig_isShow,
+	
+				structureConfig.ShowType structureConfig_showType,
+	
+				structureConfig.IsHeader structureConfig_isHeader,
+	
+				structureConfig.DefaultValue structureConfig_defaultValue,
+	
+				structureConfig.SortBy structureConfig_sortBy,
+	
+				structureConfig.DataSource structureConfig_dataSource,
+	
+				structureConfig.CreatorId structureConfig_creatorId,
+	
+				structureConfig.CreateTime structureConfig_createTime,
+	
+				structureConfig.ModifierId structureConfig_modifierId,
+	
+				structureConfig.ModifyTime structureConfig_modifyTime,
+	
+				structureConfig.isDelete structureConfig_isDelete
+	
+		from PC_Category category
+		inner join PC_StructureConfig structureConfig on structureConfig.CategoryId=category.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="categoryResult" parameterMap="categoryParam">
+		select 
+			Id category_id,
+			Name category_name,
+			Code category_code,
+			Description category_description,
+			CreatorId category_creatorId,
+			CreateTime category_createTime,
+			ModifierId category_modifierId,
+			ModifyTime category_modifyTime,
+			isDelete category_isDelete
+		from PC_Category
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="categoryResult">
+		select 
+			Id category_id,
+			Name category_name,
+			Code category_code,
+			Description category_description,
+			CreatorId category_creatorId,
+			CreateTime category_createTime,
+			ModifierId category_modifierId,
+			ModifyTime category_modifyTime,
+			isDelete category_isDelete
+		from PC_Category
+	</select>
+	
+	<select id="selectOneById"  resultMap="categoryResult" parameterMap="categoryParam">
+		select 
+			Id category_id,
+			Name category_name,
+			Code category_code,
+			Description category_description,
+			CreatorId category_creatorId,
+			CreateTime category_createTime,
+			ModifierId category_modifierId,
+			ModifyTime category_modifyTime,
+			isDelete category_isDelete
+		from PC_Category where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="categoryResult" parameterMap="categoryParam">
+		select 
+			Id category_id,
+			Name category_name,
+			Code category_code,
+			Description category_description,
+			CreatorId category_creatorId,
+			CreateTime category_createTime,
+			ModifierId category_modifierId,
+			ModifyTime category_modifyTime,
+			isDelete category_isDelete
+		from PC_Category
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="categoryParam">
+		select count(*) from PC_Category
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="categoryParam">
+		update PC_Category
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="categoryParam">
+		update PC_Category
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Code=#{code}
+						,Description=#{description}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="categoryParam">
+		insert into PC_Category
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="categoryParam">
+		delete from PC_Category where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="categoryParam">
+		delete from PC_Category
+	</delete>
+	
+	<delete id="delete" parameterMap="categoryParam">
+		delete from PC_Category
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

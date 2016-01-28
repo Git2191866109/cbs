@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.residentincomes.dao.IResidentIncomesDao">
+	
+	<parameterMap id="residentIncomesParamImpl" type="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes" />
+	<resultMap id="residentIncomesResultImpl" type="com.bs.plugins.custom.sc.residentincomes.entity.ResidentIncomes">
+		<id property="id" column="residentIncomes_id" javaType="java.lang.Long" />
+		<result property="areaCode" column="residentIncomes_areaCode" javaType="java.lang.String" />
+		<result property="amount" column="residentIncomes_amount" javaType="java.lang.String" />
+		<result property="isBaseData" column="residentIncomes_isBaseData" javaType="java.lang.Integer" />
+		<result property="ratio" column="residentIncomes_ratio" javaType="java.math.BigDecimal" />
+		<result property="createDate" column="residentIncomes_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="residentIncomes_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="residentIncomes_creatorId" javaType="java.lang.Long" />
+		<result property="spelling" column="residentIncomes_spelling" javaType="java.lang.String" />
+		<result property="relationPath" column="residentIncomes_relationPath" javaType="java.lang.String" />
+		<association property="area" javaType="com.bs.plugins.custom.sc.area.entity.Area">
+			<id property="id" column="area_id" javaType="java.lang.Long" />
+			<result property="code" column="area_code" javaType="java.lang.String" />
+			<result property="parentCode" column="area_parentCode" javaType="java.lang.String" />
+			<result property="name" column="area_name" javaType="java.lang.String" />
+			<result property="treeLevel" column="area_treeLevel" javaType="java.lang.Integer" />
+			<result property="relationPath" column="area_relationPath" javaType="java.lang.String" />
+			<result property="spelling" column="area_spelling" javaType="java.lang.String" />
+			<result property="type" column="area_type" javaType="java.lang.Integer" />
+			<result property="createDate" column="area_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="area_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="area_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	
+	<select id="selectListByAreaCode" resultMap="residentIncomesResultImpl" parameterMap="residentIncomesParamImpl">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData
+		from SC_ResidentIncomes where areaCode not in 
+		(select DISTINCT(AreaCode) from EB_BudgetItemData)
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="areaCode != null and areaCode != ''">and AreaCode=#{areaCode}</if>
+				<if test="amount != null and amount != ''">and Amount=#{amount}</if>
+				<if test="isBaseData != null">and IsBaseData=${isBaseData}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectRelationPathByBaseData" resultMap="residentIncomesResultImpl" parameterMap="residentIncomesParamImpl">
+		select residentIncomes.Amount residentIncomes_amount,area.RelationPath area_relationPath,residentIncomes.AreaCode residentIncomes_areaCode from SC_ResidentIncomes residentIncomes 
+		left join SC_Area area on area.code = residentIncomes.areaCode
+		where residentIncomes.IsBaseData = 1
+	</select>
+	
+	<select id="selectCodeSpellingList" resultMap="residentIncomesResultImpl" parameterMap="residentIncomesParamImpl">
+		select
+			residentIncomes.Id residentIncomes_id,
+			residentIncomes.AreaCode residentIncomes_areaCode,
+			residentIncomes.Amount residentIncomes_amount,
+			residentIncomes.IsBaseData residentIncomes_isBaseData,
+			area.Id area_id,
+			area.TreeLevel area_treeLevel,
+			area.RelationPath residentIncomes_relationPath,
+			area.Spelling residentIncomes_spelling
+		from SC_ResidentIncomes residentIncomes
+		left join SC_Area area on area.Code=residentIncomes.AreaCode
+	</select>
+	<select id="selectCreateDate" resultMap="residentIncomesResultImpl" parameterMap="residentIncomesParamImpl">
+		select 
+			Id residentIncomes_id,
+			AreaCode residentIncomes_areaCode,
+			Amount residentIncomes_amount,
+			IsBaseData residentIncomes_isBaseData,
+			Ratio residentIncomes_ratio,
+			CreateDate residentIncomes_createDate,
+			ModifyDate residentIncomes_modifyDate,
+			CreatorId residentIncomes_creatorId
+		from SC_ResidentIncomes where Amount is not null ORDER BY AreaCode;
+	
+	</select>
+	
+</mapper>

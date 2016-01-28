@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetitem.dao.IBudgetItemDao">
+
+	<parameterMap id="budgetItemParam1" type="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem" />
+	<resultMap id="budgetItemResult1" type="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+		<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+		<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+		<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+		<result property="itemLevel" column="budgetItem_itemLevel" javaType="java.lang.Integer" />
+		<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+		<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+		<result property="grade" column="budgetItem_grade" javaType="java.lang.String" />
+		<result property="age" column="budgetItem_age" javaType="java.lang.Integer" />
+		<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+		<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+		<association property="budgetCategory" javaType="com.bs.plugins.custom.eb.budgetcategory.entity.BudgetCategory">
+			<id property="id" column="budgetCategory_id" javaType="java.lang.Long" />
+			<result property="name" column="budgetCategory_name" javaType="java.lang.String" />
+			<result property="code" column="budgetCategory_code" javaType="java.lang.String" />
+			<result property="createDate" column="budgetCategory_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetCategory_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetCategory_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>	
+	
+	<select id="selectPaginatedByCategoryIdList"  resultMap="budgetItemResult1" parameterMap="budgetItemParam1">
+		select 
+			Id budgetItem_id,
+			BudgetCategoryId budgetItem_budgetCategoryId,
+			ParentId budgetItem_parentId,
+			ItemLevel budgetItem_itemLevel,
+			Name budgetItem_name,
+			Code budgetItem_code,
+			Grade budgetItem_grade,
+			Age budgetItem_age,
+			CostFormula budgetItem_costFormula,
+			CreateDate budgetItem_createDate,
+			ModifyDate budgetItem_modifyDate,
+			CreatorId budgetItem_creatorId
+		from EB_BudgetItem
+		<where>
+			<if test="budgetCategoryId != null"> BudgetCategoryId=${budgetCategoryId}</if>
+			<if test="parentId != null"> ParentId=${parentId}</if>
+		</where>
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="selectSubLevel" resultType="long" parameterMap="budgetItemParam1">
+		select count(1) from EB_BudgetItem where parentId = ${id}
+	</select>
+	<select id="getBudgetItemOne" resultMap="budgetItemResult1" parameterMap="budgetItemParam1">
+		select Id budgetItem_id,ParentId budgetItem_parentId,Name budgetItem_name ,BudgetCategoryId budgetItem_budgetCategoryId from  EB_BudgetItem 
+		<where>
+			<if test="id != null"> parentId = 0</if> 
+			<if test="budgetCategoryId != null"> and budgetCategoryId = ${budgetCategoryId}</if>
+		</where>
+	</select>
+	<select id="getBudgetItemTwo" resultMap="budgetItemResult1" parameterMap="budgetItemParam1">
+		select Id budgetItem_id,ParentId budgetItem_parentId,Name budgetItem_name ,BudgetCategoryId budgetItem_budgetCategoryId from  EB_BudgetItem 
+		<where>
+			<if test="id != null"> parentId = ${id}</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.attributedataconfig.dao.IAttributeDataConfigDao">
+
+	<parameterMap id="attributeDataConfigParam" type="com.bs.plugins.custom.pc.attributedataconfig.entity.AttributeDataConfig" />
+	<resultMap id="attributeDataConfigResult" type="com.bs.plugins.custom.pc.attributedataconfig.entity.AttributeDataConfig">
+		<id property="id" column="attributeDataConfig_id" javaType="java.lang.Long" />
+		<result property="attributeId" column="attributeDataConfig_attributeId" javaType="java.lang.Long" />
+		<result property="dataSource" column="attributeDataConfig_dataSource" javaType="java.lang.Integer" />
+		<result property="dictCategoryId" column="attributeDataConfig_dictCategoryId" javaType="java.lang.Long" />
+		<result property="tableName" column="attributeDataConfig_tableName" javaType="java.lang.String" />
+		<result property="keyColumn" column="attributeDataConfig_keyColumn" javaType="java.lang.String" />
+		<result property="valueColumn" column="attributeDataConfig_valueColumn" javaType="java.lang.String" />
+		<result property="customKey" column="attributeDataConfig_customKey" javaType="java.lang.String" />
+		<result property="customValue" column="attributeDataConfig_customValue" javaType="java.lang.String" />
+		<result property="creatorId" column="attributeDataConfig_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="attributeDataConfig_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="attributeDataConfig_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="attributeDataConfig_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="attributeDataConfig_isDelete" javaType="java.lang.Integer" />
+		<association property="attribute" javaType="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+			<id property="id" column="attribute_id" javaType="java.lang.Long" />
+			<result property="name" column="attribute_name" javaType="java.lang.String" />
+			<result property="code" column="attribute_code" javaType="java.lang.String" />
+			<result property="category" column="attribute_category" javaType="java.lang.Integer" />
+			<result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+			<result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+			<result property="description" column="attribute_description" javaType="java.lang.String" />
+			<result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="attributeDataConfigResult" parameterMap="attributeDataConfigParam">
+		select
+			attributeDataConfig.Id attributeDataConfig_id,
+			attributeDataConfig.AttributeId attributeDataConfig_attributeId,
+			attributeDataConfig.DataSource attributeDataConfig_dataSource,
+			attributeDataConfig.DictCategoryId attributeDataConfig_dictCategoryId,
+			attributeDataConfig.TableName attributeDataConfig_tableName,
+			attributeDataConfig.KeyColumn attributeDataConfig_keyColumn,
+			attributeDataConfig.ValueColumn attributeDataConfig_valueColumn,
+			attributeDataConfig.CustomKey attributeDataConfig_customKey,
+			attributeDataConfig.CustomValue attributeDataConfig_customValue,
+			attributeDataConfig.CreatorId attributeDataConfig_creatorId,
+			attributeDataConfig.CreateTime attributeDataConfig_createTime,
+			attributeDataConfig.ModifierId attributeDataConfig_modifierId,
+			attributeDataConfig.ModifyTime attributeDataConfig_modifyTime,
+			attributeDataConfig.isDelete attributeDataConfig_isDelete,	
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete
+		from PC_AttributeDataConfig attributeDataConfig
+		inner join PC_Attribute attribute on attribute.Id=attributeDataConfig.AttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">and DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">and CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">and CustomValue=#{customValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAttributeDataConfigAttribute" resultMap="attributeDataConfigResult" parameterMap="attributeDataConfigParam">
+		select
+			attributeDataConfig.Id attributeDataConfig_id,
+			attributeDataConfig.AttributeId attributeDataConfig_attributeId,
+			attributeDataConfig.DataSource attributeDataConfig_dataSource,
+			attributeDataConfig.DictCategoryId attributeDataConfig_dictCategoryId,
+			attributeDataConfig.TableName attributeDataConfig_tableName,
+			attributeDataConfig.KeyColumn attributeDataConfig_keyColumn,
+			attributeDataConfig.ValueColumn attributeDataConfig_valueColumn,
+			attributeDataConfig.CustomKey attributeDataConfig_customKey,
+			attributeDataConfig.CustomValue attributeDataConfig_customValue,
+			attributeDataConfig.CreatorId attributeDataConfig_creatorId,
+			attributeDataConfig.CreateTime attributeDataConfig_createTime,
+			attributeDataConfig.ModifierId attributeDataConfig_modifierId,
+			attributeDataConfig.ModifyTime attributeDataConfig_modifyTime,
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete
+		from PC_AttributeDataConfig attributeDataConfig
+		inner join PC_Attribute attribute on attribute.Id=attributeDataConfig.AttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">and DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">and CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">and CustomValue=#{customValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="attributeDataConfigResult" parameterMap="attributeDataConfigParam">
+		select 
+			Id attributeDataConfig_id,
+			AttributeId attributeDataConfig_attributeId,
+			DataSource attributeDataConfig_dataSource,
+			DictCategoryId attributeDataConfig_dictCategoryId,
+			TableName attributeDataConfig_tableName,
+			KeyColumn attributeDataConfig_keyColumn,
+			ValueColumn attributeDataConfig_valueColumn,
+			CustomKey attributeDataConfig_customKey,
+			CustomValue attributeDataConfig_customValue,
+			CreatorId attributeDataConfig_creatorId,
+			CreateTime attributeDataConfig_createTime,
+			ModifierId attributeDataConfig_modifierId,
+			ModifyTime attributeDataConfig_modifyTime,
+			isDelete attributeDataConfig_isDelete
+		from PC_AttributeDataConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">and DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">and CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">and CustomValue=#{customValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="attributeDataConfigResult">
+		select 
+			Id attributeDataConfig_id,
+			AttributeId attributeDataConfig_attributeId,
+			DataSource attributeDataConfig_dataSource,
+			DictCategoryId attributeDataConfig_dictCategoryId,
+			TableName attributeDataConfig_tableName,
+			KeyColumn attributeDataConfig_keyColumn,
+			ValueColumn attributeDataConfig_valueColumn,
+			CustomKey attributeDataConfig_customKey,
+			CustomValue attributeDataConfig_customValue,
+			CreatorId attributeDataConfig_creatorId,
+			CreateTime attributeDataConfig_createTime,
+			ModifierId attributeDataConfig_modifierId,
+			ModifyTime attributeDataConfig_modifyTime,
+			isDelete attributeDataConfig_isDelete
+		from PC_AttributeDataConfig
+	</select>
+	
+	<select id="selectOneById"  resultMap="attributeDataConfigResult" parameterMap="attributeDataConfigParam">
+		select 
+			Id attributeDataConfig_id,
+			AttributeId attributeDataConfig_attributeId,
+			DataSource attributeDataConfig_dataSource,
+			DictCategoryId attributeDataConfig_dictCategoryId,
+			TableName attributeDataConfig_tableName,
+			KeyColumn attributeDataConfig_keyColumn,
+			ValueColumn attributeDataConfig_valueColumn,
+			CustomKey attributeDataConfig_customKey,
+			CustomValue attributeDataConfig_customValue,
+			CreatorId attributeDataConfig_creatorId,
+			CreateTime attributeDataConfig_createTime,
+			ModifierId attributeDataConfig_modifierId,
+			ModifyTime attributeDataConfig_modifyTime,
+			isDelete attributeDataConfig_isDelete
+		from PC_AttributeDataConfig where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="attributeDataConfigResult" parameterMap="attributeDataConfigParam">
+		select 
+			Id attributeDataConfig_id,
+			AttributeId attributeDataConfig_attributeId,
+			DataSource attributeDataConfig_dataSource,
+			DictCategoryId attributeDataConfig_dictCategoryId,
+			TableName attributeDataConfig_tableName,
+			KeyColumn attributeDataConfig_keyColumn,
+			ValueColumn attributeDataConfig_valueColumn,
+			CustomKey attributeDataConfig_customKey,
+			CustomValue attributeDataConfig_customValue,
+			CreatorId attributeDataConfig_creatorId,
+			CreateTime attributeDataConfig_createTime,
+			ModifierId attributeDataConfig_modifierId,
+			ModifyTime attributeDataConfig_modifyTime,
+			isDelete attributeDataConfig_isDelete
+		from PC_AttributeDataConfig
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="attributeDataConfigParam">
+		select count(*) from PC_AttributeDataConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">and DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">and CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">and CustomValue=#{customValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="attributeDataConfigParam">
+		update PC_AttributeDataConfig
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="attributeId != null">,AttributeId=${attributeId}</if>
+				<if test="dataSource != null">,DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">,DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">,TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">,KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">,ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">,CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">,CustomValue=#{customValue}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,isDelete=${isDelete}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="attributeDataConfigParam">
+		update PC_AttributeDataConfig
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,AttributeId=${attributeId}
+                    	<if test="dataSource != null">,DataSource=${dataSource}</if>
+                        <if test="dataSource == null">,DataSource= 0</if>
+                            ,DictCategoryId=${dictCategoryId}
+						,TableName=#{tableName}
+						,KeyColumn=#{keyColumn}
+						,ValueColumn=#{valueColumn}
+						,CustomKey=#{customKey}
+						,CustomValue=#{customValue}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,isDelete=${isDelete}</if>
+                        <if test="isDelete == null">,isDelete= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="attributeDataConfigParam">
+		insert into PC_AttributeDataConfig
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="attributeId != null">,AttributeId</if>
+			<if test="dataSource != null">,DataSource</if>
+			<if test="dictCategoryId != null">,DictCategoryId</if>
+			<if test="tableName != null and tableName != ''">,TableName</if>
+			<if test="keyColumn != null and keyColumn != ''">,KeyColumn</if>
+			<if test="valueColumn != null and valueColumn != ''">,ValueColumn</if>
+			<if test="customKey != null and customKey != ''">,CustomKey</if>
+			<if test="customValue != null and customValue != ''">,CustomValue</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,isDelete</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="attributeId != null">,${attributeId}</if>
+			<if test="dataSource != null">,${dataSource}</if>
+			<if test="dictCategoryId != null">,${dictCategoryId}</if>
+			<if test="tableName != null and tableName != ''">,#{tableName}</if>
+			<if test="keyColumn != null and keyColumn != ''">,#{keyColumn}</if>
+			<if test="valueColumn != null and valueColumn != ''">,#{valueColumn}</if>
+			<if test="customKey != null and customKey != ''">,#{customKey}</if>
+			<if test="customValue != null and customValue != ''">,#{customValue}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="attributeDataConfigParam">
+		delete from PC_AttributeDataConfig where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="attributeDataConfigParam">
+		delete from PC_AttributeDataConfig
+	</delete>
+	
+	<delete id="delete" parameterMap="attributeDataConfigParam">
+		delete from PC_AttributeDataConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="dataSource != null">and DataSource=${dataSource}</if>
+				<if test="dictCategoryId != null">and DictCategoryId=${dictCategoryId}</if>
+				<if test="tableName != null and tableName != ''">and TableName=#{tableName}</if>
+				<if test="keyColumn != null and keyColumn != ''">and KeyColumn=#{keyColumn}</if>
+				<if test="valueColumn != null and valueColumn != ''">and ValueColumn=#{valueColumn}</if>
+				<if test="customKey != null and customKey != ''">and CustomKey=#{customKey}</if>
+				<if test="customValue != null and customValue != ''">and CustomValue=#{customValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and isDelete=${isDelete}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

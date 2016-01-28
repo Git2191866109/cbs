@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.productattributeconfig.dao.IProductAttributeConfigDao">
+	
+	<parameterMap id="productAttributeConfigParamImpl" type="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig" />
+	<resultMap id="productAttributeConfigResultImpl" type="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+		<id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+		<result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+		<result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+		<result property="code" column="productAttributeConfig_code" javaType="java.lang.String" />
+		<result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+		<result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+		<result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+		<association property="attribute" javaType="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+			<id property="id" column="attribute_id" javaType="java.lang.Long" />
+			<result property="name" column="attribute_name" javaType="java.lang.String" />
+			<result property="code" column="attribute_code" javaType="java.lang.String" />
+			<result property="category" column="attribute_category" javaType="java.lang.Integer" />
+			<result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+			<result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+			<result property="description" column="attribute_description" javaType="java.lang.String" />
+			<result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectProductAttributeConfigByProductIdAndCode" resultMap="productAttributeConfigResultImpl" parameterMap="productAttributeConfigParamImpl">
+		select productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			productAttributeConfig.DelFlag productAttributeConfig_delFlag
+			from PC_ProductAttributeConfig where productId = ${productId} and AttributeId = (SELECT ID from PC_Attribute where Code = #{code})
+	</select>
+	
+	<select id="selectProductAttributeConfigInfoByProductId" resultMap="productAttributeConfigResultImpl" parameterMap="productAttributeConfigParamImpl">
+		select productAttributeConfig.Id productAttributeConfig_id,attribute.Code productAttributeConfig_code, productAttributeConfig.AttributeValue productAttributeConfig_attributeValue
+		from PC_ProductAttributeConfig productAttributeConfig left join PC_Attribute attribute on attribute.Id = productAttributeConfig.AttributeId
+		where productAttributeConfig.ProductId = ${productId}
+	</select>
+</mapper>

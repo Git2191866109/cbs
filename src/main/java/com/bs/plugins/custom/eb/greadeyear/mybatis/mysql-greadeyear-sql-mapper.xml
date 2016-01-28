@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.greadeyear.dao.IGreadeYearDao">
+	
+	<parameterMap id="greadeYearParamImpl" type="com.bs.plugins.custom.eb.greadeyear.entity.GreadeYear" />
+	<resultMap id="greadeYearResultImpl" type="com.bs.plugins.custom.eb.greadeyear.entity.GreadeYear">
+		<id property="id" column="greadeYear_id" javaType="java.lang.Long" />
+		<result property="growStageId" column="greadeYear_growStageId" javaType="java.lang.Long" />
+		<result property="name" column="greadeYear_name" javaType="java.lang.String" />
+		<result property="greade" column="greadeYear_greade" javaType="java.lang.Integer" />
+		<result property="startYear" column="greadeYear_startYear" javaType="java.lang.Integer" />
+		<result property="endYear" column="greadeYear_endYear" javaType="java.lang.Integer" />
+		<result property="createDate" column="greadeYear_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="greadeYear_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="greadeYear_creatorId" javaType="java.lang.Long" />
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectPaginatedListOrderByGreade"  resultMap="greadeYearResultImpl" parameterMap="greadeYearParamImpl">
+		select 
+			Id greadeYear_id,
+			GrowStageId greadeYear_growStageId,
+			Name greadeYear_name,
+			Greade greadeYear_greade,
+			StartYear greadeYear_startYear,
+			EndYear greadeYear_endYear,
+			CreateDate greadeYear_createDate,
+			ModifyDate greadeYear_modifyDate,
+			CreatorId greadeYear_creatorId
+		from EB_GreadeYear
+		<where>
+			<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+		</where>
+		order by Greade asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="selectMinAndMaxYearByGrowStageId" resultMap="greadeYearResultImpl" parameterMap="greadeYearParamImpl">
+		select GrowStageId greadeYear_growStageId,Min(StartYear) greadeYear_startYear,MAX(EndYear) greadeYear_endYear from EB_GreadeYear where GrowStageId = ${growStageId}
+	</select>
+</mapper>

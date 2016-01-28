@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetdatarelation.dao.IBudgetDataRelationDao">
+
+	<parameterMap id="budgetDataRelationParam" type="com.bs.plugins.custom.eb.budgetdatarelation.entity.BudgetDataRelation" />
+	<resultMap id="budgetDataRelationResult" type="com.bs.plugins.custom.eb.budgetdatarelation.entity.BudgetDataRelation">
+		<result property="itemId" column="budgetDataRelation_itemId" javaType="java.lang.Long" />
+		<result property="fieldValueId" column="budgetDataRelation_fieldValueId" javaType="java.lang.Long" />
+		<result property="dataAttributeId" column="budgetDataRelation_dataAttributeId" javaType="java.lang.Long" />
+		<association property="itemFieldValue" javaType="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+			<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+			<result property="areaId" column="itemFieldValue_areaId" javaType="java.lang.Long" />
+			<result property="itemNameId" column="itemFieldValue_itemNameId" javaType="java.lang.Long" />
+			<result property="value" column="itemFieldValue_value" javaType="java.lang.String" />
+			<result property="isValid" column="itemFieldValue_isValid" javaType="java.lang.Integer" />
+			<result property="isDefault" column="itemFieldValue_isDefault" javaType="java.lang.Integer" />
+			<result property="grede" column="itemFieldValue_grede" javaType="java.lang.Integer" />
+			<result property="description" column="itemFieldValue_description" javaType="java.lang.String" />
+			<result property="createDate" column="itemFieldValue_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="itemFieldValue_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="itemFieldValue_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="budgetItem" javaType="com.bs.plugins.custom.eb.budgetitem.entity.BudgetItem">
+			<id property="id" column="budgetItem_id" javaType="java.lang.Long" />
+			<result property="budgetCategoryId" column="budgetItem_budgetCategoryId" javaType="java.lang.Long" />
+			<result property="parentId" column="budgetItem_parentId" javaType="java.lang.Long" />
+			<result property="itemLevel" column="budgetItem_itemLevel" javaType="java.lang.Integer" />
+			<result property="name" column="budgetItem_name" javaType="java.lang.String" />
+			<result property="code" column="budgetItem_code" javaType="java.lang.String" />
+			<result property="grade" column="budgetItem_grade" javaType="java.lang.String" />
+			<result property="costFormula" column="budgetItem_costFormula" javaType="java.lang.String" />
+			<result property="isInflation" column="budgetItem_isInflation" javaType="java.lang.Integer" />
+			<result property="isTranslation" column="budgetItem_isTranslation" javaType="java.lang.Integer" />
+			<result property="inputLevel" column="budgetItem_inputLevel" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetItem_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetItem_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="budgetItem_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="educationMode" javaType="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+			<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+			<result property="name" column="educationMode_name" javaType="java.lang.String" />
+			<result property="type" column="educationMode_type" javaType="java.lang.Integer" />
+			<result property="startAge" column="educationMode_startAge" javaType="java.lang.Integer" />
+			<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			budgetDataRelation.DataAttributeId budgetDataRelation_dataAttributeId,	
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.AreaId itemFieldValue_areaId,
+			itemFieldValue.ItemNameId itemFieldValue_itemNameId,
+			itemFieldValue.Value itemFieldValue_value,
+			itemFieldValue.IsValid itemFieldValue_isValid,
+			itemFieldValue.IsDefault itemFieldValue_isDefault,
+			itemFieldValue.Grede itemFieldValue_grede,
+			itemFieldValue.Description itemFieldValue_description,
+			itemFieldValue.CreateDate itemFieldValue_createDate,
+			itemFieldValue.ModifyDate itemFieldValue_modifyDate,
+			itemFieldValue.CreatorId itemFieldValue_creatorId
+			budgetItem.Id budgetItem_id,
+			budgetItem.BudgetCategoryId budgetItem_budgetCategoryId,
+			budgetItem.ParentId budgetItem_parentId,
+			budgetItem.ItemLevel budgetItem_itemLevel,
+			budgetItem.Name budgetItem_name,
+			budgetItem.Code budgetItem_code,
+			budgetItem.Grade budgetItem_grade,
+			budgetItem.CostFormula budgetItem_costFormula,
+			budgetItem.IsInflation budgetItem_isInflation,
+			budgetItem.IsTranslation budgetItem_isTranslation,
+			budgetItem.InputLevel budgetItem_inputLevel,
+			budgetItem.CreateDate budgetItem_createDate,
+			budgetItem.ModifyDate budgetItem_modifyDate,
+			budgetItem.CreatorId budgetItem_creatorId
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.Type educationMode_type,
+			educationMode.StartAge educationMode_startAge,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId
+		from EB_BudgetDataRelation budgetDataRelation
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.Id=budgetDataRelation.FieldValueId
+		inner join EB_BudgetItem budgetItem on budgetItem.Id=budgetDataRelation.ItemId
+		inner join EB_EducationMode educationMode on educationMode.Id=budgetDataRelation.DataAttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetDataRelationItemFieldValue" resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			itemFieldValue.Id educationMode_id,
+			itemFieldValue.AreaId educationMode_areaId,
+			itemFieldValue.ItemNameId educationMode_itemNameId,
+			itemFieldValue.Value educationMode_value,
+			itemFieldValue.IsValid educationMode_isValid,
+			itemFieldValue.IsDefault educationMode_isDefault,
+			itemFieldValue.Grede educationMode_grede,
+			itemFieldValue.Description educationMode_description,
+			itemFieldValue.CreateDate educationMode_createDate,
+			itemFieldValue.ModifyDate educationMode_modifyDate,
+			itemFieldValue.CreatorId educationMode_creatorId,
+		from EB_BudgetDataRelation budgetDataRelation
+		inner join EB_ItemFieldValue itemFieldValue on itemFieldValue.Id=budgetDataRelation.FieldValueId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectBudgetDataRelationBudgetItem" resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			budgetItem.Id educationMode_id,
+			budgetItem.BudgetCategoryId educationMode_budgetCategoryId,
+			budgetItem.ParentId educationMode_parentId,
+			budgetItem.ItemLevel educationMode_itemLevel,
+			budgetItem.Name educationMode_name,
+			budgetItem.Code educationMode_code,
+			budgetItem.Grade educationMode_grade,
+			budgetItem.CostFormula educationMode_costFormula,
+			budgetItem.IsInflation educationMode_isInflation,
+			budgetItem.IsTranslation educationMode_isTranslation,
+			budgetItem.InputLevel educationMode_inputLevel,
+			budgetItem.CreateDate educationMode_createDate,
+			budgetItem.ModifyDate educationMode_modifyDate,
+			budgetItem.CreatorId educationMode_creatorId,
+		from EB_BudgetDataRelation budgetDataRelation
+		inner join EB_BudgetItem budgetItem on budgetItem.Id=budgetDataRelation.ItemId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectBudgetDataRelationEducationMode" resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select
+			budgetDataRelation.ItemId budgetDataRelation_itemId,
+			budgetDataRelation.FieldValueId budgetDataRelation_fieldValueId,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.Type educationMode_type,
+			educationMode.StartAge educationMode_startAge,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId,
+		from EB_BudgetDataRelation budgetDataRelation
+		inner join EB_EducationMode educationMode on educationMode.Id=budgetDataRelation.DataAttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select 
+			ItemId budgetDataRelation_itemId,
+			FieldValueId budgetDataRelation_fieldValueId,
+			DataAttributeId budgetDataRelation_dataAttributeId
+		from EB_BudgetDataRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetDataRelationResult">
+		select 
+			ItemId budgetDataRelation_itemId,
+			FieldValueId budgetDataRelation_fieldValueId,
+			DataAttributeId budgetDataRelation_dataAttributeId
+		from EB_BudgetDataRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="budgetDataRelationResult" parameterMap="budgetDataRelationParam">
+		select 
+			ItemId budgetDataRelation_itemId,
+			FieldValueId budgetDataRelation_fieldValueId,
+			DataAttributeId budgetDataRelation_dataAttributeId
+		from EB_BudgetDataRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetDataRelationParam">
+		select count(*) from EB_BudgetDataRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="budgetDataRelationParam">
+		insert into EB_BudgetDataRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="itemId != null">,ItemId</if>
+			<if test="fieldValueId != null">,FieldValueId</if>
+			<if test="dataAttributeId != null">,DataAttributeId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="itemId != null">,${itemId}</if>
+			<if test="fieldValueId != null">,${fieldValueId}</if>
+			<if test="dataAttributeId != null">,${dataAttributeId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="budgetDataRelationParam">
+		delete from EB_BudgetDataRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetDataRelationParam">
+		delete from EB_BudgetDataRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="itemId != null">and ItemId=${itemId}</if>
+				<if test="fieldValueId != null">and FieldValueId=${fieldValueId}</if>
+				<if test="dataAttributeId != null">and DataAttributeId=${dataAttributeId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

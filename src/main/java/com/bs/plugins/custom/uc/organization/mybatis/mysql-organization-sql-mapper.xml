@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.organization.dao.IOrganizationDao">
+	<parameterMap id="subOrganizationParam" type="com.bs.plugins.custom.uc.organization.entity.Organization" />
+	<resultMap id="subOrganizationResult" type="com.bs.plugins.custom.uc.organization.entity.Organization">
+	
+	</resultMap>
+		<update id="update" parameterMap="organizationParam">
+		update UC_Organization
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="parentId != null">,ParentId=${parentId}</if>
+				<if test="parentName != null and parentName != ''">,ParentName=#{parentName}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">,ShortName=#{shortName}</if>
+				<if test="phone != null and phone != ''">,Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">,Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">,PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">,Address=#{address}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="treeLevel != null">,TreeLevel=${treeLevel}</if>
+				<if test="treePath != null and treePath != ''">,TreePath=#{treePath}</if>
+				<if test="isChildNode != null">,IsChildNode=${isChildNode}</if>
+				<if test="isCommission != null">,IsCommission=${isCommission}</if>
+				,ModifyTime=now()
+				<if test="roleIds != null and roleIds != ''">,RoleIds=#{roleIds}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.appointment.dao.IAppointmentDao">
+
+	<select id="selectAppointments"
+		parameterType="com.bs.plugins.custom.tc.appointment.entity.Appointment"
+		resultType="com.bs.plugins.custom.tc.appointment.entity.Appointment">
+		SELECT
+			*
+		FROM
+			TC_Appointment
+		<where>
+			<trim prefixOverrides="and">
+				<if test="mobilePhone != null and mobilePhone != ''">AND MobilePhone = #{mobilePhone}</if>
+				<if test="productName != null and productName != ''">AND ProductName = #{productName}</if>
+				<if test="appointAmount != null and appointAmount != ''">AND AppointAmount = #{appointAmount}</if>
+				<if test="startTime != null and startTime != ''"><![CDATA[AND DATE_FORMAT(AppointTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(AppointTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="status != null">AND Status = #{status}</if>
+			</trim>
+		</where>
+		order by AppointTime desc
+		limit ${start},${offset}
+	</select>
+	<select id="selectAppointmentsCount"
+		parameterType="com.bs.plugins.custom.tc.appointment.entity.Appointment" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TC_Appointment
+		<where>
+			<trim prefixOverrides="and">
+				<if test="mobilePhone != null and mobilePhone != ''">AND MobilePhone = #{mobilePhone}</if>
+				<if test="productName != null and productName != ''">AND ProductName = #{productName}</if>
+				<if test="appointAmount != null and appointAmount != ''">AND AppointAmount = #{appointAmount}</if>
+				<if test="startTime != null and startTime != ''"><![CDATA[AND DATE_FORMAT(AppointTime,'%Y-%m-%d') >= #{startTime}]]></if>
+				<if test="endTime != null and endTime != ''"><![CDATA[AND DATE_FORMAT(AppointTime,'%Y-%m-%d') <= #{endTime}]]></if>
+				<if test="status != null">AND Status = #{status}</if>
+			</trim>
+		</where>
+		order by AppointTime desc
+		limit ${start},${offset}
+	</select>
+</mapper>

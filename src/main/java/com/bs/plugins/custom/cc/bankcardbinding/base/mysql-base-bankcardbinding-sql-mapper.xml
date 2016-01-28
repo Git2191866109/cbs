@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.bankcardbinding.dao.IBankCardBindingDao">
+
+	<parameterMap id="bankCardBindingParam" type="com.bs.plugins.custom.cc.bankcardbinding.entity.BankCardBinding" />
+	<resultMap id="bankCardBindingResult" type="com.bs.plugins.custom.cc.bankcardbinding.entity.BankCardBinding">
+		<id property="id" column="bankCardBinding_id" javaType="java.lang.Long" />
+		<result property="memberId" column="bankCardBinding_memberId" javaType="java.lang.Long" />
+		<result property="transactionNumber" column="bankCardBinding_transactionNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="bankCardBinding_payPlantformNumber" javaType="java.lang.String" />
+		<result property="cardNumber" column="bankCardBinding_cardNumber" javaType="java.lang.String" />
+		<result property="bankAccount" column="bankCardBinding_bankAccount" javaType="java.lang.String" />
+		<result property="bankCode" column="bankCardBinding_bankCode" javaType="java.lang.String" />
+		<result property="bankName" column="bankCardBinding_bankName" javaType="java.lang.String" />
+		<result property="openingBankName" column="bankCardBinding_openingBankName" javaType="java.lang.String" />
+		<result property="linkLineNumber" column="bankCardBinding_linkLineNumber" javaType="java.lang.String" />
+		<result property="province" column="bankCardBinding_province" javaType="java.lang.String" />
+		<result property="city" column="bankCardBinding_city" javaType="java.lang.String" />
+		<result property="isValid" column="bankCardBinding_isValid" javaType="java.lang.Integer" />
+		<result property="isBlackList" column="bankCardBinding_isBlackList" javaType="java.lang.Integer" />
+		<result property="isQuickCard" column="bankCardBinding_isQuickCard" javaType="java.lang.Integer" />
+		<result property="bindingTime" column="bankCardBinding_bindingTime" javaType="java.lang.String" />
+		<result property="unbindTime" column="bankCardBinding_unbindTime" javaType="java.lang.String" />
+		<result property="finishTime" column="bankCardBinding_finishTime" javaType="java.lang.String" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="bankCardBindingResult" parameterMap="bankCardBindingParam">
+		select
+			bankCardBinding.Id bankCardBinding_id,
+			bankCardBinding.MemberId bankCardBinding_memberId,
+			bankCardBinding.TransactionNumber bankCardBinding_transactionNumber,
+			bankCardBinding.PayPlantformNumber bankCardBinding_payPlantformNumber,
+			bankCardBinding.CardNumber bankCardBinding_cardNumber,
+			bankCardBinding.BankAccount bankCardBinding_bankAccount,
+			bankCardBinding.BankCode bankCardBinding_bankCode,
+			bankCardBinding.BankName bankCardBinding_bankName,
+			bankCardBinding.OpeningBankName bankCardBinding_openingBankName,
+			bankCardBinding.LinkLineNumber bankCardBinding_linkLineNumber,
+			bankCardBinding.Province bankCardBinding_province,
+			bankCardBinding.City bankCardBinding_city,
+			bankCardBinding.IsValid bankCardBinding_isValid,
+			bankCardBinding.IsBlackList bankCardBinding_isBlackList,
+			bankCardBinding.IsQuickCard bankCardBinding_isQuickCard,
+			bankCardBinding.BindingTime bankCardBinding_bindingTime,
+			bankCardBinding.UnbindTime bankCardBinding_unbindTime,
+			bankCardBinding.FinishTime bankCardBinding_finishTime,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_BankCardBinding bankCardBinding
+		inner join CC_Member member on member.Id=bankCardBinding.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">and CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">and BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">and OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">and LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">and Province=#{province}</if>
+				<if test="city != null and city != ''">and City=#{city}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="isBlackList != null">and IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">and IsQuickCard=${isQuickCard}</if>
+				<if test="bindingTime != null and bindingTime != ''">and BindingTime=#{bindingTime}</if>
+				<if test="unbindTime != null and unbindTime != ''">and UnbindTime=#{unbindTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBankCardBindingMember" resultMap="bankCardBindingResult" parameterMap="bankCardBindingParam">
+		select
+			bankCardBinding.Id bankCardBinding_id,
+			bankCardBinding.MemberId bankCardBinding_memberId,
+			bankCardBinding.TransactionNumber bankCardBinding_transactionNumber,
+			bankCardBinding.PayPlantformNumber bankCardBinding_payPlantformNumber,
+			bankCardBinding.CardNumber bankCardBinding_cardNumber,
+			bankCardBinding.BankAccount bankCardBinding_bankAccount,
+			bankCardBinding.BankCode bankCardBinding_bankCode,
+			bankCardBinding.BankName bankCardBinding_bankName,
+			bankCardBinding.OpeningBankName bankCardBinding_openingBankName,
+			bankCardBinding.LinkLineNumber bankCardBinding_linkLineNumber,
+			bankCardBinding.Province bankCardBinding_province,
+			bankCardBinding.City bankCardBinding_city,
+			bankCardBinding.IsValid bankCardBinding_isValid,
+			bankCardBinding.IsBlackList bankCardBinding_isBlackList,
+			bankCardBinding.IsQuickCard bankCardBinding_isQuickCard,
+			bankCardBinding.BindingTime bankCardBinding_bindingTime,
+			bankCardBinding.UnbindTime bankCardBinding_unbindTime,
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_BankCardBinding bankCardBinding
+		inner join CC_Member member on member.Id=bankCardBinding.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">and CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">and BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">and OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">and LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">and Province=#{province}</if>
+				<if test="city != null and city != ''">and City=#{city}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="isBlackList != null">and IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">and IsQuickCard=${isQuickCard}</if>
+				<if test="bindingTime != null and bindingTime != ''">and BindingTime=#{bindingTime}</if>
+				<if test="unbindTime != null and unbindTime != ''">and UnbindTime=#{unbindTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="bankCardBindingResult" parameterMap="bankCardBindingParam">
+		select 
+			Id bankCardBinding_id,
+			MemberId bankCardBinding_memberId,
+			TransactionNumber bankCardBinding_transactionNumber,
+			PayPlantformNumber bankCardBinding_payPlantformNumber,
+			CardNumber bankCardBinding_cardNumber,
+			BankAccount bankCardBinding_bankAccount,
+			BankCode bankCardBinding_bankCode,
+			BankName bankCardBinding_bankName,
+			OpeningBankName bankCardBinding_openingBankName,
+			LinkLineNumber bankCardBinding_linkLineNumber,
+			Province bankCardBinding_province,
+			City bankCardBinding_city,
+			IsValid bankCardBinding_isValid,
+			IsBlackList bankCardBinding_isBlackList,
+			IsQuickCard bankCardBinding_isQuickCard,
+			BindingTime bankCardBinding_bindingTime,
+			UnbindTime bankCardBinding_unbindTime,
+			FinishTime bankCardBinding_finishTime
+		from CC_BankCardBinding
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">and CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">and BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">and OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">and LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">and Province=#{province}</if>
+				<if test="city != null and city != ''">and City=#{city}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="isBlackList != null">and IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">and IsQuickCard=${isQuickCard}</if>
+				<if test="bindingTime != null and bindingTime != ''">and BindingTime=#{bindingTime}</if>
+				<if test="unbindTime != null and unbindTime != ''">and UnbindTime=#{unbindTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="bankCardBindingResult">
+		select 
+			Id bankCardBinding_id,
+			MemberId bankCardBinding_memberId,
+			TransactionNumber bankCardBinding_transactionNumber,
+			PayPlantformNumber bankCardBinding_payPlantformNumber,
+			CardNumber bankCardBinding_cardNumber,
+			BankAccount bankCardBinding_bankAccount,
+			BankCode bankCardBinding_bankCode,
+			BankName bankCardBinding_bankName,
+			OpeningBankName bankCardBinding_openingBankName,
+			LinkLineNumber bankCardBinding_linkLineNumber,
+			Province bankCardBinding_province,
+			City bankCardBinding_city,
+			IsValid bankCardBinding_isValid,
+			IsBlackList bankCardBinding_isBlackList,
+			IsQuickCard bankCardBinding_isQuickCard,
+			BindingTime bankCardBinding_bindingTime,
+			UnbindTime bankCardBinding_unbindTime,
+			FinishTime bankCardBinding_finishTime
+		from CC_BankCardBinding
+	</select>
+	
+	<select id="selectOneById"  resultMap="bankCardBindingResult" parameterMap="bankCardBindingParam">
+		select 
+			Id bankCardBinding_id,
+			MemberId bankCardBinding_memberId,
+			TransactionNumber bankCardBinding_transactionNumber,
+			PayPlantformNumber bankCardBinding_payPlantformNumber,
+			CardNumber bankCardBinding_cardNumber,
+			BankAccount bankCardBinding_bankAccount,
+			BankCode bankCardBinding_bankCode,
+			BankName bankCardBinding_bankName,
+			OpeningBankName bankCardBinding_openingBankName,
+			LinkLineNumber bankCardBinding_linkLineNumber,
+			Province bankCardBinding_province,
+			City bankCardBinding_city,
+			IsValid bankCardBinding_isValid,
+			IsBlackList bankCardBinding_isBlackList,
+			IsQuickCard bankCardBinding_isQuickCard,
+			BindingTime bankCardBinding_bindingTime,
+			UnbindTime bankCardBinding_unbindTime,
+			FinishTime bankCardBinding_finishTime
+		from CC_BankCardBinding where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="bankCardBindingResult" parameterMap="bankCardBindingParam">
+		select 
+			Id bankCardBinding_id,
+			MemberId bankCardBinding_memberId,
+			TransactionNumber bankCardBinding_transactionNumber,
+			PayPlantformNumber bankCardBinding_payPlantformNumber,
+			CardNumber bankCardBinding_cardNumber,
+			BankAccount bankCardBinding_bankAccount,
+			BankCode bankCardBinding_bankCode,
+			BankName bankCardBinding_bankName,
+			OpeningBankName bankCardBinding_openingBankName,
+			LinkLineNumber bankCardBinding_linkLineNumber,
+			Province bankCardBinding_province,
+			City bankCardBinding_city,
+			IsValid bankCardBinding_isValid,
+			IsBlackList bankCardBinding_isBlackList,
+			IsQuickCard bankCardBinding_isQuickCard,
+			BindingTime bankCardBinding_bindingTime,
+			UnbindTime bankCardBinding_unbindTime,
+			FinishTime bankCardBinding_finishTime
+		from CC_BankCardBinding
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="bankCardBindingParam">
+		select count(*) from CC_BankCardBinding
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">and CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">and BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">and OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">and LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">and Province=#{province}</if>
+				<if test="city != null and city != ''">and City=#{city}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="isBlackList != null">and IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">and IsQuickCard=${isQuickCard}</if>
+				<if test="bindingTime != null and bindingTime != ''">and BindingTime=#{bindingTime}</if>
+				<if test="unbindTime != null and unbindTime != ''">and UnbindTime=#{unbindTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="bankCardBindingParam">
+		update CC_BankCardBinding
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">,CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">,BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">,BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">,BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">,OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">,LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">,Province=#{province}</if>
+				<if test="city != null and city != ''">,City=#{city}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+				<if test="isBlackList != null">,IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">,IsQuickCard=${isQuickCard}</if>
+               		 <if test="bindingTime != null  and bindingTime != ''">,BindingTime=#{bindingTime}</if>
+               		 <if test="unbindTime != null  and unbindTime != ''">,UnbindTime=#{unbindTime}</if>
+               		 <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="bankCardBindingParam">
+		update CC_BankCardBinding
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+						,TransactionNumber=#{transactionNumber}
+						,PayPlantformNumber=#{payPlantformNumber}
+						,CardNumber=#{cardNumber}
+						,BankAccount=#{bankAccount}
+						,BankCode=#{bankCode}
+						,BankName=#{bankName}
+						,OpeningBankName=#{openingBankName}
+						,LinkLineNumber=#{linkLineNumber}
+						,Province=#{province}
+						,City=#{city}
+                    	<if test="isValid != null">,IsValid=${isValid}</if>
+                        <if test="isValid == null">,IsValid= 0</if>
+                    	<if test="isBlackList != null">,IsBlackList=${isBlackList}</if>
+                        <if test="isBlackList == null">,IsBlackList= 0</if>
+                    	<if test="isQuickCard != null">,IsQuickCard=${isQuickCard}</if>
+                        <if test="isQuickCard == null">,IsQuickCard= 0</if>
+                        <if test="bindingTime != null  and bindingTime != ''">,BindingTime=#{bindingTime}</if>
+                        <if test="unbindTime != null  and unbindTime != ''">,UnbindTime=#{unbindTime}</if>
+                        <if test="finishTime != null  and finishTime != ''">,FinishTime=#{finishTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="bankCardBindingParam">
+		insert into CC_BankCardBinding
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber</if>
+			<if test="cardNumber != null and cardNumber != ''">,CardNumber</if>
+			<if test="bankAccount != null and bankAccount != ''">,BankAccount</if>
+			<if test="bankCode != null and bankCode != ''">,BankCode</if>
+			<if test="bankName != null and bankName != ''">,BankName</if>
+			<if test="openingBankName != null and openingBankName != ''">,OpeningBankName</if>
+			<if test="linkLineNumber != null and linkLineNumber != ''">,LinkLineNumber</if>
+			<if test="province != null and province != ''">,Province</if>
+			<if test="city != null and city != ''">,City</if>
+			<if test="isValid != null">,IsValid</if>
+			<if test="isBlackList != null">,IsBlackList</if>
+			<if test="isQuickCard != null">,IsQuickCard</if>
+                <if test="bindingTime != null and bindingTime != ''">,BindingTime</if>
+                <if test="unbindTime != null and unbindTime != ''">,UnbindTime</if>
+                <if test="finishTime != null and finishTime != ''">,FinishTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,#{payPlantformNumber}</if>
+			<if test="cardNumber != null and cardNumber != ''">,#{cardNumber}</if>
+			<if test="bankAccount != null and bankAccount != ''">,#{bankAccount}</if>
+			<if test="bankCode != null and bankCode != ''">,#{bankCode}</if>
+			<if test="bankName != null and bankName != ''">,#{bankName}</if>
+			<if test="openingBankName != null and openingBankName != ''">,#{openingBankName}</if>
+			<if test="linkLineNumber != null and linkLineNumber != ''">,#{linkLineNumber}</if>
+			<if test="province != null and province != ''">,#{province}</if>
+			<if test="city != null and city != ''">,#{city}</if>
+			<if test="isValid != null">,${isValid}</if>
+			<if test="isBlackList != null">,${isBlackList}</if>
+			<if test="isQuickCard != null">,${isQuickCard}</if>
+            	<if test="bindingTime != null and bindingTime != ''">,#{bindingTime}</if>
+            	<if test="unbindTime != null and unbindTime != ''">,#{unbindTime}</if>
+            	<if test="finishTime != null and finishTime != ''">,#{finishTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="bankCardBindingParam">
+		delete from CC_BankCardBinding where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="bankCardBindingParam">
+		delete from CC_BankCardBinding
+	</delete>
+	
+	<delete id="delete" parameterMap="bankCardBindingParam">
+		delete from CC_BankCardBinding
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+				<if test="cardNumber != null and cardNumber != ''">and CardNumber=#{cardNumber}</if>
+				<if test="bankAccount != null and bankAccount != ''">and BankAccount=#{bankAccount}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="openingBankName != null and openingBankName != ''">and OpeningBankName=#{openingBankName}</if>
+				<if test="linkLineNumber != null and linkLineNumber != ''">and LinkLineNumber=#{linkLineNumber}</if>
+				<if test="province != null and province != ''">and Province=#{province}</if>
+				<if test="city != null and city != ''">and City=#{city}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="isBlackList != null">and IsBlackList=${isBlackList}</if>
+				<if test="isQuickCard != null">and IsQuickCard=${isQuickCard}</if>
+				<if test="bindingTime != null and bindingTime != ''">and BindingTime=#{bindingTime}</if>
+				<if test="unbindTime != null and unbindTime != ''">and UnbindTime=#{unbindTime}</if>
+				<if test="finishTime != null and finishTime != ''">and FinishTime=#{finishTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

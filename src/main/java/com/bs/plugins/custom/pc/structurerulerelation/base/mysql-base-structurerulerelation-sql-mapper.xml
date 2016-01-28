@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.structurerulerelation.dao.IStructureRuleRelationDao">
+
+	<parameterMap id="structureRuleRelationParam" type="com.bs.plugins.custom.pc.structurerulerelation.entity.StructureRuleRelation" />
+	<resultMap id="structureRuleRelationResult" type="com.bs.plugins.custom.pc.structurerulerelation.entity.StructureRuleRelation">
+		<result property="validationRuleId" column="structureRuleRelation_validationRuleId" javaType="java.lang.Long" />
+		<result property="productStructureId" column="structureRuleRelation_productStructureId" javaType="java.lang.Long" />
+		<association property="structureConfig" javaType="com.bs.plugins.custom.pc.structureconfig.entity.StructureConfig">
+			<id property="id" column="structureConfig_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="structureConfig_categoryId" javaType="java.lang.Long" />
+			<result property="attributeId" column="structureConfig_attributeId" javaType="java.lang.Long" />
+			<result property="isShow" column="structureConfig_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="structureConfig_showType" javaType="java.lang.Integer" />
+			<result property="isHeader" column="structureConfig_isHeader" javaType="java.lang.Integer" />
+			<result property="defaultValue" column="structureConfig_defaultValue" javaType="java.lang.String" />
+			<result property="sortBy" column="structureConfig_sortBy" javaType="java.lang.Integer" />
+			<result property="dataSource" column="structureConfig_dataSource" javaType="java.lang.Integer" />
+			<result property="creatorId" column="structureConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="structureConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="structureConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="structureConfig_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="structureConfig_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<association property="validationRule" javaType="com.bs.plugins.custom.pc.validationrule.entity.ValidationRule">
+			<id property="id" column="validationRule_id" javaType="java.lang.Long" />
+			<result property="name" column="validationRule_name" javaType="java.lang.String" />
+			<result property="code" column="validationRule_code" javaType="java.lang.String" />
+			<result property="value" column="validationRule_value" javaType="java.lang.String" />
+			<result property="description" column="validationRule_description" javaType="java.lang.String" />
+			<result property="creatorId" column="validationRule_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="validationRule_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="validationRule_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="validationRule_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="validationRule_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="structureRuleRelationResult" parameterMap="structureRuleRelationParam">
+		select
+			structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+			structureRuleRelation.ProductStructureId structureRuleRelation_productStructureId,	
+			structureConfig.Id structureConfig_id,
+			structureConfig.CategoryId structureConfig_categoryId,
+			structureConfig.AttributeId structureConfig_attributeId,
+			structureConfig.IsShow structureConfig_isShow,
+			structureConfig.ShowType structureConfig_showType,
+			structureConfig.IsHeader structureConfig_isHeader,
+			structureConfig.DefaultValue structureConfig_defaultValue,
+			structureConfig.SortBy structureConfig_sortBy,
+			structureConfig.DataSource structureConfig_dataSource,
+			structureConfig.CreatorId structureConfig_creatorId,
+			structureConfig.CreateTime structureConfig_createTime,
+			structureConfig.ModifierId structureConfig_modifierId,
+			structureConfig.ModifyTime structureConfig_modifyTime,
+			structureConfig.isDelete structureConfig_isDelete,
+			validationRule.Id validationRule_id,
+			validationRule.Name validationRule_name,
+			validationRule.Code validationRule_code,
+			validationRule.Value validationRule_value,
+			validationRule.Description validationRule_description,
+			validationRule.CreatorId validationRule_creatorId,
+			validationRule.CreateTime validationRule_createTime,
+			validationRule.ModifierId validationRule_modifierId,
+			validationRule.ModifyTime validationRule_modifyTime,
+			validationRule.isDelete validationRule_isDelete
+		from PC_StructureRuleRelation structureRuleRelation
+		inner join PC_StructureConfig structureConfig on structureConfig.Id=structureRuleRelation.ProductStructureId
+		inner join PC_ValidationRule validationRule on validationRule.Id=structureRuleRelation.ValidationRuleId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectStructureRuleRelationStructureConfig" resultMap="structureRuleRelationResult" parameterMap="structureRuleRelationParam">
+		select
+			structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+			structureConfig.Id validationRule_id,
+			structureConfig.CategoryId validationRule_categoryId,
+			structureConfig.AttributeId validationRule_attributeId,
+			structureConfig.IsShow validationRule_isShow,
+			structureConfig.ShowType validationRule_showType,
+			structureConfig.IsHeader validationRule_isHeader,
+			structureConfig.DefaultValue validationRule_defaultValue,
+			structureConfig.SortBy validationRule_sortBy,
+			structureConfig.DataSource validationRule_dataSource,
+			structureConfig.CreatorId validationRule_creatorId,
+			structureConfig.CreateTime validationRule_createTime,
+			structureConfig.ModifierId validationRule_modifierId,
+			structureConfig.ModifyTime validationRule_modifyTime,
+			structureConfig.isDelete validationRule_isDelete
+		from PC_StructureRuleRelation structureRuleRelation
+		inner join PC_StructureConfig structureConfig on structureConfig.Id=structureRuleRelation.ProductStructureId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectStructureRuleRelationValidationRule" resultMap="structureRuleRelationResult" parameterMap="structureRuleRelationParam">
+		select
+			structureRuleRelation.ValidationRuleId structureRuleRelation_validationRuleId,
+			validationRule.Id validationRule_id,
+			validationRule.Name validationRule_name,
+			validationRule.Code validationRule_code,
+			validationRule.Value validationRule_value,
+			validationRule.Description validationRule_description,
+			validationRule.CreatorId validationRule_creatorId,
+			validationRule.CreateTime validationRule_createTime,
+			validationRule.ModifierId validationRule_modifierId,
+			validationRule.ModifyTime validationRule_modifyTime,
+			validationRule.isDelete validationRule_isDelete
+		from PC_StructureRuleRelation structureRuleRelation
+		inner join PC_ValidationRule validationRule on validationRule.Id=structureRuleRelation.ValidationRuleId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="structureRuleRelationResult" parameterMap="structureRuleRelationParam">
+		select 
+			ValidationRuleId structureRuleRelation_validationRuleId,
+			ProductStructureId structureRuleRelation_productStructureId
+		from PC_StructureRuleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="structureRuleRelationResult">
+		select 
+			ValidationRuleId structureRuleRelation_validationRuleId,
+			ProductStructureId structureRuleRelation_productStructureId
+		from PC_StructureRuleRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="structureRuleRelationResult" parameterMap="structureRuleRelationParam">
+		select 
+			ValidationRuleId structureRuleRelation_validationRuleId,
+			ProductStructureId structureRuleRelation_productStructureId
+		from PC_StructureRuleRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="structureRuleRelationParam">
+		select count(*) from PC_StructureRuleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="structureRuleRelationParam">
+		insert into PC_StructureRuleRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="validationRuleId != null">,ValidationRuleId</if>
+			<if test="productStructureId != null">,ProductStructureId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="validationRuleId != null">,${validationRuleId}</if>
+			<if test="productStructureId != null">,${productStructureId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="structureRuleRelationParam">
+		delete from PC_StructureRuleRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="structureRuleRelationParam">
+		delete from PC_StructureRuleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="validationRuleId != null">and ValidationRuleId=${validationRuleId}</if>
+				<if test="productStructureId != null">and ProductStructureId=${productStructureId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

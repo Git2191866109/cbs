@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.greadeyear.dao.IGreadeYearDao">
+
+	<parameterMap id="greadeYearParam" type="com.bs.plugins.custom.eb.greadeyear.entity.GreadeYear" />
+	<resultMap id="greadeYearResult" type="com.bs.plugins.custom.eb.greadeyear.entity.GreadeYear">
+		<id property="id" column="greadeYear_id" javaType="java.lang.Long" />
+		<result property="growStageId" column="greadeYear_growStageId" javaType="java.lang.Long" />
+		<result property="name" column="greadeYear_name" javaType="java.lang.String" />
+		<result property="greade" column="greadeYear_greade" javaType="java.lang.Integer" />
+		<result property="startYear" column="greadeYear_startYear" javaType="java.lang.Integer" />
+		<result property="endYear" column="greadeYear_endYear" javaType="java.lang.Integer" />
+		<result property="createDate" column="greadeYear_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="greadeYear_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="greadeYear_creatorId" javaType="java.lang.Long" />
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="greadeYearResult" parameterMap="greadeYearParam">
+		select
+			greadeYear.Id greadeYear_id,
+			greadeYear.GrowStageId greadeYear_growStageId,
+			greadeYear.Name greadeYear_name,
+			greadeYear.Greade greadeYear_greade,
+			greadeYear.StartYear greadeYear_startYear,
+			greadeYear.EndYear greadeYear_endYear,
+			greadeYear.CreateDate greadeYear_createDate,
+			greadeYear.ModifyDate greadeYear_modifyDate,
+			greadeYear.CreatorId greadeYear_creatorId,	
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+		from EB_GreadeYear greadeYear
+		inner join EB_GrowStages growStages on growStages.Id=greadeYear.GrowStageId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="greade != null">and Greade=${greade}</if>
+				<if test="startYear != null">and StartYear=${startYear}</if>
+				<if test="endYear != null">and EndYear=${endYear}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectGreadeYearGrowStages" resultMap="greadeYearResult" parameterMap="greadeYearParam">
+		select
+			greadeYear.Id greadeYear_id,
+			greadeYear.GrowStageId greadeYear_growStageId,
+			greadeYear.Name greadeYear_name,
+			greadeYear.Greade greadeYear_greade,
+			greadeYear.StartYear greadeYear_startYear,
+			greadeYear.EndYear greadeYear_endYear,
+			greadeYear.CreateDate greadeYear_createDate,
+			greadeYear.ModifyDate greadeYear_modifyDate,
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId
+		from EB_GreadeYear greadeYear
+		inner join EB_GrowStages growStages on growStages.Id=greadeYear.GrowStageId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="greade != null">and Greade=${greade}</if>
+				<if test="startYear != null">and StartYear=${startYear}</if>
+				<if test="endYear != null">and EndYear=${endYear}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="greadeYearResult" parameterMap="greadeYearParam">
+		select 
+			Id greadeYear_id,
+			GrowStageId greadeYear_growStageId,
+			Name greadeYear_name,
+			Greade greadeYear_greade,
+			StartYear greadeYear_startYear,
+			EndYear greadeYear_endYear,
+			CreateDate greadeYear_createDate,
+			ModifyDate greadeYear_modifyDate,
+			CreatorId greadeYear_creatorId
+		from EB_GreadeYear
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="greade != null">and Greade=${greade}</if>
+				<if test="startYear != null">and StartYear=${startYear}</if>
+				<if test="endYear != null">and EndYear=${endYear}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="greadeYearResult">
+		select 
+			Id greadeYear_id,
+			GrowStageId greadeYear_growStageId,
+			Name greadeYear_name,
+			Greade greadeYear_greade,
+			StartYear greadeYear_startYear,
+			EndYear greadeYear_endYear,
+			CreateDate greadeYear_createDate,
+			ModifyDate greadeYear_modifyDate,
+			CreatorId greadeYear_creatorId
+		from EB_GreadeYear
+	</select>
+	
+	<select id="selectOneById"  resultMap="greadeYearResult" parameterMap="greadeYearParam">
+		select 
+			Id greadeYear_id,
+			GrowStageId greadeYear_growStageId,
+			Name greadeYear_name,
+			Greade greadeYear_greade,
+			StartYear greadeYear_startYear,
+			EndYear greadeYear_endYear,
+			CreateDate greadeYear_createDate,
+			ModifyDate greadeYear_modifyDate,
+			CreatorId greadeYear_creatorId
+		from EB_GreadeYear where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="greadeYearResult" parameterMap="greadeYearParam">
+		select 
+			Id greadeYear_id,
+			GrowStageId greadeYear_growStageId,
+			Name greadeYear_name,
+			Greade greadeYear_greade,
+			StartYear greadeYear_startYear,
+			EndYear greadeYear_endYear,
+			CreateDate greadeYear_createDate,
+			ModifyDate greadeYear_modifyDate,
+			CreatorId greadeYear_creatorId
+		from EB_GreadeYear
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="greadeYearParam">
+		select count(*) from EB_GreadeYear
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="greade != null">and Greade=${greade}</if>
+				<if test="startYear != null">and StartYear=${startYear}</if>
+				<if test="endYear != null">and EndYear=${endYear}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="greadeYearParam">
+		update EB_GreadeYear
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="growStageId != null">,GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="greade != null">,Greade=${greade}</if>
+				<if test="startYear != null">,StartYear=${startYear}</if>
+				<if test="endYear != null">,EndYear=${endYear}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="greadeYearParam">
+		update EB_GreadeYear
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,GrowStageId=${growStageId}
+						,Name=#{name}
+                        <if test="greade != null">,Greade=${greade}</if>
+                        <if test="greade == null">,Greade= 0</if>
+                        <if test="startYear != null">,StartYear=${startYear}</if>
+                        <if test="startYear == null">,StartYear= 0</if>
+                        <if test="endYear != null">,EndYear=${endYear}</if>
+                        <if test="endYear == null">,EndYear= 0</if>
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="greadeYearParam">
+		insert into EB_GreadeYear
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="growStageId != null">,GrowStageId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="greade != null">,Greade</if>
+			<if test="startYear != null">,StartYear</if>
+			<if test="endYear != null">,EndYear</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="growStageId != null">,${growStageId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="greade != null">,${greade}</if>
+			<if test="startYear != null">,${startYear}</if>
+			<if test="endYear != null">,${endYear}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="greadeYearParam">
+		delete from EB_GreadeYear where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="greadeYearParam">
+		delete from EB_GreadeYear
+	</delete>
+	
+	<delete id="delete" parameterMap="greadeYearParam">
+		delete from EB_GreadeYear
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="growStageId != null">and GrowStageId=${growStageId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="greade != null">and Greade=${greade}</if>
+				<if test="startYear != null">and StartYear=${startYear}</if>
+				<if test="endYear != null">and EndYear=${endYear}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.educationgoal.dao.IEducationGoalDao">
+
+	<parameterMap id="educationGoalParam" type="com.bs.plugins.custom.eb.educationgoal.entity.EducationGoal" />
+	<resultMap id="educationGoalResult" type="com.bs.plugins.custom.eb.educationgoal.entity.EducationGoal">
+		<id property="id" column="educationGoal_id" javaType="java.lang.Long" />
+		<result property="name" column="educationGoal_name" javaType="java.lang.String" />
+		<result property="isInland" column="educationGoal_isInland" javaType="java.lang.Integer" />
+		<result property="createDate" column="educationGoal_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="educationGoal_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="educationGoal_creatorId" javaType="java.lang.Long" />
+		<collection property="budgetBasicInfos" ofType="com.bs.plugins.custom.eb.budgetbasicinfo.entity.BudgetBasicInfo">
+			<id property="id" column="budgetBasicInfo_id" javaType="java.lang.Long" />
+			<result property="memberId" column="budgetBasicInfo_memberId" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="budgetBasicInfo_eduGoalId" javaType="java.lang.Long" />
+			<result property="serialNumber" column="budgetBasicInfo_serialNumber" javaType="java.lang.String" />
+			<result property="name" column="budgetBasicInfo_name" javaType="java.lang.String" />
+			<result property="costLevel" column="budgetBasicInfo_costLevel" javaType="java.lang.Integer" />
+			<result property="age" column="budgetBasicInfo_age" javaType="java.lang.Integer" />
+			<result property="birthday" column="budgetBasicInfo_birthday" javaType="java.lang.String" />
+			<result property="provinceSpelling" column="budgetBasicInfo_provinceSpelling" javaType="java.lang.String" />
+			<result property="provinceCode" column="budgetBasicInfo_provinceCode" javaType="java.lang.String" />
+			<result property="provinceName" column="budgetBasicInfo_provinceName" javaType="java.lang.String" />
+			<result property="cityCode" column="budgetBasicInfo_cityCode" javaType="java.lang.String" />
+			<result property="cityName" column="budgetBasicInfo_cityName" javaType="java.lang.String" />
+			<result property="countryCode" column="budgetBasicInfo_countryCode" javaType="java.lang.String" />
+			<result property="countryName" column="budgetBasicInfo_countryName" javaType="java.lang.String" />
+			<result property="avatarPicture" column="budgetBasicInfo_avatarPicture" javaType="java.lang.String" />
+			<result property="budgetCost" column="budgetBasicInfo_budgetCost" javaType="java.math.BigDecimal" />
+			<result property="financingAtisfiedRate" column="budgetBasicInfo_financingAtisfiedRate" javaType="java.lang.String" />
+			<result property="balance" column="budgetBasicInfo_balance" javaType="java.math.BigDecimal" />
+			<result property="isLacking" column="budgetBasicInfo_isLacking" javaType="java.lang.Integer" />
+			<result property="reserves" column="budgetBasicInfo_reserves" javaType="java.math.BigDecimal" />
+			<result property="monthlyInvestment" column="budgetBasicInfo_monthlyInvestment" javaType="java.math.BigDecimal" />
+			<result property="birthYear" column="budgetBasicInfo_birthYear" javaType="java.lang.Integer" />
+			<result property="sex" column="budgetBasicInfo_sex" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetBasicInfo_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetBasicInfo_modifyDate" javaType="java.lang.String" />
+			<result property="isValid" column="budgetBasicInfo_isValid" javaType="java.lang.Integer" />
+			<result property="creatorId" column="budgetBasicInfo_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="goalItemRelations" ofType="com.bs.plugins.custom.eb.goalitemrelation.entity.GoalItemRelation">
+			<id property="id" column="goalItemRelation_id" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="goalItemRelation_eduGoalId" javaType="java.lang.Long" />
+			<result property="eduModeId" column="goalItemRelation_eduModeId" javaType="java.lang.Long" />
+			<result property="growStagesId" column="goalItemRelation_growStagesId" javaType="java.lang.Long" />
+			<result property="inputType" column="goalItemRelation_inputType" javaType="java.lang.Integer" />
+			<result property="isInland" column="goalItemRelation_isInland" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="educationConfigures" ofType="com.bs.plugins.custom.eb.educationconfigure.entity.EducationConfigure">
+			<id property="id" column="educationConfigure_id" javaType="java.lang.Long" />
+			<result property="eduGoalId_master" column="educationConfigure_eduGoalId_master" javaType="java.lang.Long" />
+			<result property="eduGoalId_vice" column="educationConfigure_eduGoalId_vice" javaType="java.lang.Long" />
+			<result property="createDate" column="educationConfigure_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationConfigure_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationConfigure_creatorId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,	
+			budgetBasicInfo.Id budgetBasicInfo_id,
+			budgetBasicInfo.MemberId budgetBasicInfo_memberId,
+			budgetBasicInfo.EduGoalId budgetBasicInfo_eduGoalId,
+			budgetBasicInfo.SerialNumber budgetBasicInfo_serialNumber,
+			budgetBasicInfo.Name budgetBasicInfo_name,
+			budgetBasicInfo.CostLevel budgetBasicInfo_costLevel,
+			budgetBasicInfo.Age budgetBasicInfo_age,
+			budgetBasicInfo.Birthday budgetBasicInfo_birthday,
+			budgetBasicInfo.ProvinceSpelling budgetBasicInfo_provinceSpelling,
+			budgetBasicInfo.ProvinceCode budgetBasicInfo_provinceCode,
+			budgetBasicInfo.ProvinceName budgetBasicInfo_provinceName,
+			budgetBasicInfo.CityCode budgetBasicInfo_cityCode,
+			budgetBasicInfo.CityName budgetBasicInfo_cityName,
+			budgetBasicInfo.CountryCode budgetBasicInfo_countryCode,
+			budgetBasicInfo.CountryName budgetBasicInfo_countryName,
+			budgetBasicInfo.AvatarPicture budgetBasicInfo_avatarPicture,
+			budgetBasicInfo.BudgetCost budgetBasicInfo_budgetCost,
+			budgetBasicInfo.FinancingAtisfiedRate budgetBasicInfo_financingAtisfiedRate,
+			budgetBasicInfo.Balance budgetBasicInfo_balance,
+			budgetBasicInfo.IsLacking budgetBasicInfo_isLacking,
+			budgetBasicInfo.Reserves budgetBasicInfo_reserves,
+			budgetBasicInfo.MonthlyInvestment budgetBasicInfo_monthlyInvestment,
+			budgetBasicInfo.BirthYear budgetBasicInfo_birthYear,
+			budgetBasicInfo.Sex budgetBasicInfo_sex,
+			budgetBasicInfo.CreateDate budgetBasicInfo_createDate,
+			budgetBasicInfo.ModifyDate budgetBasicInfo_modifyDate,
+			budgetBasicInfo.IsValid budgetBasicInfo_isValid,
+			budgetBasicInfo.CreatorId budgetBasicInfo_creatorId
+			goalItemRelation.Id goalItemRelation_id,
+			goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+			goalItemRelation.EduModeId goalItemRelation_eduModeId,
+			goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+			goalItemRelation.InputType goalItemRelation_inputType,
+			goalItemRelation.IsInland goalItemRelation_isInland
+			educationConfigure.Id educationConfigure_id,
+			educationConfigure.EduGoalId_master educationConfigure_eduGoalId_master,
+			educationConfigure.EduGoalId_vice educationConfigure_eduGoalId_vice,
+			educationConfigure.CreateDate educationConfigure_createDate,
+			educationConfigure.ModifyDate educationConfigure_modifyDate,
+			educationConfigure.CreatorId educationConfigure_creatorId
+		from EB_EducationGoal educationGoal
+		inner join EB_BudgetBasicInfo budgetBasicInfo on budgetBasicInfo.EduGoalId=educationGoal.Id
+		inner join EB_GoalItemRelation goalItemRelation on goalItemRelation.EduGoalId=educationGoal.Id
+		inner join EB_EducationConfigure educationConfigure on educationConfigure.EduGoalId_master=educationGoal.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEducationGoalBudgetBasicInfo" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,
+				budgetBasicInfo.Id budgetBasicInfo_id,
+	
+				budgetBasicInfo.MemberId budgetBasicInfo_memberId,
+	
+				budgetBasicInfo.EduGoalId budgetBasicInfo_eduGoalId,
+	
+				budgetBasicInfo.SerialNumber budgetBasicInfo_serialNumber,
+	
+				budgetBasicInfo.Name budgetBasicInfo_name,
+	
+				budgetBasicInfo.CostLevel budgetBasicInfo_costLevel,
+	
+				budgetBasicInfo.Age budgetBasicInfo_age,
+	
+				budgetBasicInfo.Birthday budgetBasicInfo_birthday,
+	
+				budgetBasicInfo.ProvinceSpelling budgetBasicInfo_provinceSpelling,
+	
+				budgetBasicInfo.ProvinceCode budgetBasicInfo_provinceCode,
+	
+				budgetBasicInfo.ProvinceName budgetBasicInfo_provinceName,
+	
+				budgetBasicInfo.CityCode budgetBasicInfo_cityCode,
+	
+				budgetBasicInfo.CityName budgetBasicInfo_cityName,
+	
+				budgetBasicInfo.CountryCode budgetBasicInfo_countryCode,
+	
+				budgetBasicInfo.CountryName budgetBasicInfo_countryName,
+	
+				budgetBasicInfo.AvatarPicture budgetBasicInfo_avatarPicture,
+	
+				budgetBasicInfo.BudgetCost budgetBasicInfo_budgetCost,
+	
+				budgetBasicInfo.FinancingAtisfiedRate budgetBasicInfo_financingAtisfiedRate,
+	
+				budgetBasicInfo.Balance budgetBasicInfo_balance,
+	
+				budgetBasicInfo.IsLacking budgetBasicInfo_isLacking,
+	
+				budgetBasicInfo.Reserves budgetBasicInfo_reserves,
+	
+				budgetBasicInfo.MonthlyInvestment budgetBasicInfo_monthlyInvestment,
+	
+				budgetBasicInfo.BirthYear budgetBasicInfo_birthYear,
+	
+				budgetBasicInfo.Sex budgetBasicInfo_sex,
+	
+				budgetBasicInfo.CreateDate budgetBasicInfo_createDate,
+	
+				budgetBasicInfo.ModifyDate budgetBasicInfo_modifyDate,
+	
+				budgetBasicInfo.IsValid budgetBasicInfo_isValid,
+	
+				budgetBasicInfo.CreatorId budgetBasicInfo_creatorId
+	
+		from EB_EducationGoal educationGoal
+		inner join EB_BudgetBasicInfo budgetBasicInfo on budgetBasicInfo.EduGoalId=educationGoal.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectEducationGoalGoalItemRelation" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,
+				goalItemRelation.Id goalItemRelation_id,
+	
+				goalItemRelation.EduGoalId goalItemRelation_eduGoalId,
+	
+				goalItemRelation.EduModeId goalItemRelation_eduModeId,
+	
+				goalItemRelation.GrowStagesId goalItemRelation_growStagesId,
+	
+				goalItemRelation.InputType goalItemRelation_inputType,
+	
+				goalItemRelation.IsInland goalItemRelation_isInland
+	
+		from EB_EducationGoal educationGoal
+		inner join EB_GoalItemRelation goalItemRelation on goalItemRelation.EduGoalId=educationGoal.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectEducationGoalEducationConfigure" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId,
+				educationConfigure.Id educationConfigure_id,
+	
+				educationConfigure.EduGoalId_master educationConfigure_eduGoalId_master,
+	
+				educationConfigure.EduGoalId_vice educationConfigure_eduGoalId_vice,
+	
+				educationConfigure.CreateDate educationConfigure_createDate,
+	
+				educationConfigure.ModifyDate educationConfigure_modifyDate,
+	
+				educationConfigure.CreatorId educationConfigure_creatorId
+	
+		from EB_EducationGoal educationGoal
+		inner join EB_EducationConfigure educationConfigure on educationConfigure.EduGoalId_master=educationGoal.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select 
+			Id educationGoal_id,
+			Name educationGoal_name,
+			IsInland educationGoal_isInland,
+			CreateDate educationGoal_createDate,
+			ModifyDate educationGoal_modifyDate,
+			CreatorId educationGoal_creatorId
+		from EB_EducationGoal
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="educationGoalResult">
+		select 
+			Id educationGoal_id,
+			Name educationGoal_name,
+			IsInland educationGoal_isInland,
+			CreateDate educationGoal_createDate,
+			ModifyDate educationGoal_modifyDate,
+			CreatorId educationGoal_creatorId
+		from EB_EducationGoal
+	</select>
+	
+	<select id="selectOneById"  resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select 
+			Id educationGoal_id,
+			Name educationGoal_name,
+			IsInland educationGoal_isInland,
+			CreateDate educationGoal_createDate,
+			ModifyDate educationGoal_modifyDate,
+			CreatorId educationGoal_creatorId
+		from EB_EducationGoal where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="educationGoalResult" parameterMap="educationGoalParam">
+		select 
+			Id educationGoal_id,
+			Name educationGoal_name,
+			IsInland educationGoal_isInland,
+			CreateDate educationGoal_createDate,
+			ModifyDate educationGoal_modifyDate,
+			CreatorId educationGoal_creatorId
+		from EB_EducationGoal
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="educationGoalParam">
+		select count(*) from EB_EducationGoal
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="educationGoalParam">
+		update EB_EducationGoal
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="isInland != null">,IsInland=${isInland}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="educationGoalParam">
+		update EB_EducationGoal
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+                    	<if test="isInland != null">,IsInland=${isInland}</if>
+                        <if test="isInland == null">,IsInland= 0</if>
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="educationGoalParam">
+		insert into EB_EducationGoal
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="isInland != null">,IsInland</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="isInland != null">,${isInland}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="educationGoalParam">
+		delete from EB_EducationGoal where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="educationGoalParam">
+		delete from EB_EducationGoal
+	</delete>
+	
+	<delete id="delete" parameterMap="educationGoalParam">
+		delete from EB_EducationGoal
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="isInland != null">and IsInland=${isInland}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

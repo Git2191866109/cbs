@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.accountingstatistics.dao.IAccountingStatisticsDao">
+
+	<parameterMap id="accountingStatisticsParam" type="com.bs.plugins.custom.cc.accountingstatistics.entity.AccountingStatistics" />
+	<resultMap id="accountingStatisticsResult" type="com.bs.plugins.custom.cc.accountingstatistics.entity.AccountingStatistics">
+		<id property="id" column="accountingStatistics_id" javaType="java.lang.Long" />
+		<result property="memberId" column="accountingStatistics_memberId" javaType="java.lang.Long" />
+		<result property="totalExpectedProfit" column="accountingStatistics_totalExpectedProfit" javaType="java.math.BigDecimal" />
+		<result property="totalActualProfit" column="accountingStatistics_totalActualProfit" javaType="java.math.BigDecimal" />
+		<result property="totalInvestment" column="accountingStatistics_totalInvestment" javaType="java.math.BigDecimal" />
+		<result property="totalPrincipal" column="accountingStatistics_totalPrincipal" javaType="java.math.BigDecimal" />
+		<result property="holdPrincipal" column="accountingStatistics_holdPrincipal" javaType="java.math.BigDecimal" />
+		<result property="totallExpectedAsset" column="accountingStatistics_totallExpectedAsset" javaType="java.math.BigDecimal" />
+		<result property="totalActivityBonus" column="accountingStatistics_totalActivityBonus" javaType="java.math.BigDecimal" />
+		<result property="totalExperienceGold" column="accountingStatistics_totalExperienceGold" javaType="java.math.BigDecimal" />
+		<association property="member" javaType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="accountingStatisticsResult" parameterMap="accountingStatisticsParam">
+		select
+			accountingStatistics.Id accountingStatistics_id,
+			accountingStatistics.MemberId accountingStatistics_memberId,
+			accountingStatistics.TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			accountingStatistics.TotalActualProfit accountingStatistics_totalActualProfit,
+			accountingStatistics.TotalInvestment accountingStatistics_totalInvestment,
+			accountingStatistics.TotalPrincipal accountingStatistics_totalPrincipal,
+			accountingStatistics.HoldPrincipal accountingStatistics_holdPrincipal,
+			accountingStatistics.TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			accountingStatistics.TotalActivityBonus accountingStatistics_totalActivityBonus,
+			accountingStatistics.TotalExperienceGold accountingStatistics_totalExperienceGold,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_AccountingStatistics accountingStatistics
+		inner join CC_Member member on member.Id=accountingStatistics.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">and TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">and TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">and TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">and TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">and HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">and TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">and TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">and TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectAccountingStatisticsMember" resultMap="accountingStatisticsResult" parameterMap="accountingStatisticsParam">
+		select
+			accountingStatistics.Id accountingStatistics_id,
+			accountingStatistics.MemberId accountingStatistics_memberId,
+			accountingStatistics.TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			accountingStatistics.TotalActualProfit accountingStatistics_totalActualProfit,
+			accountingStatistics.TotalInvestment accountingStatistics_totalInvestment,
+			accountingStatistics.TotalPrincipal accountingStatistics_totalPrincipal,
+			accountingStatistics.HoldPrincipal accountingStatistics_holdPrincipal,
+			accountingStatistics.TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			accountingStatistics.TotalActivityBonus accountingStatistics_totalActivityBonus,
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_AccountingStatistics accountingStatistics
+		inner join CC_Member member on member.Id=accountingStatistics.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">and TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">and TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">and TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">and TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">and HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">and TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">and TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">and TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="accountingStatisticsResult" parameterMap="accountingStatisticsParam">
+		select 
+			Id accountingStatistics_id,
+			MemberId accountingStatistics_memberId,
+			TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			TotalActualProfit accountingStatistics_totalActualProfit,
+			TotalInvestment accountingStatistics_totalInvestment,
+			TotalPrincipal accountingStatistics_totalPrincipal,
+			HoldPrincipal accountingStatistics_holdPrincipal,
+			TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			TotalActivityBonus accountingStatistics_totalActivityBonus,
+			TotalExperienceGold accountingStatistics_totalExperienceGold
+		from CC_AccountingStatistics
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">and TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">and TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">and TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">and TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">and HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">and TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">and TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">and TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="accountingStatisticsResult">
+		select 
+			Id accountingStatistics_id,
+			MemberId accountingStatistics_memberId,
+			TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			TotalActualProfit accountingStatistics_totalActualProfit,
+			TotalInvestment accountingStatistics_totalInvestment,
+			TotalPrincipal accountingStatistics_totalPrincipal,
+			HoldPrincipal accountingStatistics_holdPrincipal,
+			TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			TotalActivityBonus accountingStatistics_totalActivityBonus,
+			TotalExperienceGold accountingStatistics_totalExperienceGold
+		from CC_AccountingStatistics
+	</select>
+	
+	<select id="selectOneById"  resultMap="accountingStatisticsResult" parameterMap="accountingStatisticsParam">
+		select 
+			Id accountingStatistics_id,
+			MemberId accountingStatistics_memberId,
+			TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			TotalActualProfit accountingStatistics_totalActualProfit,
+			TotalInvestment accountingStatistics_totalInvestment,
+			TotalPrincipal accountingStatistics_totalPrincipal,
+			HoldPrincipal accountingStatistics_holdPrincipal,
+			TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			TotalActivityBonus accountingStatistics_totalActivityBonus,
+			TotalExperienceGold accountingStatistics_totalExperienceGold
+		from CC_AccountingStatistics where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="accountingStatisticsResult" parameterMap="accountingStatisticsParam">
+		select 
+			Id accountingStatistics_id,
+			MemberId accountingStatistics_memberId,
+			TotalExpectedProfit accountingStatistics_totalExpectedProfit,
+			TotalActualProfit accountingStatistics_totalActualProfit,
+			TotalInvestment accountingStatistics_totalInvestment,
+			TotalPrincipal accountingStatistics_totalPrincipal,
+			HoldPrincipal accountingStatistics_holdPrincipal,
+			TotallExpectedAsset accountingStatistics_totallExpectedAsset,
+			TotalActivityBonus accountingStatistics_totalActivityBonus,
+			TotalExperienceGold accountingStatistics_totalExperienceGold
+		from CC_AccountingStatistics
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="accountingStatisticsParam">
+		select count(*) from CC_AccountingStatistics
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">and TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">and TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">and TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">and TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">and HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">and TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">and TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">and TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="accountingStatisticsParam">
+		update CC_AccountingStatistics
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">,TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">,TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">,TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">,TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">,HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">,TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">,TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">,TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="accountingStatisticsParam">
+		update CC_AccountingStatistics
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,MemberId=${memberId}
+						,TotalExpectedProfit=${totalExpectedProfit}
+						,TotalActualProfit=${totalActualProfit}
+						,TotalInvestment=${totalInvestment}
+						,TotalPrincipal=${totalPrincipal}
+						,HoldPrincipal=${holdPrincipal}
+						,TotallExpectedAsset=${totallExpectedAsset}
+						,TotalActivityBonus=${totalActivityBonus}
+						,TotalExperienceGold=${totalExperienceGold}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="accountingStatisticsParam">
+		insert into CC_AccountingStatistics
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="totalExpectedProfit != null">,TotalExpectedProfit</if>
+			<if test="totalActualProfit != null">,TotalActualProfit</if>
+			<if test="totalInvestment != null">,TotalInvestment</if>
+			<if test="totalPrincipal != null">,TotalPrincipal</if>
+			<if test="holdPrincipal != null">,HoldPrincipal</if>
+			<if test="totallExpectedAsset != null">,TotallExpectedAsset</if>
+			<if test="totalActivityBonus != null">,TotalActivityBonus</if>
+			<if test="totalExperienceGold != null">,TotalExperienceGold</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="totalExpectedProfit != null">,${totalExpectedProfit}</if>
+			<if test="totalActualProfit != null">,${totalActualProfit}</if>
+			<if test="totalInvestment != null">,${totalInvestment}</if>
+			<if test="totalPrincipal != null">,${totalPrincipal}</if>
+			<if test="holdPrincipal != null">,${holdPrincipal}</if>
+			<if test="totallExpectedAsset != null">,${totallExpectedAsset}</if>
+			<if test="totalActivityBonus != null">,${totalActivityBonus}</if>
+			<if test="totalExperienceGold != null">,${totalExperienceGold}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="accountingStatisticsParam">
+		delete from CC_AccountingStatistics where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="accountingStatisticsParam">
+		delete from CC_AccountingStatistics
+	</delete>
+	
+	<delete id="delete" parameterMap="accountingStatisticsParam">
+		delete from CC_AccountingStatistics
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="totalExpectedProfit != null">and TotalExpectedProfit=${totalExpectedProfit}</if>
+				<if test="totalActualProfit != null">and TotalActualProfit=${totalActualProfit}</if>
+				<if test="totalInvestment != null">and TotalInvestment=${totalInvestment}</if>
+				<if test="totalPrincipal != null">and TotalPrincipal=${totalPrincipal}</if>
+				<if test="holdPrincipal != null">and HoldPrincipal=${holdPrincipal}</if>
+				<if test="totallExpectedAsset != null">and TotallExpectedAsset=${totallExpectedAsset}</if>
+				<if test="totalActivityBonus != null">and TotalActivityBonus=${totalActivityBonus}</if>
+				<if test="totalExperienceGold != null">and TotalExperienceGold=${totalExperienceGold}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

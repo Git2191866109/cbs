@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.parameter.dao.IParameterDao">
+    <select id="selectPaginatedByParameterCategoryIdList"  resultMap="parameterResult" parameterMap="parameterParam">
+        select
+        Id parameter_id,
+        ParameterCategoryId parameter_parameterCategoryId,
+        Name parameter_name,
+        Code parameter_code,
+        Value parameter_value,
+        Description parameter_description,
+        State parameter_state,
+        CreationDate parameter_creationDate,
+        ModificationDate parameter_modificationDate
+        from SC_Parameter
+        <where>
+            <if test="parameterCategoryId != null">ParameterCategoryId = ${parameterCategoryId} </if>
+        </where>
+        order by Id asc
+        limit ${start},${offset}
+    </select>
+    
+    <select id="selectByCode" parameterType="string" resultType="com.bs.plugins.custom.sc.parameter.entity.Parameter">
+    	SELECT * FROM SC_Parameter WHERE code = #{code}
+    </select>
+</mapper>

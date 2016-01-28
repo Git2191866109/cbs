@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<aa name="资产配置" code="5">
+  <assetManage name="资产管理" code="501">
+    <assetCategory name="资产分类" code="50101" model-name="AA_AssetCategory" view-type="tree_list">
+      <create name="创建" code="5010101" menu-type="top" model-name="AA_AssetCategory" view-type="create"/>
+      <modify name="修改" code="5010102" menu-type="shortcut" model-name="AA_AssetCategory" view-type="modify"/>
+      <delete name="删除" code="5010103" menu-type="shortcut" model-name="AA_AssetCategory" view-type="delete"/>
+      <detail name="明细" code="5010104" menu-type="shortcut" model-name="AA_AssetCategory" view-type="detail"/>
+    </assetCategory>
+  </assetManage>
+  <riskManager name="风险偏好管理" code="502">
+    <riskPreferenceDefinition name="风险偏好定义" code="50201" model-name="AA_RiskPreferenceDefinition" view-type="tree_list">
+      <create name="创建" code="5020101" menu-type="top" model-name="AA_RiskPreferenceDefinition" view-type="create"/>
+      <modify name="修改" code="5020102" menu-type="shortcut" model-name="AA_RiskPreferenceDefinition" view-type="modify"/>
+      <delete name="删除" code="5020103" menu-type="shortcut" model-name="AA_RiskPreferenceDefinition" view-type="delete"/>
+      <detail name="明细" code="5020104" menu-type="shortcut" model-name="AA_RiskPreferenceDefinition" view-type="detail"/>
+    </riskPreferenceDefinition>
+  </riskManager>
+</aa>

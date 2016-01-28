@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sc.degree.dao.IDegreeDao">
+
+	<parameterMap id="degreeParam" type="com.bs.plugins.custom.sc.degree.entity.Degree" />
+	<resultMap id="degreeResult" type="com.bs.plugins.custom.sc.degree.entity.Degree">
+		<id property="id" column="degree_id" javaType="java.lang.Long" />
+		<result property="name" column="degree_name" javaType="java.lang.String" />
+		<result property="description" column="degree_description" javaType="java.lang.String" />
+		<result property="isValid" column="degree_isValid" javaType="java.lang.Integer" />
+		<result property="createDate" column="degree_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="degree_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="degree_creatorId" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="degreeResult" parameterMap="degreeParam">
+		select 
+			Id degree_id,
+			Name degree_name,
+			Description degree_description,
+			IsValid degree_isValid,
+			CreateDate degree_createDate,
+			ModifyDate degree_modifyDate,
+			CreatorId degree_creatorId
+		from SC_Degree
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="degreeResult">
+		select 
+			Id degree_id,
+			Name degree_name,
+			Description degree_description,
+			IsValid degree_isValid,
+			CreateDate degree_createDate,
+			ModifyDate degree_modifyDate,
+			CreatorId degree_creatorId
+		from SC_Degree
+	</select>
+	
+	<select id="selectOneById"  resultMap="degreeResult" parameterMap="degreeParam">
+		select 
+			Id degree_id,
+			Name degree_name,
+			Description degree_description,
+			IsValid degree_isValid,
+			CreateDate degree_createDate,
+			ModifyDate degree_modifyDate,
+			CreatorId degree_creatorId
+		from SC_Degree where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="degreeResult" parameterMap="degreeParam">
+		select 
+			Id degree_id,
+			Name degree_name,
+			Description degree_description,
+			IsValid degree_isValid,
+			CreateDate degree_createDate,
+			ModifyDate degree_modifyDate,
+			CreatorId degree_creatorId
+		from SC_Degree
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="degreeParam">
+		select count(*) from SC_Degree
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="degreeParam">
+		update SC_Degree
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="isValid != null">,IsValid=${isValid}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="degreeParam">
+		update SC_Degree
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Description=#{description}
+                    	<if test="isValid != null">,IsValid=${isValid}</if>
+                        <if test="isValid == null">,IsValid= 0</if>
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="degreeParam">
+		insert into SC_Degree
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="isValid != null">,IsValid</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="isValid != null">,${isValid}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="degreeParam">
+		delete from SC_Degree where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="degreeParam">
+		delete from SC_Degree
+	</delete>
+	
+	<delete id="delete" parameterMap="degreeParam">
+		delete from SC_Degree
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

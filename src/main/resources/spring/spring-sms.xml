@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 无线天利 -->
+	<bean id="wxtl" class="com.bs.plugins.thirdparty.sms.SMSWXTLImpl" > <!-- 默认为单例模式 scope="singleton" scope="prototype" -->
+		<property name="channel">
+			<map>
+				<!-- 发送短信 URL -->
+				<entry key="httpSendPath" value="http://58.68.247.137:9053/communication/sendSms.ashx"/>
+				<!-- 客户端ID -->
+				<entry key="cid" value="9196"/>
+				<!-- 客户端密码 -->
+				<entry key="pwd" value="YkB15L"/>
+				<!-- 通道组id -->
+				<entry key="productid" value="201512034"/>
+				<!-- 手号机 -->
+				<entry key="mobile" value=""/>
+				<!-- 短信内容 -->
+				<entry key="content" value=""/>
+				<!-- 子号码 -->
+				<entry key="lcode" value=""/>
+				<!-- 短信唯一标识,用于匹配状态报告 -->
+				<entry key="ssid" value=""/>
+				<!-- 短信类型:15普通短信,32长短信  后台配置 -->
+				<entry key="format" value="15"/>
+				<!-- 客户自定义签名,可以不填 -->
+				<entry key="sign" value=""/>
+				<!-- 客户自定义内容,目前没有用到,不用填写 --> 
+				<entry key="custom" value=""/> 
+				<!-- 获取短信报告 URL -->
+				<entry key="httpFetchPath" value="http://58.68.247.137:9053/communication/fetchReports.ashx"/>
+				<!-- 一次获取状态报告的数量  后台配置 -->
+				<entry key="cnt" value="100"/>
+				<!-- B64 URL编码调用接口 -->
+			</map>
+		</property>
+		<!-- 错误码  -->
+		<property name="errorCode">
+			<map>
+				<entry key="0" value="发送成功 "/>
+				<entry key="DELIVRD" value="发送成功"/>
+				<entry key="-1" value="认证错误 "/>
+				<entry key="-2" value="手机号码错误 "/>
+				<entry key="-3" value="消息长度错误 "/>
+				<entry key="-6" value="不允许群发 "/>
+				<entry key="-7" value="发送超时错误 "/>
+				<entry key="-9" value="发送失败错 "/>
+				<entry key="-10" value="黑名单"/>
+				<entry key="-12" value="路由处理错"/>
+				<entry key="-14" value="消息重复"/>
+				<entry key="-19" value="资源中心返回rid为null"/>
+				<entry key="-20" value="超时未发"/>
+				<entry key="-21" value="报备签名错误"/>
+				<entry key="-22" value="网关通道敏感词"/>
+				<entry key="-23" value="网关通道黑名单"/>
+				<entry key="-24" value="预付费超量"/>
+				<entry key="-27" value="手机号码重复"/>
+			</map>
+		</property>
+		<!-- 状态码 -->
+		<property name="statusCode">
+			<map>
+				<entry key="0" value="0"/><!-- 成功 -->
+				<entry key="1" value="1"/><!-- 等待 -->
+				<entry key="2" value="2"/><!-- 失败 -->
+			</map>
+		</property>
+	</bean>
+	
+	
+	<!-- 亿美软通 -->
+	<bean id="yimei" class="com.bs.plugins.thirdparty.sms.SMSYMImpl">
+		<property name="channel">
+			<map>
+				<!-- 发送短信 URL -->
+				<entry key="httpSendPath" value="http://hprpt2.eucp.b2m.cn:8080/sdkproxy/sendsms.action"/>
+				<!-- 用户序列号 -->
+				<entry key="cdkey" value="0SDK-EBB-6699-RCZUN"/>
+				<!-- 客户端密码 -->
+				<entry key="password" value="799067"/>
+				<!-- 手号机 -->
+				<entry key="phone" value=""/>
+				<!-- 短信内容 -->
+				<entry key="message" value=""/>
+				<!-- 附加号 -->
+				<entry key="addserial" value=""/>
+				<!-- 短信唯一标识,用于匹配状态报告 -->
+				<entry key="seqid" value=""/>
+				<!-- 短信优先级1-5 -->
+				<entry key="smspriority" value="1"/>
+				<!-- 获取报告 URL -->
+				<entry key="httpFetchPath" value="http://hprpt2.eucp.b2m.cn:8080/sdkproxy/getreport.action"/>
+			</map>
+		</property>
+		<!-- 错误码及其描述-->
+		<property name="errorCode">
+			<map>
+				<!-- 客户端 -->
+				<entry key="-2" value="客户端异常"/>
+				<entry key="-9000" value="数据格式错误,数据超出数据库允许范围"/>
+				<entry key="-9001" value="序列号格式错误"/>
+				<entry key="-9002" value="密码格式错误"/>
+				<entry key="-9003" value="客户端Key格式错误"/>
+				<!-- 客户端发送业务 -->
+				<entry key="-9016" value="发送短信包大小超出范围"/>
+				<entry key="-9017" value="发送短信内容格式错误"/>
+				<entry key="-9018" value="发送短信扩展号格式错误"/>
+				<entry key="-9019" value="发送短信优先级格式错误"/>
+				<entry key="-9020" value="发送短信手机号格式错误"/>
+				<entry key="-9021" value="发送短信定时时间格式错误"/>
+				<entry key="-9022" value="发送短信唯一序列值错误"/>
+				<entry key="-9023" value="充值卡号格式错误"/>
+				<entry key="-9024" value="充值密码格式错误"/>
+				<!-- 服务端 -->
+				<entry key="0" value="成功"/>
+				<entry key="-1" value="系统异常"/>
+				<entry key="-101" value="命令不被支持"/>
+				<entry key="-102" value="RegistryTransInfo删除信息失败"/>
+				<entry key="-103" value="RegistryInfo更新信息失败"/>
+				<entry key="-104" value="请求超过限制"/>
+				<entry key="-117" value="发送短信失败"/>
+				<entry key="-118" value="接收MO失败"/>
+				<entry key="-119" value="接收Report失败"/>
+				<entry key="-123" value="查询单价失败"/>
+				<entry key="-124" value="查询余额失败"/>
+				<entry key="-125" value="设置MO转发失败"/>
+				<entry key="-126" value="路由信息失败"/>
+				<entry key="-127" value="计费失败0余额"/>
+				<entry key="-128" value="计费失败余额不足"/>
+				<entry key="-1100" value="序列号错误,序列号不存在内存中,或尝试攻击的用户"/>
+				<entry key="-1103" value="序列号Key错误"/>
+				<entry key="-1102" value="序列号密码错误"/>
+				<entry key="-1104" value="路由失败，请联系系统管理员"/>
+				<entry key="-1105" value="注册号状态异常, 未用 1"/>
+				<entry key="-1107" value="注册号状态异常, 停用 3"/>
+				<entry key="-1108" value="注册号状态异常, 停止 5"/>
+			</map>
+		</property>
+		<!-- 状态码 -->
+		<property name="statusCode">
+			<map>
+				<entry key="0" value="0"/><!-- 成功 -->
+				<entry key="1" value="2"/><!-- 失败 -->
+			</map>
+		</property>
+	</bean>
+	
+	
+</beans>
+
+
+

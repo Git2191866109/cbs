@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.securityquestion.dao.ISecurityQuestionDao">
+
+	<parameterMap id="securityQuestionParam" type="com.bs.plugins.custom.cc.securityquestion.entity.SecurityQuestion" />
+	<resultMap id="securityQuestionResult" type="com.bs.plugins.custom.cc.securityquestion.entity.SecurityQuestion">
+		<id property="id" column="securityQuestion_id" javaType="java.lang.Long" />
+		<result property="questionCategoryId" column="securityQuestion_questionCategoryId" javaType="java.lang.Long" />
+		<result property="name" column="securityQuestion_name" javaType="java.lang.String" />
+		<result property="status" column="securityQuestion_status" javaType="java.lang.Integer" />
+		<result property="createDate" column="securityQuestion_createDate" javaType="java.lang.String" />
+		<association property="questionCategory" javaType="com.bs.plugins.custom.cc.questioncategory.entity.QuestionCategory">
+			<id property="id" column="questionCategory_id" javaType="java.lang.Long" />
+			<result property="name" column="questionCategory_name" javaType="java.lang.String" />
+			<result property="creatorId" column="questionCategory_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="questionCategory_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="questionCategory_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="questionCategory_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="questionCategory_isDelete" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="securityQuestionResult" parameterMap="securityQuestionParam">
+		select
+			securityQuestion.Id securityQuestion_id,
+			securityQuestion.QuestionCategoryId securityQuestion_questionCategoryId,
+			securityQuestion.Name securityQuestion_name,
+			securityQuestion.Status securityQuestion_status,
+			securityQuestion.CreateDate securityQuestion_createDate,	
+			questionCategory.Id questionCategory_id,
+			questionCategory.Name questionCategory_name,
+			questionCategory.CreatorId questionCategory_creatorId,
+			questionCategory.CreateTime questionCategory_createTime,
+			questionCategory.ModifierId questionCategory_modifierId,
+			questionCategory.ModifyTime questionCategory_modifyTime,
+			questionCategory.isDelete questionCategory_isDelete
+		from CC_SecurityQuestion securityQuestion
+		inner join CC_QuestionCategory questionCategory on questionCategory.Id=securityQuestion.QuestionCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="questionCategoryId != null">and QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSecurityQuestionQuestionCategory" resultMap="securityQuestionResult" parameterMap="securityQuestionParam">
+		select
+			securityQuestion.Id securityQuestion_id,
+			securityQuestion.QuestionCategoryId securityQuestion_questionCategoryId,
+			securityQuestion.Name securityQuestion_name,
+			securityQuestion.Status securityQuestion_status,
+			questionCategory.Id questionCategory_id,
+			questionCategory.Name questionCategory_name,
+			questionCategory.CreatorId questionCategory_creatorId,
+			questionCategory.CreateTime questionCategory_createTime,
+			questionCategory.ModifierId questionCategory_modifierId,
+			questionCategory.ModifyTime questionCategory_modifyTime,
+			questionCategory.isDelete questionCategory_isDelete
+		from CC_SecurityQuestion securityQuestion
+		inner join CC_QuestionCategory questionCategory on questionCategory.Id=securityQuestion.QuestionCategoryId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="questionCategoryId != null">and QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="securityQuestionResult" parameterMap="securityQuestionParam">
+		select 
+			Id securityQuestion_id,
+			QuestionCategoryId securityQuestion_questionCategoryId,
+			Name securityQuestion_name,
+			Status securityQuestion_status,
+			CreateDate securityQuestion_createDate
+		from CC_SecurityQuestion
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="questionCategoryId != null">and QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="securityQuestionResult">
+		select 
+			Id securityQuestion_id,
+			QuestionCategoryId securityQuestion_questionCategoryId,
+			Name securityQuestion_name,
+			Status securityQuestion_status,
+			CreateDate securityQuestion_createDate
+		from CC_SecurityQuestion
+	</select>
+	
+	<select id="selectOneById"  resultMap="securityQuestionResult" parameterMap="securityQuestionParam">
+		select 
+			Id securityQuestion_id,
+			QuestionCategoryId securityQuestion_questionCategoryId,
+			Name securityQuestion_name,
+			Status securityQuestion_status,
+			CreateDate securityQuestion_createDate
+		from CC_SecurityQuestion where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="securityQuestionResult" parameterMap="securityQuestionParam">
+		select 
+			Id securityQuestion_id,
+			QuestionCategoryId securityQuestion_questionCategoryId,
+			Name securityQuestion_name,
+			Status securityQuestion_status,
+			CreateDate securityQuestion_createDate
+		from CC_SecurityQuestion
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="securityQuestionParam">
+		select count(*) from CC_SecurityQuestion
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="questionCategoryId != null">and QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="securityQuestionParam">
+		update CC_SecurityQuestion
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="questionCategoryId != null">,QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="status != null">,Status=${status}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="securityQuestionParam">
+		update CC_SecurityQuestion
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,QuestionCategoryId=${questionCategoryId}
+						,Name=#{name}
+                        <if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="securityQuestionParam">
+		insert into CC_SecurityQuestion
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="questionCategoryId != null">,QuestionCategoryId</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="status != null">,Status</if>
+                ,CreateDate
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="questionCategoryId != null">,${questionCategoryId}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="status != null">,${status}</if>
+                ,now()
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="securityQuestionParam">
+		delete from CC_SecurityQuestion where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="securityQuestionParam">
+		delete from CC_SecurityQuestion
+	</delete>
+	
+	<delete id="delete" parameterMap="securityQuestionParam">
+		delete from CC_SecurityQuestion
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="questionCategoryId != null">and QuestionCategoryId=${questionCategoryId}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

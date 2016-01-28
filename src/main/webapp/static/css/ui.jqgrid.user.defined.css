@@ -1,0 +1,92 @@
+/**淇敼鏍囬楂樺害**/
+.ui-widget {
+	font-family: Microsoft Yahei, Lucida Grande, Lucida Sans, Arial, sans-serif;
+	font-size: 1.1em;
+}
+.ui-jqgrid .ui-jqgrid-htable th div {
+	overflow: hidden;
+	position: relative;
+	height: 25px;
+}
+/**淇敼鏍囬鏂囧瓧浣嶇疆**/
+.ui-jqgrid .ui-jqgrid-sortable {
+	cursor: pointer;
+	padding-top: 8px;
+}
+/**淇敼鍒嗛〉宸ュ叿鏉￠珮搴�*/
+.ui-jqgrid .ui-jqgrid-pager {
+	border-left: 0 none !important;
+	border-right: 0 none !important;
+	border-bottom: 0 none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	position: relative;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 11px;
+}
+/**淇敼toptools bar 楂樺害**/
+.ui-jqgrid .ui-userdata {
+	border-left: 0 none;
+	border-right: 0 none;
+	height: 30px;
+	overflow: hidden;
+}
+.defined-tools{
+	margin-top: 6px;
+	margin-left:10px;
+	float: left;
+	cursor: pointer;
+}
+/**淇敼琛ㄦ牸鑳屾櫙鍥剧墖锛坖query-ui-1.8.2锛�*/
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default
+	{
+	border: 1px solid #c5dbec;
+	background: #F0F5F7;
+	font-weight: bold;
+	color: #2e6e9e;
+}
+/**淇敼琛ㄦ牸澶村浘鐗囷紙jquery-ui-1.8.2锛�*/
+.ui-widget-header {
+	border: 1px solid #4297d7;
+	background: #87B6D9;
+	color: #ffffff;
+	font-weight: bold;
+}
+/**鏍戝舰琛ㄦ牸鍥炬爣鎺у埗**/
+.ui-jqgrid .tree-wrap-ltr {
+	height: 28px;
+}
+
+.ui-jqgrid .tree-wrap-ltr div{
+	margin-top: 10px;
+}
+.ui-jqgrid tr.jqgrow td {
+	height: 30px;
+	line-height: 35px;
+	padding: 0 2px 0 2px;
+}
+.ui-jqgrid .ui-userdata{
+	height: 40px;
+	line-height: 40px;
+}
+#top_create {
+	margin-left: 10px;
+}
+#top_create:hover{
+	text-decoration: underline;
+}
+.jqgridContainer a{
+	margin-left: 10px;
+}
+.jqgridContainer a:first-child{
+	margin-left: 0;
+}
+.jqgridContainer a:hover{
+	text-decoration: underline;
+	background:#fff;
+}
+.jqgridContainer a img{
+	margin-right: 5px;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.feedback.dao.IFeedbackDao">
+	<select id="paginated"  resultMap="feedbackResult" parameterMap="feedbackParam">
+		select 
+			Id feedback_id,
+			MemberId feedback_memberId,
+			IpAddress feedback_ipAddress,
+			NickName feedback_nickName,
+			Email feedback_email,
+			MobilePhone feedback_mobilePhone,
+			Content feedback_content,
+			CreateTime feedback_createTime,
+			State feedback_state,
+			ReplyContent feedback_replyContent,
+			OperatorId feedback_operatorId,
+			DealTime feedback_dealTime
+		from CC_Feedback
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="ipAddress != null and ipAddress != ''">and IpAddress like CONCAT('%',#{ipAddress},'%')</if>
+				<if test="nickName != null and nickName != ''">and NickName like CONCAT('%',#{nickName},'%')</if>
+				<if test="email != null and email != ''">and Email like CONCAT('%',#{email},'%')</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone like CONCAT('%',#{mobilePhone},'%')</if>
+				<if test="content != null and content != ''">and Content like CONCAT('%',#{content},'%')</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="state != null">and State=${state}</if>
+				<if test="replyContent != null and replyContent != ''">and ReplyContent like CONCAT('%',#{replyContent},'%')</if>
+				<if test="operatorId != null">and OperatorId=${operatorId}</if>
+				<if test="dealTime != null and dealTime != ''">and DealTime=#{dealTime}</if>
+			</trim>
+		</where>	
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+</mapper>

@@ -1,0 +1,2164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.product.dao.IProductDao">
+
+	<parameterMap id="productParam" type="com.bs.plugins.custom.pc.product.entity.Product" />
+	<resultMap id="productResult" type="com.bs.plugins.custom.pc.product.entity.Product">
+		<id property="id" column="product_id" javaType="java.lang.Long" />
+		<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+		<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+		<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+		<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+		<result property="name" column="product_name" javaType="java.lang.String" />
+		<result property="code" column="product_code" javaType="java.lang.String" />
+		<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+		<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+		<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+		<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+		<result property="description" column="product_description" javaType="java.lang.String" />
+		<result property="status" column="product_status" javaType="java.lang.Integer" />
+		<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+		<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+		<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+		<result property="sort" column="product_sort" javaType="java.lang.Long" />
+		<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		<association property="basicProduct" javaType="com.bs.plugins.custom.pc.basicproduct.entity.BasicProduct">
+			<id property="id" column="basicProduct_id" javaType="java.lang.Long" />
+			<result property="spvId" column="basicProduct_spvId" javaType="java.lang.Long" />
+			<result property="name" column="basicProduct_name" javaType="java.lang.String" />
+			<result property="code" column="basicProduct_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="basicProduct_totalAmount" javaType="java.lang.Integer" />
+			<result property="interestRateDate" column="basicProduct_interestRateDate" javaType="java.lang.String" />
+			<result property="profitExpirationDate" column="basicProduct_profitExpirationDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="basicProduct_actualExpirationDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="basicProduct_paymentDate" javaType="java.lang.String" />
+			<result property="actualPaymentDate" column="basicProduct_actualPaymentDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="basicProduct_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualExpectedProfitRatio" column="basicProduct_actualExpectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="basicProduct_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="actualProfit" column="basicProduct_actualProfit" javaType="java.math.BigDecimal" />
+			<result property="description" column="basicProduct_description" javaType="java.lang.String" />
+			<result property="createTime" column="basicProduct_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="basicProduct_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="basicProduct_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="basicProduct_isDelete" javaType="java.lang.Integer" />
+			<result property="creatorId" column="basicProduct_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="assetCategory" javaType="com.bs.plugins.custom.aa.assetcategory.entity.AssetCategory">
+			<id property="id" column="assetCategory_id" javaType="java.lang.Long" />
+			<result property="code" column="assetCategory_code" javaType="java.lang.Integer" />
+			<result property="name" column="assetCategory_name" javaType="java.lang.String" />
+			<result property="type" column="assetCategory_type" javaType="java.lang.Integer" />
+			<result property="rateOfReturn" column="assetCategory_rateOfReturn" javaType="java.lang.Double" />
+			<result property="variance" column="assetCategory_variance" javaType="java.lang.Double" />
+			<result property="rate" column="assetCategory_rate" javaType="java.lang.Double" />
+			<result property="description" column="assetCategory_description" javaType="java.lang.String" />
+			<result property="createTime" column="assetCategory_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="assetCategory_modifyTime" javaType="java.lang.String" />
+		</association>
+		<collection property="productAttributeConfigs" ofType="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+			<id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+			<result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+			<result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+			<result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+			<result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+			<result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="productAmountLocks" ofType="com.bs.plugins.custom.tc.productamountlock.entity.ProductAmountLock">
+			<id property="id" column="productAmountLock_id" javaType="java.lang.Long" />
+			<result property="productId" column="productAmountLock_productId" javaType="java.lang.Long" />
+			<result property="spvId" column="productAmountLock_spvId" javaType="java.lang.Long" />
+			<result property="memberId" column="productAmountLock_memberId" javaType="java.lang.Long" />
+			<result property="productName" column="productAmountLock_productName" javaType="java.lang.String" />
+			<result property="productCode" column="productAmountLock_productCode" javaType="java.lang.String" />
+			<result property="transactionNumber" column="productAmountLock_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="productAmountLock_payPlantformNumber" javaType="java.lang.String" />
+			<result property="umpayProductAccountNo" column="productAmountLock_umpayProductAccountNo" javaType="java.lang.String" />
+			<result property="lockAmount" column="productAmountLock_lockAmount" javaType="java.lang.Integer" />
+			<result property="shares" column="productAmountLock_shares" javaType="java.lang.Integer" />
+			<result property="intoStatus" column="productAmountLock_intoStatus" javaType="java.lang.Integer" />
+			<result property="handleStatus" column="productAmountLock_handleStatus" javaType="java.lang.Integer" />
+			<result property="finishTime" column="productAmountLock_finishTime" javaType="java.lang.String" />
+			<result property="subsTime" column="productAmountLock_subsTime" javaType="java.lang.String" />
+			<result property="expireTime" column="productAmountLock_expireTime" javaType="java.lang.Long" />
+			<result property="remark" column="productAmountLock_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="spvAccountingDetails" ofType="com.bs.plugins.custom.tc.spvaccountingdetail.entity.SpvAccountingDetail">
+			<id property="id" column="spvAccountingDetail_id" javaType="java.lang.Long" />
+			<result property="spvId" column="spvAccountingDetail_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="spvAccountingDetail_productId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="spvAccountingDetail_transactionNumber" javaType="java.lang.String" />
+			<result property="flowTo" column="spvAccountingDetail_flowTo" javaType="java.lang.Integer" />
+			<result property="amount" column="spvAccountingDetail_amount" javaType="java.math.BigDecimal" />
+			<result property="accountBalance" column="spvAccountingDetail_accountBalance" javaType="java.math.BigDecimal" />
+			<result property="umpayAccountBalance" column="spvAccountingDetail_umpayAccountBalance" javaType="java.math.BigDecimal" />
+			<result property="businessType" column="spvAccountingDetail_businessType" javaType="java.lang.Integer" />
+			<result property="businessId" column="spvAccountingDetail_businessId" javaType="java.lang.Long" />
+			<result property="accountType" column="spvAccountingDetail_accountType" javaType="java.lang.Integer" />
+			<result property="operatorId" column="spvAccountingDetail_operatorId" javaType="java.lang.Long" />
+			<result property="operator" column="spvAccountingDetail_operator" javaType="java.lang.String" />
+			<result property="description" column="spvAccountingDetail_description" javaType="java.lang.String" />
+			<result property="createTime" column="spvAccountingDetail_createTime" javaType="java.lang.String" />
+		</collection>
+		<collection property="accountingDetails" ofType="com.bs.plugins.custom.tc.accountingdetail.entity.AccountingDetail">
+			<id property="id" column="accountingDetail_id" javaType="java.lang.Long" />
+			<result property="memberId" column="accountingDetail_memberId" javaType="java.lang.Long" />
+			<result property="productId" column="accountingDetail_productId" javaType="java.lang.Long" />
+			<result property="flowTo" column="accountingDetail_flowTo" javaType="java.lang.Integer" />
+			<result property="amount" column="accountingDetail_amount" javaType="java.math.BigDecimal" />
+			<result property="accountBalance" column="accountingDetail_accountBalance" javaType="java.math.BigDecimal" />
+			<result property="umpayAccountBalance" column="accountingDetail_umpayAccountBalance" javaType="java.math.BigDecimal" />
+			<result property="counterpartyType" column="accountingDetail_counterpartyType" javaType="java.lang.Integer" />
+			<result property="counterpartyId" column="accountingDetail_counterpartyId" javaType="java.lang.Long" />
+			<result property="businessType" column="accountingDetail_businessType" javaType="java.lang.Integer" />
+			<result property="businessId" column="accountingDetail_businessId" javaType="java.lang.Long" />
+			<result property="accountType" column="accountingDetail_accountType" javaType="java.lang.Integer" />
+			<result property="transactionNumber" column="accountingDetail_transactionNumber" javaType="java.lang.String" />
+			<result property="operatorId" column="accountingDetail_operatorId" javaType="java.lang.Long" />
+			<result property="operator" column="accountingDetail_operator" javaType="java.lang.String" />
+			<result property="description" column="accountingDetail_description" javaType="java.lang.String" />
+			<result property="createTime" column="accountingDetail_createTime" javaType="java.lang.String" />
+		</collection>
+		<collection property="productContracts" ofType="com.bs.plugins.custom.pc.productcontract.entity.ProductContract">
+			<id property="id" column="productContract_id" javaType="java.lang.Long" />
+			<result property="productId" column="productContract_productId" javaType="java.lang.Long" />
+			<result property="templateId" column="productContract_templateId" javaType="java.lang.Long" />
+			<result property="name" column="productContract_name" javaType="java.lang.String" />
+			<result property="code" column="productContract_code" javaType="java.lang.String" />
+			<result property="filePath" column="productContract_filePath" javaType="java.lang.String" />
+			<result property="content" column="productContract_content" javaType="java.lang.String" />
+			<result property="description" column="productContract_description" javaType="java.lang.String" />
+			<result property="creatorId" column="productContract_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="productContract_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="productContract_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="productContract_modifyTime" javaType="java.lang.String" />
+			<result property="delFlag" column="productContract_delFlag" javaType="java.lang.Integer" />
+		</collection>
+		<collection property="productReturnMoneys" ofType="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney">
+			<id property="id" column="productReturnMoney_id" javaType="java.lang.Long" />
+			<result property="memberId" column="productReturnMoney_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="productReturnMoney_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="productReturnMoney_productId" javaType="java.lang.Long" />
+			<result property="subscriptionId" column="productReturnMoney_subscriptionId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="productReturnMoney_transactionNumber" javaType="java.lang.String" />
+			<result property="spvIntoObjectId" column="productReturnMoney_spvIntoObjectId" javaType="java.lang.Long" />
+			<result property="objectIncomeNumber" column="productReturnMoney_objectIncomeNumber" javaType="java.lang.String" />
+			<result property="returnNumber" column="productReturnMoney_returnNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="productReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="productReturnMoney_productName" javaType="java.lang.String" />
+			<result property="productCode" column="productReturnMoney_productCode" javaType="java.lang.String" />
+			<result property="distributePrincipal" column="productReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+			<result property="distributeInterest" column="productReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+			<result property="distributeAmount" column="productReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+			<result property="distributeStatus" column="productReturnMoney_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="productReturnMoney_distributeTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="productReturnMoney_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="productReturnMoney_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="productReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="productReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="productReturnMoney_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="actualProfitRatio" column="productReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualReturnAmount" column="productReturnMoney_actualReturnAmount" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFee" column="productReturnMoney_memberServiceFee" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFeeRatio" column="productReturnMoney_memberServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="returnTime" column="productReturnMoney_returnTime" javaType="java.lang.String" />
+			<result property="returnStatus" column="productReturnMoney_returnStatus" javaType="java.lang.Integer" />
+			<result property="businessCheckStatus" column="productReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="productReturnMoney_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="productReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeStatus" column="productReturnMoney_objectIncomeStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeTime" column="productReturnMoney_objectIncomeTime" javaType="java.lang.String" />
+			<result property="remark" column="productReturnMoney_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="subscriptions" ofType="com.bs.plugins.custom.tc.subscription.entity.Subscription">
+			<id property="id" column="subscription_id" javaType="java.lang.Long" />
+			<result property="memberId" column="subscription_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="subscription_spvId" javaType="java.lang.Long" />
+			<result property="loanId" column="subscription_loanId" javaType="java.lang.Long" />
+			<result property="loanNumber" column="subscription_loanNumber" javaType="java.lang.String" />
+			<result property="productId" column="subscription_productId" javaType="java.lang.Long" />
+			<result property="amountLockId" column="subscription_amountLockId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="subscription_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="subscription_payPlantformNumber" javaType="java.lang.String" />
+			<result property="umpayProductAccountNo" column="subscription_umpayProductAccountNo" javaType="java.lang.String" />
+			<result property="productName" column="subscription_productName" javaType="java.lang.String" />
+			<result property="productCode" column="subscription_productCode" javaType="java.lang.String" />
+			<result property="tradeStatus" column="subscription_tradeStatus" javaType="java.lang.Integer" />
+			<result property="investAmount" column="subscription_investAmount" javaType="java.math.BigDecimal" />
+			<result property="shares" column="subscription_shares" javaType="java.lang.Integer" />
+			<result property="orderTime" column="subscription_orderTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="subscription_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="subscription_paymentDate" javaType="java.lang.String" />
+			<result property="expectedExpirationDate" column="subscription_expectedExpirationDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="subscription_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="subscription_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="subscription_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="subscription_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="subscription_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="actualLoanAmount" column="subscription_actualLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="subscription_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="subscription_loanStatus" javaType="java.lang.Integer" />
+			<result property="status" column="subscription_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="subscription_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="subscription_distributeTime" javaType="java.lang.String" />
+			<result property="isBuyBack" column="subscription_isBuyBack" javaType="java.lang.Integer" />
+			<result property="checkingStatus" column="subscription_checkingStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="subscription_checkingTime" javaType="java.lang.String" />
+			<result property="contractPath" column="subscription_contractPath" javaType="java.lang.String" />
+			<result property="remark" column="subscription_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="appointments" ofType="com.bs.plugins.custom.tc.appointment.entity.Appointment">
+			<id property="id" column="appointment_id" javaType="java.lang.Long" />
+			<result property="memberId" column="appointment_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="appointment_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="appointment_productId" javaType="java.lang.Long" />
+			<result property="contact" column="appointment_contact" javaType="java.lang.String" />
+			<result property="mobilePhone" column="appointment_mobilePhone" javaType="java.lang.String" />
+			<result property="productName" column="appointment_productName" javaType="java.lang.String" />
+			<result property="productCode" column="appointment_productCode" javaType="java.lang.String" />
+			<result property="appointAmount" column="appointment_appointAmount" javaType="java.math.BigDecimal" />
+			<result property="shares" column="appointment_shares" javaType="java.lang.Integer" />
+			<result property="appointTime" column="appointment_appointTime" javaType="java.lang.String" />
+			<result property="status" column="appointment_status" javaType="java.lang.Integer" />
+			<result property="remark" column="appointment_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="spvProductReturnMoneys" ofType="com.bs.plugins.custom.tc.spvproductreturnmoney.entity.SpvProductReturnMoney">
+			<id property="id" column="spvProductReturnMoney_id" javaType="java.lang.Long" />
+			<result property="memberId" column="spvProductReturnMoney_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="spvProductReturnMoney_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="spvProductReturnMoney_productId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="spvProductReturnMoney_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="spvProductReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="spvProductReturnMoney_productName" javaType="java.lang.String" />
+			<result property="productCode" column="spvProductReturnMoney_productCode" javaType="java.lang.String" />
+			<result property="distributePrincipal" column="spvProductReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+			<result property="distributeInterest" column="spvProductReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+			<result property="distributeAmount" column="spvProductReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+			<result property="interestRateDate" column="spvProductReturnMoney_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="spvProductReturnMoney_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="spvProductReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="spvProductReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualProfitRatio" column="spvProductReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="spvProductReturnMoney_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="spvProductReturnMoney_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="businessCheckStatus" column="spvProductReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="spvProductReturnMoney_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="spvProductReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+			<result property="intoObjectStatus" column="spvProductReturnMoney_intoObjectStatus" javaType="java.lang.Integer" />
+			<result property="intoObjectTime" column="spvProductReturnMoney_intoObjectTime" javaType="java.lang.String" />
+			<result property="remark" column="spvProductReturnMoney_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="loans" ofType="com.bs.plugins.custom.tc.loan.entity.Loan">
+			<id property="id" column="loan_id" javaType="java.lang.Long" />
+			<result property="spvId" column="loan_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="loan_productId" javaType="java.lang.Long" />
+			<result property="tradeNumber" column="loan_tradeNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="loan_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="loan_productName" javaType="java.lang.String" />
+			<result property="productCode" column="loan_productCode" javaType="java.lang.String" />
+			<result property="totalLoanAmount" column="loan_totalLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="loan_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="loan_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="loan_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="loan_loanStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="loan_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="loan_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="loan_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="subProducts" ofType="com.bs.plugins.custom.pc.subproduct.entity.SubProduct">
+			<id property="id" column="subProduct_id" javaType="java.lang.Long" />
+			<result property="productId" column="subProduct_productId" javaType="java.lang.Long" />
+			<result property="code" column="subProduct_code" javaType="java.lang.String" />
+			<result property="releaseTime" column="subProduct_releaseTime" javaType="java.lang.String" />
+			<result property="status" column="subProduct_status" javaType="java.lang.Integer" />
+			<result property="umpayAccountNo" column="subProduct_umpayAccountNo" javaType="java.lang.String" />
+			<result property="transactionNumber" column="subProduct_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="subProduct_payPlantformNumber" javaType="java.lang.String" />
+		</collection>
+		<collection property="platformServiceFees" ofType="com.bs.plugins.custom.tc.platformservicefee.entity.PlatformServiceFee">
+			<id property="id" column="platformServiceFee_id" javaType="java.lang.Long" />
+			<result property="platformId" column="platformServiceFee_platformId" javaType="java.lang.Long" />
+			<result property="spvId" column="platformServiceFee_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="platformServiceFee_productId" javaType="java.lang.Long" />
+			<result property="returnMoneyId" column="platformServiceFee_returnMoneyId" javaType="java.lang.Long" />
+			<result property="spvLoanId" column="platformServiceFee_spvLoanId" javaType="java.lang.Long" />
+			<result property="tradeNumber" column="platformServiceFee_tradeNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="platformServiceFee_payPlantformNumber" javaType="java.lang.String" />
+			<result property="principalAmount" column="platformServiceFee_principalAmount" javaType="java.math.BigDecimal" />
+			<result property="serviceFee" column="platformServiceFee_serviceFee" javaType="java.math.BigDecimal" />
+			<result property="serviceFeeRatio" column="platformServiceFee_serviceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="takeTime" column="platformServiceFee_takeTime" javaType="java.lang.String" />
+			<result property="takeStatus" column="platformServiceFee_takeStatus" javaType="java.lang.Integer" />
+			<result property="takeFinishTime" column="platformServiceFee_takeFinishTime" javaType="java.lang.String" />
+			<result property="checkingTime" column="platformServiceFee_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="platformServiceFee_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="platformServiceFee_remark" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,	
+			basicProduct.Id basicProduct_id,
+			basicProduct.SpvId basicProduct_spvId,
+			basicProduct.Name basicProduct_name,
+			basicProduct.Code basicProduct_code,
+			basicProduct.TotalAmount basicProduct_totalAmount,
+			basicProduct.InterestRateDate basicProduct_interestRateDate,
+			basicProduct.ProfitExpirationDate basicProduct_profitExpirationDate,
+			basicProduct.ActualExpirationDate basicProduct_actualExpirationDate,
+			basicProduct.PaymentDate basicProduct_paymentDate,
+			basicProduct.ActualPaymentDate basicProduct_actualPaymentDate,
+			basicProduct.ExpectedProfitRatio basicProduct_expectedProfitRatio,
+			basicProduct.ActualExpectedProfitRatio basicProduct_actualExpectedProfitRatio,
+			basicProduct.ExpectedProfit basicProduct_expectedProfit,
+			basicProduct.ActualProfit basicProduct_actualProfit,
+			basicProduct.Description basicProduct_description,
+			basicProduct.CreateTime basicProduct_createTime,
+			basicProduct.ModifierId basicProduct_modifierId,
+			basicProduct.ModifyTime basicProduct_modifyTime,
+			basicProduct.isDelete basicProduct_isDelete,
+			basicProduct.CreatorId basicProduct_creatorId,
+			assetCategory.Id assetCategory_id,
+			assetCategory.Code assetCategory_code,
+			assetCategory.Name assetCategory_name,
+			assetCategory.Type assetCategory_type,
+			assetCategory.RateOfReturn assetCategory_rateOfReturn,
+			assetCategory.Variance assetCategory_variance,
+			assetCategory.Rate assetCategory_rate,
+			assetCategory.Description assetCategory_description,
+			assetCategory.CreateTime assetCategory_createTime,
+			assetCategory.ModifyTime assetCategory_modifyTime
+		from PC_Product product
+		inner join PC_BasicProduct basicProduct on basicProduct.Id=product.BasicProductId
+		inner join AA_AssetCategory assetCategory on assetCategory.Id=product.AssetCategoryCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectProductBasicProduct" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			basicProduct.Id assetCategory_id,
+			basicProduct.SpvId assetCategory_spvId,
+			basicProduct.Name assetCategory_name,
+			basicProduct.Code assetCategory_code,
+			basicProduct.TotalAmount assetCategory_totalAmount,
+			basicProduct.InterestRateDate assetCategory_interestRateDate,
+			basicProduct.ProfitExpirationDate assetCategory_profitExpirationDate,
+			basicProduct.ActualExpirationDate assetCategory_actualExpirationDate,
+			basicProduct.PaymentDate assetCategory_paymentDate,
+			basicProduct.ActualPaymentDate assetCategory_actualPaymentDate,
+			basicProduct.ExpectedProfitRatio assetCategory_expectedProfitRatio,
+			basicProduct.ActualExpectedProfitRatio assetCategory_actualExpectedProfitRatio,
+			basicProduct.ExpectedProfit assetCategory_expectedProfit,
+			basicProduct.ActualProfit assetCategory_actualProfit,
+			basicProduct.Description assetCategory_description,
+			basicProduct.CreateTime assetCategory_createTime,
+			basicProduct.ModifierId assetCategory_modifierId,
+			basicProduct.ModifyTime assetCategory_modifyTime,
+			basicProduct.isDelete assetCategory_isDelete,
+			basicProduct.CreatorId assetCategory_creatorId
+		from PC_Product product
+		inner join PC_BasicProduct basicProduct on basicProduct.Id=product.BasicProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectProductAssetCategory" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			assetCategory.Id assetCategory_id,
+			assetCategory.Code assetCategory_code,
+			assetCategory.Name assetCategory_name,
+			assetCategory.Type assetCategory_type,
+			assetCategory.RateOfReturn assetCategory_rateOfReturn,
+			assetCategory.Variance assetCategory_variance,
+			assetCategory.Rate assetCategory_rate,
+			assetCategory.Description assetCategory_description,
+			assetCategory.CreateTime assetCategory_createTime,
+			assetCategory.ModifyTime assetCategory_modifyTime
+		from PC_Product product
+		inner join AA_AssetCategory assetCategory on assetCategory.Id=product.AssetCategoryCode
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectCollections" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,	
+			productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			productAttributeConfig.DelFlag productAttributeConfig_delFlag
+			productAmountLock.Id productAmountLock_id,
+			productAmountLock.ProductId productAmountLock_productId,
+			productAmountLock.SpvId productAmountLock_spvId,
+			productAmountLock.MemberId productAmountLock_memberId,
+			productAmountLock.ProductName productAmountLock_productName,
+			productAmountLock.ProductCode productAmountLock_productCode,
+			productAmountLock.TransactionNumber productAmountLock_transactionNumber,
+			productAmountLock.PayPlantformNumber productAmountLock_payPlantformNumber,
+			productAmountLock.UmpayProductAccountNo productAmountLock_umpayProductAccountNo,
+			productAmountLock.LockAmount productAmountLock_lockAmount,
+			productAmountLock.Shares productAmountLock_shares,
+			productAmountLock.IntoStatus productAmountLock_intoStatus,
+			productAmountLock.HandleStatus productAmountLock_handleStatus,
+			productAmountLock.FinishTime productAmountLock_finishTime,
+			productAmountLock.SubsTime productAmountLock_subsTime,
+			productAmountLock.ExpireTime productAmountLock_expireTime,
+			productAmountLock.Remark productAmountLock_remark
+			spvAccountingDetail.Id spvAccountingDetail_id,
+			spvAccountingDetail.SpvId spvAccountingDetail_spvId,
+			spvAccountingDetail.ProductId spvAccountingDetail_productId,
+			spvAccountingDetail.TransactionNumber spvAccountingDetail_transactionNumber,
+			spvAccountingDetail.FlowTo spvAccountingDetail_flowTo,
+			spvAccountingDetail.Amount spvAccountingDetail_amount,
+			spvAccountingDetail.AccountBalance spvAccountingDetail_accountBalance,
+			spvAccountingDetail.UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+			spvAccountingDetail.BusinessType spvAccountingDetail_businessType,
+			spvAccountingDetail.BusinessId spvAccountingDetail_businessId,
+			spvAccountingDetail.AccountType spvAccountingDetail_accountType,
+			spvAccountingDetail.OperatorId spvAccountingDetail_operatorId,
+			spvAccountingDetail.Operator spvAccountingDetail_operator,
+			spvAccountingDetail.Description spvAccountingDetail_description,
+			spvAccountingDetail.CreateTime spvAccountingDetail_createTime
+			accountingDetail.Id accountingDetail_id,
+			accountingDetail.MemberId accountingDetail_memberId,
+			accountingDetail.ProductId accountingDetail_productId,
+			accountingDetail.FlowTo accountingDetail_flowTo,
+			accountingDetail.Amount accountingDetail_amount,
+			accountingDetail.AccountBalance accountingDetail_accountBalance,
+			accountingDetail.UmpayAccountBalance accountingDetail_umpayAccountBalance,
+			accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+			accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+			accountingDetail.BusinessType accountingDetail_businessType,
+			accountingDetail.BusinessId accountingDetail_businessId,
+			accountingDetail.AccountType accountingDetail_accountType,
+			accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+			accountingDetail.OperatorId accountingDetail_operatorId,
+			accountingDetail.Operator accountingDetail_operator,
+			accountingDetail.Description accountingDetail_description,
+			accountingDetail.CreateTime accountingDetail_createTime
+			productContract.Id productContract_id,
+			productContract.ProductId productContract_productId,
+			productContract.TemplateId productContract_templateId,
+			productContract.Name productContract_name,
+			productContract.Code productContract_code,
+			productContract.FilePath productContract_filePath,
+			productContract.Content productContract_content,
+			productContract.Description productContract_description,
+			productContract.CreatorId productContract_creatorId,
+			productContract.CreateTime productContract_createTime,
+			productContract.ModifierId productContract_modifierId,
+			productContract.ModifyTime productContract_modifyTime,
+			productContract.DelFlag productContract_delFlag
+			productReturnMoney.Id productReturnMoney_id,
+			productReturnMoney.MemberId productReturnMoney_memberId,
+			productReturnMoney.SpvId productReturnMoney_spvId,
+			productReturnMoney.ProductId productReturnMoney_productId,
+			productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+			productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+			productReturnMoney.SpvIntoObjectId productReturnMoney_spvIntoObjectId,
+			productReturnMoney.ObjectIncomeNumber productReturnMoney_objectIncomeNumber,
+			productReturnMoney.ReturnNumber productReturnMoney_returnNumber,
+			productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+			productReturnMoney.ProductName productReturnMoney_productName,
+			productReturnMoney.ProductCode productReturnMoney_productCode,
+			productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+			productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+			productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+			productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+			productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+			productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+			productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+			productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+			productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+			productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+			productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+			productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+			productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+			productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+			productReturnMoney.ReturnTime productReturnMoney_returnTime,
+			productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+			productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+			productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+			productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+			productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+			productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+			productReturnMoney.Remark productReturnMoney_remark
+			subscription.Id subscription_id,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			subscription.LoanId subscription_loanId,
+			subscription.LoanNumber subscription_loanNumber,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.IsBuyBack subscription_isBuyBack,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.ContractPath subscription_contractPath,
+			subscription.Remark subscription_remark
+			appointment.Id appointment_id,
+			appointment.MemberId appointment_memberId,
+			appointment.SpvId appointment_spvId,
+			appointment.ProductId appointment_productId,
+			appointment.Contact appointment_contact,
+			appointment.MobilePhone appointment_mobilePhone,
+			appointment.ProductName appointment_productName,
+			appointment.ProductCode appointment_productCode,
+			appointment.AppointAmount appointment_appointAmount,
+			appointment.Shares appointment_shares,
+			appointment.AppointTime appointment_appointTime,
+			appointment.Status appointment_status,
+			appointment.Remark appointment_remark
+			spvProductReturnMoney.Id spvProductReturnMoney_id,
+			spvProductReturnMoney.MemberId spvProductReturnMoney_memberId,
+			spvProductReturnMoney.SpvId spvProductReturnMoney_spvId,
+			spvProductReturnMoney.ProductId spvProductReturnMoney_productId,
+			spvProductReturnMoney.TransactionNumber spvProductReturnMoney_transactionNumber,
+			spvProductReturnMoney.PayPlantformNumber spvProductReturnMoney_payPlantformNumber,
+			spvProductReturnMoney.ProductName spvProductReturnMoney_productName,
+			spvProductReturnMoney.ProductCode spvProductReturnMoney_productCode,
+			spvProductReturnMoney.DistributePrincipal spvProductReturnMoney_distributePrincipal,
+			spvProductReturnMoney.DistributeInterest spvProductReturnMoney_distributeInterest,
+			spvProductReturnMoney.DistributeAmount spvProductReturnMoney_distributeAmount,
+			spvProductReturnMoney.InterestRateDate spvProductReturnMoney_interestRateDate,
+			spvProductReturnMoney.PaymentDate spvProductReturnMoney_paymentDate,
+			spvProductReturnMoney.ActualExpirationDate spvProductReturnMoney_actualExpirationDate,
+			spvProductReturnMoney.ExpectedProfitRatio spvProductReturnMoney_expectedProfitRatio,
+			spvProductReturnMoney.ActualProfitRatio spvProductReturnMoney_actualProfitRatio,
+			spvProductReturnMoney.SpvServiceFee spvProductReturnMoney_spvServiceFee,
+			spvProductReturnMoney.SpvServiceFeeRatio spvProductReturnMoney_spvServiceFeeRatio,
+			spvProductReturnMoney.BusinessCheckStatus spvProductReturnMoney_businessCheckStatus,
+			spvProductReturnMoney.CheckingTime spvProductReturnMoney_checkingTime,
+			spvProductReturnMoney.CheckingStatus spvProductReturnMoney_checkingStatus,
+			spvProductReturnMoney.IntoObjectStatus spvProductReturnMoney_intoObjectStatus,
+			spvProductReturnMoney.IntoObjectTime spvProductReturnMoney_intoObjectTime,
+			spvProductReturnMoney.Remark spvProductReturnMoney_remark
+			loan.Id loan_id,
+			loan.SpvId loan_spvId,
+			loan.ProductId loan_productId,
+			loan.TradeNumber loan_tradeNumber,
+			loan.PayPlantformNumber loan_payPlantformNumber,
+			loan.ProductName loan_productName,
+			loan.ProductCode loan_productCode,
+			loan.TotalLoanAmount loan_totalLoanAmount,
+			loan.SpvServiceFee loan_spvServiceFee,
+			loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+			loan.LoanTime loan_loanTime,
+			loan.LoanStatus loan_loanStatus,
+			loan.CheckingTime loan_checkingTime,
+			loan.CheckingStatus loan_checkingStatus,
+			loan.Remark loan_remark
+			subProduct.Id subProduct_id,
+			subProduct.ProductId subProduct_productId,
+			subProduct.Code subProduct_code,
+			subProduct.ReleaseTime subProduct_releaseTime,
+			subProduct.Status subProduct_status,
+			subProduct.UmpayAccountNo subProduct_umpayAccountNo,
+			subProduct.TransactionNumber subProduct_transactionNumber,
+			subProduct.PayPlantformNumber subProduct_payPlantformNumber
+			platformServiceFee.Id platformServiceFee_id,
+			platformServiceFee.PlatformId platformServiceFee_platformId,
+			platformServiceFee.SpvId platformServiceFee_spvId,
+			platformServiceFee.ProductId platformServiceFee_productId,
+			platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+			platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+			platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+			platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+			platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+			platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+			platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+			platformServiceFee.TakeTime platformServiceFee_takeTime,
+			platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+			platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+			platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+			platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+			platformServiceFee.Remark platformServiceFee_remark
+		from PC_Product product
+		inner join PC_ProductAttributeConfig productAttributeConfig on productAttributeConfig.ProductId=product.Id
+		inner join TC_ProductAmountLock productAmountLock on productAmountLock.ProductId=product.Id
+		inner join TC_SpvAccountingDetail spvAccountingDetail on spvAccountingDetail.ProductId=product.Id
+		inner join TC_AccountingDetail accountingDetail on accountingDetail.ProductId=product.Id
+		inner join PC_ProductContract productContract on productContract.ProductId=product.Id
+		inner join TC_ProductReturnMoney productReturnMoney on productReturnMoney.ProductId=product.Id
+		inner join TC_Subscription subscription on subscription.ProductId=product.Id
+		inner join TC_Appointment appointment on appointment.ProductId=product.Id
+		inner join TC_SpvProductReturnMoney spvProductReturnMoney on spvProductReturnMoney.ProductId=product.Id
+		inner join TC_Loan loan on loan.ProductId=product.Id
+		inner join PC_SubProduct subProduct on subProduct.ProductId=product.Id
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectProductProductAttributeConfig" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				productAttributeConfig.Id productAttributeConfig_id,
+	
+				productAttributeConfig.ProductId productAttributeConfig_productId,
+	
+				productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+	
+				productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+	
+				productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+	
+				productAttributeConfig.CreateTime productAttributeConfig_createTime,
+	
+				productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+	
+				productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+	
+				productAttributeConfig.DelFlag productAttributeConfig_delFlag
+	
+		from PC_Product product
+		inner join PC_ProductAttributeConfig productAttributeConfig on productAttributeConfig.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductProductAmountLock" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				productAmountLock.Id productAmountLock_id,
+	
+				productAmountLock.ProductId productAmountLock_productId,
+	
+				productAmountLock.SpvId productAmountLock_spvId,
+	
+				productAmountLock.MemberId productAmountLock_memberId,
+	
+				productAmountLock.ProductName productAmountLock_productName,
+	
+				productAmountLock.ProductCode productAmountLock_productCode,
+	
+				productAmountLock.TransactionNumber productAmountLock_transactionNumber,
+	
+				productAmountLock.PayPlantformNumber productAmountLock_payPlantformNumber,
+	
+				productAmountLock.UmpayProductAccountNo productAmountLock_umpayProductAccountNo,
+	
+				productAmountLock.LockAmount productAmountLock_lockAmount,
+	
+				productAmountLock.Shares productAmountLock_shares,
+	
+				productAmountLock.IntoStatus productAmountLock_intoStatus,
+	
+				productAmountLock.HandleStatus productAmountLock_handleStatus,
+	
+				productAmountLock.FinishTime productAmountLock_finishTime,
+	
+				productAmountLock.SubsTime productAmountLock_subsTime,
+	
+				productAmountLock.ExpireTime productAmountLock_expireTime,
+	
+				productAmountLock.Remark productAmountLock_remark
+	
+		from PC_Product product
+		inner join TC_ProductAmountLock productAmountLock on productAmountLock.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductSpvAccountingDetail" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				spvAccountingDetail.Id spvAccountingDetail_id,
+	
+				spvAccountingDetail.SpvId spvAccountingDetail_spvId,
+	
+				spvAccountingDetail.ProductId spvAccountingDetail_productId,
+	
+				spvAccountingDetail.TransactionNumber spvAccountingDetail_transactionNumber,
+	
+				spvAccountingDetail.FlowTo spvAccountingDetail_flowTo,
+	
+				spvAccountingDetail.Amount spvAccountingDetail_amount,
+	
+				spvAccountingDetail.AccountBalance spvAccountingDetail_accountBalance,
+	
+				spvAccountingDetail.UmpayAccountBalance spvAccountingDetail_umpayAccountBalance,
+	
+				spvAccountingDetail.BusinessType spvAccountingDetail_businessType,
+	
+				spvAccountingDetail.BusinessId spvAccountingDetail_businessId,
+	
+				spvAccountingDetail.AccountType spvAccountingDetail_accountType,
+	
+				spvAccountingDetail.OperatorId spvAccountingDetail_operatorId,
+	
+				spvAccountingDetail.Operator spvAccountingDetail_operator,
+	
+				spvAccountingDetail.Description spvAccountingDetail_description,
+	
+				spvAccountingDetail.CreateTime spvAccountingDetail_createTime
+	
+		from PC_Product product
+		inner join TC_SpvAccountingDetail spvAccountingDetail on spvAccountingDetail.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductAccountingDetail" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				accountingDetail.Id accountingDetail_id,
+	
+				accountingDetail.MemberId accountingDetail_memberId,
+	
+				accountingDetail.ProductId accountingDetail_productId,
+	
+				accountingDetail.FlowTo accountingDetail_flowTo,
+	
+				accountingDetail.Amount accountingDetail_amount,
+	
+				accountingDetail.AccountBalance accountingDetail_accountBalance,
+	
+				accountingDetail.UmpayAccountBalance accountingDetail_umpayAccountBalance,
+	
+				accountingDetail.CounterpartyType accountingDetail_counterpartyType,
+	
+				accountingDetail.CounterpartyId accountingDetail_counterpartyId,
+	
+				accountingDetail.BusinessType accountingDetail_businessType,
+	
+				accountingDetail.BusinessId accountingDetail_businessId,
+	
+				accountingDetail.AccountType accountingDetail_accountType,
+	
+				accountingDetail.TransactionNumber accountingDetail_transactionNumber,
+	
+				accountingDetail.OperatorId accountingDetail_operatorId,
+	
+				accountingDetail.Operator accountingDetail_operator,
+	
+				accountingDetail.Description accountingDetail_description,
+	
+				accountingDetail.CreateTime accountingDetail_createTime
+	
+		from PC_Product product
+		inner join TC_AccountingDetail accountingDetail on accountingDetail.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductProductContract" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				productContract.Id productContract_id,
+	
+				productContract.ProductId productContract_productId,
+	
+				productContract.TemplateId productContract_templateId,
+	
+				productContract.Name productContract_name,
+	
+				productContract.Code productContract_code,
+	
+				productContract.FilePath productContract_filePath,
+	
+				productContract.Content productContract_content,
+	
+				productContract.Description productContract_description,
+	
+				productContract.CreatorId productContract_creatorId,
+	
+				productContract.CreateTime productContract_createTime,
+	
+				productContract.ModifierId productContract_modifierId,
+	
+				productContract.ModifyTime productContract_modifyTime,
+	
+				productContract.DelFlag productContract_delFlag
+	
+		from PC_Product product
+		inner join PC_ProductContract productContract on productContract.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductProductReturnMoney" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				productReturnMoney.Id productReturnMoney_id,
+	
+				productReturnMoney.MemberId productReturnMoney_memberId,
+	
+				productReturnMoney.SpvId productReturnMoney_spvId,
+	
+				productReturnMoney.ProductId productReturnMoney_productId,
+	
+				productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+	
+				productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+	
+				productReturnMoney.SpvIntoObjectId productReturnMoney_spvIntoObjectId,
+	
+				productReturnMoney.ObjectIncomeNumber productReturnMoney_objectIncomeNumber,
+	
+				productReturnMoney.ReturnNumber productReturnMoney_returnNumber,
+	
+				productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+	
+				productReturnMoney.ProductName productReturnMoney_productName,
+	
+				productReturnMoney.ProductCode productReturnMoney_productCode,
+	
+				productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+	
+				productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+	
+				productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+	
+				productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+	
+				productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+	
+				productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+	
+				productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+	
+				productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+	
+				productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+	
+				productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+	
+				productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+	
+				productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+	
+				productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+	
+				productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+	
+				productReturnMoney.ReturnTime productReturnMoney_returnTime,
+	
+				productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+	
+				productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+	
+				productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+	
+				productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+	
+				productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+	
+				productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+	
+				productReturnMoney.Remark productReturnMoney_remark
+	
+		from PC_Product product
+		inner join TC_ProductReturnMoney productReturnMoney on productReturnMoney.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductSubscription" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				subscription.Id subscription_id,
+	
+				subscription.MemberId subscription_memberId,
+	
+				subscription.SpvId subscription_spvId,
+	
+				subscription.LoanId subscription_loanId,
+	
+				subscription.LoanNumber subscription_loanNumber,
+	
+				subscription.ProductId subscription_productId,
+	
+				subscription.AmountLockId subscription_amountLockId,
+	
+				subscription.TransactionNumber subscription_transactionNumber,
+	
+				subscription.PayPlantformNumber subscription_payPlantformNumber,
+	
+				subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+	
+				subscription.ProductName subscription_productName,
+	
+				subscription.ProductCode subscription_productCode,
+	
+				subscription.TradeStatus subscription_tradeStatus,
+	
+				subscription.InvestAmount subscription_investAmount,
+	
+				subscription.Shares subscription_shares,
+	
+				subscription.OrderTime subscription_orderTime,
+	
+				subscription.InterestRateDate subscription_interestRateDate,
+	
+				subscription.PaymentDate subscription_paymentDate,
+	
+				subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+	
+				subscription.ActualExpirationDate subscription_actualExpirationDate,
+	
+				subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+	
+				subscription.ExpectedProfit subscription_expectedProfit,
+	
+				subscription.SpvServiceFee subscription_spvServiceFee,
+	
+				subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+	
+				subscription.ActualLoanAmount subscription_actualLoanAmount,
+	
+				subscription.LoanTime subscription_loanTime,
+	
+				subscription.LoanStatus subscription_loanStatus,
+	
+				subscription.Status subscription_status,
+	
+				subscription.DistributeStatus subscription_distributeStatus,
+	
+				subscription.DistributeTime subscription_distributeTime,
+	
+				subscription.IsBuyBack subscription_isBuyBack,
+	
+				subscription.CheckingStatus subscription_checkingStatus,
+	
+				subscription.CheckingTime subscription_checkingTime,
+	
+				subscription.ContractPath subscription_contractPath,
+	
+				subscription.Remark subscription_remark
+	
+		from PC_Product product
+		inner join TC_Subscription subscription on subscription.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductAppointment" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				appointment.Id appointment_id,
+	
+				appointment.MemberId appointment_memberId,
+	
+				appointment.SpvId appointment_spvId,
+	
+				appointment.ProductId appointment_productId,
+	
+				appointment.Contact appointment_contact,
+	
+				appointment.MobilePhone appointment_mobilePhone,
+	
+				appointment.ProductName appointment_productName,
+	
+				appointment.ProductCode appointment_productCode,
+	
+				appointment.AppointAmount appointment_appointAmount,
+	
+				appointment.Shares appointment_shares,
+	
+				appointment.AppointTime appointment_appointTime,
+	
+				appointment.Status appointment_status,
+	
+				appointment.Remark appointment_remark
+	
+		from PC_Product product
+		inner join TC_Appointment appointment on appointment.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductSpvProductReturnMoney" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				spvProductReturnMoney.Id spvProductReturnMoney_id,
+	
+				spvProductReturnMoney.MemberId spvProductReturnMoney_memberId,
+	
+				spvProductReturnMoney.SpvId spvProductReturnMoney_spvId,
+	
+				spvProductReturnMoney.ProductId spvProductReturnMoney_productId,
+	
+				spvProductReturnMoney.TransactionNumber spvProductReturnMoney_transactionNumber,
+	
+				spvProductReturnMoney.PayPlantformNumber spvProductReturnMoney_payPlantformNumber,
+	
+				spvProductReturnMoney.ProductName spvProductReturnMoney_productName,
+	
+				spvProductReturnMoney.ProductCode spvProductReturnMoney_productCode,
+	
+				spvProductReturnMoney.DistributePrincipal spvProductReturnMoney_distributePrincipal,
+	
+				spvProductReturnMoney.DistributeInterest spvProductReturnMoney_distributeInterest,
+	
+				spvProductReturnMoney.DistributeAmount spvProductReturnMoney_distributeAmount,
+	
+				spvProductReturnMoney.InterestRateDate spvProductReturnMoney_interestRateDate,
+	
+				spvProductReturnMoney.PaymentDate spvProductReturnMoney_paymentDate,
+	
+				spvProductReturnMoney.ActualExpirationDate spvProductReturnMoney_actualExpirationDate,
+	
+				spvProductReturnMoney.ExpectedProfitRatio spvProductReturnMoney_expectedProfitRatio,
+	
+				spvProductReturnMoney.ActualProfitRatio spvProductReturnMoney_actualProfitRatio,
+	
+				spvProductReturnMoney.SpvServiceFee spvProductReturnMoney_spvServiceFee,
+	
+				spvProductReturnMoney.SpvServiceFeeRatio spvProductReturnMoney_spvServiceFeeRatio,
+	
+				spvProductReturnMoney.BusinessCheckStatus spvProductReturnMoney_businessCheckStatus,
+	
+				spvProductReturnMoney.CheckingTime spvProductReturnMoney_checkingTime,
+	
+				spvProductReturnMoney.CheckingStatus spvProductReturnMoney_checkingStatus,
+	
+				spvProductReturnMoney.IntoObjectStatus spvProductReturnMoney_intoObjectStatus,
+	
+				spvProductReturnMoney.IntoObjectTime spvProductReturnMoney_intoObjectTime,
+	
+				spvProductReturnMoney.Remark spvProductReturnMoney_remark
+	
+		from PC_Product product
+		inner join TC_SpvProductReturnMoney spvProductReturnMoney on spvProductReturnMoney.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductLoan" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				loan.Id loan_id,
+	
+				loan.SpvId loan_spvId,
+	
+				loan.ProductId loan_productId,
+	
+				loan.TradeNumber loan_tradeNumber,
+	
+				loan.PayPlantformNumber loan_payPlantformNumber,
+	
+				loan.ProductName loan_productName,
+	
+				loan.ProductCode loan_productCode,
+	
+				loan.TotalLoanAmount loan_totalLoanAmount,
+	
+				loan.SpvServiceFee loan_spvServiceFee,
+	
+				loan.SpvServiceFeeRatio loan_spvServiceFeeRatio,
+	
+				loan.LoanTime loan_loanTime,
+	
+				loan.LoanStatus loan_loanStatus,
+	
+				loan.CheckingTime loan_checkingTime,
+	
+				loan.CheckingStatus loan_checkingStatus,
+	
+				loan.Remark loan_remark
+	
+		from PC_Product product
+		inner join TC_Loan loan on loan.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductSubProduct" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				subProduct.Id subProduct_id,
+	
+				subProduct.ProductId subProduct_productId,
+	
+				subProduct.Code subProduct_code,
+	
+				subProduct.ReleaseTime subProduct_releaseTime,
+	
+				subProduct.Status subProduct_status,
+	
+				subProduct.UmpayAccountNo subProduct_umpayAccountNo,
+	
+				subProduct.TransactionNumber subProduct_transactionNumber,
+	
+				subProduct.PayPlantformNumber subProduct_payPlantformNumber
+	
+		from PC_Product product
+		inner join PC_SubProduct subProduct on subProduct.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectProductPlatformServiceFee" resultMap="productResult" parameterMap="productParam">
+		select
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName,
+				platformServiceFee.Id platformServiceFee_id,
+	
+				platformServiceFee.PlatformId platformServiceFee_platformId,
+	
+				platformServiceFee.SpvId platformServiceFee_spvId,
+	
+				platformServiceFee.ProductId platformServiceFee_productId,
+	
+				platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+	
+				platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+	
+				platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+	
+				platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+	
+				platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+	
+				platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+	
+				platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+	
+				platformServiceFee.TakeTime platformServiceFee_takeTime,
+	
+				platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+	
+				platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+	
+				platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+	
+				platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+	
+				platformServiceFee.Remark platformServiceFee_remark
+	
+		from PC_Product product
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.ProductId=product.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="productResult" parameterMap="productParam">
+		select 
+			Id product_id,
+			BasicProductId product_basicProductId,
+			SpvId product_spvId,
+			CategoryId product_categoryId,
+			AssetCategoryCode product_assetCategoryCode,
+			Name product_name,
+			Code product_code,
+			TotalAmount product_totalAmount,
+			SurplusAmount product_surplusAmount,
+			FirstPublishTime product_firstPublishTime,
+			UmpayAccountNo product_umpayAccountNo,
+			Description product_description,
+			Status product_status,
+			DistributeStatus product_distributeStatus,
+			CreatorId product_creatorId,
+			CreateTime product_createTime,
+			ModifierId product_modifierId,
+			ModifyTime product_modifyTime,
+			IsDelete product_isDelete,
+			Sort product_sort,
+			ViewName product_viewName
+		from PC_Product
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="productResult">
+		select 
+			Id product_id,
+			BasicProductId product_basicProductId,
+			SpvId product_spvId,
+			CategoryId product_categoryId,
+			AssetCategoryCode product_assetCategoryCode,
+			Name product_name,
+			Code product_code,
+			TotalAmount product_totalAmount,
+			SurplusAmount product_surplusAmount,
+			FirstPublishTime product_firstPublishTime,
+			UmpayAccountNo product_umpayAccountNo,
+			Description product_description,
+			Status product_status,
+			DistributeStatus product_distributeStatus,
+			CreatorId product_creatorId,
+			CreateTime product_createTime,
+			ModifierId product_modifierId,
+			ModifyTime product_modifyTime,
+			IsDelete product_isDelete,
+			Sort product_sort,
+			ViewName product_viewName
+		from PC_Product
+	</select>
+	
+	<select id="selectOneById"  resultMap="productResult" parameterMap="productParam">
+		select 
+			Id product_id,
+			BasicProductId product_basicProductId,
+			SpvId product_spvId,
+			CategoryId product_categoryId,
+			AssetCategoryCode product_assetCategoryCode,
+			Name product_name,
+			Code product_code,
+			TotalAmount product_totalAmount,
+			SurplusAmount product_surplusAmount,
+			FirstPublishTime product_firstPublishTime,
+			UmpayAccountNo product_umpayAccountNo,
+			Description product_description,
+			Status product_status,
+			DistributeStatus product_distributeStatus,
+			CreatorId product_creatorId,
+			CreateTime product_createTime,
+			ModifierId product_modifierId,
+			ModifyTime product_modifyTime,
+			IsDelete product_isDelete,
+			Sort product_sort,
+			ViewName product_viewName
+		from PC_Product where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="productResult" parameterMap="productParam">
+		select 
+			Id product_id,
+			BasicProductId product_basicProductId,
+			SpvId product_spvId,
+			CategoryId product_categoryId,
+			AssetCategoryCode product_assetCategoryCode,
+			Name product_name,
+			Code product_code,
+			TotalAmount product_totalAmount,
+			SurplusAmount product_surplusAmount,
+			FirstPublishTime product_firstPublishTime,
+			UmpayAccountNo product_umpayAccountNo,
+			Description product_description,
+			Status product_status,
+			DistributeStatus product_distributeStatus,
+			CreatorId product_creatorId,
+			CreateTime product_createTime,
+			ModifierId product_modifierId,
+			ModifyTime product_modifyTime,
+			IsDelete product_isDelete,
+			Sort product_sort,
+			ViewName product_viewName
+		from PC_Product
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="productParam">
+		select count(*) from PC_Product
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="productParam">
+		update PC_Product
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="basicProductId != null">,BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">,SpvId=${spvId}</if>
+				<if test="categoryId != null">,CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">,AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="totalAmount != null">,TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">,SurplusAmount=${surplusAmount}</if>
+               		 <if test="firstPublishTime != null  and firstPublishTime != ''">,FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="distributeStatus != null">,DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="isDelete != null">,IsDelete=${isDelete}</if>
+				<if test="sort != null">,Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">,ViewName=#{viewName}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="productParam">
+		update PC_Product
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,BasicProductId=${basicProductId}
+                            ,SpvId=${spvId}
+                            ,CategoryId=${categoryId}
+						,AssetCategoryCode=#{assetCategoryCode}
+						,Name=#{name}
+						,Code=#{code}
+                        <if test="totalAmount != null">,TotalAmount=${totalAmount}</if>
+                        <if test="totalAmount == null">,TotalAmount= 0</if>
+                        <if test="surplusAmount != null">,SurplusAmount=${surplusAmount}</if>
+                        <if test="surplusAmount == null">,SurplusAmount= 0</if>
+                        <if test="firstPublishTime != null  and firstPublishTime != ''">,FirstPublishTime=#{firstPublishTime}</if>
+						,UmpayAccountNo=#{umpayAccountNo}
+						,Description=#{description}
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                    	<if test="distributeStatus != null">,DistributeStatus=${distributeStatus}</if>
+                        <if test="distributeStatus == null">,DistributeStatus= 0</if>
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="isDelete != null">,IsDelete=${isDelete}</if>
+                        <if test="isDelete == null">,IsDelete= 0</if>
+                            ,Sort=${sort}
+						,ViewName=#{viewName}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="productParam">
+		insert into PC_Product
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="basicProductId != null">,BasicProductId</if>
+			<if test="spvId != null">,SpvId</if>
+			<if test="categoryId != null">,CategoryId</if>
+			<if test="assetCategoryCode != null and assetCategoryCode != ''">,AssetCategoryCode</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="totalAmount != null">,TotalAmount</if>
+			<if test="surplusAmount != null">,SurplusAmount</if>
+                <if test="firstPublishTime != null and firstPublishTime != ''">,FirstPublishTime</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="status != null">,Status</if>
+			<if test="distributeStatus != null">,DistributeStatus</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="isDelete != null">,IsDelete</if>
+			<if test="sort != null">,Sort</if>
+			<if test="viewName != null and viewName != ''">,ViewName</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="basicProductId != null">,${basicProductId}</if>
+			<if test="spvId != null">,${spvId}</if>
+			<if test="categoryId != null">,${categoryId}</if>
+			<if test="assetCategoryCode != null and assetCategoryCode != ''">,#{assetCategoryCode}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="totalAmount != null">,${totalAmount}</if>
+			<if test="surplusAmount != null">,${surplusAmount}</if>
+            	<if test="firstPublishTime != null and firstPublishTime != ''">,#{firstPublishTime}</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,#{umpayAccountNo}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="status != null">,${status}</if>
+			<if test="distributeStatus != null">,${distributeStatus}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="isDelete != null">,${isDelete}</if>
+			<if test="sort != null">,${sort}</if>
+			<if test="viewName != null and viewName != ''">,#{viewName}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="productParam">
+		delete from PC_Product where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="productParam">
+		delete from PC_Product
+	</delete>
+	
+	<delete id="delete" parameterMap="productParam">
+		delete from PC_Product
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicProductId != null">and BasicProductId=${basicProductId}</if>
+				<if test="spvId != null">and SpvId=${spvId}</if>
+				<if test="categoryId != null">and CategoryId=${categoryId}</if>
+				<if test="assetCategoryCode != null and assetCategoryCode != ''">and AssetCategoryCode=#{assetCategoryCode}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="totalAmount != null">and TotalAmount=${totalAmount}</if>
+				<if test="surplusAmount != null">and SurplusAmount=${surplusAmount}</if>
+				<if test="firstPublishTime != null and firstPublishTime != ''">and FirstPublishTime=#{firstPublishTime}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="isDelete != null">and IsDelete=${isDelete}</if>
+				<if test="sort != null">and Sort=${sort}</if>
+				<if test="viewName != null and viewName != ''">and ViewName=#{viewName}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

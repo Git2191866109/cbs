@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.productattributeconfig.dao.IProductAttributeConfigDao">
+
+	<parameterMap id="productAttributeConfigParam" type="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig" />
+	<resultMap id="productAttributeConfigResult" type="com.bs.plugins.custom.pc.productattributeconfig.entity.ProductAttributeConfig">
+		<id property="id" column="productAttributeConfig_id" javaType="java.lang.Long" />
+		<result property="productId" column="productAttributeConfig_productId" javaType="java.lang.Long" />
+		<result property="attributeId" column="productAttributeConfig_attributeId" javaType="java.lang.Long" />
+		<result property="attributeValue" column="productAttributeConfig_attributeValue" javaType="java.lang.String" />
+		<result property="creatorId" column="productAttributeConfig_creatorId" javaType="java.lang.Long" />
+		<result property="createTime" column="productAttributeConfig_createTime" javaType="java.lang.String" />
+		<result property="modifierId" column="productAttributeConfig_modifierId" javaType="java.lang.Long" />
+		<result property="modifyTime" column="productAttributeConfig_modifyTime" javaType="java.lang.String" />
+		<result property="delFlag" column="productAttributeConfig_delFlag" javaType="java.lang.Integer" />
+		<association property="attribute" javaType="com.bs.plugins.custom.pc.attribute.entity.Attribute">
+			<id property="id" column="attribute_id" javaType="java.lang.Long" />
+			<result property="name" column="attribute_name" javaType="java.lang.String" />
+			<result property="code" column="attribute_code" javaType="java.lang.String" />
+			<result property="category" column="attribute_category" javaType="java.lang.Integer" />
+			<result property="isFixed" column="attribute_isFixed" javaType="java.lang.Integer" />
+			<result property="isInherit" column="attribute_isInherit" javaType="java.lang.Integer" />
+			<result property="description" column="attribute_description" javaType="java.lang.String" />
+			<result property="creatorId" column="attribute_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="attribute_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="attribute_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="attribute_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="attribute_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select
+			productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			productAttributeConfig.DelFlag productAttributeConfig_delFlag,	
+			attribute.Id attribute_id,
+			attribute.Name attribute_name,
+			attribute.Code attribute_code,
+			attribute.Category attribute_category,
+			attribute.IsFixed attribute_isFixed,
+			attribute.IsInherit attribute_isInherit,
+			attribute.Description attribute_description,
+			attribute.CreatorId attribute_creatorId,
+			attribute.CreateTime attribute_createTime,
+			attribute.ModifierId attribute_modifierId,
+			attribute.ModifyTime attribute_modifyTime,
+			attribute.isDelete attribute_isDelete,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from PC_ProductAttributeConfig productAttributeConfig
+		inner join PC_Attribute attribute on attribute.Id=productAttributeConfig.AttributeId
+		inner join PC_Product product on product.Id=productAttributeConfig.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectProductAttributeConfigAttribute" resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select
+			productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			attribute.Id product_id,
+			attribute.Name product_name,
+			attribute.Code product_code,
+			attribute.Category product_category,
+			attribute.IsFixed product_isFixed,
+			attribute.IsInherit product_isInherit,
+			attribute.Description product_description,
+			attribute.CreatorId product_creatorId,
+			attribute.CreateTime product_createTime,
+			attribute.ModifierId product_modifierId,
+			attribute.ModifyTime product_modifyTime,
+			attribute.isDelete product_isDelete
+		from PC_ProductAttributeConfig productAttributeConfig
+		inner join PC_Attribute attribute on attribute.Id=productAttributeConfig.AttributeId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectProductAttributeConfigProduct" resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select
+			productAttributeConfig.Id productAttributeConfig_id,
+			productAttributeConfig.ProductId productAttributeConfig_productId,
+			productAttributeConfig.AttributeId productAttributeConfig_attributeId,
+			productAttributeConfig.AttributeValue productAttributeConfig_attributeValue,
+			productAttributeConfig.CreatorId productAttributeConfig_creatorId,
+			productAttributeConfig.CreateTime productAttributeConfig_createTime,
+			productAttributeConfig.ModifierId productAttributeConfig_modifierId,
+			productAttributeConfig.ModifyTime productAttributeConfig_modifyTime,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from PC_ProductAttributeConfig productAttributeConfig
+		inner join PC_Product product on product.Id=productAttributeConfig.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select 
+			Id productAttributeConfig_id,
+			ProductId productAttributeConfig_productId,
+			AttributeId productAttributeConfig_attributeId,
+			AttributeValue productAttributeConfig_attributeValue,
+			CreatorId productAttributeConfig_creatorId,
+			CreateTime productAttributeConfig_createTime,
+			ModifierId productAttributeConfig_modifierId,
+			ModifyTime productAttributeConfig_modifyTime,
+			DelFlag productAttributeConfig_delFlag
+		from PC_ProductAttributeConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="productAttributeConfigResult">
+		select 
+			Id productAttributeConfig_id,
+			ProductId productAttributeConfig_productId,
+			AttributeId productAttributeConfig_attributeId,
+			AttributeValue productAttributeConfig_attributeValue,
+			CreatorId productAttributeConfig_creatorId,
+			CreateTime productAttributeConfig_createTime,
+			ModifierId productAttributeConfig_modifierId,
+			ModifyTime productAttributeConfig_modifyTime,
+			DelFlag productAttributeConfig_delFlag
+		from PC_ProductAttributeConfig
+	</select>
+	
+	<select id="selectOneById"  resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select 
+			Id productAttributeConfig_id,
+			ProductId productAttributeConfig_productId,
+			AttributeId productAttributeConfig_attributeId,
+			AttributeValue productAttributeConfig_attributeValue,
+			CreatorId productAttributeConfig_creatorId,
+			CreateTime productAttributeConfig_createTime,
+			ModifierId productAttributeConfig_modifierId,
+			ModifyTime productAttributeConfig_modifyTime,
+			DelFlag productAttributeConfig_delFlag
+		from PC_ProductAttributeConfig where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="productAttributeConfigResult" parameterMap="productAttributeConfigParam">
+		select 
+			Id productAttributeConfig_id,
+			ProductId productAttributeConfig_productId,
+			AttributeId productAttributeConfig_attributeId,
+			AttributeValue productAttributeConfig_attributeValue,
+			CreatorId productAttributeConfig_creatorId,
+			CreateTime productAttributeConfig_createTime,
+			ModifierId productAttributeConfig_modifierId,
+			ModifyTime productAttributeConfig_modifyTime,
+			DelFlag productAttributeConfig_delFlag
+		from PC_ProductAttributeConfig
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="productAttributeConfigParam">
+		select count(*) from PC_ProductAttributeConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="productAttributeConfigParam">
+		update PC_ProductAttributeConfig
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="attributeId != null">,AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">,AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="modifierId != null">,ModifierId=${modifierId}</if>
+                    ,ModifyTime=now()
+				<if test="delFlag != null">,DelFlag=${delFlag}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="productAttributeConfigParam">
+		update PC_ProductAttributeConfig
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ProductId=${productId}
+                            ,AttributeId=${attributeId}
+						,AttributeValue=#{attributeValue}
+                            ,ModifierId=${opId}
+                            ,ModifyTime=now()
+                    	<if test="delFlag != null">,DelFlag=${delFlag}</if>
+                        <if test="delFlag == null">,DelFlag= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="productAttributeConfigParam">
+		insert into PC_ProductAttributeConfig
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="attributeId != null">,AttributeId</if>
+			<if test="attributeValue != null and attributeValue != ''">,AttributeValue</if>
+			<if test="creatorId != null">,CreatorId</if>
+                ,CreateTime
+			<if test="modifierId != null">,ModifierId</if>
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="delFlag != null">,DelFlag</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="attributeId != null">,${attributeId}</if>
+			<if test="attributeValue != null and attributeValue != ''">,#{attributeValue}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+                ,now()
+			<if test="modifierId != null">,${modifierId}</if>
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="delFlag != null">,${delFlag}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="productAttributeConfigParam">
+		delete from PC_ProductAttributeConfig where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="productAttributeConfigParam">
+		delete from PC_ProductAttributeConfig
+	</delete>
+	
+	<delete id="delete" parameterMap="productAttributeConfigParam">
+		delete from PC_ProductAttributeConfig
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="attributeId != null">and AttributeId=${attributeId}</if>
+				<if test="attributeValue != null and attributeValue != ''">and AttributeValue=#{attributeValue}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifierId != null">and ModifierId=${modifierId}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="delFlag != null">and DelFlag=${delFlag}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

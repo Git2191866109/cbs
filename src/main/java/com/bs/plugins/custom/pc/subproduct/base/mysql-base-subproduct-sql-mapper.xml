@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.subproduct.dao.ISubProductDao">
+
+	<parameterMap id="subProductParam" type="com.bs.plugins.custom.pc.subproduct.entity.SubProduct" />
+	<resultMap id="subProductResult" type="com.bs.plugins.custom.pc.subproduct.entity.SubProduct">
+		<id property="id" column="subProduct_id" javaType="java.lang.Long" />
+		<result property="productId" column="subProduct_productId" javaType="java.lang.Long" />
+		<result property="code" column="subProduct_code" javaType="java.lang.String" />
+		<result property="releaseTime" column="subProduct_releaseTime" javaType="java.lang.String" />
+		<result property="status" column="subProduct_status" javaType="java.lang.Integer" />
+		<result property="umpayAccountNo" column="subProduct_umpayAccountNo" javaType="java.lang.String" />
+		<result property="transactionNumber" column="subProduct_transactionNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="subProduct_payPlantformNumber" javaType="java.lang.String" />
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="product_umpayAccountNo" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="product_distributeStatus" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+			<result property="sort" column="product_sort" javaType="java.lang.Long" />
+			<result property="viewName" column="product_viewName" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="subProductResult" parameterMap="subProductParam">
+		select
+			subProduct.Id subProduct_id,
+			subProduct.ProductId subProduct_productId,
+			subProduct.Code subProduct_code,
+			subProduct.ReleaseTime subProduct_releaseTime,
+			subProduct.Status subProduct_status,
+			subProduct.UmpayAccountNo subProduct_umpayAccountNo,
+			subProduct.TransactionNumber subProduct_transactionNumber,
+			subProduct.PayPlantformNumber subProduct_payPlantformNumber,	
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from PC_SubProduct subProduct
+		inner join PC_Product product on product.Id=subProduct.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="releaseTime != null and releaseTime != ''">and ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSubProductProduct" resultMap="subProductResult" parameterMap="subProductParam">
+		select
+			subProduct.Id subProduct_id,
+			subProduct.ProductId subProduct_productId,
+			subProduct.Code subProduct_code,
+			subProduct.ReleaseTime subProduct_releaseTime,
+			subProduct.Status subProduct_status,
+			subProduct.UmpayAccountNo subProduct_umpayAccountNo,
+			subProduct.TransactionNumber subProduct_transactionNumber,
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.SpvId product_spvId,
+			product.CategoryId product_categoryId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.UmpayAccountNo product_umpayAccountNo,
+			product.Description product_description,
+			product.Status product_status,
+			product.DistributeStatus product_distributeStatus,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.IsDelete product_isDelete,
+			product.Sort product_sort,
+			product.ViewName product_viewName
+		from PC_SubProduct subProduct
+		inner join PC_Product product on product.Id=subProduct.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="releaseTime != null and releaseTime != ''">and ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="subProductResult" parameterMap="subProductParam">
+		select 
+			Id subProduct_id,
+			ProductId subProduct_productId,
+			Code subProduct_code,
+			ReleaseTime subProduct_releaseTime,
+			Status subProduct_status,
+			UmpayAccountNo subProduct_umpayAccountNo,
+			TransactionNumber subProduct_transactionNumber,
+			PayPlantformNumber subProduct_payPlantformNumber
+		from PC_SubProduct
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="releaseTime != null and releaseTime != ''">and ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="subProductResult">
+		select 
+			Id subProduct_id,
+			ProductId subProduct_productId,
+			Code subProduct_code,
+			ReleaseTime subProduct_releaseTime,
+			Status subProduct_status,
+			UmpayAccountNo subProduct_umpayAccountNo,
+			TransactionNumber subProduct_transactionNumber,
+			PayPlantformNumber subProduct_payPlantformNumber
+		from PC_SubProduct
+	</select>
+	
+	<select id="selectOneById"  resultMap="subProductResult" parameterMap="subProductParam">
+		select 
+			Id subProduct_id,
+			ProductId subProduct_productId,
+			Code subProduct_code,
+			ReleaseTime subProduct_releaseTime,
+			Status subProduct_status,
+			UmpayAccountNo subProduct_umpayAccountNo,
+			TransactionNumber subProduct_transactionNumber,
+			PayPlantformNumber subProduct_payPlantformNumber
+		from PC_SubProduct where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="subProductResult" parameterMap="subProductParam">
+		select 
+			Id subProduct_id,
+			ProductId subProduct_productId,
+			Code subProduct_code,
+			ReleaseTime subProduct_releaseTime,
+			Status subProduct_status,
+			UmpayAccountNo subProduct_umpayAccountNo,
+			TransactionNumber subProduct_transactionNumber,
+			PayPlantformNumber subProduct_payPlantformNumber
+		from PC_SubProduct
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="subProductParam">
+		select count(*) from PC_SubProduct
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="releaseTime != null and releaseTime != ''">and ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="subProductParam">
+		update PC_SubProduct
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="productId != null">,ProductId=${productId}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+               		 <if test="releaseTime != null  and releaseTime != ''">,ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="subProductParam">
+		update PC_SubProduct
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,ProductId=${productId}
+						,Code=#{code}
+                        <if test="releaseTime != null  and releaseTime != ''">,ReleaseTime=#{releaseTime}</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+						,UmpayAccountNo=#{umpayAccountNo}
+						,TransactionNumber=#{transactionNumber}
+						,PayPlantformNumber=#{payPlantformNumber}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="subProductParam">
+		insert into PC_SubProduct
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="productId != null">,ProductId</if>
+			<if test="code != null and code != ''">,Code</if>
+                <if test="releaseTime != null and releaseTime != ''">,ReleaseTime</if>
+			<if test="status != null">,Status</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,TransactionNumber</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,PayPlantformNumber</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="productId != null">,${productId}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+            	<if test="releaseTime != null and releaseTime != ''">,#{releaseTime}</if>
+			<if test="status != null">,${status}</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,#{umpayAccountNo}</if>
+			<if test="transactionNumber != null and transactionNumber != ''">,#{transactionNumber}</if>
+			<if test="payPlantformNumber != null and payPlantformNumber != ''">,#{payPlantformNumber}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="subProductParam">
+		delete from PC_SubProduct where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="subProductParam">
+		delete from PC_SubProduct
+	</delete>
+	
+	<delete id="delete" parameterMap="subProductParam">
+		delete from PC_SubProduct
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="releaseTime != null and releaseTime != ''">and ReleaseTime=#{releaseTime}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

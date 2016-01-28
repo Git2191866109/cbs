@@ -1,0 +1,391 @@
+ options   
+ {   
+   IGNORE_CASE=true;
+   STATIC =false;   
+ }   
+    
+PARSER_BEGIN(ExpressionParser)    
+/** New line translator. */   
+package com.ow.module.parser; 
+public class ExpressionParser   
+{   
+  private  static double  x;   
+  public ExpressionParser(String expression)   
+  {   
+    this(new java.io.StringReader(expression));   
+  }    
+   public ExpressionParser(String expression,double x)   
+  {   
+    this(new java.io.StringReader(expression));   
+    this.x=x;   
+  }     
+  /** Main entry point. */  
+  public static double calculate(String exp) throws ParseException   
+  {   
+	  	double rd = 0;
+	  	java.io.StringReader stringReader = new java.io.StringReader(exp);
+	    ExpressionParser parser = new ExpressionParser(stringReader); 
+	    try
+	    {
+		    rd = parser.condition();
+		    if (stringReader != null)
+		    	stringReader.close();
+		    System.out.println("expression:"+exp);  
+		    System.out.println("result:"+rd);
+		    return  rd;
+	    }catch(ParseException pe){
+	    	pe.printStackTrace();
+	    	throw pe;
+	    }catch (Exception e){
+    		e.printStackTrace();
+    		//throw e;
+	    }
+	    return rd;   
+  }   
+}   
+  
+PARSER_END(ExpressionParser)   
+  
+SKIP :   
+{   
+  " "  
+| "\t"  
+| "\n"  
+| "\r"  
+}   
+TOKEN :   
+{   
+  < IF     : "if" >
+| < ELSEIF : "elseif" >   
+| < ELSE   : "else" >    
+}
+TOKEN : {   
+  < ABS    : "abs" >   
+| < SIN    : "sin" >   
+| < COS    : "cos" >   
+| < LOG    : "log" >   
+| < LOG10  : "log10" >   
+| < SQRT   : "sqrt" >   
+| < TAN    : "tan" >      
+} 
+TOKEN :   
+{   
+  < BIGGERTHEN     : ">" >
+| < SMALLERTHEN    : "<" >
+| < NOTSMALLERTHEN : ">=" >
+| < NOTBIGGERTHEN  : "<=" >   
+| < EQUALS         : "==" > 
+| < NOTEQUALS      : "!=" >
+| < AND            : "&&" >
+| < OR             : "||" > 
+| < NOT            : "!" >   
+}   
+TOKEN :   
+{   
+  < PLUS    : "+" >   
+| < MINUS   : "-" >   
+| < TIMES   : "*" >   
+| < DIVIDE  : "/" >   
+}
+TOKEN:
+{
+  <STRING:<DOUBLE_QUOTE>(<LETTER>| <DIGITS>)+<DOUBLE_QUOTE>
+  |<SINGLE_QUOTE>(<LETTER>| <DIGITS>)+<SINGLE_QUOTE>
+  |<DOUBLE_QUOTE><DOUBLE_QUOTE>
+  |<SINGLE_QUOTE><SINGLE_QUOTE>>
+} 
+TOKEN : { < NUMBER : <DIGITS> | <DIGITS> "." <DIGITS> | <DIGITS>"." | "."<DIGITS> > }   
+TOKEN : { < #DIGITS : (["0"-"9"])+ > | <#LETTER:["a"-"z", "A"-"Z", "!","@","#","$","%","^","&","*","-","_",":","."," "]>}   
+TOKEN : { < OPEN_PAR : "(" > |< CLOSE_PAR:")" > |< OPEN_BRACE : "{" > |< CLOSE_BRACE:"}" >}   
+TOKEN : { <SEMICOLON : ";"> |<DOUBLE_QUOTE : "\""> |<SINGLE_QUOTE : "'">|<NULL : "null">}
+TOKEN :   
+{   
+  < TRUE    : "true" >   
+| < FALSE   : "false" >   
+}   
+  
+  
+ double plusAndMinus() :   
+{   
+  Token t;   
+  double  result=0;   
+  double  i=0;   
+}   
+{   
+  result=timesAndDivide()   
+  (   
+    < PLUS >   
+    i=timesAndDivide()   
+    {   
+      result+=i;   
+    }   
+| < MINUS >   
+ i=timesAndDivide()   
+    {   
+      result-=i;   
+    }   
+  )*   
+     
+  {   
+    return result;   
+  }   
+}   
+  
+double  primary():   
+{   
+  Token t;   
+  double d;   
+}   
+{   
+ d=doNumber()   
+ {   
+ return d;   
+}   
+|d=calculatorPar()   
+{   
+ return d;   
+}   
+| < MINUS >d=primary()   
+{   
+return d;   
+}
+| d=doFunction()   
+{   
+return d;   
+}      
+}   
+  
+double  timesAndDivide():   
+{   
+ double  result=0;   
+ double   i=0;   
+}   
+{   
+ result=primary()   
+ (   
+   < TIMES >   
+   i=primary()   
+   {   
+    result*=i;   
+   }   
+| < DIVIDE >   
+i=primary()   
+   {   
+    result/=i;   
+   }   
+)*   
+ {   
+   return result;   
+ }   
+  
+}   
+double doFunction():   
+{   
+  double arg=0;   
+}   
+{   
+  < SIN > arg=calculatorPar()   
+  {   
+      return Math.sin(arg);   
+  }   
+| < COS >   
+arg=calculatorPar()   
+  {   
+      return Math.cos(arg);   
+  } 
+| < ABS >   
+arg=calculatorPar()   
+  {   
+      return Math.abs(arg);   
+  } 
+| < TAN >   
+arg=calculatorPar()   
+  {   
+      return Math.tan(arg);   
+  } 
+| < LOG >   
+arg=calculatorPar()   
+  {   
+      return Math.log(arg);   
+  } 
+| < LOG10 >   
+arg=calculatorPar()   
+  {   
+      return Math.log10(arg);   
+  }  
+| < SQRT >   
+arg=calculatorPar()   
+  {   
+      return Math.sqrt(arg);   
+  }     
+} 
+ 
+double doNumber():   
+{   
+  Token t;   
+  double d;   
+  double result;   
+}   
+{   
+  result= getNumber()   
+  (   
+   d=calculatorPar()   
+   {   
+    result=d*result;   
+   }
+   | d=doFunction()   
+   {   
+    result=d*result;   
+   }   
+   )*   
+   {   
+    return result;   
+   }   
+{   
+   return result;   
+}   
+}   
+double getNumber():   
+{ Token t;   
+  double result=1;   
+}   
+{   
+   t= < NUMBER >   
+  {   
+   result= Double.parseDouble(t.image);   
+  }      
+{   
+return result;   
+}  
+}   
+  
+double calculatorPar():   
+{   
+double d;   
+}   
+{   
+< OPEN_PAR >d=plusAndMinus()< CLOSE_PAR >   
+{   
+ return d;   
+}   
+} 
+boolean compare():   
+{
+	double a;
+	double b;
+	boolean result;
+}   
+{   
+	a=plusAndMinus()(
+		<EQUALS>b=plusAndMinus()  
+		{result=(a==b);}
+		|<BIGGERTHEN>b=plusAndMinus()  
+		{result=(a>b);}
+		|<SMALLERTHEN>b=plusAndMinus()  
+		{result=(a<b);}
+		|<NOTSMALLERTHEN>b=plusAndMinus()  
+		{result=(a>=b);}
+		|<NOTBIGGERTHEN>b=plusAndMinus()  
+		{result=(a<=b);}
+		|<NOTEQUALS>b=plusAndMinus()  
+		{result=(a!=b);}
+	)  
+	{return result;}  
+}
+boolean strCompare():   
+{
+	String a;
+	String b;
+	boolean result;
+}   
+{   
+	a=getString()(
+		<EQUALS>b=getString()  
+		{result=(a.compareTo(b)==0);}
+		|<BIGGERTHEN>b=getString()  
+		{result=(a.compareTo(b)>0);}
+		|<SMALLERTHEN>b=getString()  
+		{result=(a.compareTo(b)<0);}
+		|<NOTSMALLERTHEN>b=getString()  
+		{result=(a.compareTo(b)>=0);}
+		|<NOTBIGGERTHEN>b=getString()  
+		{result=(a.compareTo(b)<=0);}
+		|<NOTEQUALS>b=getString()  
+		{result=(a.compareTo(b)!=0);}
+	)  
+	{return result;}  
+}
+String getString():   
+{ Token t;   
+  String result="";   
+}   
+{   
+  (t= < STRING >{result= t.image;}|t=<NULL>{result="";}  )   
+  {return result;}  
+} 
+boolean wrappedCompare():   
+{
+	boolean a;
+	boolean b;
+	boolean result;
+}   
+{   
+	(a = strCompare(){result = a;}|b = compare(){result = b;})
+	{return result;}  
+}
+boolean logicalCalculus():
+{
+	boolean a;
+	boolean b;
+	Token t;
+	boolean result;
+}
+{
+	(a=wrappedCompare()
+	{result = a;}(
+		<AND>b=wrappedCompare()  
+		{result=(result&&b);}
+		|<OR>b=wrappedCompare()  
+		{result=(result||b);}
+	)*
+	|t=<TRUE>{result = true;}
+	|t=<FALSE>{result = false;})
+	{return result;}
+}
+boolean isOrNot():
+{
+	boolean a;
+	boolean result;
+}
+{
+	(<NOT>< OPEN_PAR >a = logicalCalculus()< CLOSE_PAR >
+	{result = !a;}
+	|a = logicalCalculus()
+	{result = a;}
+	)
+	{return result;}
+}
+double condition():
+{
+	boolean a;
+	boolean b=false;
+	double c;
+	double d=0.0;
+	double e=0.0;
+}
+{
+<IF>< OPEN_PAR >a=isOrNot()< CLOSE_PAR >
+<OPEN_BRACE>c=plusAndMinus()<SEMICOLON><CLOSE_BRACE>
+{if(a)return c;}
+(
+<ELSEIF>< OPEN_PAR >b=isOrNot()< CLOSE_PAR >
+<OPEN_BRACE>d=plusAndMinus()<SEMICOLON><CLOSE_BRACE>
+{if(b)return d;}
+)*
+(
+<ELSE>
+<OPEN_BRACE>e=plusAndMinus()<SEMICOLON><CLOSE_BRACE>
+{return e;}
+)?
+{return e;}
+}

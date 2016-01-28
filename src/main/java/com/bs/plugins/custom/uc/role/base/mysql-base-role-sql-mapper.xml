@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.role.dao.IRoleDao">
+
+	<parameterMap id="roleParam" type="com.bs.plugins.custom.uc.role.entity.Role" />
+	<resultMap id="roleResult" type="com.bs.plugins.custom.uc.role.entity.Role">
+		<id property="id" column="role_id" javaType="java.lang.Long" />
+		<result property="name" column="role_name" javaType="java.lang.String" />
+		<result property="description" column="role_description" javaType="java.lang.String" />
+		<result property="type" column="role_type" javaType="java.lang.Integer" />
+		<result property="status" column="role_status" javaType="java.lang.Integer" />
+		<result property="createTime" column="role_createTime" javaType="java.lang.String" />
+		<result property="modifyTime" column="role_modifyTime" javaType="java.lang.String" />
+		<result property="creatorId" column="role_creatorId" javaType="java.lang.Long" />
+		<collection property="roleAuthRelations" ofType="com.bs.plugins.custom.uc.roleauthrelation.entity.RoleAuthRelation">
+			<result property="roleId" column="roleAuthRelation_roleId" javaType="java.lang.Long" />
+			<result property="authId" column="roleAuthRelation_authId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="userRoleRelations" ofType="com.bs.plugins.custom.uc.userrolerelation.entity.UserRoleRelation">
+			<result property="userId" column="userRoleRelation_userId" javaType="java.lang.Long" />
+			<result property="roleId" column="userRoleRelation_roleId" javaType="java.lang.Long" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="roleResult" parameterMap="roleParam">
+		select
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			role.Type role_type,
+			role.Status role_status,
+			role.CreateTime role_createTime,
+			role.ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId,	
+			roleAuthRelation.RoleId roleAuthRelation_roleId,
+			roleAuthRelation.AuthId roleAuthRelation_authId
+			userRoleRelation.UserId userRoleRelation_userId,
+			userRoleRelation.RoleId userRoleRelation_roleId
+		from UC_Role role
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.RoleId=role.Id
+		inner join UC_UserRoleRelation userRoleRelation on userRoleRelation.RoleId=role.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectRoleRoleAuthRelation" resultMap="roleResult" parameterMap="roleParam">
+		select
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			role.Type role_type,
+			role.Status role_status,
+			role.CreateTime role_createTime,
+			role.ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId,
+				roleAuthRelation.RoleId roleAuthRelation_roleId,
+	
+				roleAuthRelation.AuthId roleAuthRelation_authId
+	
+		from UC_Role role
+		inner join UC_RoleAuthRelation roleAuthRelation on roleAuthRelation.RoleId=role.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectRoleUserRoleRelation" resultMap="roleResult" parameterMap="roleParam">
+		select
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			role.Type role_type,
+			role.Status role_status,
+			role.CreateTime role_createTime,
+			role.ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId,
+				userRoleRelation.UserId userRoleRelation_userId,
+	
+				userRoleRelation.RoleId userRoleRelation_roleId
+	
+		from UC_Role role
+		inner join UC_UserRoleRelation userRoleRelation on userRoleRelation.RoleId=role.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="roleResult" parameterMap="roleParam">
+		select 
+			Id role_id,
+			Name role_name,
+			Description role_description,
+			Type role_type,
+			Status role_status,
+			CreateTime role_createTime,
+			ModifyTime role_modifyTime,
+			CreatorId role_creatorId
+		from UC_Role
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="roleResult">
+		select 
+			Id role_id,
+			Name role_name,
+			Description role_description,
+			Type role_type,
+			Status role_status,
+			CreateTime role_createTime,
+			ModifyTime role_modifyTime,
+			CreatorId role_creatorId
+		from UC_Role
+	</select>
+	
+	<select id="selectOneById"  resultMap="roleResult" parameterMap="roleParam">
+		select 
+			Id role_id,
+			Name role_name,
+			Description role_description,
+			Type role_type,
+			Status role_status,
+			CreateTime role_createTime,
+			ModifyTime role_modifyTime,
+			CreatorId role_creatorId
+		from UC_Role where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="roleResult" parameterMap="roleParam">
+		select 
+			Id role_id,
+			Name role_name,
+			Description role_description,
+			Type role_type,
+			Status role_status,
+			CreateTime role_createTime,
+			ModifyTime role_modifyTime,
+			CreatorId role_creatorId
+		from UC_Role
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="roleParam">
+		select count(*) from UC_Role
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="roleParam">
+		update UC_Role
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="status != null">,Status=${status}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="roleParam">
+		update UC_Role
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,Name=#{name}
+						,Description=#{description}
+                        <if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                            ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="roleParam">
+		insert into UC_Role
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="type != null">,Type</if>
+			<if test="status != null">,Status</if>
+                ,CreateTime
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="type != null">,${type}</if>
+			<if test="status != null">,${status}</if>
+                ,now()
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="roleParam">
+		delete from UC_Role where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="roleParam">
+		delete from UC_Role
+	</delete>
+	
+	<delete id="delete" parameterMap="roleParam">
+		delete from UC_Role
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

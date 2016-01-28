@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.itemfieldvalue.dao.IItemFieldValueDao">
+	
+	<parameterMap id="itemFieldValueParamImpl" type="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue" />
+	<resultMap id="itemFieldValueResultImpl" type="com.bs.plugins.custom.eb.itemfieldvalue.entity.ItemFieldValue">
+		<id property="id" column="itemFieldValue_id" javaType="java.lang.Long" />
+		<result property="itemFieldId" column="itemFieldValue_itemFieldId" javaType="java.lang.Long" />
+		<result property="dataCollectionId" column="itemFieldValue_dataCollectionId" javaType="java.lang.Long" />
+		<result property="fieldName" column="itemFieldValue_fieldName" javaType="java.lang.String" />
+		<result property="fieldValue" column="itemFieldValue_fieldValue" javaType="java.lang.String" />
+		<association property="itemField" javaType="com.bs.plugins.custom.eb.itemfield.entity.ItemField">
+			<id property="id" column="itemField_id" javaType="java.lang.Long" />
+			<result property="categoryId" column="itemField_categoryId" javaType="java.lang.Long" />
+			<result property="tableName" column="itemField_tableName" javaType="java.lang.String" />
+			<result property="columnName" column="itemField_columnName" javaType="java.lang.String" />
+			<result property="columnCode" column="itemField_columnCode" javaType="java.lang.String" />
+			<result property="columnAlias" column="itemField_columnAlias" javaType="java.lang.String" />
+			<result property="isShow" column="itemField_isShow" javaType="java.lang.Integer" />
+			<result property="showType" column="itemField_showType" javaType="java.lang.Integer" />
+			<result property="rank" column="itemField_rank" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+
+	<select id="selectAllItemFieldValueItemField" resultMap="itemFieldValueResultImpl" parameterMap="itemFieldValueParamImpl">
+		select
+			itemFieldValue.Id itemFieldValue_id,
+			itemFieldValue.ItemFieldId itemFieldValue_itemFieldId,
+			itemFieldValue.DataCollectionId itemFieldValue_dataCollectionId,
+			itemFieldValue.FieldName itemFieldValue_fieldName,
+			itemField.Id itemField_id,
+			itemField.CategoryId itemField_categoryId,
+			itemField.TableName itemField_tableName,
+			itemField.ColumnName itemField_columnName,
+			itemField.ColumnCode itemField_columnCode,
+			itemField.ColumnAlias itemField_columnAlias,
+			itemField.IsShow itemField_isShow,
+			itemField.ShowType itemField_showType,
+			itemField.Rank itemField_rank
+		from EB_ItemFieldValue itemFieldValue
+		inner join EB_ItemField itemField on itemField.Id=itemFieldValue.ItemFieldId
+	</select>
+</mapper>

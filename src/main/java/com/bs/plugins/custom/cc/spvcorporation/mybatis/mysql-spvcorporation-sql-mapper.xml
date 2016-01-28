@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.spvcorporation.dao.ISpvCorporationDao">
+	<select id="selectByType"  resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation where Type=${type}
+	</select>	
+	
+	<update id="updateByType" parameterMap="spvCorporationParam">
+		update CC_SpvCorporation
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">,AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">,FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">,UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">,ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">,BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">,BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">,SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">,Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">,Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">,PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">,Address=#{address}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+			</trim>
+		</set>
+		where Type=${type}
+	</update>
+		<select id="selectPaginatedListByStatus"  resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation
+		order by Id desc
+		limit ${start},${offset}
+	</select>
+	<select id="getCountByStatus"  resultType="long" parameterMap="spvCorporationParam">
+		select count(*) from CC_SpvCorporation
+	</select>
+	<update id="updateSpvById" parameterMap="spvCorporationParam">
+		update CC_SpvCorporation
+		<set>
+			<trim prefixOverrides=",">
+				Type=${type}
+				,Code=#{code}
+				,UmpayAccountNo=#{umpayAccountNo}
+				,UmpayMerchantNo=#{umpayMerchantNo}
+				,Name=#{name}
+				,ShortName=#{shortName}
+				,BankName=#{bankName}
+				,BankCode=#{bankCode}
+				,BankCardNumber=#{bankCardNumber}
+				,SignaturePicPath=#{signaturePicPath}
+				,Phone=#{phone}
+				,Fax=#{fax}
+				,PostCode=#{postCode}
+				,Address=#{address}
+				,Description=#{description}
+				,Status=${status}
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+</mapper>

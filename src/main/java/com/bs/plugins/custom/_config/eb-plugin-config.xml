@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<xxx name="功能名称" 
+code="功能代码" 
+model-name="模型名称[实体bean名称]" 
+method-name="调用方法[任意]" 
+view-type="视图类型[list,create,modify,detail]" 
+template-name="模板名称[自定义模板使用该属性]"> 
+ -->
+<eb name="预算中心" code="4"> 
+  <budget name="教育预算" code="401"> 
+  		<goal name="教育期望" code="40101" model-name="EB_EducationGoal">
+  			<create name="创建" code="4010101" menu-type="top" model-name="EB_EducationGoal" view-type="create"/>  
+	      	<modify name="修改" code="4010102" menu-type="shortcut" model-name="EB_EducationGoal" view-type="modify"/>  
+	      	<delete name="删除" code="4010103" menu-type="shortcut" model-name="EB_EducationGoal" view-type="delete"/> 
+	      	<setting name="设置" code="4010104" menu-type="shortcut" model-name="EB_EducationGoal" view-type="setting"/> 
+     <!-- 	 	 <conn   name="关联" code="4010105" menu-type="shortcut" model-name="EB_EducationConfigure" view-type="conn"/> 
+    -->  </goal>
+	    <grow name="成长阶段" code="40102" model-name="EB_GrowStages">
+	    	<create name="创建" code="4010201" menu-type="top" model-name="EB_GrowStages" view-type="create"/>  
+	      	<modify name="修改" code="4010202" menu-type="shortcut" model-name="EB_GrowStages" view-type="modify"/>  
+	      	<delete name="删除" code="4010203" menu-type="shortcut" model-name="EB_GrowStages" view-type="delete"/> 
+	    </grow>
+	    <greade name="年级年序" code="40103" model-name="EB_GreadeYear">
+	    	<create name="创建" code="4010301" menu-type="top" model-name="EB_GreadeYear" view-type="create"/>  
+	      	<modify name="修改" code="4010302" menu-type="shortcut" model-name="EB_GreadeYear" view-type="modify"/>  
+	      	<delete name="删除" code="4010303" menu-type="shortcut" model-name="EB_GreadeYear" view-type="delete"/> 
+	    </greade>  
+	    <mode name="教育方式" code="40104" model-name="EB_EducationMode">
+	    	<create name="创建" code="4010401" menu-type="top" model-name="EB_EducationMode" view-type="create"/>  
+	      	<modify name="修改" code="4010402" menu-type="shortcut" model-name="EB_EducationMode" view-type="modify"/>  
+	      	<delete name="删除" code="4010403" menu-type="shortcut" model-name="EB_EducationMode" view-type="delete"/> 
+	    </mode>
+	   <category name="费用大类" code="40105" model-name="EB_BudgetCategory" view-type="list"> 
+	      <create name="创建" code="4010501" menu-type="top" model-name="EB_BudgetCategory" view-type="create"/>  
+	      <modify name="修改" code="4010502" menu-type="shortcut" model-name="EB_BudgetCategory" view-type="modify"/>  
+	      <delete name="删除" code="4010503" menu-type="shortcut" model-name="EB_BudgetCategory" view-type="delete"/> 
+	    </category>
+	    <item name="费用小类" code="40106" model-name="EB_BudgetItem" view-type="list"> 
+	      <create name="创建" code="4010601" menu-type="top" model-name="EB_BudgetItem" view-type="create"/>  
+	      <modify name="修改" code="4010602" menu-type="shortcut" model-name="EB_BudgetItem" view-type="modify"/>  
+	      <delete name="删除" code="4010603" menu-type="shortcut" model-name="EB_BudgetItem" view-type="delete"/>  
+	      <child name="添加下级" code="4010604" menu-type="shortcut" model-name="EB_BudgetItem" view-type="detail"/> 
+	    </item>  
+	    <name name="费用大类字段配置" code="40107" model-name="EB_ItemField" view-type="list"> 
+	      <create name="创建" code="4010701" menu-type="top" model-name="EB_ItemField" view-type="create"/>  
+	      <modify name="修改" code="4010702" menu-type="shortcut" model-name="EB_ItemField" view-type="modify"/>  
+	      <delete name="删除" code="4010703" menu-type="shortcut" model-name="EB_ItemField" view-type="delete"/> 
+	      <setvalue name="设置值" code="4010704" menu-type="shortcut" model-name="EB_ItemField" /> 
+	    </name>  
+	     <relation name="预算数据配置" code="40108" model-name="EB_ModeItemRelation" view-type="list"> 
+		     <relationship name="关系配置" code="4010801" model-name="EB_ModeItemRelation">
+		        <conn name="关联" code="401080101" menu-type="shortcut" model-name="EB_ModeItemRelation"/> 
+		     </relationship>
+	         <data name="数据配置" code="4010802" model-name="EB_ModeItemRelation">
+				<create name="创建" code="401080201" menu-type="top" model-name="EB_ModeItemRelation" view-type="create"/>  
+	   			<modify name="修改" code="401080202" menu-type="shortcut" model-name="EB_ModeItemRelation" view-type="modify"/>  
+	  			<delete name="删除" code="401080203" menu-type="shortcut" model-name="EB_ModeItemRelation" view-type="delete"/> 
+	         </data>
+	         <generated name="生成数据" code="4010803" model-name="EB_ModeItemRelation">
+			     <generate name="一键生成" code="401080301" menu-type="shortcut" model-name="EB_ModeItemRelation"/> 
+		         <incomes name="居民收入数据生成" code="401080302" menu-type="shortcut" model-name="EB_ModeItemRelation"/> 
+	         </generated>
+	      </relation>
+  </budget>
+</eb>

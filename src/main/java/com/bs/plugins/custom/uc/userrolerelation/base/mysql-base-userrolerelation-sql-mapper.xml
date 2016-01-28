@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.uc.userrolerelation.dao.IUserRoleRelationDao">
+
+	<parameterMap id="userRoleRelationParam" type="com.bs.plugins.custom.uc.userrolerelation.entity.UserRoleRelation" />
+	<resultMap id="userRoleRelationResult" type="com.bs.plugins.custom.uc.userrolerelation.entity.UserRoleRelation">
+		<result property="userId" column="userRoleRelation_userId" javaType="java.lang.Long" />
+		<result property="roleId" column="userRoleRelation_roleId" javaType="java.lang.Long" />
+		<association property="role" javaType="com.bs.plugins.custom.uc.role.entity.Role">
+			<id property="id" column="role_id" javaType="java.lang.Long" />
+			<result property="name" column="role_name" javaType="java.lang.String" />
+			<result property="description" column="role_description" javaType="java.lang.String" />
+			<result property="type" column="role_type" javaType="java.lang.Integer" />
+			<result property="status" column="role_status" javaType="java.lang.Integer" />
+			<result property="createTime" column="role_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="role_modifyTime" javaType="java.lang.String" />
+			<result property="creatorId" column="role_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="user" javaType="com.bs.plugins.custom.uc.user.entity.User">
+			<id property="id" column="user_id" javaType="java.lang.Long" />
+			<result property="orgCode" column="user_orgCode" javaType="java.lang.String" />
+			<result property="account" column="user_account" javaType="java.lang.String" />
+			<result property="name" column="user_name" javaType="java.lang.String" />
+			<result property="type" column="user_type" javaType="java.lang.Integer" />
+			<result property="position" column="user_position" javaType="java.lang.String" />
+			<result property="password" column="user_password" javaType="java.lang.String" />
+			<result property="gender" column="user_gender" javaType="java.lang.Integer" />
+			<result property="birthday" column="user_birthday" javaType="java.lang.String" />
+			<result property="head" column="user_head" javaType="java.lang.String" />
+			<result property="individualitySignature" column="user_individualitySignature" javaType="java.lang.String" />
+			<result property="mobilePhone" column="user_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="user_officePhone" javaType="java.lang.String" />
+			<result property="email" column="user_email" javaType="java.lang.String" />
+			<result property="description" column="user_description" javaType="java.lang.String" />
+			<result property="status" column="user_status" javaType="java.lang.Integer" />
+			<result property="style" column="user_style" javaType="java.lang.String" />
+			<result property="createTime" column="user_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="user_modifyTime" javaType="java.lang.String" />
+			<result property="roleIds" column="user_roleIds" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select
+			userRoleRelation.UserId userRoleRelation_userId,
+			userRoleRelation.RoleId userRoleRelation_roleId,	
+			role.Id role_id,
+			role.Name role_name,
+			role.Description role_description,
+			role.Type role_type,
+			role.Status role_status,
+			role.CreateTime role_createTime,
+			role.ModifyTime role_modifyTime,
+			role.CreatorId role_creatorId,
+			user.Id user_id,
+			user.OrgCode user_orgCode,
+			user.Account user_account,
+			user.Name user_name,
+			user.Type user_type,
+			user.Position user_position,
+			user.Password user_password,
+			user.Gender user_gender,
+			user.Birthday user_birthday,
+			user.Head user_head,
+			user.IndividualitySignature user_individualitySignature,
+			user.MobilePhone user_mobilePhone,
+			user.OfficePhone user_officePhone,
+			user.Email user_email,
+			user.Description user_description,
+			user.Status user_status,
+			user.Style user_style,
+			user.CreateTime user_createTime,
+			user.ModifyTime user_modifyTime,
+			user.RoleIds user_roleIds
+		from UC_UserRoleRelation userRoleRelation
+		inner join UC_Role role on role.Id=userRoleRelation.RoleId
+		inner join UC_User user on user.Id=userRoleRelation.UserId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectUserRoleRelationRole" resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select
+			userRoleRelation.UserId userRoleRelation_userId,
+			role.Id user_id,
+			role.Name user_name,
+			role.Description user_description,
+			role.Type user_type,
+			role.Status user_status,
+			role.CreateTime user_createTime,
+			role.ModifyTime user_modifyTime,
+			role.CreatorId user_creatorId
+		from UC_UserRoleRelation userRoleRelation
+		inner join UC_Role role on role.Id=userRoleRelation.RoleId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectUserRoleRelationUser" resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select
+			userRoleRelation.UserId userRoleRelation_userId,
+			user.Id user_id,
+			user.OrgCode user_orgCode,
+			user.Account user_account,
+			user.Name user_name,
+			user.Type user_type,
+			user.Position user_position,
+			user.Password user_password,
+			user.Gender user_gender,
+			user.Birthday user_birthday,
+			user.Head user_head,
+			user.IndividualitySignature user_individualitySignature,
+			user.MobilePhone user_mobilePhone,
+			user.OfficePhone user_officePhone,
+			user.Email user_email,
+			user.Description user_description,
+			user.Status user_status,
+			user.Style user_style,
+			user.CreateTime user_createTime,
+			user.ModifyTime user_modifyTime,
+			user.RoleIds user_roleIds
+		from UC_UserRoleRelation userRoleRelation
+		inner join UC_User user on user.Id=userRoleRelation.UserId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select 
+			UserId userRoleRelation_userId,
+			RoleId userRoleRelation_roleId
+		from UC_UserRoleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="userRoleRelationResult">
+		select 
+			UserId userRoleRelation_userId,
+			RoleId userRoleRelation_roleId
+		from UC_UserRoleRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="userRoleRelationResult" parameterMap="userRoleRelationParam">
+		select 
+			UserId userRoleRelation_userId,
+			RoleId userRoleRelation_roleId
+		from UC_UserRoleRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="userRoleRelationParam">
+		select count(*) from UC_UserRoleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="userRoleRelationParam">
+		insert into UC_UserRoleRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="userId != null">,UserId</if>
+			<if test="roleId != null">,RoleId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="userId != null">,${userId}</if>
+			<if test="roleId != null">,${roleId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="userRoleRelationParam">
+		delete from UC_UserRoleRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="userRoleRelationParam">
+		delete from UC_UserRoleRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="userId != null">and UserId=${userId}</if>
+				<if test="roleId != null">and RoleId=${roleId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

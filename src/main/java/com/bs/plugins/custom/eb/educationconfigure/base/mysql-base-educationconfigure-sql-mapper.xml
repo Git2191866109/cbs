@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.educationconfigure.dao.IEducationConfigureDao">
+
+	<parameterMap id="educationConfigureParam" type="com.bs.plugins.custom.eb.educationconfigure.entity.EducationConfigure" />
+	<resultMap id="educationConfigureResult" type="com.bs.plugins.custom.eb.educationconfigure.entity.EducationConfigure">
+		<id property="id" column="educationConfigure_id" javaType="java.lang.Long" />
+		<result property="eduGoalId_master" column="educationConfigure_eduGoalId_master" javaType="java.lang.Long" />
+		<result property="eduGoalId_vice" column="educationConfigure_eduGoalId_vice" javaType="java.lang.Long" />
+		<result property="createDate" column="educationConfigure_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="educationConfigure_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="educationConfigure_creatorId" javaType="java.lang.Long" />
+		<association property="educationGoal" javaType="com.bs.plugins.custom.eb.educationgoal.entity.EducationGoal">
+			<id property="id" column="educationGoal_id" javaType="java.lang.Long" />
+			<result property="name" column="educationGoal_name" javaType="java.lang.String" />
+			<result property="isInland" column="educationGoal_isInland" javaType="java.lang.Integer" />
+			<result property="createDate" column="educationGoal_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationGoal_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationGoal_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="educationConfigureResult" parameterMap="educationConfigureParam">
+		select
+			educationConfigure.Id educationConfigure_id,
+			educationConfigure.EduGoalId_master educationConfigure_eduGoalId_master,
+			educationConfigure.EduGoalId_vice educationConfigure_eduGoalId_vice,
+			educationConfigure.CreateDate educationConfigure_createDate,
+			educationConfigure.ModifyDate educationConfigure_modifyDate,
+			educationConfigure.CreatorId educationConfigure_creatorId,	
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId
+		from EB_EducationConfigure educationConfigure
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=educationConfigure.EduGoalId_master
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId_master != null">and EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">and EduGoalId_vice=${eduGoalId_vice}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEducationConfigureEducationGoal" resultMap="educationConfigureResult" parameterMap="educationConfigureParam">
+		select
+			educationConfigure.Id educationConfigure_id,
+			educationConfigure.EduGoalId_master educationConfigure_eduGoalId_master,
+			educationConfigure.EduGoalId_vice educationConfigure_eduGoalId_vice,
+			educationConfigure.CreateDate educationConfigure_createDate,
+			educationConfigure.ModifyDate educationConfigure_modifyDate,
+			educationGoal.Id educationGoal_id,
+			educationGoal.Name educationGoal_name,
+			educationGoal.IsInland educationGoal_isInland,
+			educationGoal.CreateDate educationGoal_createDate,
+			educationGoal.ModifyDate educationGoal_modifyDate,
+			educationGoal.CreatorId educationGoal_creatorId
+		from EB_EducationConfigure educationConfigure
+		inner join EB_EducationGoal educationGoal on educationGoal.Id=educationConfigure.EduGoalId_master
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId_master != null">and EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">and EduGoalId_vice=${eduGoalId_vice}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="educationConfigureResult" parameterMap="educationConfigureParam">
+		select 
+			Id educationConfigure_id,
+			EduGoalId_master educationConfigure_eduGoalId_master,
+			EduGoalId_vice educationConfigure_eduGoalId_vice,
+			CreateDate educationConfigure_createDate,
+			ModifyDate educationConfigure_modifyDate,
+			CreatorId educationConfigure_creatorId
+		from EB_EducationConfigure
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId_master != null">and EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">and EduGoalId_vice=${eduGoalId_vice}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="educationConfigureResult">
+		select 
+			Id educationConfigure_id,
+			EduGoalId_master educationConfigure_eduGoalId_master,
+			EduGoalId_vice educationConfigure_eduGoalId_vice,
+			CreateDate educationConfigure_createDate,
+			ModifyDate educationConfigure_modifyDate,
+			CreatorId educationConfigure_creatorId
+		from EB_EducationConfigure
+	</select>
+	
+	<select id="selectOneById"  resultMap="educationConfigureResult" parameterMap="educationConfigureParam">
+		select 
+			Id educationConfigure_id,
+			EduGoalId_master educationConfigure_eduGoalId_master,
+			EduGoalId_vice educationConfigure_eduGoalId_vice,
+			CreateDate educationConfigure_createDate,
+			ModifyDate educationConfigure_modifyDate,
+			CreatorId educationConfigure_creatorId
+		from EB_EducationConfigure where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="educationConfigureResult" parameterMap="educationConfigureParam">
+		select 
+			Id educationConfigure_id,
+			EduGoalId_master educationConfigure_eduGoalId_master,
+			EduGoalId_vice educationConfigure_eduGoalId_vice,
+			CreateDate educationConfigure_createDate,
+			ModifyDate educationConfigure_modifyDate,
+			CreatorId educationConfigure_creatorId
+		from EB_EducationConfigure
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="educationConfigureParam">
+		select count(*) from EB_EducationConfigure
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId_master != null">and EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">and EduGoalId_vice=${eduGoalId_vice}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="educationConfigureParam">
+		update EB_EducationConfigure
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="eduGoalId_master != null">,EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">,EduGoalId_vice=${eduGoalId_vice}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="educationConfigureParam">
+		update EB_EducationConfigure
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,EduGoalId_master=${eduGoalId_master}
+                            ,EduGoalId_vice=${eduGoalId_vice}
+                            ,ModifyDate=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="educationConfigureParam">
+		insert into EB_EducationConfigure
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="eduGoalId_master != null">,EduGoalId_master</if>
+			<if test="eduGoalId_vice != null">,EduGoalId_vice</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="eduGoalId_master != null">,${eduGoalId_master}</if>
+			<if test="eduGoalId_vice != null">,${eduGoalId_vice}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="educationConfigureParam">
+		delete from EB_EducationConfigure where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="educationConfigureParam">
+		delete from EB_EducationConfigure
+	</delete>
+	
+	<delete id="delete" parameterMap="educationConfigureParam">
+		delete from EB_EducationConfigure
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="eduGoalId_master != null">and EduGoalId_master=${eduGoalId_master}</if>
+				<if test="eduGoalId_vice != null">and EduGoalId_vice=${eduGoalId_vice}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

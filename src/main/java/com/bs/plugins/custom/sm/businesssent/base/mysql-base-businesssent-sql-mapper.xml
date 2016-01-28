@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.sm.businesssent.dao.IBusinessSentDao">
+
+	<parameterMap id="businessSentParam" type="com.bs.plugins.custom.sm.businesssent.entity.BusinessSent" />
+	<resultMap id="businessSentResult" type="com.bs.plugins.custom.sm.businesssent.entity.BusinessSent">
+		<id property="id" column="businessSent_id" javaType="java.lang.Long" />
+		<result property="mobilePhone" column="businessSent_mobilePhone" javaType="java.lang.String" />
+		<result property="memberId" column="businessSent_memberId" javaType="java.lang.Long" />
+		<result property="content" column="businessSent_content" javaType="java.lang.String" />
+		<result property="businessCode" column="businessSent_businessCode" javaType="java.lang.String" />
+		<result property="spCode" column="businessSent_spCode" javaType="java.lang.String" />
+		<result property="isRetry" column="businessSent_isRetry" javaType="java.lang.Integer" />
+		<result property="retryCount" column="businessSent_retryCount" javaType="java.lang.Integer" />
+		<result property="messageSerial" column="businessSent_messageSerial" javaType="java.lang.String" />
+		<result property="status" column="businessSent_status" javaType="java.lang.Integer" />
+		<result property="statusReport" column="businessSent_statusReport" javaType="java.lang.Integer" />
+		<result property="statements" column="businessSent_statements" javaType="java.lang.String" />
+		<result property="type" column="businessSent_type" javaType="java.lang.String" />
+		<result property="totalCount" column="businessSent_totalCount" javaType="java.lang.Integer" />
+		<result property="sendTime" column="businessSent_sendTime" javaType="java.lang.String" />
+		<result property="createTime" column="businessSent_createTime" javaType="java.lang.String" />
+		<result property="timeout" column="businessSent_timeout" javaType="java.lang.Long" />
+		<result property="originTime" column="businessSent_originTime" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="businessSentResult" parameterMap="businessSentParam">
+		select 
+			Id businessSent_id,
+			MobilePhone businessSent_mobilePhone,
+			MemberId businessSent_memberId,
+			Content businessSent_content,
+			BusinessCode businessSent_businessCode,
+			SpCode businessSent_spCode,
+			IsRetry businessSent_isRetry,
+			RetryCount businessSent_retryCount,
+			MessageSerial businessSent_messageSerial,
+			Status businessSent_status,
+			StatusReport businessSent_statusReport,
+			Statements businessSent_statements,
+			Type businessSent_type,
+			TotalCount businessSent_totalCount,
+			SendTime businessSent_sendTime,
+			CreateTime businessSent_createTime,
+			Timeout businessSent_timeout,
+			OriginTime businessSent_originTime
+		from SM_BusinessSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="spCode != null and spCode != ''">and SpCode=#{spCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="messageSerial != null and messageSerial != ''">and MessageSerial=#{messageSerial}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statusReport != null">and StatusReport=${statusReport}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="totalCount != null">and TotalCount=${totalCount}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="originTime != null">and OriginTime=${originTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="businessSentResult">
+		select 
+			Id businessSent_id,
+			MobilePhone businessSent_mobilePhone,
+			MemberId businessSent_memberId,
+			Content businessSent_content,
+			BusinessCode businessSent_businessCode,
+			SpCode businessSent_spCode,
+			IsRetry businessSent_isRetry,
+			RetryCount businessSent_retryCount,
+			MessageSerial businessSent_messageSerial,
+			Status businessSent_status,
+			StatusReport businessSent_statusReport,
+			Statements businessSent_statements,
+			Type businessSent_type,
+			TotalCount businessSent_totalCount,
+			SendTime businessSent_sendTime,
+			CreateTime businessSent_createTime,
+			Timeout businessSent_timeout,
+			OriginTime businessSent_originTime
+		from SM_BusinessSent
+	</select>
+	
+	<select id="selectOneById"  resultMap="businessSentResult" parameterMap="businessSentParam">
+		select 
+			Id businessSent_id,
+			MobilePhone businessSent_mobilePhone,
+			MemberId businessSent_memberId,
+			Content businessSent_content,
+			BusinessCode businessSent_businessCode,
+			SpCode businessSent_spCode,
+			IsRetry businessSent_isRetry,
+			RetryCount businessSent_retryCount,
+			MessageSerial businessSent_messageSerial,
+			Status businessSent_status,
+			StatusReport businessSent_statusReport,
+			Statements businessSent_statements,
+			Type businessSent_type,
+			TotalCount businessSent_totalCount,
+			SendTime businessSent_sendTime,
+			CreateTime businessSent_createTime,
+			Timeout businessSent_timeout,
+			OriginTime businessSent_originTime
+		from SM_BusinessSent where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="businessSentResult" parameterMap="businessSentParam">
+		select 
+			Id businessSent_id,
+			MobilePhone businessSent_mobilePhone,
+			MemberId businessSent_memberId,
+			Content businessSent_content,
+			BusinessCode businessSent_businessCode,
+			SpCode businessSent_spCode,
+			IsRetry businessSent_isRetry,
+			RetryCount businessSent_retryCount,
+			MessageSerial businessSent_messageSerial,
+			Status businessSent_status,
+			StatusReport businessSent_statusReport,
+			Statements businessSent_statements,
+			Type businessSent_type,
+			TotalCount businessSent_totalCount,
+			SendTime businessSent_sendTime,
+			CreateTime businessSent_createTime,
+			Timeout businessSent_timeout,
+			OriginTime businessSent_originTime
+		from SM_BusinessSent
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="businessSentParam">
+		select count(*) from SM_BusinessSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="spCode != null and spCode != ''">and SpCode=#{spCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="messageSerial != null and messageSerial != ''">and MessageSerial=#{messageSerial}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statusReport != null">and StatusReport=${statusReport}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="totalCount != null">and TotalCount=${totalCount}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="originTime != null">and OriginTime=${originTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="businessSentParam">
+		update SM_BusinessSent
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone=#{mobilePhone}</if>
+				<if test="memberId != null">,MemberId=${memberId}</if>
+				<if test="content != null and content != ''">,Content=#{content}</if>
+				<if test="businessCode != null and businessCode != ''">,BusinessCode=#{businessCode}</if>
+				<if test="spCode != null and spCode != ''">,SpCode=#{spCode}</if>
+				<if test="isRetry != null">,IsRetry=${isRetry}</if>
+				<if test="retryCount != null">,RetryCount=${retryCount}</if>
+				<if test="messageSerial != null and messageSerial != ''">,MessageSerial=#{messageSerial}</if>
+				<if test="status != null">,Status=${status}</if>
+				<if test="statusReport != null">,StatusReport=${statusReport}</if>
+				<if test="statements != null and statements != ''">,Statements=#{statements}</if>
+				<if test="type != null and type != ''">,Type=#{type}</if>
+				<if test="totalCount != null">,TotalCount=${totalCount}</if>
+               		 <if test="sendTime != null  and sendTime != ''">,SendTime=#{sendTime}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+				<if test="timeout != null">,Timeout=${timeout}</if>
+				<if test="originTime != null">,OriginTime=${originTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="businessSentParam">
+		update SM_BusinessSent
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,MobilePhone=#{mobilePhone}
+                            ,MemberId=${memberId}
+						,Content=#{content}
+						,BusinessCode=#{businessCode}
+						,SpCode=#{spCode}
+                    	<if test="isRetry != null">,IsRetry=${isRetry}</if>
+                        <if test="isRetry == null">,IsRetry= 0</if>
+                    	<if test="retryCount != null">,RetryCount=${retryCount}</if>
+                        <if test="retryCount == null">,RetryCount= 0</if>
+						,MessageSerial=#{messageSerial}
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                    	<if test="statusReport != null">,StatusReport=${statusReport}</if>
+                        <if test="statusReport == null">,StatusReport= 0</if>
+						,Statements=#{statements}
+						,Type=#{type}
+                        <if test="totalCount != null">,TotalCount=${totalCount}</if>
+                        <if test="totalCount == null">,TotalCount= 0</if>
+                        <if test="sendTime != null  and sendTime != ''">,SendTime=#{sendTime}</if>
+                            ,Timeout=${timeout}
+                            ,OriginTime=${originTime}
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="businessSentParam">
+		insert into SM_BusinessSent
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,MobilePhone</if>
+			<if test="memberId != null">,MemberId</if>
+			<if test="content != null and content != ''">,Content</if>
+			<if test="businessCode != null and businessCode != ''">,BusinessCode</if>
+			<if test="spCode != null and spCode != ''">,SpCode</if>
+			<if test="isRetry != null">,IsRetry</if>
+			<if test="retryCount != null">,RetryCount</if>
+			<if test="messageSerial != null and messageSerial != ''">,MessageSerial</if>
+			<if test="status != null">,Status</if>
+			<if test="statusReport != null">,StatusReport</if>
+			<if test="statements != null and statements != ''">,Statements</if>
+			<if test="type != null and type != ''">,Type</if>
+			<if test="totalCount != null">,TotalCount</if>
+                <if test="sendTime != null and sendTime != ''">,SendTime</if>
+                ,CreateTime
+			<if test="timeout != null">,Timeout</if>
+			<if test="originTime != null">,OriginTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone}</if>
+			<if test="memberId != null">,${memberId}</if>
+			<if test="content != null and content != ''">,#{content}</if>
+			<if test="businessCode != null and businessCode != ''">,#{businessCode}</if>
+			<if test="spCode != null and spCode != ''">,#{spCode}</if>
+			<if test="isRetry != null">,${isRetry}</if>
+			<if test="retryCount != null">,${retryCount}</if>
+			<if test="messageSerial != null and messageSerial != ''">,#{messageSerial}</if>
+			<if test="status != null">,${status}</if>
+			<if test="statusReport != null">,${statusReport}</if>
+			<if test="statements != null and statements != ''">,#{statements}</if>
+			<if test="type != null and type != ''">,#{type}</if>
+			<if test="totalCount != null">,${totalCount}</if>
+            	<if test="sendTime != null and sendTime != ''">,#{sendTime}</if>
+                ,now()
+			<if test="timeout != null">,${timeout}</if>
+			<if test="originTime != null">,${originTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="businessSentParam">
+		delete from SM_BusinessSent where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="businessSentParam">
+		delete from SM_BusinessSent
+	</delete>
+	
+	<delete id="delete" parameterMap="businessSentParam">
+		delete from SM_BusinessSent
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone=#{mobilePhone}</if>
+				<if test="memberId != null">and MemberId=${memberId}</if>
+				<if test="content != null and content != ''">and Content=#{content}</if>
+				<if test="businessCode != null and businessCode != ''">and BusinessCode=#{businessCode}</if>
+				<if test="spCode != null and spCode != ''">and SpCode=#{spCode}</if>
+				<if test="isRetry != null">and IsRetry=${isRetry}</if>
+				<if test="retryCount != null">and RetryCount=${retryCount}</if>
+				<if test="messageSerial != null and messageSerial != ''">and MessageSerial=#{messageSerial}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="statusReport != null">and StatusReport=${statusReport}</if>
+				<if test="statements != null and statements != ''">and Statements=#{statements}</if>
+				<if test="type != null and type != ''">and Type=#{type}</if>
+				<if test="totalCount != null">and TotalCount=${totalCount}</if>
+				<if test="sendTime != null and sendTime != ''">and SendTime=#{sendTime}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="timeout != null">and Timeout=${timeout}</if>
+				<if test="originTime != null">and OriginTime=${originTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

@@ -1,0 +1,1702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.spvcorporation.dao.ISpvCorporationDao">
+
+	<parameterMap id="spvCorporationParam" type="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation" />
+	<resultMap id="spvCorporationResult" type="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation">
+		<id property="id" column="spvCorporation_id" javaType="java.lang.Long" />
+		<result property="type" column="spvCorporation_type" javaType="java.lang.Integer" />
+		<result property="code" column="spvCorporation_code" javaType="java.lang.String" />
+		<result property="umpayAccountNo" column="spvCorporation_umpayAccountNo" javaType="java.lang.String" />
+		<result property="availableAmount" column="spvCorporation_availableAmount" javaType="java.math.BigDecimal" />
+		<result property="frozenAmount" column="spvCorporation_frozenAmount" javaType="java.math.BigDecimal" />
+		<result property="umpayMerchantNo" column="spvCorporation_umpayMerchantNo" javaType="java.lang.String" />
+		<result property="name" column="spvCorporation_name" javaType="java.lang.String" />
+		<result property="shortName" column="spvCorporation_shortName" javaType="java.lang.String" />
+		<result property="bankName" column="spvCorporation_bankName" javaType="java.lang.String" />
+		<result property="bankCode" column="spvCorporation_bankCode" javaType="java.lang.String" />
+		<result property="bankCardNumber" column="spvCorporation_bankCardNumber" javaType="java.lang.String" />
+		<result property="signaturePicPath" column="spvCorporation_signaturePicPath" javaType="java.lang.String" />
+		<result property="phone" column="spvCorporation_phone" javaType="java.lang.String" />
+		<result property="fax" column="spvCorporation_fax" javaType="java.lang.String" />
+		<result property="postCode" column="spvCorporation_postCode" javaType="java.lang.String" />
+		<result property="address" column="spvCorporation_address" javaType="java.lang.String" />
+		<result property="description" column="spvCorporation_description" javaType="java.lang.String" />
+		<result property="status" column="spvCorporation_status" javaType="java.lang.Integer" />
+		<result property="createTime" column="spvCorporation_createTime" javaType="java.lang.String" />
+		<result property="modifyTime" column="spvCorporation_modifyTime" javaType="java.lang.String" />
+		<collection property="members" ofType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</collection>
+		<collection property="spvRechargeRecordss" ofType="com.bs.plugins.custom.tc.spvrechargerecords.entity.SpvRechargeRecords">
+			<id property="id" column="spvRechargeRecords_id" javaType="java.lang.Long" />
+			<result property="spvId" column="spvRechargeRecords_spvId" javaType="java.lang.Long" />
+			<result property="spvName" column="spvRechargeRecords_spvName" javaType="java.lang.String" />
+			<result property="transactionNumber" column="spvRechargeRecords_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="spvRechargeRecords_payPlantformNumber" javaType="java.lang.String" />
+			<result property="amount" column="spvRechargeRecords_amount" javaType="java.math.BigDecimal" />
+			<result property="bankName" column="spvRechargeRecords_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="spvRechargeRecords_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="spvRechargeRecords_bankCardNumber" javaType="java.lang.String" />
+			<result property="handlingCharge" column="spvRechargeRecords_handlingCharge" javaType="java.math.BigDecimal" />
+			<result property="handlingChargeType" column="spvRechargeRecords_handlingChargeType" javaType="java.lang.Integer" />
+			<result property="applyTime" column="spvRechargeRecords_applyTime" javaType="java.lang.String" />
+			<result property="finishTime" column="spvRechargeRecords_finishTime" javaType="java.lang.String" />
+			<result property="status" column="spvRechargeRecords_status" javaType="java.lang.Integer" />
+			<result property="isQuestionnaire" column="spvRechargeRecords_isQuestionnaire" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="spvRechargeRecords_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="spvRechargeRecords_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="spvRechargeRecords_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="spvWithdrawCashRecordss" ofType="com.bs.plugins.custom.tc.spvwithdrawcashrecords.entity.SpvWithdrawCashRecords">
+			<id property="id" column="spvWithdrawCashRecords_id" javaType="java.lang.Long" />
+			<result property="spvId" column="spvWithdrawCashRecords_spvId" javaType="java.lang.Long" />
+			<result property="spvName" column="spvWithdrawCashRecords_spvName" javaType="java.lang.String" />
+			<result property="transactionNumber" column="spvWithdrawCashRecords_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="spvWithdrawCashRecords_payPlantformNumber" javaType="java.lang.String" />
+			<result property="amount" column="spvWithdrawCashRecords_amount" javaType="java.math.BigDecimal" />
+			<result property="bankName" column="spvWithdrawCashRecords_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="spvWithdrawCashRecords_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="spvWithdrawCashRecords_bankCardNumber" javaType="java.lang.String" />
+			<result property="handlingChargeType" column="spvWithdrawCashRecords_handlingChargeType" javaType="java.lang.Integer" />
+			<result property="handlingCharge" column="spvWithdrawCashRecords_handlingCharge" javaType="java.math.BigDecimal" />
+			<result property="applyTime" column="spvWithdrawCashRecords_applyTime" javaType="java.lang.String" />
+			<result property="finishTime" column="spvWithdrawCashRecords_finishTime" javaType="java.lang.String" />
+			<result property="status" column="spvWithdrawCashRecords_status" javaType="java.lang.Integer" />
+			<result property="isQuestionnaire" column="spvWithdrawCashRecords_isQuestionnaire" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="spvWithdrawCashRecords_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="spvWithdrawCashRecords_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="spvWithdrawCashRecords_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="subscriptions" ofType="com.bs.plugins.custom.tc.subscription.entity.Subscription">
+			<id property="id" column="subscription_id" javaType="java.lang.Long" />
+			<result property="memberId" column="subscription_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="subscription_spvId" javaType="java.lang.Long" />
+			<result property="loanId" column="subscription_loanId" javaType="java.lang.Long" />
+			<result property="loanNumber" column="subscription_loanNumber" javaType="java.lang.String" />
+			<result property="productId" column="subscription_productId" javaType="java.lang.Long" />
+			<result property="amountLockId" column="subscription_amountLockId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="subscription_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="subscription_payPlantformNumber" javaType="java.lang.String" />
+			<result property="umpayProductAccountNo" column="subscription_umpayProductAccountNo" javaType="java.lang.String" />
+			<result property="productName" column="subscription_productName" javaType="java.lang.String" />
+			<result property="productCode" column="subscription_productCode" javaType="java.lang.String" />
+			<result property="tradeStatus" column="subscription_tradeStatus" javaType="java.lang.Integer" />
+			<result property="investAmount" column="subscription_investAmount" javaType="java.math.BigDecimal" />
+			<result property="shares" column="subscription_shares" javaType="java.lang.Integer" />
+			<result property="orderTime" column="subscription_orderTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="subscription_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="subscription_paymentDate" javaType="java.lang.String" />
+			<result property="expectedExpirationDate" column="subscription_expectedExpirationDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="subscription_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="subscription_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="subscription_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="subscription_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="subscription_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="actualLoanAmount" column="subscription_actualLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="subscription_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="subscription_loanStatus" javaType="java.lang.Integer" />
+			<result property="status" column="subscription_status" javaType="java.lang.Integer" />
+			<result property="distributeStatus" column="subscription_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="subscription_distributeTime" javaType="java.lang.String" />
+			<result property="isBuyBack" column="subscription_isBuyBack" javaType="java.lang.Integer" />
+			<result property="checkingStatus" column="subscription_checkingStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="subscription_checkingTime" javaType="java.lang.String" />
+			<result property="contractPath" column="subscription_contractPath" javaType="java.lang.String" />
+			<result property="remark" column="subscription_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="basicProducts" ofType="com.bs.plugins.custom.pc.basicproduct.entity.BasicProduct">
+			<id property="id" column="basicProduct_id" javaType="java.lang.Long" />
+			<result property="spvId" column="basicProduct_spvId" javaType="java.lang.Long" />
+			<result property="name" column="basicProduct_name" javaType="java.lang.String" />
+			<result property="code" column="basicProduct_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="basicProduct_totalAmount" javaType="java.lang.Integer" />
+			<result property="interestRateDate" column="basicProduct_interestRateDate" javaType="java.lang.String" />
+			<result property="profitExpirationDate" column="basicProduct_profitExpirationDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="basicProduct_actualExpirationDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="basicProduct_paymentDate" javaType="java.lang.String" />
+			<result property="actualPaymentDate" column="basicProduct_actualPaymentDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="basicProduct_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualExpectedProfitRatio" column="basicProduct_actualExpectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="basicProduct_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="actualProfit" column="basicProduct_actualProfit" javaType="java.math.BigDecimal" />
+			<result property="description" column="basicProduct_description" javaType="java.lang.String" />
+			<result property="createTime" column="basicProduct_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="basicProduct_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="basicProduct_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="basicProduct_isDelete" javaType="java.lang.Integer" />
+			<result property="creatorId" column="basicProduct_creatorId" javaType="java.lang.Long" />
+		</collection>
+		<collection property="productReturnMoneys" ofType="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney">
+			<id property="id" column="productReturnMoney_id" javaType="java.lang.Long" />
+			<result property="memberId" column="productReturnMoney_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="productReturnMoney_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="productReturnMoney_productId" javaType="java.lang.Long" />
+			<result property="subscriptionId" column="productReturnMoney_subscriptionId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="productReturnMoney_transactionNumber" javaType="java.lang.String" />
+			<result property="spvIntoObjectId" column="productReturnMoney_spvIntoObjectId" javaType="java.lang.Long" />
+			<result property="objectIncomeNumber" column="productReturnMoney_objectIncomeNumber" javaType="java.lang.String" />
+			<result property="returnNumber" column="productReturnMoney_returnNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="productReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="productReturnMoney_productName" javaType="java.lang.String" />
+			<result property="productCode" column="productReturnMoney_productCode" javaType="java.lang.String" />
+			<result property="distributePrincipal" column="productReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+			<result property="distributeInterest" column="productReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+			<result property="distributeAmount" column="productReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+			<result property="distributeStatus" column="productReturnMoney_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="productReturnMoney_distributeTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="productReturnMoney_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="productReturnMoney_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="productReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="productReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="productReturnMoney_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="actualProfitRatio" column="productReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualReturnAmount" column="productReturnMoney_actualReturnAmount" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFee" column="productReturnMoney_memberServiceFee" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFeeRatio" column="productReturnMoney_memberServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="returnTime" column="productReturnMoney_returnTime" javaType="java.lang.String" />
+			<result property="returnStatus" column="productReturnMoney_returnStatus" javaType="java.lang.Integer" />
+			<result property="businessCheckStatus" column="productReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="productReturnMoney_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="productReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeStatus" column="productReturnMoney_objectIncomeStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeTime" column="productReturnMoney_objectIncomeTime" javaType="java.lang.String" />
+			<result property="remark" column="productReturnMoney_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="spvProductReturnMoneys" ofType="com.bs.plugins.custom.tc.spvproductreturnmoney.entity.SpvProductReturnMoney">
+			<id property="id" column="spvProductReturnMoney_id" javaType="java.lang.Long" />
+			<result property="memberId" column="spvProductReturnMoney_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="spvProductReturnMoney_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="spvProductReturnMoney_productId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="spvProductReturnMoney_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="spvProductReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="spvProductReturnMoney_productName" javaType="java.lang.String" />
+			<result property="productCode" column="spvProductReturnMoney_productCode" javaType="java.lang.String" />
+			<result property="distributePrincipal" column="spvProductReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+			<result property="distributeInterest" column="spvProductReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+			<result property="distributeAmount" column="spvProductReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+			<result property="interestRateDate" column="spvProductReturnMoney_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="spvProductReturnMoney_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="spvProductReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="spvProductReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualProfitRatio" column="spvProductReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="spvProductReturnMoney_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="spvProductReturnMoney_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="businessCheckStatus" column="spvProductReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="spvProductReturnMoney_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="spvProductReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+			<result property="intoObjectStatus" column="spvProductReturnMoney_intoObjectStatus" javaType="java.lang.Integer" />
+			<result property="intoObjectTime" column="spvProductReturnMoney_intoObjectTime" javaType="java.lang.String" />
+			<result property="remark" column="spvProductReturnMoney_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="platformServiceFees" ofType="com.bs.plugins.custom.tc.platformservicefee.entity.PlatformServiceFee">
+			<id property="id" column="platformServiceFee_id" javaType="java.lang.Long" />
+			<result property="platformId" column="platformServiceFee_platformId" javaType="java.lang.Long" />
+			<result property="spvId" column="platformServiceFee_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="platformServiceFee_productId" javaType="java.lang.Long" />
+			<result property="returnMoneyId" column="platformServiceFee_returnMoneyId" javaType="java.lang.Long" />
+			<result property="spvLoanId" column="platformServiceFee_spvLoanId" javaType="java.lang.Long" />
+			<result property="tradeNumber" column="platformServiceFee_tradeNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="platformServiceFee_payPlantformNumber" javaType="java.lang.String" />
+			<result property="principalAmount" column="platformServiceFee_principalAmount" javaType="java.math.BigDecimal" />
+			<result property="serviceFee" column="platformServiceFee_serviceFee" javaType="java.math.BigDecimal" />
+			<result property="serviceFeeRatio" column="platformServiceFee_serviceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="takeTime" column="platformServiceFee_takeTime" javaType="java.lang.String" />
+			<result property="takeStatus" column="platformServiceFee_takeStatus" javaType="java.lang.Integer" />
+			<result property="takeFinishTime" column="platformServiceFee_takeFinishTime" javaType="java.lang.String" />
+			<result property="checkingTime" column="platformServiceFee_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="platformServiceFee_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="platformServiceFee_remark" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+			spvRechargeRecords.Id spvRechargeRecords_id,
+			spvRechargeRecords.SpvId spvRechargeRecords_spvId,
+			spvRechargeRecords.SpvName spvRechargeRecords_spvName,
+			spvRechargeRecords.TransactionNumber spvRechargeRecords_transactionNumber,
+			spvRechargeRecords.PayPlantformNumber spvRechargeRecords_payPlantformNumber,
+			spvRechargeRecords.Amount spvRechargeRecords_amount,
+			spvRechargeRecords.BankName spvRechargeRecords_bankName,
+			spvRechargeRecords.BankCode spvRechargeRecords_bankCode,
+			spvRechargeRecords.BankCardNumber spvRechargeRecords_bankCardNumber,
+			spvRechargeRecords.HandlingCharge spvRechargeRecords_handlingCharge,
+			spvRechargeRecords.HandlingChargeType spvRechargeRecords_handlingChargeType,
+			spvRechargeRecords.ApplyTime spvRechargeRecords_applyTime,
+			spvRechargeRecords.FinishTime spvRechargeRecords_finishTime,
+			spvRechargeRecords.Status spvRechargeRecords_status,
+			spvRechargeRecords.IsQuestionnaire spvRechargeRecords_isQuestionnaire,
+			spvRechargeRecords.CheckingTime spvRechargeRecords_checkingTime,
+			spvRechargeRecords.CheckingStatus spvRechargeRecords_checkingStatus,
+			spvRechargeRecords.Remark spvRechargeRecords_remark
+			spvWithdrawCashRecords.Id spvWithdrawCashRecords_id,
+			spvWithdrawCashRecords.SpvId spvWithdrawCashRecords_spvId,
+			spvWithdrawCashRecords.SpvName spvWithdrawCashRecords_spvName,
+			spvWithdrawCashRecords.TransactionNumber spvWithdrawCashRecords_transactionNumber,
+			spvWithdrawCashRecords.PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+			spvWithdrawCashRecords.Amount spvWithdrawCashRecords_amount,
+			spvWithdrawCashRecords.BankName spvWithdrawCashRecords_bankName,
+			spvWithdrawCashRecords.BankCode spvWithdrawCashRecords_bankCode,
+			spvWithdrawCashRecords.BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+			spvWithdrawCashRecords.HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+			spvWithdrawCashRecords.HandlingCharge spvWithdrawCashRecords_handlingCharge,
+			spvWithdrawCashRecords.ApplyTime spvWithdrawCashRecords_applyTime,
+			spvWithdrawCashRecords.FinishTime spvWithdrawCashRecords_finishTime,
+			spvWithdrawCashRecords.Status spvWithdrawCashRecords_status,
+			spvWithdrawCashRecords.IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+			spvWithdrawCashRecords.CheckingTime spvWithdrawCashRecords_checkingTime,
+			spvWithdrawCashRecords.CheckingStatus spvWithdrawCashRecords_checkingStatus,
+			spvWithdrawCashRecords.Remark spvWithdrawCashRecords_remark
+			subscription.Id subscription_id,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			subscription.LoanId subscription_loanId,
+			subscription.LoanNumber subscription_loanNumber,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.IsBuyBack subscription_isBuyBack,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.ContractPath subscription_contractPath,
+			subscription.Remark subscription_remark
+			basicProduct.Id basicProduct_id,
+			basicProduct.SpvId basicProduct_spvId,
+			basicProduct.Name basicProduct_name,
+			basicProduct.Code basicProduct_code,
+			basicProduct.TotalAmount basicProduct_totalAmount,
+			basicProduct.InterestRateDate basicProduct_interestRateDate,
+			basicProduct.ProfitExpirationDate basicProduct_profitExpirationDate,
+			basicProduct.ActualExpirationDate basicProduct_actualExpirationDate,
+			basicProduct.PaymentDate basicProduct_paymentDate,
+			basicProduct.ActualPaymentDate basicProduct_actualPaymentDate,
+			basicProduct.ExpectedProfitRatio basicProduct_expectedProfitRatio,
+			basicProduct.ActualExpectedProfitRatio basicProduct_actualExpectedProfitRatio,
+			basicProduct.ExpectedProfit basicProduct_expectedProfit,
+			basicProduct.ActualProfit basicProduct_actualProfit,
+			basicProduct.Description basicProduct_description,
+			basicProduct.CreateTime basicProduct_createTime,
+			basicProduct.ModifierId basicProduct_modifierId,
+			basicProduct.ModifyTime basicProduct_modifyTime,
+			basicProduct.isDelete basicProduct_isDelete,
+			basicProduct.CreatorId basicProduct_creatorId
+			productReturnMoney.Id productReturnMoney_id,
+			productReturnMoney.MemberId productReturnMoney_memberId,
+			productReturnMoney.SpvId productReturnMoney_spvId,
+			productReturnMoney.ProductId productReturnMoney_productId,
+			productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+			productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+			productReturnMoney.SpvIntoObjectId productReturnMoney_spvIntoObjectId,
+			productReturnMoney.ObjectIncomeNumber productReturnMoney_objectIncomeNumber,
+			productReturnMoney.ReturnNumber productReturnMoney_returnNumber,
+			productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+			productReturnMoney.ProductName productReturnMoney_productName,
+			productReturnMoney.ProductCode productReturnMoney_productCode,
+			productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+			productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+			productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+			productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+			productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+			productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+			productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+			productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+			productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+			productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+			productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+			productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+			productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+			productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+			productReturnMoney.ReturnTime productReturnMoney_returnTime,
+			productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+			productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+			productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+			productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+			productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+			productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+			productReturnMoney.Remark productReturnMoney_remark
+			spvProductReturnMoney.Id spvProductReturnMoney_id,
+			spvProductReturnMoney.MemberId spvProductReturnMoney_memberId,
+			spvProductReturnMoney.SpvId spvProductReturnMoney_spvId,
+			spvProductReturnMoney.ProductId spvProductReturnMoney_productId,
+			spvProductReturnMoney.TransactionNumber spvProductReturnMoney_transactionNumber,
+			spvProductReturnMoney.PayPlantformNumber spvProductReturnMoney_payPlantformNumber,
+			spvProductReturnMoney.ProductName spvProductReturnMoney_productName,
+			spvProductReturnMoney.ProductCode spvProductReturnMoney_productCode,
+			spvProductReturnMoney.DistributePrincipal spvProductReturnMoney_distributePrincipal,
+			spvProductReturnMoney.DistributeInterest spvProductReturnMoney_distributeInterest,
+			spvProductReturnMoney.DistributeAmount spvProductReturnMoney_distributeAmount,
+			spvProductReturnMoney.InterestRateDate spvProductReturnMoney_interestRateDate,
+			spvProductReturnMoney.PaymentDate spvProductReturnMoney_paymentDate,
+			spvProductReturnMoney.ActualExpirationDate spvProductReturnMoney_actualExpirationDate,
+			spvProductReturnMoney.ExpectedProfitRatio spvProductReturnMoney_expectedProfitRatio,
+			spvProductReturnMoney.ActualProfitRatio spvProductReturnMoney_actualProfitRatio,
+			spvProductReturnMoney.SpvServiceFee spvProductReturnMoney_spvServiceFee,
+			spvProductReturnMoney.SpvServiceFeeRatio spvProductReturnMoney_spvServiceFeeRatio,
+			spvProductReturnMoney.BusinessCheckStatus spvProductReturnMoney_businessCheckStatus,
+			spvProductReturnMoney.CheckingTime spvProductReturnMoney_checkingTime,
+			spvProductReturnMoney.CheckingStatus spvProductReturnMoney_checkingStatus,
+			spvProductReturnMoney.IntoObjectStatus spvProductReturnMoney_intoObjectStatus,
+			spvProductReturnMoney.IntoObjectTime spvProductReturnMoney_intoObjectTime,
+			spvProductReturnMoney.Remark spvProductReturnMoney_remark
+			platformServiceFee.Id platformServiceFee_id,
+			platformServiceFee.PlatformId platformServiceFee_platformId,
+			platformServiceFee.SpvId platformServiceFee_spvId,
+			platformServiceFee.ProductId platformServiceFee_productId,
+			platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+			platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+			platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+			platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+			platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+			platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+			platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+			platformServiceFee.TakeTime platformServiceFee_takeTime,
+			platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+			platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+			platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+			platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+			platformServiceFee.Remark platformServiceFee_remark
+		from CC_SpvCorporation spvCorporation
+		inner join CC_Member member on member.SpvId=spvCorporation.Id
+		inner join TC_SpvRechargeRecords spvRechargeRecords on spvRechargeRecords.SpvId=spvCorporation.Id
+		inner join TC_SpvWithdrawCashRecords spvWithdrawCashRecords on spvWithdrawCashRecords.SpvId=spvCorporation.Id
+		inner join TC_Subscription subscription on subscription.SpvId=spvCorporation.Id
+		inner join PC_BasicProduct basicProduct on basicProduct.SpvId=spvCorporation.Id
+		inner join TC_ProductReturnMoney productReturnMoney on productReturnMoney.SpvId=spvCorporation.Id
+		inner join TC_SpvProductReturnMoney spvProductReturnMoney on spvProductReturnMoney.SpvId=spvCorporation.Id
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectSpvCorporationMember" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				member.Id member_id,
+	
+				member.SpvId member_spvId,
+	
+				member.EmailRegisterValidId member_emailRegisterValidId,
+	
+				member.Type member_type,
+	
+				member.Code member_code,
+	
+				member.Account member_account,
+	
+				member.PhoneAccount member_phoneAccount,
+	
+				member.EmailAccount member_emailAccount,
+	
+				member.Password member_password,
+	
+				member.UmpayUserNo member_umpayUserNo,
+	
+				member.UmpayAccountNo member_umpayAccountNo,
+	
+				member.PayPassword member_payPassword,
+	
+				member.Nickname member_nickname,
+	
+				member.Avatar member_avatar,
+	
+				member.ValidEmail member_validEmail,
+	
+				member.MobilePhone member_mobilePhone,
+	
+				member.OfficePhone member_officePhone,
+	
+				member.CertificateType member_certificateType,
+	
+				member.CertificateNo member_certificateNo,
+	
+				member.Name member_name,
+	
+				member.Male member_male,
+	
+				member.Birthday member_birthday,
+	
+				member.FamilyRole member_familyRole,
+	
+				member.Rrac member_rrac,
+	
+				member.RiskScore member_riskScore,
+	
+				member.ProvinceSpell member_provinceSpell,
+	
+				member.ProvinceCode member_provinceCode,
+	
+				member.CityCode member_cityCode,
+	
+				member.CountryCode member_countryCode,
+	
+				member.ProvinceName member_provinceName,
+	
+				member.CityName member_cityName,
+	
+				member.CountryName member_countryName,
+	
+				member.Address member_address,
+	
+				member.Income member_income,
+	
+				member.Job member_job,
+	
+				member.Education member_education,
+	
+				member.ChildrenCount member_childrenCount,
+	
+				member.IsFreePassword member_isFreePassword,
+	
+				member.IsEmailValid member_isEmailValid,
+	
+				member.IsRealname member_isRealname,
+	
+				member.IsActivate member_isActivate,
+	
+				member.IsOpenAccount member_isOpenAccount,
+	
+				member.IsBindingCard member_isBindingCard,
+	
+				member.IsSignature member_isSignature,
+	
+				member.SignatureTime member_signatureTime,
+	
+				member.OpenAccountTime member_openAccountTime,
+	
+				member.RegisterTime member_registerTime,
+	
+				member.ModifyTime member_modifyTime,
+	
+				member.SerialNo member_serialNo,
+	
+				member.ResetTime member_resetTime,
+	
+				member.ReferralCode member_referralCode,
+	
+				member.RecommendIdcode member_recommendIdcode
+	
+		from CC_SpvCorporation spvCorporation
+		inner join CC_Member member on member.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationSpvRechargeRecords" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				spvRechargeRecords.Id spvRechargeRecords_id,
+	
+				spvRechargeRecords.SpvId spvRechargeRecords_spvId,
+	
+				spvRechargeRecords.SpvName spvRechargeRecords_spvName,
+	
+				spvRechargeRecords.TransactionNumber spvRechargeRecords_transactionNumber,
+	
+				spvRechargeRecords.PayPlantformNumber spvRechargeRecords_payPlantformNumber,
+	
+				spvRechargeRecords.Amount spvRechargeRecords_amount,
+	
+				spvRechargeRecords.BankName spvRechargeRecords_bankName,
+	
+				spvRechargeRecords.BankCode spvRechargeRecords_bankCode,
+	
+				spvRechargeRecords.BankCardNumber spvRechargeRecords_bankCardNumber,
+	
+				spvRechargeRecords.HandlingCharge spvRechargeRecords_handlingCharge,
+	
+				spvRechargeRecords.HandlingChargeType spvRechargeRecords_handlingChargeType,
+	
+				spvRechargeRecords.ApplyTime spvRechargeRecords_applyTime,
+	
+				spvRechargeRecords.FinishTime spvRechargeRecords_finishTime,
+	
+				spvRechargeRecords.Status spvRechargeRecords_status,
+	
+				spvRechargeRecords.IsQuestionnaire spvRechargeRecords_isQuestionnaire,
+	
+				spvRechargeRecords.CheckingTime spvRechargeRecords_checkingTime,
+	
+				spvRechargeRecords.CheckingStatus spvRechargeRecords_checkingStatus,
+	
+				spvRechargeRecords.Remark spvRechargeRecords_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_SpvRechargeRecords spvRechargeRecords on spvRechargeRecords.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationSpvWithdrawCashRecords" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				spvWithdrawCashRecords.Id spvWithdrawCashRecords_id,
+	
+				spvWithdrawCashRecords.SpvId spvWithdrawCashRecords_spvId,
+	
+				spvWithdrawCashRecords.SpvName spvWithdrawCashRecords_spvName,
+	
+				spvWithdrawCashRecords.TransactionNumber spvWithdrawCashRecords_transactionNumber,
+	
+				spvWithdrawCashRecords.PayPlantformNumber spvWithdrawCashRecords_payPlantformNumber,
+	
+				spvWithdrawCashRecords.Amount spvWithdrawCashRecords_amount,
+	
+				spvWithdrawCashRecords.BankName spvWithdrawCashRecords_bankName,
+	
+				spvWithdrawCashRecords.BankCode spvWithdrawCashRecords_bankCode,
+	
+				spvWithdrawCashRecords.BankCardNumber spvWithdrawCashRecords_bankCardNumber,
+	
+				spvWithdrawCashRecords.HandlingChargeType spvWithdrawCashRecords_handlingChargeType,
+	
+				spvWithdrawCashRecords.HandlingCharge spvWithdrawCashRecords_handlingCharge,
+	
+				spvWithdrawCashRecords.ApplyTime spvWithdrawCashRecords_applyTime,
+	
+				spvWithdrawCashRecords.FinishTime spvWithdrawCashRecords_finishTime,
+	
+				spvWithdrawCashRecords.Status spvWithdrawCashRecords_status,
+	
+				spvWithdrawCashRecords.IsQuestionnaire spvWithdrawCashRecords_isQuestionnaire,
+	
+				spvWithdrawCashRecords.CheckingTime spvWithdrawCashRecords_checkingTime,
+	
+				spvWithdrawCashRecords.CheckingStatus spvWithdrawCashRecords_checkingStatus,
+	
+				spvWithdrawCashRecords.Remark spvWithdrawCashRecords_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_SpvWithdrawCashRecords spvWithdrawCashRecords on spvWithdrawCashRecords.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationSubscription" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				subscription.Id subscription_id,
+	
+				subscription.MemberId subscription_memberId,
+	
+				subscription.SpvId subscription_spvId,
+	
+				subscription.LoanId subscription_loanId,
+	
+				subscription.LoanNumber subscription_loanNumber,
+	
+				subscription.ProductId subscription_productId,
+	
+				subscription.AmountLockId subscription_amountLockId,
+	
+				subscription.TransactionNumber subscription_transactionNumber,
+	
+				subscription.PayPlantformNumber subscription_payPlantformNumber,
+	
+				subscription.UmpayProductAccountNo subscription_umpayProductAccountNo,
+	
+				subscription.ProductName subscription_productName,
+	
+				subscription.ProductCode subscription_productCode,
+	
+				subscription.TradeStatus subscription_tradeStatus,
+	
+				subscription.InvestAmount subscription_investAmount,
+	
+				subscription.Shares subscription_shares,
+	
+				subscription.OrderTime subscription_orderTime,
+	
+				subscription.InterestRateDate subscription_interestRateDate,
+	
+				subscription.PaymentDate subscription_paymentDate,
+	
+				subscription.ExpectedExpirationDate subscription_expectedExpirationDate,
+	
+				subscription.ActualExpirationDate subscription_actualExpirationDate,
+	
+				subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+	
+				subscription.ExpectedProfit subscription_expectedProfit,
+	
+				subscription.SpvServiceFee subscription_spvServiceFee,
+	
+				subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+	
+				subscription.ActualLoanAmount subscription_actualLoanAmount,
+	
+				subscription.LoanTime subscription_loanTime,
+	
+				subscription.LoanStatus subscription_loanStatus,
+	
+				subscription.Status subscription_status,
+	
+				subscription.DistributeStatus subscription_distributeStatus,
+	
+				subscription.DistributeTime subscription_distributeTime,
+	
+				subscription.IsBuyBack subscription_isBuyBack,
+	
+				subscription.CheckingStatus subscription_checkingStatus,
+	
+				subscription.CheckingTime subscription_checkingTime,
+	
+				subscription.ContractPath subscription_contractPath,
+	
+				subscription.Remark subscription_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_Subscription subscription on subscription.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationBasicProduct" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				basicProduct.Id basicProduct_id,
+	
+				basicProduct.SpvId basicProduct_spvId,
+	
+				basicProduct.Name basicProduct_name,
+	
+				basicProduct.Code basicProduct_code,
+	
+				basicProduct.TotalAmount basicProduct_totalAmount,
+	
+				basicProduct.InterestRateDate basicProduct_interestRateDate,
+	
+				basicProduct.ProfitExpirationDate basicProduct_profitExpirationDate,
+	
+				basicProduct.ActualExpirationDate basicProduct_actualExpirationDate,
+	
+				basicProduct.PaymentDate basicProduct_paymentDate,
+	
+				basicProduct.ActualPaymentDate basicProduct_actualPaymentDate,
+	
+				basicProduct.ExpectedProfitRatio basicProduct_expectedProfitRatio,
+	
+				basicProduct.ActualExpectedProfitRatio basicProduct_actualExpectedProfitRatio,
+	
+				basicProduct.ExpectedProfit basicProduct_expectedProfit,
+	
+				basicProduct.ActualProfit basicProduct_actualProfit,
+	
+				basicProduct.Description basicProduct_description,
+	
+				basicProduct.CreateTime basicProduct_createTime,
+	
+				basicProduct.ModifierId basicProduct_modifierId,
+	
+				basicProduct.ModifyTime basicProduct_modifyTime,
+	
+				basicProduct.isDelete basicProduct_isDelete,
+	
+				basicProduct.CreatorId basicProduct_creatorId
+	
+		from CC_SpvCorporation spvCorporation
+		inner join PC_BasicProduct basicProduct on basicProduct.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationProductReturnMoney" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				productReturnMoney.Id productReturnMoney_id,
+	
+				productReturnMoney.MemberId productReturnMoney_memberId,
+	
+				productReturnMoney.SpvId productReturnMoney_spvId,
+	
+				productReturnMoney.ProductId productReturnMoney_productId,
+	
+				productReturnMoney.SubscriptionId productReturnMoney_subscriptionId,
+	
+				productReturnMoney.TransactionNumber productReturnMoney_transactionNumber,
+	
+				productReturnMoney.SpvIntoObjectId productReturnMoney_spvIntoObjectId,
+	
+				productReturnMoney.ObjectIncomeNumber productReturnMoney_objectIncomeNumber,
+	
+				productReturnMoney.ReturnNumber productReturnMoney_returnNumber,
+	
+				productReturnMoney.PayPlantformNumber productReturnMoney_payPlantformNumber,
+	
+				productReturnMoney.ProductName productReturnMoney_productName,
+	
+				productReturnMoney.ProductCode productReturnMoney_productCode,
+	
+				productReturnMoney.DistributePrincipal productReturnMoney_distributePrincipal,
+	
+				productReturnMoney.DistributeInterest productReturnMoney_distributeInterest,
+	
+				productReturnMoney.DistributeAmount productReturnMoney_distributeAmount,
+	
+				productReturnMoney.DistributeStatus productReturnMoney_distributeStatus,
+	
+				productReturnMoney.DistributeTime productReturnMoney_distributeTime,
+	
+				productReturnMoney.InterestRateDate productReturnMoney_interestRateDate,
+	
+				productReturnMoney.PaymentDate productReturnMoney_paymentDate,
+	
+				productReturnMoney.ActualExpirationDate productReturnMoney_actualExpirationDate,
+	
+				productReturnMoney.ExpectedProfitRatio productReturnMoney_expectedProfitRatio,
+	
+				productReturnMoney.ExpectedProfit productReturnMoney_expectedProfit,
+	
+				productReturnMoney.ActualProfitRatio productReturnMoney_actualProfitRatio,
+	
+				productReturnMoney.ActualReturnAmount productReturnMoney_actualReturnAmount,
+	
+				productReturnMoney.MemberServiceFee productReturnMoney_memberServiceFee,
+	
+				productReturnMoney.MemberServiceFeeRatio productReturnMoney_memberServiceFeeRatio,
+	
+				productReturnMoney.ReturnTime productReturnMoney_returnTime,
+	
+				productReturnMoney.ReturnStatus productReturnMoney_returnStatus,
+	
+				productReturnMoney.BusinessCheckStatus productReturnMoney_businessCheckStatus,
+	
+				productReturnMoney.CheckingTime productReturnMoney_checkingTime,
+	
+				productReturnMoney.CheckingStatus productReturnMoney_checkingStatus,
+	
+				productReturnMoney.ObjectIncomeStatus productReturnMoney_objectIncomeStatus,
+	
+				productReturnMoney.ObjectIncomeTime productReturnMoney_objectIncomeTime,
+	
+				productReturnMoney.Remark productReturnMoney_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_ProductReturnMoney productReturnMoney on productReturnMoney.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationSpvProductReturnMoney" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				spvProductReturnMoney.Id spvProductReturnMoney_id,
+	
+				spvProductReturnMoney.MemberId spvProductReturnMoney_memberId,
+	
+				spvProductReturnMoney.SpvId spvProductReturnMoney_spvId,
+	
+				spvProductReturnMoney.ProductId spvProductReturnMoney_productId,
+	
+				spvProductReturnMoney.TransactionNumber spvProductReturnMoney_transactionNumber,
+	
+				spvProductReturnMoney.PayPlantformNumber spvProductReturnMoney_payPlantformNumber,
+	
+				spvProductReturnMoney.ProductName spvProductReturnMoney_productName,
+	
+				spvProductReturnMoney.ProductCode spvProductReturnMoney_productCode,
+	
+				spvProductReturnMoney.DistributePrincipal spvProductReturnMoney_distributePrincipal,
+	
+				spvProductReturnMoney.DistributeInterest spvProductReturnMoney_distributeInterest,
+	
+				spvProductReturnMoney.DistributeAmount spvProductReturnMoney_distributeAmount,
+	
+				spvProductReturnMoney.InterestRateDate spvProductReturnMoney_interestRateDate,
+	
+				spvProductReturnMoney.PaymentDate spvProductReturnMoney_paymentDate,
+	
+				spvProductReturnMoney.ActualExpirationDate spvProductReturnMoney_actualExpirationDate,
+	
+				spvProductReturnMoney.ExpectedProfitRatio spvProductReturnMoney_expectedProfitRatio,
+	
+				spvProductReturnMoney.ActualProfitRatio spvProductReturnMoney_actualProfitRatio,
+	
+				spvProductReturnMoney.SpvServiceFee spvProductReturnMoney_spvServiceFee,
+	
+				spvProductReturnMoney.SpvServiceFeeRatio spvProductReturnMoney_spvServiceFeeRatio,
+	
+				spvProductReturnMoney.BusinessCheckStatus spvProductReturnMoney_businessCheckStatus,
+	
+				spvProductReturnMoney.CheckingTime spvProductReturnMoney_checkingTime,
+	
+				spvProductReturnMoney.CheckingStatus spvProductReturnMoney_checkingStatus,
+	
+				spvProductReturnMoney.IntoObjectStatus spvProductReturnMoney_intoObjectStatus,
+	
+				spvProductReturnMoney.IntoObjectTime spvProductReturnMoney_intoObjectTime,
+	
+				spvProductReturnMoney.Remark spvProductReturnMoney_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_SpvProductReturnMoney spvProductReturnMoney on spvProductReturnMoney.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	<select id="selectSpvCorporationPlatformServiceFee" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select
+			spvCorporation.Id spvCorporation_id,
+			spvCorporation.Type spvCorporation_type,
+			spvCorporation.Code spvCorporation_code,
+			spvCorporation.UmpayAccountNo spvCorporation_umpayAccountNo,
+			spvCorporation.AvailableAmount spvCorporation_availableAmount,
+			spvCorporation.FrozenAmount spvCorporation_frozenAmount,
+			spvCorporation.UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			spvCorporation.Name spvCorporation_name,
+			spvCorporation.ShortName spvCorporation_shortName,
+			spvCorporation.BankName spvCorporation_bankName,
+			spvCorporation.BankCode spvCorporation_bankCode,
+			spvCorporation.BankCardNumber spvCorporation_bankCardNumber,
+			spvCorporation.SignaturePicPath spvCorporation_signaturePicPath,
+			spvCorporation.Phone spvCorporation_phone,
+			spvCorporation.Fax spvCorporation_fax,
+			spvCorporation.PostCode spvCorporation_postCode,
+			spvCorporation.Address spvCorporation_address,
+			spvCorporation.Description spvCorporation_description,
+			spvCorporation.Status spvCorporation_status,
+			spvCorporation.CreateTime spvCorporation_createTime,
+			spvCorporation.ModifyTime spvCorporation_modifyTime,
+				platformServiceFee.Id platformServiceFee_id,
+	
+				platformServiceFee.PlatformId platformServiceFee_platformId,
+	
+				platformServiceFee.SpvId platformServiceFee_spvId,
+	
+				platformServiceFee.ProductId platformServiceFee_productId,
+	
+				platformServiceFee.ReturnMoneyId platformServiceFee_returnMoneyId,
+	
+				platformServiceFee.SpvLoanId platformServiceFee_spvLoanId,
+	
+				platformServiceFee.TradeNumber platformServiceFee_tradeNumber,
+	
+				platformServiceFee.PayPlantformNumber platformServiceFee_payPlantformNumber,
+	
+				platformServiceFee.PrincipalAmount platformServiceFee_principalAmount,
+	
+				platformServiceFee.ServiceFee platformServiceFee_serviceFee,
+	
+				platformServiceFee.ServiceFeeRatio platformServiceFee_serviceFeeRatio,
+	
+				platformServiceFee.TakeTime platformServiceFee_takeTime,
+	
+				platformServiceFee.TakeStatus platformServiceFee_takeStatus,
+	
+				platformServiceFee.TakeFinishTime platformServiceFee_takeFinishTime,
+	
+				platformServiceFee.CheckingTime platformServiceFee_checkingTime,
+	
+				platformServiceFee.CheckingStatus platformServiceFee_checkingStatus,
+	
+				platformServiceFee.Remark platformServiceFee_remark
+	
+		from CC_SpvCorporation spvCorporation
+		inner join TC_PlatformServiceFee platformServiceFee on platformServiceFee.SpvId=spvCorporation.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="spvCorporationResult">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation
+	</select>
+	
+	<select id="selectOneById"  resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="spvCorporationResult" parameterMap="spvCorporationParam">
+		select 
+			Id spvCorporation_id,
+			Type spvCorporation_type,
+			Code spvCorporation_code,
+			UmpayAccountNo spvCorporation_umpayAccountNo,
+			AvailableAmount spvCorporation_availableAmount,
+			FrozenAmount spvCorporation_frozenAmount,
+			UmpayMerchantNo spvCorporation_umpayMerchantNo,
+			Name spvCorporation_name,
+			ShortName spvCorporation_shortName,
+			BankName spvCorporation_bankName,
+			BankCode spvCorporation_bankCode,
+			BankCardNumber spvCorporation_bankCardNumber,
+			SignaturePicPath spvCorporation_signaturePicPath,
+			Phone spvCorporation_phone,
+			Fax spvCorporation_fax,
+			PostCode spvCorporation_postCode,
+			Address spvCorporation_address,
+			Description spvCorporation_description,
+			Status spvCorporation_status,
+			CreateTime spvCorporation_createTime,
+			ModifyTime spvCorporation_modifyTime
+		from CC_SpvCorporation
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="spvCorporationParam">
+		select count(*) from CC_SpvCorporation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="spvCorporationParam">
+		update CC_SpvCorporation
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="type != null">,Type=${type}</if>
+				<if test="code != null and code != ''">,Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">,AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">,FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">,UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">,ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">,BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">,BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">,SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">,Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">,Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">,PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">,Address=#{address}</if>
+				<if test="description != null and description != ''">,Description=#{description}</if>
+				<if test="status != null">,Status=${status}</if>
+               		 <if test="createTime != null  and createTime != ''">,CreateTime=#{createTime}</if>
+                    ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="spvCorporationParam">
+		update CC_SpvCorporation
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                    	<if test="type != null">,Type=${type}</if>
+                        <if test="type == null">,Type= 0</if>
+						,Code=#{code}
+						,UmpayAccountNo=#{umpayAccountNo}
+						,AvailableAmount=${availableAmount}
+						,FrozenAmount=${frozenAmount}
+						,UmpayMerchantNo=#{umpayMerchantNo}
+						,Name=#{name}
+						,ShortName=#{shortName}
+						,BankName=#{bankName}
+						,BankCode=#{bankCode}
+						,BankCardNumber=#{bankCardNumber}
+						,SignaturePicPath=#{signaturePicPath}
+						,Phone=#{phone}
+						,Fax=#{fax}
+						,PostCode=#{postCode}
+						,Address=#{address}
+						,Description=#{description}
+                    	<if test="status != null">,Status=${status}</if>
+                        <if test="status == null">,Status= 0</if>
+                            ,ModifyTime=now()
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="spvCorporationParam">
+		insert into CC_SpvCorporation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="type != null">,Type</if>
+			<if test="code != null and code != ''">,Code</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,UmpayAccountNo</if>
+			<if test="availableAmount != null">,AvailableAmount</if>
+			<if test="frozenAmount != null">,FrozenAmount</if>
+			<if test="umpayMerchantNo != null and umpayMerchantNo != ''">,UmpayMerchantNo</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="shortName != null and shortName != ''">,ShortName</if>
+			<if test="bankName != null and bankName != ''">,BankName</if>
+			<if test="bankCode != null and bankCode != ''">,BankCode</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,BankCardNumber</if>
+			<if test="signaturePicPath != null and signaturePicPath != ''">,SignaturePicPath</if>
+			<if test="phone != null and phone != ''">,Phone</if>
+			<if test="fax != null and fax != ''">,Fax</if>
+			<if test="postCode != null and postCode != ''">,PostCode</if>
+			<if test="address != null and address != ''">,Address</if>
+			<if test="description != null and description != ''">,Description</if>
+			<if test="status != null">,Status</if>
+                ,CreateTime
+                <if test="modifyTime != null and modifyTime != ''">,ModifyTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="type != null">,${type}</if>
+			<if test="code != null and code != ''">,#{code}</if>
+			<if test="umpayAccountNo != null and umpayAccountNo != ''">,#{umpayAccountNo}</if>
+			<if test="availableAmount != null">,${availableAmount}</if>
+			<if test="frozenAmount != null">,${frozenAmount}</if>
+			<if test="umpayMerchantNo != null and umpayMerchantNo != ''">,#{umpayMerchantNo}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="shortName != null and shortName != ''">,#{shortName}</if>
+			<if test="bankName != null and bankName != ''">,#{bankName}</if>
+			<if test="bankCode != null and bankCode != ''">,#{bankCode}</if>
+			<if test="bankCardNumber != null and bankCardNumber != ''">,#{bankCardNumber}</if>
+			<if test="signaturePicPath != null and signaturePicPath != ''">,#{signaturePicPath}</if>
+			<if test="phone != null and phone != ''">,#{phone}</if>
+			<if test="fax != null and fax != ''">,#{fax}</if>
+			<if test="postCode != null and postCode != ''">,#{postCode}</if>
+			<if test="address != null and address != ''">,#{address}</if>
+			<if test="description != null and description != ''">,#{description}</if>
+			<if test="status != null">,${status}</if>
+                ,now()
+            	<if test="modifyTime != null and modifyTime != ''">,#{modifyTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="spvCorporationParam">
+		delete from CC_SpvCorporation where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="spvCorporationParam">
+		delete from CC_SpvCorporation
+	</delete>
+	
+	<delete id="delete" parameterMap="spvCorporationParam">
+		delete from CC_SpvCorporation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="type != null">and Type=${type}</if>
+				<if test="code != null and code != ''">and Code=#{code}</if>
+				<if test="umpayAccountNo != null and umpayAccountNo != ''">and UmpayAccountNo=#{umpayAccountNo}</if>
+				<if test="availableAmount != null">and AvailableAmount=${availableAmount}</if>
+				<if test="frozenAmount != null">and FrozenAmount=${frozenAmount}</if>
+				<if test="umpayMerchantNo != null and umpayMerchantNo != ''">and UmpayMerchantNo=#{umpayMerchantNo}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="shortName != null and shortName != ''">and ShortName=#{shortName}</if>
+				<if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+				<if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+				<if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+				<if test="signaturePicPath != null and signaturePicPath != ''">and SignaturePicPath=#{signaturePicPath}</if>
+				<if test="phone != null and phone != ''">and Phone=#{phone}</if>
+				<if test="fax != null and fax != ''">and Fax=#{fax}</if>
+				<if test="postCode != null and postCode != ''">and PostCode=#{postCode}</if>
+				<if test="address != null and address != ''">and Address=#{address}</if>
+				<if test="description != null and description != ''">and Description=#{description}</if>
+				<if test="status != null">and Status=${status}</if>
+				<if test="createTime != null and createTime != ''">and CreateTime=#{createTime}</if>
+				<if test="modifyTime != null and modifyTime != ''">and ModifyTime=#{modifyTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

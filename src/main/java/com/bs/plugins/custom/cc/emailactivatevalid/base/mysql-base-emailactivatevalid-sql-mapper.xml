@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.cc.emailactivatevalid.dao.IEmailActivateValidDao">
+
+	<parameterMap id="emailActivateValidParam" type="com.bs.plugins.custom.cc.emailactivatevalid.entity.EmailActivateValid" />
+	<resultMap id="emailActivateValidResult" type="com.bs.plugins.custom.cc.emailactivatevalid.entity.EmailActivateValid">
+		<id property="id" column="emailActivateValid_id" javaType="java.lang.Long" />
+		<result property="bussinessCode" column="emailActivateValid_bussinessCode" javaType="java.lang.String" />
+		<result property="emailAccount" column="emailActivateValid_emailAccount" javaType="java.lang.String" />
+		<result property="password" column="emailActivateValid_password" javaType="java.lang.String" />
+		<result property="serialNo" column="emailActivateValid_serialNo" javaType="java.lang.String" />
+		<result property="nickname" column="emailActivateValid_nickname" javaType="java.lang.String" />
+		<result property="expiredTime" column="emailActivateValid_expiredTime" javaType="java.lang.Long" />
+		<result property="registerTime" column="emailActivateValid_registerTime" javaType="java.lang.String" />
+		<collection property="members" ofType="com.bs.plugins.custom.cc.member.entity.Member">
+			<id property="id" column="member_id" javaType="java.lang.Long" />
+			<result property="spvId" column="member_spvId" javaType="java.lang.Long" />
+			<result property="emailRegisterValidId" column="member_emailRegisterValidId" javaType="java.lang.Long" />
+			<result property="type" column="member_type" javaType="java.lang.Integer" />
+			<result property="code" column="member_code" javaType="java.lang.String" />
+			<result property="account" column="member_account" javaType="java.lang.String" />
+			<result property="phoneAccount" column="member_phoneAccount" javaType="java.lang.String" />
+			<result property="emailAccount" column="member_emailAccount" javaType="java.lang.String" />
+			<result property="password" column="member_password" javaType="java.lang.String" />
+			<result property="umpayUserNo" column="member_umpayUserNo" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="member_umpayAccountNo" javaType="java.lang.String" />
+			<result property="payPassword" column="member_payPassword" javaType="java.lang.String" />
+			<result property="nickname" column="member_nickname" javaType="java.lang.String" />
+			<result property="avatar" column="member_avatar" javaType="java.lang.String" />
+			<result property="validEmail" column="member_validEmail" javaType="java.lang.String" />
+			<result property="mobilePhone" column="member_mobilePhone" javaType="java.lang.String" />
+			<result property="officePhone" column="member_officePhone" javaType="java.lang.String" />
+			<result property="certificateType" column="member_certificateType" javaType="java.lang.Integer" />
+			<result property="certificateNo" column="member_certificateNo" javaType="java.lang.String" />
+			<result property="name" column="member_name" javaType="java.lang.String" />
+			<result property="male" column="member_male" javaType="java.lang.Integer" />
+			<result property="birthday" column="member_birthday" javaType="java.lang.String" />
+			<result property="familyRole" column="member_familyRole" javaType="java.lang.Integer" />
+			<result property="rrac" column="member_rrac" javaType="java.lang.Integer" />
+			<result property="riskScore" column="member_riskScore" javaType="java.lang.Integer" />
+			<result property="provinceSpell" column="member_provinceSpell" javaType="java.lang.String" />
+			<result property="provinceCode" column="member_provinceCode" javaType="java.lang.Integer" />
+			<result property="cityCode" column="member_cityCode" javaType="java.lang.Integer" />
+			<result property="countryCode" column="member_countryCode" javaType="java.lang.Integer" />
+			<result property="provinceName" column="member_provinceName" javaType="java.lang.String" />
+			<result property="cityName" column="member_cityName" javaType="java.lang.String" />
+			<result property="countryName" column="member_countryName" javaType="java.lang.String" />
+			<result property="address" column="member_address" javaType="java.lang.String" />
+			<result property="income" column="member_income" javaType="java.lang.Integer" />
+			<result property="job" column="member_job" javaType="java.lang.Integer" />
+			<result property="education" column="member_education" javaType="java.lang.Integer" />
+			<result property="childrenCount" column="member_childrenCount" javaType="java.lang.Integer" />
+			<result property="isFreePassword" column="member_isFreePassword" javaType="java.lang.Integer" />
+			<result property="isEmailValid" column="member_isEmailValid" javaType="java.lang.Integer" />
+			<result property="isRealname" column="member_isRealname" javaType="java.lang.Integer" />
+			<result property="isActivate" column="member_isActivate" javaType="java.lang.Integer" />
+			<result property="isOpenAccount" column="member_isOpenAccount" javaType="java.lang.Integer" />
+			<result property="isBindingCard" column="member_isBindingCard" javaType="java.lang.Integer" />
+			<result property="isSignature" column="member_isSignature" javaType="java.lang.Integer" />
+			<result property="signatureTime" column="member_signatureTime" javaType="java.lang.String" />
+			<result property="openAccountTime" column="member_openAccountTime" javaType="java.lang.String" />
+			<result property="registerTime" column="member_registerTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="member_modifyTime" javaType="java.lang.String" />
+			<result property="serialNo" column="member_serialNo" javaType="java.lang.String" />
+			<result property="resetTime" column="member_resetTime" javaType="java.lang.Long" />
+			<result property="referralCode" column="member_referralCode" javaType="java.lang.String" />
+			<result property="recommendIdcode" column="member_recommendIdcode" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	
+	
+	
+	<select id="selectCollections" resultMap="emailActivateValidResult" parameterMap="emailActivateValidParam">
+		select
+			emailActivateValid.Id emailActivateValid_id,
+			emailActivateValid.BussinessCode emailActivateValid_bussinessCode,
+			emailActivateValid.EmailAccount emailActivateValid_emailAccount,
+			emailActivateValid.Password emailActivateValid_password,
+			emailActivateValid.SerialNo emailActivateValid_serialNo,
+			emailActivateValid.Nickname emailActivateValid_nickname,
+			emailActivateValid.ExpiredTime emailActivateValid_expiredTime,
+			emailActivateValid.RegisterTime emailActivateValid_registerTime,	
+			member.Id member_id,
+			member.SpvId member_spvId,
+			member.EmailRegisterValidId member_emailRegisterValidId,
+			member.Type member_type,
+			member.Code member_code,
+			member.Account member_account,
+			member.PhoneAccount member_phoneAccount,
+			member.EmailAccount member_emailAccount,
+			member.Password member_password,
+			member.UmpayUserNo member_umpayUserNo,
+			member.UmpayAccountNo member_umpayAccountNo,
+			member.PayPassword member_payPassword,
+			member.Nickname member_nickname,
+			member.Avatar member_avatar,
+			member.ValidEmail member_validEmail,
+			member.MobilePhone member_mobilePhone,
+			member.OfficePhone member_officePhone,
+			member.CertificateType member_certificateType,
+			member.CertificateNo member_certificateNo,
+			member.Name member_name,
+			member.Male member_male,
+			member.Birthday member_birthday,
+			member.FamilyRole member_familyRole,
+			member.Rrac member_rrac,
+			member.RiskScore member_riskScore,
+			member.ProvinceSpell member_provinceSpell,
+			member.ProvinceCode member_provinceCode,
+			member.CityCode member_cityCode,
+			member.CountryCode member_countryCode,
+			member.ProvinceName member_provinceName,
+			member.CityName member_cityName,
+			member.CountryName member_countryName,
+			member.Address member_address,
+			member.Income member_income,
+			member.Job member_job,
+			member.Education member_education,
+			member.ChildrenCount member_childrenCount,
+			member.IsFreePassword member_isFreePassword,
+			member.IsEmailValid member_isEmailValid,
+			member.IsRealname member_isRealname,
+			member.IsActivate member_isActivate,
+			member.IsOpenAccount member_isOpenAccount,
+			member.IsBindingCard member_isBindingCard,
+			member.IsSignature member_isSignature,
+			member.SignatureTime member_signatureTime,
+			member.OpenAccountTime member_openAccountTime,
+			member.RegisterTime member_registerTime,
+			member.ModifyTime member_modifyTime,
+			member.SerialNo member_serialNo,
+			member.ResetTime member_resetTime,
+			member.ReferralCode member_referralCode,
+			member.RecommendIdcode member_recommendIdcode
+		from CC_EmailActivateValid emailActivateValid
+		inner join CC_Member member on member.EmailRegisterValidId=emailActivateValid.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectEmailActivateValidMember" resultMap="emailActivateValidResult" parameterMap="emailActivateValidParam">
+		select
+			emailActivateValid.Id emailActivateValid_id,
+			emailActivateValid.BussinessCode emailActivateValid_bussinessCode,
+			emailActivateValid.EmailAccount emailActivateValid_emailAccount,
+			emailActivateValid.Password emailActivateValid_password,
+			emailActivateValid.SerialNo emailActivateValid_serialNo,
+			emailActivateValid.Nickname emailActivateValid_nickname,
+			emailActivateValid.ExpiredTime emailActivateValid_expiredTime,
+			emailActivateValid.RegisterTime emailActivateValid_registerTime,
+				member.Id member_id,
+	
+				member.SpvId member_spvId,
+	
+				member.EmailRegisterValidId member_emailRegisterValidId,
+	
+				member.Type member_type,
+	
+				member.Code member_code,
+	
+				member.Account member_account,
+	
+				member.PhoneAccount member_phoneAccount,
+	
+				member.EmailAccount member_emailAccount,
+	
+				member.Password member_password,
+	
+				member.UmpayUserNo member_umpayUserNo,
+	
+				member.UmpayAccountNo member_umpayAccountNo,
+	
+				member.PayPassword member_payPassword,
+	
+				member.Nickname member_nickname,
+	
+				member.Avatar member_avatar,
+	
+				member.ValidEmail member_validEmail,
+	
+				member.MobilePhone member_mobilePhone,
+	
+				member.OfficePhone member_officePhone,
+	
+				member.CertificateType member_certificateType,
+	
+				member.CertificateNo member_certificateNo,
+	
+				member.Name member_name,
+	
+				member.Male member_male,
+	
+				member.Birthday member_birthday,
+	
+				member.FamilyRole member_familyRole,
+	
+				member.Rrac member_rrac,
+	
+				member.RiskScore member_riskScore,
+	
+				member.ProvinceSpell member_provinceSpell,
+	
+				member.ProvinceCode member_provinceCode,
+	
+				member.CityCode member_cityCode,
+	
+				member.CountryCode member_countryCode,
+	
+				member.ProvinceName member_provinceName,
+	
+				member.CityName member_cityName,
+	
+				member.CountryName member_countryName,
+	
+				member.Address member_address,
+	
+				member.Income member_income,
+	
+				member.Job member_job,
+	
+				member.Education member_education,
+	
+				member.ChildrenCount member_childrenCount,
+	
+				member.IsFreePassword member_isFreePassword,
+	
+				member.IsEmailValid member_isEmailValid,
+	
+				member.IsRealname member_isRealname,
+	
+				member.IsActivate member_isActivate,
+	
+				member.IsOpenAccount member_isOpenAccount,
+	
+				member.IsBindingCard member_isBindingCard,
+	
+				member.IsSignature member_isSignature,
+	
+				member.SignatureTime member_signatureTime,
+	
+				member.OpenAccountTime member_openAccountTime,
+	
+				member.RegisterTime member_registerTime,
+	
+				member.ModifyTime member_modifyTime,
+	
+				member.SerialNo member_serialNo,
+	
+				member.ResetTime member_resetTime,
+	
+				member.ReferralCode member_referralCode,
+	
+				member.RecommendIdcode member_recommendIdcode
+	
+		from CC_EmailActivateValid emailActivateValid
+		inner join CC_Member member on member.EmailRegisterValidId=emailActivateValid.Id
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectList" resultMap="emailActivateValidResult" parameterMap="emailActivateValidParam">
+		select 
+			Id emailActivateValid_id,
+			BussinessCode emailActivateValid_bussinessCode,
+			EmailAccount emailActivateValid_emailAccount,
+			Password emailActivateValid_password,
+			SerialNo emailActivateValid_serialNo,
+			Nickname emailActivateValid_nickname,
+			ExpiredTime emailActivateValid_expiredTime,
+			RegisterTime emailActivateValid_registerTime
+		from CC_EmailActivateValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="emailActivateValidResult">
+		select 
+			Id emailActivateValid_id,
+			BussinessCode emailActivateValid_bussinessCode,
+			EmailAccount emailActivateValid_emailAccount,
+			Password emailActivateValid_password,
+			SerialNo emailActivateValid_serialNo,
+			Nickname emailActivateValid_nickname,
+			ExpiredTime emailActivateValid_expiredTime,
+			RegisterTime emailActivateValid_registerTime
+		from CC_EmailActivateValid
+	</select>
+	
+	<select id="selectOneById"  resultMap="emailActivateValidResult" parameterMap="emailActivateValidParam">
+		select 
+			Id emailActivateValid_id,
+			BussinessCode emailActivateValid_bussinessCode,
+			EmailAccount emailActivateValid_emailAccount,
+			Password emailActivateValid_password,
+			SerialNo emailActivateValid_serialNo,
+			Nickname emailActivateValid_nickname,
+			ExpiredTime emailActivateValid_expiredTime,
+			RegisterTime emailActivateValid_registerTime
+		from CC_EmailActivateValid where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="emailActivateValidResult" parameterMap="emailActivateValidParam">
+		select 
+			Id emailActivateValid_id,
+			BussinessCode emailActivateValid_bussinessCode,
+			EmailAccount emailActivateValid_emailAccount,
+			Password emailActivateValid_password,
+			SerialNo emailActivateValid_serialNo,
+			Nickname emailActivateValid_nickname,
+			ExpiredTime emailActivateValid_expiredTime,
+			RegisterTime emailActivateValid_registerTime
+		from CC_EmailActivateValid
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="emailActivateValidParam">
+		select count(*) from CC_EmailActivateValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="emailActivateValidParam">
+		update CC_EmailActivateValid
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">,BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">,EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">,Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">,SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">,Nickname=#{nickname}</if>
+				<if test="expiredTime != null">,ExpiredTime=${expiredTime}</if>
+               		 <if test="registerTime != null  and registerTime != ''">,RegisterTime=#{registerTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="emailActivateValidParam">
+		update CC_EmailActivateValid
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+						,BussinessCode=#{bussinessCode}
+						,EmailAccount=#{emailAccount}
+						,Password=#{password}
+						,SerialNo=#{serialNo}
+						,Nickname=#{nickname}
+                            ,ExpiredTime=${expiredTime}
+                        <if test="registerTime != null  and registerTime != ''">,RegisterTime=#{registerTime}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="emailActivateValidParam">
+		insert into CC_EmailActivateValid
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="bussinessCode != null and bussinessCode != ''">,BussinessCode</if>
+			<if test="emailAccount != null and emailAccount != ''">,EmailAccount</if>
+			<if test="password != null and password != ''">,Password</if>
+			<if test="serialNo != null and serialNo != ''">,SerialNo</if>
+			<if test="nickname != null and nickname != ''">,Nickname</if>
+			<if test="expiredTime != null">,ExpiredTime</if>
+                <if test="registerTime != null and registerTime != ''">,RegisterTime</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="bussinessCode != null and bussinessCode != ''">,#{bussinessCode}</if>
+			<if test="emailAccount != null and emailAccount != ''">,#{emailAccount}</if>
+			<if test="password != null and password != ''">,#{password}</if>
+			<if test="serialNo != null and serialNo != ''">,#{serialNo}</if>
+			<if test="nickname != null and nickname != ''">,#{nickname}</if>
+			<if test="expiredTime != null">,${expiredTime}</if>
+            	<if test="registerTime != null and registerTime != ''">,#{registerTime}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="emailActivateValidParam">
+		delete from CC_EmailActivateValid where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="emailActivateValidParam">
+		delete from CC_EmailActivateValid
+	</delete>
+	
+	<delete id="delete" parameterMap="emailActivateValidParam">
+		delete from CC_EmailActivateValid
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="bussinessCode != null and bussinessCode != ''">and BussinessCode=#{bussinessCode}</if>
+				<if test="emailAccount != null and emailAccount != ''">and EmailAccount=#{emailAccount}</if>
+				<if test="password != null and password != ''">and Password=#{password}</if>
+				<if test="serialNo != null and serialNo != ''">and SerialNo=#{serialNo}</if>
+				<if test="nickname != null and nickname != ''">and Nickname=#{nickname}</if>
+				<if test="expiredTime != null">and ExpiredTime=${expiredTime}</if>
+				<if test="registerTime != null and registerTime != ''">and RegisterTime=#{registerTime}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

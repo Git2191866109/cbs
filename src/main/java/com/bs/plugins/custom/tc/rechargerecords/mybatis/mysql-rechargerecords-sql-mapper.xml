@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.rechargerecords.dao.IRechargeRecordsDao">
+
+    <select id="selectPaginatedNewList"  resultMap="rechargeRecordsResult" parameterMap="rechargeRecordsParam">
+        select
+        Id rechargeRecords_id,
+        MemberId rechargeRecords_memberId,
+        TransactionNumber rechargeRecords_transactionNumber,
+        PayPlantformNumber rechargeRecords_payPlantformNumber,
+        Amount rechargeRecords_amount,
+        IDCardType rechargeRecords_iDCardType,
+        IDCard rechargeRecords_iDCard,
+        BankName rechargeRecords_bankName,
+        BankCode rechargeRecords_bankCode,
+        BankCardNumber rechargeRecords_bankCardNumber,
+        HandlingCharge rechargeRecords_handlingCharge,
+        ApplyTime rechargeRecords_applyTime,
+        Status rechargeRecords_status,
+        CheckingTime rechargeRecords_checkingTime,
+        CheckingStatus rechargeRecords_checkingStatus,
+        Remark rechargeRecords_remark
+        from TC_RechargeRecords
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="memberId != null">and MemberId=${memberId}</if>
+                <if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+                <if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+                <if test="amount != null">and Amount=${amount}</if>
+                <if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+                <if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+                <if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+                <if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+                <if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+                <if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+                <if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+                <if test="applyTimeStartTime != null and applyTimeStartTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(ApplyTime) >= TO_DAYS(#{applyTimeStartTime})
+					]]>
+
+                </if>
+                <if test="applyTimeEndTime != null and applyTimeEndTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(applyTime) <= TO_DAYS(#{applyTimeEndTime})
+					]]>
+                </if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+                <if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+                <if test="remark != null and remark != ''">and Remark=#{remark}</if>
+            </trim>
+        </where>
+        order by Id asc
+        limit ${start},${offset}
+    </select>
+    <select id="getNewCount"  resultType="long" parameterMap="rechargeRecordsParam">
+        select count(*) from TC_RechargeRecords
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and Id=${id}</if>
+                <if test="memberId != null">and MemberId=${memberId}</if>
+                <if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+                <if test="payPlantformNumber != null and payPlantformNumber != ''">and PayPlantformNumber=#{payPlantformNumber}</if>
+                <if test="amount != null">and Amount=${amount}</if>
+                <if test="iDCardType != null">and IDCardType=${iDCardType}</if>
+                <if test="iDCard != null and iDCard != ''">and IDCard=#{iDCard}</if>
+                <if test="bankName != null and bankName != ''">and BankName=#{bankName}</if>
+                <if test="bankCode != null and bankCode != ''">and BankCode=#{bankCode}</if>
+                <if test="bankCardNumber != null and bankCardNumber != ''">and BankCardNumber=#{bankCardNumber}</if>
+                <if test="handlingCharge != null">and HandlingCharge=${handlingCharge}</if>
+                <if test="applyTime != null and applyTime != ''">and ApplyTime=#{applyTime}</if>
+                <if test="applyTimeStartTime != null and applyTimeStartTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(ApplyTime) >= TO_DAYS(#{applyTimeStartTime})
+					]]>
+
+                </if>
+                <if test="applyTimeEndTime != null and applyTimeEndTime != ''">
+                    <![CDATA[
+					   AND TO_DAYS(applyTime) <= TO_DAYS(#{applyTimeEndTime})
+					]]>
+                </if>
+                <if test="status != null">and Status=${status}</if>
+                <if test="checkingTime != null and checkingTime != ''">and CheckingTime=#{checkingTime}</if>
+                <if test="checkingStatus != null">and CheckingStatus=${checkingStatus}</if>
+                <if test="remark != null and remark != ''">and Remark=#{remark}</if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

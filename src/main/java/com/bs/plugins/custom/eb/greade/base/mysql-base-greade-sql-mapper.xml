@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.greade.dao.IGreadeDao">
+
+	<parameterMap id="greadeParam" type="com.bs.plugins.custom.eb.greade.entity.Greade" />
+	<resultMap id="greadeResult" type="com.bs.plugins.custom.eb.greade.entity.Greade">
+		<id property="id" column="greade_id" javaType="java.lang.Long" />
+		<result property="name" column="greade_name" javaType="java.lang.String" />
+		<result property="age" column="greade_age" javaType="java.lang.Integer" />
+		<result property="createDate" column="greade_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="greade_modifyDate" javaType="java.lang.String" />
+		<result property="creatorId" column="greade_creatorId" javaType="java.lang.Long" />
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="greadeResult" parameterMap="greadeParam">
+		select 
+			Id greade_id,
+			Name greade_name,
+			Age greade_age,
+			CreateDate greade_createDate,
+			ModifyDate greade_modifyDate,
+			CreatorId greade_creatorId
+		from EB_Greade
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="greadeResult">
+		select 
+			Id greade_id,
+			Name greade_name,
+			Age greade_age,
+			CreateDate greade_createDate,
+			ModifyDate greade_modifyDate,
+			CreatorId greade_creatorId
+		from EB_Greade
+	</select>
+	
+	<select id="selectOneById"  resultMap="greadeResult" parameterMap="greadeParam">
+		select 
+			Id greade_id,
+			Name greade_name,
+			Age greade_age,
+			CreateDate greade_createDate,
+			ModifyDate greade_modifyDate,
+			CreatorId greade_creatorId
+		from EB_Greade where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="greadeResult" parameterMap="greadeParam">
+		select 
+			Id greade_id,
+			Name greade_name,
+			Age greade_age,
+			CreateDate greade_createDate,
+			ModifyDate greade_modifyDate,
+			CreatorId greade_creatorId
+		from EB_Greade
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="greadeParam">
+		select count(*) from EB_Greade
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="greadeParam">
+		update EB_Greade
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="name != null and name != ''">,Name=#{name}</if>
+				<if test="age != null">,Age=${age}</if>
+				,CreateDate=now()
+				,ModifyDate=now()
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="greadeParam">
+		insert into EB_Greade
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="name != null and name != ''">,Name</if>
+			<if test="age != null">,Age</if>
+			,CreateDate
+			,ModifyDate
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+			<if test="age != null">,${age}</if>
+			,now()
+			,now()
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="greadeParam">
+		delete from EB_Greade where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="greadeParam">
+		delete from EB_Greade
+	</delete>
+	
+	<delete id="delete" parameterMap="greadeParam">
+		delete from EB_Greade
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="name != null and name != ''">and Name=#{name}</if>
+				<if test="age != null">and Age=${age}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

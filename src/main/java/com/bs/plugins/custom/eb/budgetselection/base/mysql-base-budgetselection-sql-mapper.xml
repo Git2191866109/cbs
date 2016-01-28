@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.eb.budgetselection.dao.IBudgetSelectionDao">
+
+	<parameterMap id="budgetSelectionParam" type="com.bs.plugins.custom.eb.budgetselection.entity.BudgetSelection" />
+	<resultMap id="budgetSelectionResult" type="com.bs.plugins.custom.eb.budgetselection.entity.BudgetSelection">
+		<id property="id" column="budgetSelection_id" javaType="java.lang.Long" />
+		<result property="basicInfoId" column="budgetSelection_basicInfoId" javaType="java.lang.Long" />
+		<result property="growStagesId" column="budgetSelection_growStagesId" javaType="java.lang.Long" />
+		<result property="costLevel" column="budgetSelection_costLevel" javaType="java.lang.Integer" />
+		<result property="eduModelId" column="budgetSelection_eduModelId" javaType="java.lang.Long" />
+		<result property="provinceSpelling" column="budgetSelection_provinceSpelling" javaType="java.lang.String" />
+		<result property="provinceCode" column="budgetSelection_provinceCode" javaType="java.lang.String" />
+		<result property="provinceName" column="budgetSelection_provinceName" javaType="java.lang.String" />
+		<result property="cityCode" column="budgetSelection_cityCode" javaType="java.lang.String" />
+		<result property="cityName" column="budgetSelection_cityName" javaType="java.lang.String" />
+		<result property="countryCode" column="budgetSelection_countryCode" javaType="java.lang.String" />
+		<result property="countryName" column="budgetSelection_countryName" javaType="java.lang.String" />
+		<result property="createDate" column="budgetSelection_createDate" javaType="java.lang.String" />
+		<result property="modifyDate" column="budgetSelection_modifyDate" javaType="java.lang.String" />
+		<result property="isValid" column="budgetSelection_isValid" javaType="java.lang.Integer" />
+		<result property="creatorId" column="budgetSelection_creatorId" javaType="java.lang.Long" />
+		<association property="budgetBasicInfo" javaType="com.bs.plugins.custom.eb.budgetbasicinfo.entity.BudgetBasicInfo">
+			<id property="id" column="budgetBasicInfo_id" javaType="java.lang.Long" />
+			<result property="memberId" column="budgetBasicInfo_memberId" javaType="java.lang.Long" />
+			<result property="eduGoalId" column="budgetBasicInfo_eduGoalId" javaType="java.lang.Long" />
+			<result property="serialNumber" column="budgetBasicInfo_serialNumber" javaType="java.lang.String" />
+			<result property="name" column="budgetBasicInfo_name" javaType="java.lang.String" />
+			<result property="costLevel" column="budgetBasicInfo_costLevel" javaType="java.lang.Integer" />
+			<result property="age" column="budgetBasicInfo_age" javaType="java.lang.Integer" />
+			<result property="birthday" column="budgetBasicInfo_birthday" javaType="java.lang.String" />
+			<result property="provinceSpelling" column="budgetBasicInfo_provinceSpelling" javaType="java.lang.String" />
+			<result property="provinceCode" column="budgetBasicInfo_provinceCode" javaType="java.lang.String" />
+			<result property="provinceName" column="budgetBasicInfo_provinceName" javaType="java.lang.String" />
+			<result property="cityCode" column="budgetBasicInfo_cityCode" javaType="java.lang.String" />
+			<result property="cityName" column="budgetBasicInfo_cityName" javaType="java.lang.String" />
+			<result property="countryCode" column="budgetBasicInfo_countryCode" javaType="java.lang.String" />
+			<result property="countryName" column="budgetBasicInfo_countryName" javaType="java.lang.String" />
+			<result property="avatarPicture" column="budgetBasicInfo_avatarPicture" javaType="java.lang.String" />
+			<result property="budgetCost" column="budgetBasicInfo_budgetCost" javaType="java.math.BigDecimal" />
+			<result property="financingAtisfiedRate" column="budgetBasicInfo_financingAtisfiedRate" javaType="java.lang.String" />
+			<result property="balance" column="budgetBasicInfo_balance" javaType="java.math.BigDecimal" />
+			<result property="isLacking" column="budgetBasicInfo_isLacking" javaType="java.lang.Integer" />
+			<result property="reserves" column="budgetBasicInfo_reserves" javaType="java.math.BigDecimal" />
+			<result property="monthlyInvestment" column="budgetBasicInfo_monthlyInvestment" javaType="java.math.BigDecimal" />
+			<result property="birthYear" column="budgetBasicInfo_birthYear" javaType="java.lang.Integer" />
+			<result property="sex" column="budgetBasicInfo_sex" javaType="java.lang.Integer" />
+			<result property="createDate" column="budgetBasicInfo_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="budgetBasicInfo_modifyDate" javaType="java.lang.String" />
+			<result property="isValid" column="budgetBasicInfo_isValid" javaType="java.lang.Integer" />
+			<result property="creatorId" column="budgetBasicInfo_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="growStages" javaType="com.bs.plugins.custom.eb.growstages.entity.GrowStages">
+			<id property="id" column="growStages_id" javaType="java.lang.Long" />
+			<result property="name" column="growStages_name" javaType="java.lang.String" />
+			<result property="code" column="growStages_code" javaType="java.lang.String" />
+			<result property="startAge" column="growStages_startAge" javaType="java.lang.Integer" />
+			<result property="endAge" column="growStages_endAge" javaType="java.lang.Integer" />
+			<result property="isInclude" column="growStages_isInclude" javaType="java.lang.Integer" />
+			<result property="createDate" column="growStages_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="growStages_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="growStages_creatorId" javaType="java.lang.Long" />
+		</association>
+		<association property="educationMode" javaType="com.bs.plugins.custom.eb.educationmode.entity.EducationMode">
+			<id property="id" column="educationMode_id" javaType="java.lang.Long" />
+			<result property="growStagesId" column="educationMode_growStagesId" javaType="java.lang.Long" />
+			<result property="name" column="educationMode_name" javaType="java.lang.String" />
+			<result property="createDate" column="educationMode_createDate" javaType="java.lang.String" />
+			<result property="modifyDate" column="educationMode_modifyDate" javaType="java.lang.String" />
+			<result property="creatorId" column="educationMode_creatorId" javaType="java.lang.Long" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select
+			budgetSelection.Id budgetSelection_id,
+			budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+			budgetSelection.GrowStagesId budgetSelection_growStagesId,
+			budgetSelection.CostLevel budgetSelection_costLevel,
+			budgetSelection.EduModelId budgetSelection_eduModelId,
+			budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+			budgetSelection.ProvinceCode budgetSelection_provinceCode,
+			budgetSelection.ProvinceName budgetSelection_provinceName,
+			budgetSelection.CityCode budgetSelection_cityCode,
+			budgetSelection.CityName budgetSelection_cityName,
+			budgetSelection.CountryCode budgetSelection_countryCode,
+			budgetSelection.CountryName budgetSelection_countryName,
+			budgetSelection.CreateDate budgetSelection_createDate,
+			budgetSelection.ModifyDate budgetSelection_modifyDate,
+			budgetSelection.IsValid budgetSelection_isValid,
+			budgetSelection.CreatorId budgetSelection_creatorId,	
+			budgetBasicInfo.Id budgetBasicInfo_id,
+			budgetBasicInfo.MemberId budgetBasicInfo_memberId,
+			budgetBasicInfo.EduGoalId budgetBasicInfo_eduGoalId,
+			budgetBasicInfo.SerialNumber budgetBasicInfo_serialNumber,
+			budgetBasicInfo.Name budgetBasicInfo_name,
+			budgetBasicInfo.CostLevel budgetBasicInfo_costLevel,
+			budgetBasicInfo.Age budgetBasicInfo_age,
+			budgetBasicInfo.Birthday budgetBasicInfo_birthday,
+			budgetBasicInfo.ProvinceSpelling budgetBasicInfo_provinceSpelling,
+			budgetBasicInfo.ProvinceCode budgetBasicInfo_provinceCode,
+			budgetBasicInfo.ProvinceName budgetBasicInfo_provinceName,
+			budgetBasicInfo.CityCode budgetBasicInfo_cityCode,
+			budgetBasicInfo.CityName budgetBasicInfo_cityName,
+			budgetBasicInfo.CountryCode budgetBasicInfo_countryCode,
+			budgetBasicInfo.CountryName budgetBasicInfo_countryName,
+			budgetBasicInfo.AvatarPicture budgetBasicInfo_avatarPicture,
+			budgetBasicInfo.BudgetCost budgetBasicInfo_budgetCost,
+			budgetBasicInfo.FinancingAtisfiedRate budgetBasicInfo_financingAtisfiedRate,
+			budgetBasicInfo.Balance budgetBasicInfo_balance,
+			budgetBasicInfo.IsLacking budgetBasicInfo_isLacking,
+			budgetBasicInfo.Reserves budgetBasicInfo_reserves,
+			budgetBasicInfo.MonthlyInvestment budgetBasicInfo_monthlyInvestment,
+			budgetBasicInfo.BirthYear budgetBasicInfo_birthYear,
+			budgetBasicInfo.Sex budgetBasicInfo_sex,
+			budgetBasicInfo.CreateDate budgetBasicInfo_createDate,
+			budgetBasicInfo.ModifyDate budgetBasicInfo_modifyDate,
+			budgetBasicInfo.IsValid budgetBasicInfo_isValid,
+			budgetBasicInfo.CreatorId budgetBasicInfo_creatorId,
+			growStages.Id growStages_id,
+			growStages.Name growStages_name,
+			growStages.Code growStages_code,
+			growStages.StartAge growStages_startAge,
+			growStages.EndAge growStages_endAge,
+			growStages.IsInclude growStages_isInclude,
+			growStages.CreateDate growStages_createDate,
+			growStages.ModifyDate growStages_modifyDate,
+			growStages.CreatorId growStages_creatorId,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId
+		from EB_BudgetSelection budgetSelection
+		inner join EB_BudgetBasicInfo budgetBasicInfo on budgetBasicInfo.Id=budgetSelection.BasicInfoId
+		inner join EB_GrowStages growStages on growStages.Id=budgetSelection.GrowStagesId
+		inner join EB_EducationMode educationMode on educationMode.Id=budgetSelection.EduModelId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectBudgetSelectionBudgetBasicInfo" resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select
+			budgetSelection.Id budgetSelection_id,
+			budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+			budgetSelection.GrowStagesId budgetSelection_growStagesId,
+			budgetSelection.CostLevel budgetSelection_costLevel,
+			budgetSelection.EduModelId budgetSelection_eduModelId,
+			budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+			budgetSelection.ProvinceCode budgetSelection_provinceCode,
+			budgetSelection.ProvinceName budgetSelection_provinceName,
+			budgetSelection.CityCode budgetSelection_cityCode,
+			budgetSelection.CityName budgetSelection_cityName,
+			budgetSelection.CountryCode budgetSelection_countryCode,
+			budgetSelection.CountryName budgetSelection_countryName,
+			budgetSelection.CreateDate budgetSelection_createDate,
+			budgetSelection.ModifyDate budgetSelection_modifyDate,
+			budgetSelection.IsValid budgetSelection_isValid,
+			budgetBasicInfo.Id educationMode_id,
+			budgetBasicInfo.MemberId educationMode_memberId,
+			budgetBasicInfo.EduGoalId educationMode_eduGoalId,
+			budgetBasicInfo.SerialNumber educationMode_serialNumber,
+			budgetBasicInfo.Name educationMode_name,
+			budgetBasicInfo.CostLevel educationMode_costLevel,
+			budgetBasicInfo.Age educationMode_age,
+			budgetBasicInfo.Birthday educationMode_birthday,
+			budgetBasicInfo.ProvinceSpelling educationMode_provinceSpelling,
+			budgetBasicInfo.ProvinceCode educationMode_provinceCode,
+			budgetBasicInfo.ProvinceName educationMode_provinceName,
+			budgetBasicInfo.CityCode educationMode_cityCode,
+			budgetBasicInfo.CityName educationMode_cityName,
+			budgetBasicInfo.CountryCode educationMode_countryCode,
+			budgetBasicInfo.CountryName educationMode_countryName,
+			budgetBasicInfo.AvatarPicture educationMode_avatarPicture,
+			budgetBasicInfo.BudgetCost educationMode_budgetCost,
+			budgetBasicInfo.FinancingAtisfiedRate educationMode_financingAtisfiedRate,
+			budgetBasicInfo.Balance educationMode_balance,
+			budgetBasicInfo.IsLacking educationMode_isLacking,
+			budgetBasicInfo.Reserves educationMode_reserves,
+			budgetBasicInfo.MonthlyInvestment educationMode_monthlyInvestment,
+			budgetBasicInfo.BirthYear educationMode_birthYear,
+			budgetBasicInfo.Sex educationMode_sex,
+			budgetBasicInfo.CreateDate educationMode_createDate,
+			budgetBasicInfo.ModifyDate educationMode_modifyDate,
+			budgetBasicInfo.IsValid educationMode_isValid,
+			budgetBasicInfo.CreatorId educationMode_creatorId
+		from EB_BudgetSelection budgetSelection
+		inner join EB_BudgetBasicInfo budgetBasicInfo on budgetBasicInfo.Id=budgetSelection.BasicInfoId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectBudgetSelectionGrowStages" resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select
+			budgetSelection.Id budgetSelection_id,
+			budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+			budgetSelection.GrowStagesId budgetSelection_growStagesId,
+			budgetSelection.CostLevel budgetSelection_costLevel,
+			budgetSelection.EduModelId budgetSelection_eduModelId,
+			budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+			budgetSelection.ProvinceCode budgetSelection_provinceCode,
+			budgetSelection.ProvinceName budgetSelection_provinceName,
+			budgetSelection.CityCode budgetSelection_cityCode,
+			budgetSelection.CityName budgetSelection_cityName,
+			budgetSelection.CountryCode budgetSelection_countryCode,
+			budgetSelection.CountryName budgetSelection_countryName,
+			budgetSelection.CreateDate budgetSelection_createDate,
+			budgetSelection.ModifyDate budgetSelection_modifyDate,
+			budgetSelection.IsValid budgetSelection_isValid,
+			growStages.Id educationMode_id,
+			growStages.Name educationMode_name,
+			growStages.Code educationMode_code,
+			growStages.StartAge educationMode_startAge,
+			growStages.EndAge educationMode_endAge,
+			growStages.IsInclude educationMode_isInclude,
+			growStages.CreateDate educationMode_createDate,
+			growStages.ModifyDate educationMode_modifyDate,
+			growStages.CreatorId educationMode_creatorId
+		from EB_BudgetSelection budgetSelection
+		inner join EB_GrowStages growStages on growStages.Id=budgetSelection.GrowStagesId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectBudgetSelectionEducationMode" resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select
+			budgetSelection.Id budgetSelection_id,
+			budgetSelection.BasicInfoId budgetSelection_basicInfoId,
+			budgetSelection.GrowStagesId budgetSelection_growStagesId,
+			budgetSelection.CostLevel budgetSelection_costLevel,
+			budgetSelection.EduModelId budgetSelection_eduModelId,
+			budgetSelection.ProvinceSpelling budgetSelection_provinceSpelling,
+			budgetSelection.ProvinceCode budgetSelection_provinceCode,
+			budgetSelection.ProvinceName budgetSelection_provinceName,
+			budgetSelection.CityCode budgetSelection_cityCode,
+			budgetSelection.CityName budgetSelection_cityName,
+			budgetSelection.CountryCode budgetSelection_countryCode,
+			budgetSelection.CountryName budgetSelection_countryName,
+			budgetSelection.CreateDate budgetSelection_createDate,
+			budgetSelection.ModifyDate budgetSelection_modifyDate,
+			budgetSelection.IsValid budgetSelection_isValid,
+			educationMode.Id educationMode_id,
+			educationMode.GrowStagesId educationMode_growStagesId,
+			educationMode.Name educationMode_name,
+			educationMode.CreateDate educationMode_createDate,
+			educationMode.ModifyDate educationMode_modifyDate,
+			educationMode.CreatorId educationMode_creatorId
+		from EB_BudgetSelection budgetSelection
+		inner join EB_EducationMode educationMode on educationMode.Id=budgetSelection.EduModelId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select 
+			Id budgetSelection_id,
+			BasicInfoId budgetSelection_basicInfoId,
+			GrowStagesId budgetSelection_growStagesId,
+			CostLevel budgetSelection_costLevel,
+			EduModelId budgetSelection_eduModelId,
+			ProvinceSpelling budgetSelection_provinceSpelling,
+			ProvinceCode budgetSelection_provinceCode,
+			ProvinceName budgetSelection_provinceName,
+			CityCode budgetSelection_cityCode,
+			CityName budgetSelection_cityName,
+			CountryCode budgetSelection_countryCode,
+			CountryName budgetSelection_countryName,
+			CreateDate budgetSelection_createDate,
+			ModifyDate budgetSelection_modifyDate,
+			IsValid budgetSelection_isValid,
+			CreatorId budgetSelection_creatorId
+		from EB_BudgetSelection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="budgetSelectionResult">
+		select 
+			Id budgetSelection_id,
+			BasicInfoId budgetSelection_basicInfoId,
+			GrowStagesId budgetSelection_growStagesId,
+			CostLevel budgetSelection_costLevel,
+			EduModelId budgetSelection_eduModelId,
+			ProvinceSpelling budgetSelection_provinceSpelling,
+			ProvinceCode budgetSelection_provinceCode,
+			ProvinceName budgetSelection_provinceName,
+			CityCode budgetSelection_cityCode,
+			CityName budgetSelection_cityName,
+			CountryCode budgetSelection_countryCode,
+			CountryName budgetSelection_countryName,
+			CreateDate budgetSelection_createDate,
+			ModifyDate budgetSelection_modifyDate,
+			IsValid budgetSelection_isValid,
+			CreatorId budgetSelection_creatorId
+		from EB_BudgetSelection
+	</select>
+	
+	<select id="selectOneById"  resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select 
+			Id budgetSelection_id,
+			BasicInfoId budgetSelection_basicInfoId,
+			GrowStagesId budgetSelection_growStagesId,
+			CostLevel budgetSelection_costLevel,
+			EduModelId budgetSelection_eduModelId,
+			ProvinceSpelling budgetSelection_provinceSpelling,
+			ProvinceCode budgetSelection_provinceCode,
+			ProvinceName budgetSelection_provinceName,
+			CityCode budgetSelection_cityCode,
+			CityName budgetSelection_cityName,
+			CountryCode budgetSelection_countryCode,
+			CountryName budgetSelection_countryName,
+			CreateDate budgetSelection_createDate,
+			ModifyDate budgetSelection_modifyDate,
+			IsValid budgetSelection_isValid,
+			CreatorId budgetSelection_creatorId
+		from EB_BudgetSelection where Id=${id}
+	</select>		
+	
+	<select id="selectPaginatedList"  resultMap="budgetSelectionResult" parameterMap="budgetSelectionParam">
+		select 
+			Id budgetSelection_id,
+			BasicInfoId budgetSelection_basicInfoId,
+			GrowStagesId budgetSelection_growStagesId,
+			CostLevel budgetSelection_costLevel,
+			EduModelId budgetSelection_eduModelId,
+			ProvinceSpelling budgetSelection_provinceSpelling,
+			ProvinceCode budgetSelection_provinceCode,
+			ProvinceName budgetSelection_provinceName,
+			CityCode budgetSelection_cityCode,
+			CityName budgetSelection_cityName,
+			CountryCode budgetSelection_countryCode,
+			CountryName budgetSelection_countryName,
+			CreateDate budgetSelection_createDate,
+			ModifyDate budgetSelection_modifyDate,
+			IsValid budgetSelection_isValid,
+			CreatorId budgetSelection_creatorId
+		from EB_BudgetSelection
+		order by Id asc
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="budgetSelectionParam">
+		select count(*) from EB_BudgetSelection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	<update id="updateById" parameterMap="budgetSelectionParam">
+		update EB_BudgetSelection
+		<set>
+			<trim prefixOverrides=",">
+				<if test="id != null">,Id=${id}</if>
+				<if test="basicInfoId != null">,BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">,GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">,CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">,EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">,ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">,ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">,ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">,CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">,CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">,CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">,CountryName=#{countryName}</if>
+               		 <if test="createDate != null  and createDate != ''">,CreateDate=#{createDate}</if>
+                    ,ModifyDate=now()
+				<if test="isValid != null">,IsValid=${isValid}</if>
+				<if test="creatorId != null">,CreatorId=${creatorId}</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	<update id="updateCompleteById" parameterMap="budgetSelectionParam">
+		update EB_BudgetSelection
+		<set>
+			<trim prefixOverrides=",">
+                            ,Id=${id}
+                            ,BasicInfoId=${basicInfoId}
+                            ,GrowStagesId=${growStagesId}
+                        <if test="costLevel != null">,CostLevel=${costLevel}</if>
+                        <if test="costLevel == null">,CostLevel= 0</if>
+                            ,EduModelId=${eduModelId}
+						,ProvinceSpelling=#{provinceSpelling}
+						,ProvinceCode=#{provinceCode}
+						,ProvinceName=#{provinceName}
+						,CityCode=#{cityCode}
+						,CityName=#{cityName}
+						,CountryCode=#{countryCode}
+						,CountryName=#{countryName}
+                            ,ModifyDate=now()
+                    	<if test="isValid != null">,IsValid=${isValid}</if>
+                        <if test="isValid == null">,IsValid= 0</if>
+			</trim>
+		</set>
+		where Id=${id}
+	</update>
+	
+	<insert id="insert" parameterMap="budgetSelectionParam">
+		insert into EB_BudgetSelection
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,Id</if>
+			<if test="basicInfoId != null">,BasicInfoId</if>
+			<if test="growStagesId != null">,GrowStagesId</if>
+			<if test="costLevel != null">,CostLevel</if>
+			<if test="eduModelId != null">,EduModelId</if>
+			<if test="provinceSpelling != null and provinceSpelling != ''">,ProvinceSpelling</if>
+			<if test="provinceCode != null and provinceCode != ''">,ProvinceCode</if>
+			<if test="provinceName != null and provinceName != ''">,ProvinceName</if>
+			<if test="cityCode != null and cityCode != ''">,CityCode</if>
+			<if test="cityName != null and cityName != ''">,CityName</if>
+			<if test="countryCode != null and countryCode != ''">,CountryCode</if>
+			<if test="countryName != null and countryName != ''">,CountryName</if>
+                ,CreateDate
+                <if test="modifyDate != null and modifyDate != ''">,ModifyDate</if>
+			<if test="isValid != null">,IsValid</if>
+			<if test="creatorId != null">,CreatorId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="id != null">,${id}</if>
+			<if test="basicInfoId != null">,${basicInfoId}</if>
+			<if test="growStagesId != null">,${growStagesId}</if>
+			<if test="costLevel != null">,${costLevel}</if>
+			<if test="eduModelId != null">,${eduModelId}</if>
+			<if test="provinceSpelling != null and provinceSpelling != ''">,#{provinceSpelling}</if>
+			<if test="provinceCode != null and provinceCode != ''">,#{provinceCode}</if>
+			<if test="provinceName != null and provinceName != ''">,#{provinceName}</if>
+			<if test="cityCode != null and cityCode != ''">,#{cityCode}</if>
+			<if test="cityName != null and cityName != ''">,#{cityName}</if>
+			<if test="countryCode != null and countryCode != ''">,#{countryCode}</if>
+			<if test="countryName != null and countryName != ''">,#{countryName}</if>
+                ,now()
+            	<if test="modifyDate != null and modifyDate != ''">,#{modifyDate}</if>
+			<if test="isValid != null">,${isValid}</if>
+			<if test="creatorId != null">,${creatorId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteById" parameterMap="budgetSelectionParam">
+		delete from EB_BudgetSelection where Id=${id}
+	</delete>
+	
+	<delete id="deleteAll" parameterMap="budgetSelectionParam">
+		delete from EB_BudgetSelection
+	</delete>
+	
+	<delete id="delete" parameterMap="budgetSelectionParam">
+		delete from EB_BudgetSelection
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="basicInfoId != null">and BasicInfoId=${basicInfoId}</if>
+				<if test="growStagesId != null">and GrowStagesId=${growStagesId}</if>
+				<if test="costLevel != null">and CostLevel=${costLevel}</if>
+				<if test="eduModelId != null">and EduModelId=${eduModelId}</if>
+				<if test="provinceSpelling != null and provinceSpelling != ''">and ProvinceSpelling=#{provinceSpelling}</if>
+				<if test="provinceCode != null and provinceCode != ''">and ProvinceCode=#{provinceCode}</if>
+				<if test="provinceName != null and provinceName != ''">and ProvinceName=#{provinceName}</if>
+				<if test="cityCode != null and cityCode != ''">and CityCode=#{cityCode}</if>
+				<if test="cityName != null and cityName != ''">and CityName=#{cityName}</if>
+				<if test="countryCode != null and countryCode != ''">and CountryCode=#{countryCode}</if>
+				<if test="countryName != null and countryName != ''">and CountryName=#{countryName}</if>
+				<if test="createDate != null and createDate != ''">and CreateDate=#{createDate}</if>
+				<if test="modifyDate != null and modifyDate != ''">and ModifyDate=#{modifyDate}</if>
+				<if test="isValid != null">and IsValid=${isValid}</if>
+				<if test="creatorId != null">and CreatorId=${creatorId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

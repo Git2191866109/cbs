@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.pc.productcontractrelation.dao.IProductContractRelationDao">
+
+	<parameterMap id="productContractRelationParam" type="com.bs.plugins.custom.pc.productcontractrelation.entity.ProductContractRelation" />
+	<resultMap id="productContractRelationResult" type="com.bs.plugins.custom.pc.productcontractrelation.entity.ProductContractRelation">
+		<result property="productId" column="productContractRelation_productId" javaType="java.lang.Long" />
+		<result property="contractTemplateId" column="productContractRelation_contractTemplateId" javaType="java.lang.Long" />
+		<association property="product" javaType="com.bs.plugins.custom.pc.product.entity.Product">
+			<id property="id" column="product_id" javaType="java.lang.Long" />
+			<result property="basicProductId" column="product_basicProductId" javaType="java.lang.Long" />
+			<result property="assetCategoryCode" column="product_assetCategoryCode" javaType="java.lang.String" />
+			<result property="categoryId" column="product_categoryId" javaType="java.lang.Long" />
+			<result property="spvId" column="product_spvId" javaType="java.lang.Long" />
+			<result property="name" column="product_name" javaType="java.lang.String" />
+			<result property="code" column="product_code" javaType="java.lang.String" />
+			<result property="totalAmount" column="product_totalAmount" javaType="java.lang.Integer" />
+			<result property="surplusAmount" column="product_surplusAmount" javaType="java.lang.Integer" />
+			<result property="firstPublishTime" column="product_firstPublishTime" javaType="java.lang.String" />
+			<result property="description" column="product_description" javaType="java.lang.String" />
+			<result property="status" column="product_status" javaType="java.lang.Integer" />
+			<result property="creatorId" column="product_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="product_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="product_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="product_modifyTime" javaType="java.lang.String" />
+			<result property="isDelete" column="product_isDelete" javaType="java.lang.Integer" />
+		</association>
+		<association property="contractTemplate" javaType="com.bs.plugins.custom.pc.contracttemplate.entity.ContractTemplate">
+			<id property="id" column="contractTemplate_id" javaType="java.lang.Long" />
+			<result property="name" column="contractTemplate_name" javaType="java.lang.String" />
+			<result property="code" column="contractTemplate_code" javaType="java.lang.String" />
+			<result property="templatePath" column="contractTemplate_templatePath" javaType="java.lang.String" />
+			<result property="templateContent" column="contractTemplate_templateContent" javaType="java.lang.String" />
+			<result property="description" column="contractTemplate_description" javaType="java.lang.String" />
+			<result property="creatorId" column="contractTemplate_creatorId" javaType="java.lang.Long" />
+			<result property="createTime" column="contractTemplate_createTime" javaType="java.lang.String" />
+			<result property="modifierId" column="contractTemplate_modifierId" javaType="java.lang.Long" />
+			<result property="modifyTime" column="contractTemplate_modifyTime" javaType="java.lang.String" />
+			<result property="delFlag" column="contractTemplate_delFlag" javaType="java.lang.Integer" />
+		</association>
+	</resultMap>
+	
+	<select id="selectAssociations" resultMap="productContractRelationResult" parameterMap="productContractRelationParam">
+		select
+			productContractRelation.ProductId productContractRelation_productId,
+			productContractRelation.ContractTemplateId productContractRelation_contractTemplateId,	
+			product.Id product_id,
+			product.BasicProductId product_basicProductId,
+			product.AssetCategoryCode product_assetCategoryCode,
+			product.CategoryId product_categoryId,
+			product.SpvId product_spvId,
+			product.Name product_name,
+			product.Code product_code,
+			product.TotalAmount product_totalAmount,
+			product.SurplusAmount product_surplusAmount,
+			product.FirstPublishTime product_firstPublishTime,
+			product.Description product_description,
+			product.Status product_status,
+			product.CreatorId product_creatorId,
+			product.CreateTime product_createTime,
+			product.ModifierId product_modifierId,
+			product.ModifyTime product_modifyTime,
+			product.isDelete product_isDelete,
+			contractTemplate.Id contractTemplate_id,
+			contractTemplate.Name contractTemplate_name,
+			contractTemplate.Code contractTemplate_code,
+			contractTemplate.TemplatePath contractTemplate_templatePath,
+			contractTemplate.TemplateContent contractTemplate_templateContent,
+			contractTemplate.Description contractTemplate_description,
+			contractTemplate.CreatorId contractTemplate_creatorId,
+			contractTemplate.CreateTime contractTemplate_createTime,
+			contractTemplate.ModifierId contractTemplate_modifierId,
+			contractTemplate.ModifyTime contractTemplate_modifyTime,
+			contractTemplate.DelFlag contractTemplate_delFlag
+		from PC_ProductContractRelation productContractRelation
+		inner join PC_Product product on product.Id=productContractRelation.ProductId
+		inner join PC_ContractTemplate contractTemplate on contractTemplate.Id=productContractRelation.ContractTemplateId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	<select id="selectProductContractRelationProduct" resultMap="productContractRelationResult" parameterMap="productContractRelationParam">
+		select
+			productContractRelation.ProductId productContractRelation_productId,
+			product.Id contractTemplate_id,
+			product.BasicProductId contractTemplate_basicProductId,
+			product.AssetCategoryCode contractTemplate_assetCategoryCode,
+			product.CategoryId contractTemplate_categoryId,
+			product.SpvId contractTemplate_spvId,
+			product.Name contractTemplate_name,
+			product.Code contractTemplate_code,
+			product.TotalAmount contractTemplate_totalAmount,
+			product.SurplusAmount contractTemplate_surplusAmount,
+			product.FirstPublishTime contractTemplate_firstPublishTime,
+			product.Description contractTemplate_description,
+			product.Status contractTemplate_status,
+			product.CreatorId contractTemplate_creatorId,
+			product.CreateTime contractTemplate_createTime,
+			product.ModifierId contractTemplate_modifierId,
+			product.ModifyTime contractTemplate_modifyTime,
+			product.isDelete contractTemplate_isDelete
+		from PC_ProductContractRelation productContractRelation
+		inner join PC_Product product on product.Id=productContractRelation.ProductId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectProductContractRelationContractTemplate" resultMap="productContractRelationResult" parameterMap="productContractRelationParam">
+		select
+			productContractRelation.ProductId productContractRelation_productId,
+			contractTemplate.Id contractTemplate_id,
+			contractTemplate.Name contractTemplate_name,
+			contractTemplate.Code contractTemplate_code,
+			contractTemplate.TemplatePath contractTemplate_templatePath,
+			contractTemplate.TemplateContent contractTemplate_templateContent,
+			contractTemplate.Description contractTemplate_description,
+			contractTemplate.CreatorId contractTemplate_creatorId,
+			contractTemplate.CreateTime contractTemplate_createTime,
+			contractTemplate.ModifierId contractTemplate_modifierId,
+			contractTemplate.ModifyTime contractTemplate_modifyTime,
+			contractTemplate.DelFlag contractTemplate_delFlag
+		from PC_ProductContractRelation productContractRelation
+		inner join PC_ContractTemplate contractTemplate on contractTemplate.Id=productContractRelation.ContractTemplateId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="productContractRelationResult" parameterMap="productContractRelationParam">
+		select 
+			ProductId productContractRelation_productId,
+			ContractTemplateId productContractRelation_contractTemplateId
+		from PC_ProductContractRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="productContractRelationResult">
+		select 
+			ProductId productContractRelation_productId,
+			ContractTemplateId productContractRelation_contractTemplateId
+		from PC_ProductContractRelation
+	</select>
+	
+	
+	<select id="selectPaginatedList"  resultMap="productContractRelationResult" parameterMap="productContractRelationParam">
+		select 
+			ProductId productContractRelation_productId,
+			ContractTemplateId productContractRelation_contractTemplateId
+		from PC_ProductContractRelation
+		limit ${start},${offset}
+	</select>
+	
+	<select id="getCount"  resultType="long" parameterMap="productContractRelationParam">
+		select count(*) from PC_ProductContractRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>	
+	</select>
+	
+	
+	<insert id="insert" parameterMap="productContractRelationParam">
+		insert into PC_ProductContractRelation
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="productId != null">,ProductId</if>
+			<if test="contractTemplateId != null">,ContractTemplateId</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="productId != null">,${productId}</if>
+			<if test="contractTemplateId != null">,${contractTemplateId}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>	
+	</insert>
+	
+	
+	<delete id="deleteAll" parameterMap="productContractRelationParam">
+		delete from PC_ProductContractRelation
+	</delete>
+	
+	<delete id="delete" parameterMap="productContractRelationParam">
+		delete from PC_ProductContractRelation
+		<where>
+			<trim prefixOverrides="and">
+				<if test="productId != null">and ProductId=${productId}</if>
+				<if test="contractTemplateId != null">and ContractTemplateId=${contractTemplateId}</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

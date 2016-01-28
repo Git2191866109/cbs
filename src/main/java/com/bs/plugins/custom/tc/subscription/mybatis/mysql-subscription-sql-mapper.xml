@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bs.plugins.custom.tc.subscription.dao.ISubscriptionDao">
+	<parameterMap id="subscriptionParamImpl" type="com.bs.plugins.custom.tc.subscription.entity.Subscription" />
+	<resultMap id="subscriptionResultImpl" type="com.bs.plugins.custom.tc.subscription.entity.Subscription">
+		<id property="id" column="subscription_id" javaType="java.lang.Long" />
+		<result property="memberId" column="subscription_memberId" javaType="java.lang.Long" />
+		<result property="spvId" column="subscription_spvId" javaType="java.lang.Long" />
+		<result property="spvShortName" column="subscription_spvShortName" javaType="java.lang.String" />
+		<result property="loanId" column="subscription_loanId" javaType="java.lang.Long" />
+		<result property="productId" column="subscription_productId" javaType="java.lang.Long" />
+		<result property="amountLockId" column="subscription_amountLockId" javaType="java.lang.Long" />
+		<result property="memberName" column="subscription_memberName" javaType="java.lang.String" />
+		<result property="umpayAccountNo" column="subscription_umpayAccountNo" javaType="java.lang.String" />
+		<result property="spvUmpayMerchantNo" column="subscription_spvUmpayMerchantNo" javaType="java.lang.String" />
+		<result property="spvUmpayAccountNo" column="subscription_spvUmpayAccountNo" javaType="java.lang.String" />
+		<result property="transactionNumber" column="subscription_transactionNumber" javaType="java.lang.String" />
+		<result property="payPlantformNumber" column="subscription_payPlantformNumber" javaType="java.lang.String" />
+		<result property="productName" column="subscription_productName" javaType="java.lang.String" />
+		<result property="productCode" column="subscription_productCode" javaType="java.lang.String" />
+		<result property="tradeStatus" column="subscription_tradeStatus" javaType="java.lang.Integer" />
+		<result property="investAmount" column="subscription_investAmount" javaType="java.math.BigDecimal" />
+		<result property="shares" column="subscription_shares" javaType="java.lang.Integer" />
+		<result property="orderTime" column="subscription_orderTime" javaType="java.lang.String" />
+		<result property="interestRateDate" column="subscription_interestRateDate" javaType="java.lang.String" />
+		<result property="paymentDate" column="subscription_paymentDate" javaType="java.lang.String" />
+		<result property="actualExpirationDate" column="subscription_actualExpirationDate" javaType="java.lang.String" />
+		<result property="expectedProfitRatio" column="subscription_expectedProfitRatio" javaType="java.math.BigDecimal" />
+		<result property="expectedProfit" column="subscription_expectedProfit" javaType="java.math.BigDecimal" />
+		<result property="spvServiceFee" column="subscription_spvServiceFee" javaType="java.math.BigDecimal" />
+		<result property="spvServiceFeeRatio" column="subscription_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+		<result property="actualLoanAmount" column="subscription_actualLoanAmount" javaType="java.math.BigDecimal" />
+		<result property="loanTime" column="subscription_loanTime" javaType="java.lang.String" />
+		<result property="loanStatus" column="subscription_loanStatus" javaType="java.lang.Integer" />
+		<result property="status" column="subscription_status" javaType="java.lang.Integer" />
+		<result property="distributeStatus" column="subscription_distributeStatus" javaType="java.lang.Integer" />
+		<result property="distributeTime" column="subscription_distributeTime" javaType="java.lang.String" />
+		<result property="checkingStatus" column="subscription_checkingStatus" javaType="java.lang.Integer" />
+		<result property="checkingTime" column="subscription_checkingTime" javaType="java.lang.String" />
+		<result property="remark" column="subscription_remark" javaType="java.lang.String" />
+		<association property="productAmountLock" javaType="com.bs.plugins.custom.tc.productamountlock.entity.ProductAmountLock">
+			<id property="id" column="productAmountLock_id" javaType="java.lang.Long" />
+			<result property="productId" column="productAmountLock_productId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="productAmountLock_transactionNumber" javaType="java.lang.String" />
+			<result property="spvId" column="productAmountLock_spvId" javaType="java.lang.Long" />
+			<result property="memberId" column="productAmountLock_memberId" javaType="java.lang.Long" />
+			<result property="lockAmount" column="productAmountLock_lockAmount" javaType="java.lang.Integer" />
+			<result property="shares" column="productAmountLock_shares" javaType="java.lang.Integer" />
+			<result property="iDCardType" column="productAmountLock_iDCardType" javaType="java.lang.Integer" />
+			<result property="iDCard" column="productAmountLock_iDCard" javaType="java.lang.String" />
+			<result property="bankName" column="productAmountLock_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="productAmountLock_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="productAmountLock_bankCardNumber" javaType="java.lang.String" />
+			<result property="lockStatus" column="productAmountLock_lockStatus" javaType="java.lang.Integer" />
+			<result property="payStatus" column="productAmountLock_payStatus" javaType="java.lang.Integer" />
+			<result property="handleStatus" column="productAmountLock_handleStatus" javaType="java.lang.Integer" />
+			<result property="subsTime" column="productAmountLock_subsTime" javaType="java.lang.String" />
+			<result property="expiredTime" column="productAmountLock_expiredTime" javaType="java.lang.String" />
+			<result property="callbackPayTime" column="productAmountLock_callbackPayTime" javaType="java.lang.String" />
+			<result property="unlockTime" column="productAmountLock_unlockTime" javaType="java.lang.String" />
+			<result property="remark" column="productAmountLock_remark" javaType="java.lang.String" />
+		</association>
+		<association property="spvCorporation" javaType="com.bs.plugins.custom.cc.spvcorporation.entity.SpvCorporation">
+			<id property="id" column="spvCorporation_id" javaType="java.lang.Long" />
+			<result property="type" column="spvCorporation_type" javaType="java.lang.Integer" />
+			<result property="code" column="spvCorporation_code" javaType="java.lang.String" />
+			<result property="umpayAccountNo" column="spvCorporation_umpayAccountNo" javaType="java.lang.String" />
+			<result property="umpayMerchantNo" column="spvCorporation_umpayMerchantNo" javaType="java.lang.String" />
+			<result property="name" column="spvCorporation_name" javaType="java.lang.String" />
+			<result property="shortName" column="spvCorporation_shortName" javaType="java.lang.String" />
+			<result property="bankName" column="spvCorporation_bankName" javaType="java.lang.String" />
+			<result property="bankCode" column="spvCorporation_bankCode" javaType="java.lang.String" />
+			<result property="bankCardNumber" column="spvCorporation_bankCardNumber" javaType="java.lang.String" />
+			<result property="phone" column="spvCorporation_phone" javaType="java.lang.String" />
+			<result property="fax" column="spvCorporation_fax" javaType="java.lang.String" />
+			<result property="postCode" column="spvCorporation_postCode" javaType="java.lang.String" />
+			<result property="address" column="spvCorporation_address" javaType="java.lang.String" />
+			<result property="description" column="spvCorporation_description" javaType="java.lang.String" />
+			<result property="status" column="spvCorporation_status" javaType="java.lang.Integer" />
+			<result property="createTime" column="spvCorporation_createTime" javaType="java.lang.String" />
+			<result property="modifyTime" column="spvCorporation_modifyTime" javaType="java.lang.String" />
+		</association>
+		<association property="loan" javaType="com.bs.plugins.custom.tc.loan.entity.Loan">
+			<id property="id" column="loan_id" javaType="java.lang.Long" />
+			<result property="spvId" column="loan_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="loan_productId" javaType="java.lang.Long" />
+			<result property="payPlantformNumber" column="loan_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="loan_productName" javaType="java.lang.String" />
+			<result property="productCode" column="loan_productCode" javaType="java.lang.String" />
+			<result property="totalLoanAmount" column="loan_totalLoanAmount" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFee" column="loan_spvServiceFee" javaType="java.math.BigDecimal" />
+			<result property="spvServiceFeeRatio" column="loan_spvServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="loanTime" column="loan_loanTime" javaType="java.lang.String" />
+			<result property="loanStatus" column="loan_loanStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="loan_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="loan_checkingStatus" javaType="java.lang.Integer" />
+			<result property="remark" column="loan_remark" javaType="java.lang.String" />
+		</association>
+		<collection property="subscriptionContracts" ofType="com.bs.plugins.custom.tc.subscriptioncontract.entity.SubscriptionContract">
+			<id property="id" column="subscriptionContract_id" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="subscriptionContract_transactionNumber" javaType="java.lang.String" />
+			<result property="contractTemplateId" column="subscriptionContract_contractTemplateId" javaType="java.lang.Long" />
+			<result property="contactNumber" column="subscriptionContract_contactNumber" javaType="java.lang.String" />
+			<result property="remark" column="subscriptionContract_remark" javaType="java.lang.String" />
+		</collection>
+		<collection property="productReturnMoneys" ofType="com.bs.plugins.custom.tc.productreturnmoney.entity.ProductReturnMoney">
+			<id property="id" column="productReturnMoney_id" javaType="java.lang.Long" />
+			<result property="memberId" column="productReturnMoney_memberId" javaType="java.lang.Long" />
+			<result property="spvId" column="productReturnMoney_spvId" javaType="java.lang.Long" />
+			<result property="productId" column="productReturnMoney_productId" javaType="java.lang.Long" />
+			<result property="subscriptionId" column="productReturnMoney_subscriptionId" javaType="java.lang.Long" />
+			<result property="transactionNumber" column="productReturnMoney_transactionNumber" javaType="java.lang.String" />
+			<result property="payPlantformNumber" column="productReturnMoney_payPlantformNumber" javaType="java.lang.String" />
+			<result property="productName" column="productReturnMoney_productName" javaType="java.lang.String" />
+			<result property="productCode" column="productReturnMoney_productCode" javaType="java.lang.String" />
+			<result property="distributePrincipal" column="productReturnMoney_distributePrincipal" javaType="java.math.BigDecimal" />
+			<result property="distributeInterest" column="productReturnMoney_distributeInterest" javaType="java.math.BigDecimal" />
+			<result property="distributeAmount" column="productReturnMoney_distributeAmount" javaType="java.math.BigDecimal" />
+			<result property="distributeStatus" column="productReturnMoney_distributeStatus" javaType="java.lang.Integer" />
+			<result property="distributeTime" column="productReturnMoney_distributeTime" javaType="java.lang.String" />
+			<result property="interestRateDate" column="productReturnMoney_interestRateDate" javaType="java.lang.String" />
+			<result property="paymentDate" column="productReturnMoney_paymentDate" javaType="java.lang.String" />
+			<result property="actualExpirationDate" column="productReturnMoney_actualExpirationDate" javaType="java.lang.String" />
+			<result property="expectedProfitRatio" column="productReturnMoney_expectedProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="expectedProfit" column="productReturnMoney_expectedProfit" javaType="java.math.BigDecimal" />
+			<result property="actualProfitRatio" column="productReturnMoney_actualProfitRatio" javaType="java.math.BigDecimal" />
+			<result property="actualReturnAmount" column="productReturnMoney_actualReturnAmount" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFee" column="productReturnMoney_memberServiceFee" javaType="java.math.BigDecimal" />
+			<result property="memberServiceFeeRatio" column="productReturnMoney_memberServiceFeeRatio" javaType="java.math.BigDecimal" />
+			<result property="businessCheckStatus" column="productReturnMoney_businessCheckStatus" javaType="java.lang.Integer" />
+			<result property="returnTime" column="productReturnMoney_returnTime" javaType="java.lang.String" />
+			<result property="retrunStatus" column="productReturnMoney_retrunStatus" javaType="java.lang.Integer" />
+			<result property="checkingTime" column="productReturnMoney_checkingTime" javaType="java.lang.String" />
+			<result property="checkingStatus" column="productReturnMoney_checkingStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeStatus" column="productReturnMoney_objectIncomeStatus" javaType="java.lang.Integer" />
+			<result property="objectIncomeTime" column="productReturnMoney_objectIncomeTime" javaType="java.lang.String" />
+			<result property="remark" column="productReturnMoney_remark" javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectSubscriptionPaginated" resultMap="subscriptionResultImpl" parameterMap="subscriptionParamImpl">
+		select
+			subscription.Id subscription_id,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			spvcorporation.shortName subscription_spvShortName,
+			subscription.LoanId subscription_loanId,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.Remark subscription_remark,	
+			category.Name subscription_categoryName,
+			member.Name subscription_memberName
+		from TC_Subscription subscription
+		inner join CC_Member member on member.Id=subscription.MemberId
+		left join PC_Product product on product.Id = subscription.ProductId
+		left join CC_RealnameAuthenticate realname on realname.MemberId = member.Id
+		left join PC_Category category on category.Id = product.CategoryId
+		left join CC_SpvCorporation spvcorporation on spvcorporation.Id = subscription.spvId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId }</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName like CONCAT('%',#{productName},'%')</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="iDCard != null and iDCard != ''">and real.CertificateNo=#{iDCard}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="tradeStatus != null">and TradeStatus=${tradeStatus}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(OrderTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(OrderTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+				
+				<if test="productCategoryId != null">and product.CategoryId = ${productCategoryId}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and MobilePhone = #{mobilePhone}</if>
+			</trim>
+		</where>
+		order by OrderTime desc
+		<if test="offset != null and offset != 0">
+			limit ${start},${offset}
+		</if>
+	</select>
+	
+	<select id="selectSubscriptionCount" resultType="long" parameterMap="subscriptionParamImpl">
+		select count(1) from TC_Subscription subscription
+		left join PC_Product product on product.Id = subscription.ProductId
+		left join CC_RealnameAuthenticate realname on realname.MemberId = subscription.MemberId
+		left join CC_Member member on member.Id = subscription.MemberId
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">and Id=${id}</if>
+				<if test="productId != null">and ProductId=${productId }</if>
+				<if test="transactionNumber != null and transactionNumber != ''">and TransactionNumber=#{transactionNumber}</if>
+				<if test="productName != null and productName != ''">and ProductName like CONCAT('%',#{productName},'%')</if>
+				<if test="productCode != null and productCode != ''">and ProductCode=#{productCode}</if>
+				<if test="distributeStatus != null">and DistributeStatus=${distributeStatus}</if>
+				<if test="iDCard != null and iDCard != ''">and real.CertificateNo=#{iDCard}</if>
+				<if test="loanStatus != null">and LoanStatus=${loanStatus}</if>
+				<if test="tradeStatus != null">and TradeStatus=${tradeStatus}</if>
+				<if test="startTime != null and startTime != ''">
+				  <![CDATA[
+					   AND TO_DAYS(OrderTime) >= TO_DAYS(#{startTime})
+					]]>
+					</if>
+				<if test="endTime != null and endTime != ''">
+					<![CDATA[
+					   AND TO_DAYS(OrderTime) <= TO_DAYS(#{endTime})
+					]]>
+				</if>
+				
+				<if test="productCategoryId != null">and product.CategoryId = ${productCategoryId}</if>
+				<if test="mobilePhone != null and mobilePhone != ''">and member.MobilePhone = ${mobilePhone}</if>
+			</trim>
+		</where>
+	</select>
+	
+
+	
+	<update id="updateLoanStatusByIds" parameterMap="subscriptionParamImpl">
+		update TC_Subscription set LoanStatus=${loanStatus}
+		<if test="loanId != null">
+			,LoanId=${loanId}
+		</if>
+		,LoanNumber=#{loanNumber}
+		<where>
+			<![CDATA[ Id in ]]> 
+				<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+		       	 	${item}
+		    	</foreach> 
+			<![CDATA[]]>
+			and LoanStatus not in (1,2)
+		</where>
+	</update>
+	
+	<update id="updateLoanStatusById" parameterMap="subscriptionParamImpl">
+		update TC_Subscription set LoanStatus=${loanStatus},LoanId=${loanId},LoanNumber=#{loanNumber} where Id = ${id} and LoanStatus not in (1,2)
+	</update>
+	
+	<update id="updateRemarkById" parameterMap="subscriptionParamImpl">
+		update TC_Subscription set Remark=#{remark} where Id = ${id}
+	</update>
+	
+	<select id="selectSubscriptionByIdOrIds" resultMap="subscriptionResultImpl" parameterMap="subscriptionParamImpl" >
+		select
+			subscription.Id subscription_id,
+			product.UmpayAccountNo subscription_umpayAccountNo,
+			spvCorporation.UmpayAccountNo subscription_spvUmpayAccountNo,
+			spvCorporation.UmpayMerchantNo subscription_spvUmpayMerchantNo,
+			spvCorporation.ShortName subscription_spvShortName,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			subscription.LoanId subscription_loanId,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.Remark subscription_remark
+			from TC_Subscription subscription
+			left join PC_Product product on product.Id = subscription.ProductId
+			left join CC_SpvCorporation spvCorporation on spvCorporation.Id = subscription.SpvId
+		<where>
+			<if test="id != null">subscription.Id = ${id}</if>
+			<if test="ids != null and ids != ''">
+				<![CDATA[ subscription.Id in ]]> 
+					<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+			       	 	${item}
+			    	</foreach> 
+				<![CDATA[]]>
+			</if>
+			and (LoanStatus not in (1,2,4) or LoanStatus is null)
+		</where>
+	</select>
+	
+	<select id="financeauditExport" resultType="java.util.HashMap" parameterMap="subscriptionParamImpl">
+		select
+			memberId ,
+			spvId ,
+			loanId ,
+			productId ,
+			amountLockId ,
+			transactionNumber ,
+			payPlantformNumber ,
+			productName ,
+			productCode ,
+			tradeStatus ,
+			investAmount ,
+			shares ,
+			orderTime ,
+			interestRateDate ,
+			paymentDate ,
+			actualExpirationDate ,
+			expectedProfitRatio ,
+			expectedProfit ,
+			spvServiceFee ,
+			spvServiceFeeRatio ,
+			actualLoanAmount ,
+			loanTime ,
+			loanStatus ,
+			status ,
+			distributeStatus ,
+			distributeTime ,
+			checkingStatus ,
+			checkingTime ,
+			contractPath ,
+			remark ,	
+			member.Name memberName
+		from TC_Subscription subscription
+		inner join CC_Member member on member.Id=subscription.MemberId
+		<where>
+			<![CDATA[ subscription.Id in ]]> 
+				<foreach item="item" index="ids" collection="ids" open="(" separator="," close=")">   
+		       	 	${item}
+		    	</foreach> 
+			<![CDATA[]]>
+		</where>
+	</select>
+	
+	<select id="selectOneSubscriptionById" resultMap="subscriptionResultImpl" parameterMap="subscriptionParamImpl">
+		select
+			subscription.Id subscription_id,
+			subscription.MemberId subscription_memberId,
+			subscription.SpvId subscription_spvId,
+			subscription.LoanId subscription_loanId,
+			subscription.ProductId subscription_productId,
+			subscription.AmountLockId subscription_amountLockId,
+			subscription.TransactionNumber subscription_transactionNumber,
+			subscription.PayPlantformNumber subscription_payPlantformNumber,
+			subscription.ProductName subscription_productName,
+			subscription.ProductCode subscription_productCode,
+			subscription.TradeStatus subscription_tradeStatus,
+			subscription.InvestAmount subscription_investAmount,
+			subscription.Shares subscription_shares,
+			subscription.OrderTime subscription_orderTime,
+			subscription.InterestRateDate subscription_interestRateDate,
+			subscription.PaymentDate subscription_paymentDate,
+			subscription.ActualExpirationDate subscription_actualExpirationDate,
+			subscription.ExpectedProfitRatio subscription_expectedProfitRatio,
+			subscription.ExpectedProfit subscription_expectedProfit,
+			subscription.SpvServiceFee subscription_spvServiceFee,
+			subscription.SpvServiceFeeRatio subscription_spvServiceFeeRatio,
+			subscription.ActualLoanAmount subscription_actualLoanAmount,
+			subscription.LoanTime subscription_loanTime,
+			subscription.LoanStatus subscription_loanStatus,
+			subscription.Status subscription_status,
+			subscription.DistributeStatus subscription_distributeStatus,
+			subscription.DistributeTime subscription_distributeTime,
+			subscription.CheckingStatus subscription_checkingStatus,
+			subscription.CheckingTime subscription_checkingTime,
+			subscription.ContractPath subscription_contractPath,
+			subscription.Remark subscription_remark,	
+			bankCardBinding.openingBankName subscription_openingBankName,
+			realname.CertificateNo subscription_iDCard,
+			member.Id member_id,
+			member.Name subscription_memberName
+		from TC_Subscription subscription
+		left join CC_Member member on member.Id=subscription.MemberId
+		left join CC_BankCardBinding bankCardBinding on bankCardBinding.memberId = subscription.memberId
+		left join CC_RealnameAuthenticate realname on realname.MemberId = member.Id
+		where subscription.Id = ${id}
+	</select>
+
+	<select id="statisticsSubscriptionRecord" resultType="java.util.HashMap" parameterType="java.util.Map">
+		SELECT
+		t.CategoryId AS CategoryId,
+		MAX(t.productId) AS ProductId,
+		MAX(t.productName) AS ProductName,
+		MAX(t.productStatus) AS productStatus,
+		MIN(t.orderDate) AS OrderDate,
+		IFNULL(MAX(t.totalAmount),0)  AS  TotalAmount,
+		IFNULL(SUM(investAmount),0)  AS  InvestAmount,
+		IFNULL(MAX(t.totalAmount),0)  - IFNULL(SUM(investAmount),0) AS SurplusAmount,
+		(IFNULL(MAX(t.totalAmount),0)  - IFNULL(SUM(investAmount),0))/IFNULL(MAX(t.totalAmount),0)*100 AS SurplusRate,
+		COUNT(SubscriptionId)        orderCount
+		FROM (SELECT
+		product.Id                   productId,
+		product.BasicProductId,
+		product.CategoryId,
+		category.Name                categoryName,
+		product.SpvId,
+		product.Name                 productName,
+		product.Code                 productCode,
+		product.TotalAmount          totalAmount,
+		product.Status               productStatus,
+		product.FirstPublishTime     firstPublishTime,
+		product.AssetCategoryCode,
+		subs.id                      SubscriptionId,
+		subs.TransactionNumber,
+		subs.status                  SubscriptionStatus,
+		subs.investAmount,
+		subs.Shares,
+		subs.orderTime,
+		DATE_FORMAT(subs.orderTime,'%Y-%m-%d')    orderDate
+		FROM PC_Product product
+		LEFT JOIN PC_Category category
+		ON product.CategoryId = category.Id
+		LEFT JOIN TC_Subscription subs
+		ON subs.ProductId = product.id
+		ORDER BY product.firstPublishTime DESC
+		) t
+		WHERE 1=1
+		<if test="productId != null  and productId != ''"> and ProductId = ${productId } </if>
+		<if test="categoryId != null  and categoryId != ''"> and CategoryId = ${categoryId } </if>
+		GROUP BY
+		${condition }
+-- 		CategoryId
+-- 		, ProductId
+-- 		, orderDate;
+	</select>
+</mapper>

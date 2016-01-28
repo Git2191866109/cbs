@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 缓存 -->
+	<bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" p:cacheManagerConfigFile="classpath:ehcache.xml" />
+		
+	<bean id="hashedCredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="MD5" />
+	</bean>
+	
+	<!-- 安全框架配置 -->
+	<bean id="securityService" class="com.bs.plugins.custom.uc.user.service.UserRealmService">
+	 	<property name="credentialsMatcher" ref="hashedCredentialsMatcher" />
+		<property name="cacheManager" ref="ehCacheManager" />
+	<!-- 	<property name="saltStyle" value="CRYPT" />   -->
+		<!-- CRYPT COLUMN EXTERNAL -->
+	</bean>
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="securityService" />
+	</bean>
+	
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	
+	<bean id="formAuthenticationFilter" class="com.bs.core.security.CaptchaFormAuthenticationFilter">
+		<property name="usernameParam" value="account" />
+		<property name="failureKeyAttribute" value="loginFailureKey" />
+		<property name="passwordParam" value="password" />
+		<property name="rememberMeParam" value="rememberme" />
+	</bean>
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/main" />
+		<property name="unauthorizedUrl" value="/exit" />
+		<property name="filters">
+			<util:map>
+				<entry key="authc" value-ref="formAuthenticationFilter" />
+				<!-- <entry key="perms" value-ref="myPermsFilter"/> -->
+				<!-- <entry key="cas" value-ref="casFilter"/> -->
+				<!-- <entry key="su" value-ref="singleUserLoginFilter"/> -->
+			</util:map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/index = anon
+				/login = authc
+				/exit = anon
+				/goto/** = anon
+				/static/** = anon
+				/** = authc	 
+			</value>
+		</property>
+	</bean>
+</beans>
